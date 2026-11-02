@@ -12,8 +12,9 @@
 :root {
   --bg: #100b16;
   --purple: #24152c;
-  --purple-light: #49304f;
+  --purple2: #38213e;
   --gold: #c9a879;
+  --gold-light: #efd5a5;
   --pink: #e9b3d9;
   --cream: #f8eff7;
 }
@@ -24,13 +25,11 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background:
-    radial-gradient(ellipse at top, #382341 0%, #24152c 45%, #100b16 100%);
+    radial-gradient(ellipse at 50% 0%, #49304f 0%, #24152c 40%, #100b16 100%);
   color: var(--cream);
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
@@ -42,16 +41,16 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: .12;
-  background-image: radial-gradient(#e9b3d9 0.6px, transparent 0.6px);
-  background-size: 24px 24px;
+  opacity: .10;
+  background-image: radial-gradient(#e9b3d9 .6px, transparent .6px);
+  background-size: 25px 25px;
   z-index: -1;
 }
 
 /* HEADER */
 
 header {
-  padding: 28px 7%;
+  padding: 25px 7%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,21 +61,19 @@ header {
   color: var(--pink);
   font-family: 'Cormorant Garamond', serif;
   font-size: 32px;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
 }
 
 nav a {
   color: var(--cream);
   text-decoration: none;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 2px;
-  margin-left: 28px;
+  margin-left: 27px;
   transition: .3s;
 }
 
-nav a:hover {
-  color: var(--pink);
-}
+nav a:hover { color: var(--gold-light); }
 
 /* HERO */
 
@@ -95,10 +92,10 @@ nav a:hover {
 }
 
 .hero p {
-  margin-top: 12px;
+  margin-top: 13px;
   color: #ddc9dc;
   letter-spacing: 7px;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
 }
 
@@ -111,14 +108,18 @@ nav a:hover {
 
 /* PORTFOLIO */
 
+.portfolio {
+  padding: 35px 7% 110px;
+}
+
 .section-heading {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 65px;
 }
 
 .section-heading h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 42px;
+  font-size: 45px;
   font-weight: 500;
   color: var(--pink);
 }
@@ -126,186 +127,285 @@ nav a:hover {
 .section-heading p {
   margin-top: 10px;
   font-size: 10px;
-  letter-spacing: 3px;
-  color: #c9a879;
-}
-
-.portfolio {
-  padding: 30px 7% 110px;
+  letter-spacing: 4px;
+  color: var(--gold);
 }
 
 .doors {
-  max-width: 1150px;
+  max-width: 1160px;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  perspective: 1200px;
+  gap: 45px 32px;
+  perspective: 1600px;
+  overflow: visible;
 }
 
 .door-card {
   text-align: center;
-  transition:
-    opacity .4s ease,
-    filter .4s ease,
-    transform .4s ease;
   min-width: 0;
+  position: relative;
+  transition:
+    opacity .45s ease,
+    filter .45s ease,
+    transform .45s ease;
 }
 
 .doors.has-hover .door-card:not(.active) {
   opacity: .50;
-  filter: brightness(.75);
+  filter: brightness(.72);
   transform: scale(.97);
 }
 
 .door-card.active {
   opacity: 1;
-  filter: brightness(1.15);
-  transform: scale(1.07);
-  z-index: 2;
+  filter: brightness(1.13);
+  transform: translateY(-12px) scale(1.07);
+  z-index: 5;
 }
 
-/* DOORS */
+/* LUXURY DOOR FRAME */
 
 .door {
   width: 100%;
-  height: 285px;
+  height: 315px;
   position: relative;
-  transform-style: preserve-3d;
-  perspective: 1000px;
   cursor: pointer;
+  perspective: 1400px;
+  transform-style: preserve-3d;
 }
 
-.door-panel {
+.door-frame {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  transition: transform .9s cubic-bezier(.2,.8,.2,1);
-
+  padding: 8px;
   border: 1px solid var(--gold);
-  border-radius: 105px 105px 5px 5px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #49304f,
-      #24152c 60%,
-      #100b16
-    );
-
+  border-radius: 125px 125px 3px 3px;
+  background: linear-gradient(
+    135deg,
+    #d9bd8b,
+    #785a35 35%,
+    #e7ce9e 65%,
+    #795b39
+  );
   box-shadow:
-    inset 0 0 0 5px #e9b3d912,
-    inset 0 0 35px #0008,
-    0 15px 35px #0005;
+    0 0 0 3px #c9a87920,
+    0 15px 35px #0008;
 }
 
-.door-panel::before {
+.door-frame-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #e8d0a0;
+  border-radius: 116px 116px 1px 1px;
+  background: #1a1020;
+  box-shadow: inset 0 0 25px #000b;
+}
+
+/* DOUBLE DOOR */
+
+.double-door {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  transform-style: preserve-3d;
+  perspective: 1400px;
+}
+
+.door-leaf {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  background:
+    linear-gradient(145deg, #4a3050, #291a30 65%, #160f1c);
+  border: 1px solid #c9a879;
+  box-shadow: inset 0 0 25px #0008;
+  transition: transform 1s cubic-bezier(.2,.75,.2,1);
+}
+
+.door-leaf.left {
+  transform-origin: left center;
+  border-right: 1px solid #c9a879;
+}
+
+.door-leaf.right {
+  transform-origin: right center;
+  border-left: 1px solid #c9a879;
+}
+
+/* DECORATIVE PANELS */
+
+.panel {
+  position: absolute;
+  border: 1px solid #c9a8799c;
+  box-shadow:
+    inset 0 0 15px #0005,
+    0 0 5px #c9a87910;
+}
+
+.panel.top {
+  top: 19%;
+  left: 12%;
+  width: 76%;
+  height: 28%;
+  border-radius: 65px 65px 2px 2px;
+}
+
+.panel.bottom {
+  top: 51%;
+  left: 12%;
+  width: 76%;
+  height: 35%;
+  border-radius: 2px;
+}
+
+.panel::after {
   content: "";
   position: absolute;
-  inset: 10px;
-  border: 1px solid #c9a87970;
-  border-radius: 95px 95px 2px 2px;
-  pointer-events: none;
+  inset: 5px;
+  border: 1px solid #c9a87938;
+  border-radius: inherit;
 }
 
-.door-panel::after {
-  content: "";
+.center-decoration {
   position: absolute;
   width: 1px;
   height: 75%;
-  top: 13%;
-  right: 14px;
+  top: 12%;
+  left: 50%;
   background: linear-gradient(
     transparent,
-    #c9a87990,
+    #efd5a5,
     transparent
   );
+  z-index: 2;
 }
 
-.door-card.active .door-panel {
-  border-color: var(--pink);
+/* GOLD HANDLES */
 
-  box-shadow:
-    inset 0 0 0 5px #e9b3d91d,
-    inset 0 0 45px #e9b3d912,
-    0 0 25px #e9b3d950,
-    0 20px 40px #0008;
+.handle {
+  position: absolute;
+  top: 57%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #fff3cf,
+    #d3ad70 55%,
+    #78552c
+  );
+  box-shadow: 0 0 10px #c9a87980;
+  z-index: 4;
 }
+
+.left .handle { right: 12px; }
+.right .handle { left: 12px; }
+
+/* FRAME DETAILS */
+
+.frame-line {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(
+    transparent,
+    #f0d8a8,
+    #977449,
+    #f0d8a8,
+    transparent
+  );
+  z-index: 5;
+}
+
+.corner-detail {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--gold-light);
+  transform: rotate(45deg);
+  z-index: 6;
+}
+
+.corner-detail.one {
+  top: 12px;
+  left: 12px;
+}
+
+.corner-detail.two {
+  top: 12px;
+  right: 12px;
+}
+
+.corner-detail.three {
+  bottom: 12px;
+  left: 12px;
+}
+
+.corner-detail.four {
+  bottom: 12px;
+  right: 12px;
+}
+
+/* DOOR TEXT */
 
 .door-number {
   position: absolute;
-  top: 35px;
-  left: 0;
+  top: 25px;
   width: 100%;
   text-align: center;
-  color: #e9b3d980;
+  color: #efd5a5;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 19px;
-  letter-spacing: 3px;
-}
-
-.door-symbol {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 48px;
-  color: var(--pink);
-  text-shadow: 0 0 20px #e9b3d960;
+  font-size: 15px;
+  letter-spacing: 5px;
+  z-index: 7;
 }
 
 .door-name {
-  position: absolute;
-  width: 100%;
-  bottom: 35px;
-  left: 0;
-  text-align: center;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 23px;
-  letter-spacing: 1px;
+  font-size: 24px;
   color: var(--cream);
-}
-
-.door-handle {
-  position: absolute;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  right: 23px;
-  top: 55%;
-
-  background: radial-gradient(
-    circle at 30% 30%,
-    #fff0bd,
-    #c9a879 65%,
-    #654820
-  );
-
-  box-shadow: 0 0 10px #c9a87990;
+  letter-spacing: 1px;
+  margin-top: 23px;
 }
 
 .door-description {
   color: var(--pink);
   font-size: 10px;
-  letter-spacing: 1.3px;
+  letter-spacing: 1px;
   line-height: 1.7;
-  margin-top: 16px;
-  min-height: 35px;
+  margin-top: 10px;
+  min-height: 32px;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity .35s;
 }
 
 .door-card.active .door-description {
   opacity: 1;
 }
 
-/* DOOR OPENING */
+/* SELECTED DOOR GLOW */
 
-.door-card.opening .door-panel {
-  transform: rotateY(-100deg);
+.door-card.active .door-frame {
+  box-shadow:
+    0 0 0 3px #c9a87922,
+    0 0 28px #e9b3d950,
+    0 25px 45px #0009;
+  border-color: var(--gold-light);
+}
+
+/* OPENING ANIMATION */
+
+.door-card.opening .left {
+  transform: rotateY(-105deg);
+}
+
+.door-card.opening .right {
+  transform: rotateY(105deg);
 }
 
 /* GALLERY */
@@ -345,9 +445,9 @@ nav a:hover {
 }
 
 .gallery-top p {
-  color: #c9a879;
-  font-size: 11px;
-  letter-spacing: 2px;
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 3px;
   margin-top: 10px;
 }
 
@@ -375,7 +475,7 @@ nav a:hover {
 }
 
 .gallery-item {
-  border: 1px solid #c9a87960;
+  border: 1px solid #c9a87970;
   padding: 8px;
   background: #24152c;
   cursor: pointer;
@@ -401,22 +501,20 @@ nav a:hover {
   text-align: center;
   padding: 65px 20px;
   border: 1px dashed #c9a87980;
-  color: #e9b3d9;
+  color: var(--pink);
   font-family: 'Cormorant Garamond', serif;
   font-size: 25px;
 }
 
-/* ABOUT */
+/* ABOUT & CONTACT */
 
-.about,
-.contact {
+.about, .contact {
   text-align: center;
   padding: 85px 20px;
   border-top: 1px solid #c9a87930;
 }
 
-.about h2,
-.contact h2 {
+.about h2, .contact h2 {
   font-family: 'Cormorant Garamond', serif;
   color: var(--pink);
   font-size: 45px;
@@ -430,8 +528,6 @@ nav a:hover {
   color: #d2c1d0;
   font-size: 13px;
 }
-
-/* CONTACT */
 
 .contact a {
   display: inline-block;
@@ -456,7 +552,7 @@ footer {
   padding: 30px;
   text-align: center;
   border-top: 1px solid #c9a87930;
-  color: #c9a879;
+  color: var(--gold);
   font-size: 10px;
   letter-spacing: 2px;
 }
@@ -474,9 +570,7 @@ footer {
   padding: 25px;
 }
 
-.lightbox.show {
-  display: flex;
-}
+.lightbox.show { display: flex; }
 
 .lightbox img {
   max-width: 85vw;
@@ -499,24 +593,18 @@ footer {
   right: 25px;
 }
 
-.lightbox .prev {
-  left: 20px;
-}
-
-.lightbox .next {
-  right: 20px;
-}
+.lightbox .prev { left: 20px; }
+.lightbox .next { right: 20px; }
 
 /* RESPONSIVE */
 
 @media(max-width: 850px) {
   .doors {
     grid-template-columns: repeat(2, 1fr);
+    gap: 35px 22px;
   }
 
-  .door {
-    height: 250px;
-  }
+  .door { height: 285px; }
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -529,22 +617,18 @@ footer {
   }
 
   nav a {
-    margin-left: 9px;
+    margin-left: 8px;
     font-size: 8px;
     letter-spacing: 1px;
   }
 
-  .brand {
-    font-size: 23px;
-  }
+  .brand { font-size: 23px; }
 
   .hero {
     padding: 75px 10px 55px;
   }
 
-  .hero h1 {
-    font-size: 43px;
-  }
+  .hero h1 { font-size: 43px; }
 
   .hero p {
     font-size: 9px;
@@ -555,28 +639,22 @@ footer {
     padding: 20px 5% 70px;
   }
 
-  .doors {
-    gap: 17px;
-  }
+  .doors { gap: 28px 14px; }
 
-  .door {
-    height: 225px;
-  }
+  .door { height: 235px; }
 
-  .door-name {
-    font-size: 18px;
-  }
+  .door-name { font-size: 19px; }
 
-  .door-symbol {
-    font-size: 35px;
-  }
+  .gallery-grid { grid-template-columns: 1fr; }
 
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
+  .gallery-top h2 { font-size: 37px; }
+}
 
-  .gallery-top h2 {
-    font-size: 37px;
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
   }
 }
 </style>
@@ -586,7 +664,6 @@ footer {
 
 <header>
   <div class="brand">ANNA.</div>
-
   <nav>
     <a href="#home">HOME</a>
     <a href="#portfolio">PORTFOLIO</a>
@@ -595,158 +672,107 @@ footer {
   </nav>
 </header>
 
-<!-- HOME -->
-
 <section class="hero" id="home">
   <h1>Hi, I'm ANNA.</h1>
   <p>Graphic Designer</p>
   <div class="hero-line"></div>
 </section>
 
-<!-- PORTFOLIO DOORS -->
-
 <section class="portfolio" id="portfolio">
-
   <div class="section-heading">
     <h2>My Creative World</h2>
     <p>EXPLORE MY COLLECTION</p>
   </div>
-
   <div class="doors" id="doors"></div>
-
 </section>
 
-<!-- GALLERY -->
-
 <section class="gallery-section" id="gallery">
-
   <div class="gallery-top">
     <h2 id="galleryTitle"></h2>
     <p>MY CREATIVE COLLECTION</p>
-
     <button class="back-btn" onclick="closeGallery()">
-      ← BACK TO DOORS
+      BACK TO DOORS
     </button>
   </div>
-
   <div class="gallery-grid" id="galleryGrid"></div>
-
 </section>
 
-<!-- ABOUT -->
-
 <section class="about" id="about">
-
   <h2>About Me</h2>
-
   <p>
     Hello! I'm ANNA, a Graphic Designer passionate about
     creating beautiful visual experiences, unique artwork
     and creative designs. Welcome to my creative world.
   </p>
-
 </section>
 
-<!-- CONTACT -->
-
 <section class="contact" id="contact">
-
   <h2>Let's Create Together</h2>
-
-  <a href="mailto:YOUR-EMAIL@example.com">
-    CONTACT ME
-  </a>
-
+  <a href="mailto:YOUR-EMAIL@example.com">CONTACT ME</a>
 </section>
 
 <footer>
   © 2026 ANNA. ALL RIGHTS RESERVED.
 </footer>
 
-<!-- IMAGE LIGHTBOX -->
-
 <div class="lightbox" id="lightbox">
-
-  <button class="close" onclick="closeLightbox()">✕</button>
-
-  <button class="prev" onclick="changeImage(-1)">❮</button>
-
+  <button class="close" onclick="closeLightbox()">X</button>
+  <button class="prev" onclick="changeImage(-1)">&#10094;</button>
   <img id="lightboxImage" src="" alt="Artwork">
-
-  <button class="next" onclick="changeImage(1)">❯</button>
-
+  <button class="next" onclick="changeImage(1)">&#10095;</button>
 </div>
 
 <script>
 
-/* ALL 8 CATEGORIES */
-
 const categories = [
-
   {
     name: "Logo Design",
-    symbol: "✧",
     description: "Unique identities & beautiful branding",
     folder: "assets/logo/",
     prefix: "logo"
   },
-
   {
     name: "Banner Design",
-    symbol: "◇",
     description: "Creative banners & visual layouts",
     folder: "assets/banner/",
     prefix: "banner"
   },
-
   {
     name: "Emotes",
-    symbol: "♡",
     description: "Expressive digital emote artwork",
     folder: "assets/emotes/",
     prefix: "emote"
   },
-
   {
     name: "PNG Artwork",
-    symbol: "✦",
     description: "Creative transparent PNG designs",
     folder: "assets/png/",
     prefix: "png"
   },
-
   {
     name: "Model Design",
-    symbol: "❖",
     description: "Custom digital model designs",
     folder: "assets/model/",
     prefix: "model"
   },
-
   {
     name: "Character Art",
-    symbol: "✿",
     description: "Original character illustrations",
     folder: "assets/character-art/",
     prefix: "character"
   },
-
   {
     name: "Art Scene",
-    symbol: "❋",
     description: "Beautiful artistic environments",
     folder: "assets/art-scene/",
     prefix: "scene"
   },
-
   {
     name: "3D Room",
-    symbol: "⌂",
     description: "Immersive 3D room designs",
     folder: "assets/3d-room/",
     prefix: "room"
   }
-
 ];
 
 const doorsContainer = document.getElementById("doors");
@@ -757,8 +783,7 @@ let currentImages = [];
 let currentIndex = 0;
 let activeCategory = null;
 
-
-/* CREATE DOORS */
+/* CREATE PREMIUM DOUBLE DOORS */
 
 categories.forEach((category, index) => {
 
@@ -766,40 +791,49 @@ categories.forEach((category, index) => {
   card.className = "door-card";
 
   card.innerHTML = `
-
     <div class="door" role="button" tabindex="0"
          aria-label="Open ${category.name}">
 
-      <div class="door-panel">
+      <div class="door-frame">
+        <div class="door-frame-inner">
 
-        <div class="door-number">
-          0${index + 1}
+          <div class="door-number">0${index + 1}</div>
+
+          <div class="double-door">
+
+            <div class="door-leaf left">
+              <div class="panel top"></div>
+              <div class="panel bottom"></div>
+              <div class="handle"></div>
+            </div>
+
+            <div class="door-leaf right">
+              <div class="panel top"></div>
+              <div class="panel bottom"></div>
+              <div class="handle"></div>
+            </div>
+
+          </div>
+
+          <div class="center-decoration"></div>
+          <div class="frame-line"></div>
+
+          <div class="corner-detail one"></div>
+          <div class="corner-detail two"></div>
+          <div class="corner-detail three"></div>
+          <div class="corner-detail four"></div>
+
         </div>
-
-        <div class="door-symbol">
-          ${category.symbol}
-        </div>
-
-        <div class="door-name">
-          ${category.name}
-        </div>
-
-        <div class="door-handle"></div>
-
       </div>
-
     </div>
 
-    <div class="door-description">
-      ${category.description}
-    </div>
-
+    <div class="door-name">${category.name}</div>
+    <div class="door-description">${category.description}</div>
   `;
 
   const door = card.querySelector(".door");
 
   card.addEventListener("mouseenter", () => {
-
     doorsContainer.classList.add("has-hover");
 
     document.querySelectorAll(".door-card").forEach(item => {
@@ -807,7 +841,6 @@ categories.forEach((category, index) => {
     });
 
     card.classList.add("active");
-
   });
 
   door.addEventListener("click", () => {
@@ -815,49 +848,37 @@ categories.forEach((category, index) => {
   });
 
   door.addEventListener("keydown", event => {
-
     if (event.key === "Enter" || event.key === " ") {
-
       event.preventDefault();
-
       openCategory(index, card);
-
     }
-
   });
 
   doorsContainer.appendChild(card);
-
 });
 
-
-/* RESTORE DOORS WHEN CURSOR LEAVES */
+/* HOVER RESET */
 
 doorsContainer.addEventListener("mouseleave", () => {
-
   doorsContainer.classList.remove("has-hover");
 
   document.querySelectorAll(".door-card").forEach(card => {
     card.classList.remove("active");
   });
-
 });
 
-
-/* OPEN SELECTED DOOR */
+/* OPEN DOOR */
 
 function openCategory(index, card) {
 
   if (activeCategory !== null) return;
 
   activeCategory = index;
-
   card.classList.add("opening");
 
   setTimeout(() => {
 
     portfolio.style.display = "none";
-
     gallery.classList.add("show");
 
     const category = categories[index];
@@ -872,17 +893,14 @@ function openCategory(index, card) {
       block: "start"
     });
 
-  }, 700);
-
+  }, 900);
 }
-
 
 /* LOAD ARTWORK */
 
 function loadGallery(category) {
 
   const grid = document.getElementById("galleryGrid");
-
   grid.innerHTML = "";
 
   let found = 0;
@@ -905,7 +923,6 @@ function loadGallery(category) {
       item.className = "gallery-item";
 
       const displayed = document.createElement("img");
-
       displayed.src = src;
       displayed.alt = category.name + " artwork " + i;
 
@@ -918,9 +935,7 @@ function loadGallery(category) {
       grid.appendChild(item);
 
       const message = grid.querySelector(".empty-message");
-
       if (message) message.remove();
-
     };
 
     img.onerror = () => {
@@ -928,50 +943,38 @@ function loadGallery(category) {
       checked++;
 
       if (checked === maxImages && found === 0) {
-
         grid.innerHTML = `
           <div class="empty-message">
-            Your artwork will appear here ✧
+            Your artwork will appear here
           </div>
         `;
-
       }
-
     };
 
     img.src = src;
-
   }
-
 }
 
-
-/* BACK TO DOORS */
+/* BACK TO PORTFOLIO */
 
 function closeGallery() {
 
   gallery.classList.remove("show");
-
   portfolio.style.display = "block";
 
   document.querySelectorAll(".door-card").forEach(card => {
-
     card.classList.remove("opening", "active");
-
   });
 
   doorsContainer.classList.remove("has-hover");
-
   activeCategory = null;
 
   portfolio.scrollIntoView({
     behavior: "smooth"
   });
-
 }
 
-
-/* OPEN IMAGE */
+/* IMAGE LIGHTBOX */
 
 function openLightbox(src) {
 
@@ -986,22 +989,12 @@ function openLightbox(src) {
   if (currentIndex < 0) currentIndex = 0;
 
   document.getElementById("lightboxImage").src = src;
-
   document.getElementById("lightbox").classList.add("show");
-
 }
-
-
-/* CLOSE IMAGE */
 
 function closeLightbox() {
-
   document.getElementById("lightbox").classList.remove("show");
-
 }
-
-
-/* NEXT / PREVIOUS IMAGE */
 
 function changeImage(direction) {
 
@@ -1013,34 +1006,16 @@ function changeImage(direction) {
 
   document.getElementById("lightboxImage").src =
     currentImages[currentIndex];
-
 }
 
-
-/* LIGHTBOX BACKGROUND CLICK */
-
-document.getElementById("lightbox").addEventListener(
-  "click",
-  event => {
-
-    if (event.target.id === "lightbox") {
-      closeLightbox();
-    }
-
-  }
-);
-
-
-/* KEYBOARD CONTROLS */
+document.getElementById("lightbox").addEventListener("click", event => {
+  if (event.target.id === "lightbox") closeLightbox();
+});
 
 document.addEventListener("keydown", event => {
-
   if (event.key === "Escape") closeLightbox();
-
   if (event.key === "ArrowRight") changeImage(1);
-
   if (event.key === "ArrowLeft") changeImage(-1);
-
 });
 
 </script>
