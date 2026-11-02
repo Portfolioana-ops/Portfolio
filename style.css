@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --pink: #e9a6d6;
+  --purple: #a98ae8;
+  --dark: #100b19;
+  --cream: #f5e9f2;
+}
 
 * {
   margin: 0;
@@ -10,286 +18,462 @@ html {
 }
 
 body {
-  background: #100c18;
-  color: #f7edf5;
-  font-family: Arial, sans-serif;
+  background: var(--dark);
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
 }
 
-header {
-  height: 85px;
-  padding: 0 8%;
+.topbar {
+  height: 76px;
+  padding: 0 7%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #ffffff20;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  z-index: 20;
+  border-bottom: 1px solid #ffffff16;
 }
 
-.logo {
-  color: #f6d9eb;
-  font-size: 32px;
-  font-family: Georgia, serif;
+.brand {
+  color: white;
   text-decoration: none;
-  letter-spacing: 3px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  font-size: 19px;
 }
 
-.logo span {
-  color: #d99ac6;
+.brand span {
+  color: var(--pink);
+  margin-left: 5px;
 }
 
 nav {
   display: flex;
-  gap: 35px;
+  gap: 30px;
 }
 
 nav a {
-  color: #d6c5d7;
-  font-size: 11px;
+  color: #e9ddec;
+  font-size: 10px;
   letter-spacing: 2px;
   text-decoration: none;
   transition: .3s;
 }
 
 nav a:hover {
-  color: #e5a8d2;
+  color: var(--pink);
 }
 
 .hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 95px 15px 55px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%, #603b714c, transparent 50%),
+    linear-gradient(135deg, #100b19, #21122c 55%, #100b19);
 }
 
-.hero > p:first-child {
-  color: #dba7cc;
-  font-size: 11px;
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#ffffff80 1px, transparent 1px);
+  background-size: 55px 55px;
+  opacity: .18;
+}
+
+.eyebrow {
+  color: var(--pink);
+  font-size: 10px;
   letter-spacing: 4px;
+  font-weight: 600;
 }
 
 .hero h1 {
-  font-family: Georgia, serif;
-  font-size: clamp(65px, 11vw, 125px);
-  font-weight: normal;
-  letter-spacing: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(80px, 15vw, 175px);
+  font-weight: 500;
+  letter-spacing: 5px;
+  line-height: 1.1;
   margin: 20px 0;
+  position: relative;
+  text-shadow: 0 0 40px #c17ad34d;
 }
 
-.hero h1 span {
-  color: #dda5cf;
+.hero h1 span,
+.section-heading h2 span,
+.about h2 span,
+.contact h2 span {
+  color: var(--pink);
+  font-style: italic;
 }
 
-.hero > p:nth-of-type(2) {
-  color: #b9a9bd;
-  font-size: 14px;
+.hero-subtitle {
+  color: #d3c3d9;
+  font-size: 13px;
+  letter-spacing: 2px;
 }
 
-.hint {
-  margin-top: 38px;
-  color: #dca6ce;
+.explore-btn {
+  margin-top: 45px;
+  padding: 16px 28px;
+  border: 1px solid #dca5d5a0;
+  color: white;
+  text-decoration: none;
   font-size: 10px;
   letter-spacing: 3px;
+  transition: .35s;
+  background: #ffffff08;
 }
 
-.doors {
-  width: 90%;
-  max-width: 1150px;
-  margin: 20px auto 100px;
+.explore-btn:hover {
+  background: var(--pink);
+  color: #1b1021;
+  box-shadow: 0 0 35px #d88bc766;
+  transform: translateY(-4px);
+}
+
+.explore-btn span {
+  margin-left: 15px;
+}
+
+.hero-bottom {
+  position: absolute;
+  bottom: 30px;
+  color: #9c86a5;
+  font-size: 9px;
+  letter-spacing: 5px;
+}
+
+.orb {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .23;
+  animation: float 7s ease-in-out infinite alternate;
+}
+
+.orb-one {
+  background: #bd65ce;
+  top: 15%;
+  left: -100px;
+}
+
+.orb-two {
+  background: #7763d6;
+  bottom: 5%;
+  right: -100px;
+  animation-delay: -3s;
+}
+
+@keyframes float {
+  to { transform: translate(60px, -40px) scale(1.25); }
+}
+
+/* PORTFOLIO DOORS */
+
+.portfolio {
+  min-height: 100vh;
+  padding: 110px 5% 100px;
+  background:
+    radial-gradient(ellipse at 50% 40%, #382044, transparent 65%),
+    #100b19;
+  overflow: hidden;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 75px;
+}
+
+.section-heading h2,
+.about h2,
+.contact h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(35px, 5vw, 58px);
+  font-weight: 500;
+  margin: 16px 0;
+}
+
+.section-heading > p:last-child {
+  font-size: 12px;
+  color: #bbaac4;
+  letter-spacing: 1px;
+}
+
+.door-grid {
+  max-width: 1300px;
+  margin: auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
-  perspective: 1200px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+  perspective: 1600px;
 }
 
 .door-card {
-  text-decoration: none;
-  text-align: center;
-  color: #f5e5f1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  transition: z-index .3s;
 }
 
-.door {
-  height: 340px;
+.door-card.active {
+  z-index: 10;
+}
+
+.door-room {
+  height: 390px;
   position: relative;
-  transform-origin: left center;
-  transition: transform .8s ease, box-shadow .5s;
-  border: 7px solid #49344f;
-  outline: 1px solid #b88caf;
-  outline-offset: -13px;
+  perspective: 1100px;
+  background: #08060d;
+  border: 5px solid #48304d;
+  box-shadow:
+    0 0 0 2px #b47da04d,
+    0 15px 40px #0009,
+    inset 0 0 35px #d38bc51c;
+  overflow: visible;
+}
+
+.door-room::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #d9a9d54d;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.room-label {
+  position: absolute;
+  top: 15px;
+  left: 12px;
+  right: 12px;
+  text-align: center;
+  color: #f0c4e8;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  z-index: 1;
+}
+
+.inside-gallery {
+  position: absolute;
+  inset: 35px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pink) #24152d;
+  padding: 8px;
   background:
-    radial-gradient(ellipse at center, #634568 0%, #34243d 55%, #1c1727 100%);
-  box-shadow: 0 15px 35px #0008, inset 0 0 30px #0008;
+    radial-gradient(ellipse at center, #8c5a9345, transparent 75%),
+    #140d1c;
+}
+
+.inside-gallery .artwork-card {
+  width: 100%;
+  min-height: 0;
+  text-align: center;
+  animation: appear .5s both;
+}
+
+.inside-gallery img {
+  width: 100%;
+  max-height: 145px;
+  object-fit: contain;
+  border: 1px solid #dba4d766;
+  background: #ffffff0a;
+  border-radius: 3px;
+}
+
+.inside-gallery .artwork-card p {
+  color: #f4d8ed;
+  font-size: 8px;
+  margin-top: 4px;
+}
+
+.inside-gallery .empty-message {
+  font-size: 10px;
+  line-height: 1.7;
+  text-align: center;
+  color: #e8c4e4;
+}
+
+.door-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #9a6c91;
+  color: #f7e8f3;
+  background:
+    linear-gradient(90deg, #ffffff0a, transparent 20%, #0003 90%),
+    repeating-linear-gradient(90deg, transparent 0 35px, #ffffff08 36px 38px),
+    linear-gradient(135deg, #58365c, #291b36 45%, #593454);
+  box-shadow:
+    inset 0 0 0 7px #160e20,
+    inset 0 0 0 9px #b987a55c,
+    7px 8px 18px #0009;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.1s cubic-bezier(.2,.75,.2,1), filter .5s;
+  z-index: 3;
   overflow: hidden;
 }
 
-.door::before {
+.door-face::after {
   content: "";
   position: absolute;
-  inset: 20px;
-  border: 1px solid #dcb9d355;
+  inset: 18px 20px;
+  border: 1px solid #e7b9dc66;
+  box-shadow: inset 0 0 25px #0005;
+  pointer-events: none;
 }
 
-.door::after {
-  content: "✧";
-  position: absolute;
-  top: 45px;
-  color: #e5b5d9;
-  font-size: 25px;
+.door-face:hover {
+  filter: brightness(1.25);
 }
 
-.door span {
+.door-card.active .door-face {
+  transform: rotateY(-105deg);
+  filter: brightness(.8);
+}
+
+.door-number {
   position: absolute;
-  top: 30px;
-  left: 28px;
-  color: #d9b6d4;
+  top: 35px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #eab8df;
+}
+
+.door-symbol {
+  color: #f3c3e8;
+  font-size: 35px;
+  text-shadow: 0 0 20px #ffb6ef;
+}
+
+.door-face strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  text-shadow: 0 3px 10px #000;
+}
+
+.door-face small {
+  color: #e9b4dc;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.knob {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff2c9, #c58d58 60%, #71432e);
+  box-shadow: 0 0 12px #f6c38d88;
+}
+
+.door-caption {
+  text-align: center;
+  margin-top: 20px;
+  color: #e6c5df;
   font-size: 10px;
   letter-spacing: 2px;
 }
 
-.door h2 {
-  font-family: Georgia, serif;
-  font-size: 23px;
-  font-weight: normal;
-  letter-spacing: 3px;
-  line-height: 1.5;
-  z-index: 1;
-}
-
-.door small {
-  margin-top: 25px;
-  color: #e9b8d8;
-  font-size: 9px;
-  letter-spacing: 3px;
-  opacity: 0;
-  transition: .4s;
-}
-
-.door-card:hover .door {
-  transform: rotateY(-45deg);
-  box-shadow: 15px 15px 45px #000b;
-}
-
-.door-card:hover .door small {
-  opacity: 1;
-}
-
-.door-card > p {
-  margin-top: 20px;
-  font-family: Georgia, serif;
-  font-size: 17px;
-  color: #e6c9df;
-}
-
-#about, #gallery, #contact {
-  max-width: 1100px;
-  margin: auto;
-  padding: 100px 30px;
+.door-hint {
   text-align: center;
-  border-top: 1px solid #ffffff20;
+  margin-top: 55px;
+  color: #b995b9;
+  font-size: 9px;
+  letter-spacing: 4px;
 }
 
-#about h2, #gallery h2, #contact h2 {
-  font-family: Georgia, serif;
-  font-size: clamp(35px, 5vw, 55px);
-  font-weight: normal;
-  margin-bottom: 25px;
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-#about h2 span {
-  color: #dfa5d0;
+.about,
+.contact {
+  text-align: center;
+  padding: 110px 20px;
+  background: #160e20;
 }
 
-#about p {
-  color: #bbaabd;
+.about > p:last-child {
+  max-width: 620px;
+  margin: 20px auto 0;
+  color: #c7b6cf;
+  font-size: 13px;
   line-height: 2;
-  max-width: 600px;
-  margin: auto;
-  font-size: 14px;
 }
 
-#artwork {
-  margin-top: 35px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  color: #c7b4c9;
-  line-height: 1.8;
+.contact {
+  background: linear-gradient(135deg, #21132c, #100b19);
 }
 
-.artwork-card {
-  background: #201927;
-  border: 1px solid #765777;
-  padding: 12px;
-  overflow: hidden;
-}
-
-.artwork-card img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
-  transition: .4s;
-}
-
-.artwork-card:hover img {
-  transform: scale(1.04);
-}
-
-.artwork-card p {
-  padding: 12px;
-  font-size: 12px;
-}
-
-#contact p {
-  color: #bbaabd;
-  margin: 15px 0 25px;
-}
-
-#contact a {
+.contact a {
   display: inline-block;
-  padding: 15px 30px;
-  border: 1px solid #dba5ce;
-  color: #f3d8ec;
+  margin-top: 25px;
+  padding: 15px 28px;
+  border: 1px solid var(--pink);
+  color: white;
   text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 2px;
+  font-size: 10px;
+  letter-spacing: 3px;
   transition: .3s;
 }
 
-#contact a:hover {
-  background: #dba5ce;
-  color: #180f1d;
+.contact a:hover {
+  background: var(--pink);
+  color: #160e20;
 }
 
 footer {
-  border-top: 1px solid #ffffff20;
-  padding: 30px;
+  padding: 25px;
   text-align: center;
-  color: #9f8ca3;
-  font-size: 10px;
-  letter-spacing: 2px;
+  background: #0b0710;
+  color: #917c9a;
+  font-size: 9px;
+  letter-spacing: 3px;
 }
 
-@media (max-width: 850px) {
-  .doors {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .door-card:last-child {
-    grid-column: 1 / -1;
-    width: 48%;
-    justify-self: center;
-  }
-
-  .door {
-    height: 280px;
+@media (max-width: 1000px) {
+  .door-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
   }
 }
 
-@media (max-width: 500px) {
-  header {
-    padding: 0 18px;
+@media (max-width: 650px) {
+  .topbar {
+    padding: 0 5%;
   }
 
   nav {
@@ -297,23 +481,35 @@ footer {
   }
 
   nav a {
-    font-size: 9px;
+    font-size: 8px;
+    letter-spacing: 1px;
   }
 
-  .doors {
-    width: 88%;
-    gap: 15px;
+  .door-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 15px;
   }
 
-  .door {
-    height: 230px;
+  .door-room {
+    height: 340px;
   }
 
-  .door h2 {
-    font-size: 17px;
+  .door-face strong {
+    font-size: 21px;
   }
 
-  #artwork {
+  .section-heading {
+    margin-bottom: 45px;
+  }
+}
+
+@media (max-width: 380px) {
+  .door-grid {
     grid-template-columns: 1fr;
+    max-width: 250px;
+  }
+
+  .door-room {
+    height: 390px;
   }
 }
