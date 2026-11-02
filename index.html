@@ -7,650 +7,104 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#10111b;
-  --pink:#e9b3d9;
-  --gold:#d7b76d;
-  --muted:#b9a9bd;
-  --ink:#171923;
-}
+:root{--bg:#10111b;--pink:#e9b3d9;--gold:#d7b76d;--muted:#b9a9bd}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:#f8eff7;
-  font-family:Montserrat,sans-serif;
-  overflow-x:hidden;
-}
-button,a{font:inherit}
+body{background:var(--bg);color:#f8eff7;font-family:Montserrat,sans-serif;overflow-x:hidden}
 
-/* NAVIGATION */
-.nav{
-  height:76px;
-  position:absolute;
-  top:0;left:0;
-  width:100%;
-  padding:0 7%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  z-index:20;
-  border-bottom:1px solid #ffffff20;
-  background:#11131b55;
-}
-.logo{
-  color:white;
-  font-family:Cinzel,serif;
-  letter-spacing:5px;
-  font-size:19px;
-  text-decoration:none;
-}
+.nav{height:76px;position:absolute;top:0;left:0;width:100%;padding:0 7%;display:flex;align-items:center;justify-content:space-between;z-index:20;border-bottom:1px solid #ffffff20;background:#11131b55}
+.logo{color:white;font-family:Cinzel,serif;letter-spacing:5px;font-size:19px;text-decoration:none}
 .logo span{color:var(--pink)}
 .nav-links{display:flex;gap:28px}
-.nav-links a{
-  color:#e6d8e7;
-  text-decoration:none;
-  font-size:9px;
-  letter-spacing:1.7px;
-  transition:.3s;
-}
+.nav-links a{color:#e6d8e7;text-decoration:none;font-size:9px;letter-spacing:1.7px;transition:.3s}
 .nav-links a:hover{color:var(--pink)}
 
-/* HOME PAGE */
-.hero{
-  min-height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  overflow:hidden;
-  padding:125px 8% 85px;
-  background:
-    radial-gradient(ellipse at 50% 48%,#3d2c49 0%,transparent 48%),
-    linear-gradient(120deg,#11101b,#211a2b 58%,#11101b);
-}
-.hero:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.10;
-  background-image:radial-gradient(#fff 1px,transparent 1px);
-  background-size:42px 42px;
-}
-.hero-content{
-  position:relative;
-  z-index:3;
-  width:100%;
-  max-width:850px;
-  animation:enter 1s ease both;
-}
-@keyframes enter{
-  from{opacity:0;transform:translateY(25px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.kicker{
-  color:var(--pink);
-  font-size:10px;
-  letter-spacing:4px;
-}
-.hero h1{
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(76px,12vw,150px);
-  line-height:.92;
-  font-weight:500;
-  letter-spacing:2px;
-  margin:25px 0 20px;
-  text-shadow:0 0 45px #e9b3d933;
-}
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:125px 8% 85px;background:radial-gradient(ellipse at 50% 48%,#3d2c49 0%,transparent 48%),linear-gradient(120deg,#11101b,#211a2b 58%,#11101b)}
+.hero:before{content:"";position:absolute;inset:0;opacity:.10;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:42px 42px}
+.hero-content{position:relative;z-index:3;width:100%;max-width:850px;animation:enter 1s ease both}
+@keyframes enter{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+.kicker{color:var(--pink);font-size:10px;letter-spacing:4px}
+.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(76px,12vw,150px);line-height:.92;font-weight:500;letter-spacing:2px;margin:25px 0 20px;text-shadow:0 0 45px #e9b3d933}
 .hero h1 span{color:var(--pink);font-style:italic}
-.hero-sub{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  font-size:clamp(18px,2.2vw,27px);
-  margin-top:12px;
-}
-.designer-card{
-  width:min(330px,75vw);
-  height:58px;
-  position:relative;
-  perspective:900px;
-  display:inline-block;
-  vertical-align:middle;
-}
-.designer-card-inner{
-  width:100%;
-  height:100%;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform .9s cubic-bezier(.7,0,.2,1);
-  animation:roleFlip 5s infinite;
-}
-.designer-card.flipped .designer-card-inner{
-  transform:rotateY(180deg);
-}
-@keyframes roleFlip{
-  0%,38%{transform:rotateY(0)}
-  48%,88%{transform:rotateY(180deg)}
-  100%{transform:rotateY(360deg)}
-}
-.designer-front,.designer-back{
-  position:absolute;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  backface-visibility:hidden;
-  background:#fff;
-  color:#26303c;
-  font-size:clamp(15px,2vw,22px);
-  font-weight:500;
-  letter-spacing:.3px;
-  padding:8px 15px;
-  box-shadow:0 9px 25px #0005;
-  transform:rotate(-2deg);
-}
-.designer-back{
-  background:var(--pink);
-  transform:rotateY(180deg) rotate(-2deg);
-}
-.hero-button{
-  display:inline-block;
-  margin-top:35px;
-  padding:15px 25px;
-  border:1px solid #e8c5df;
-  color:white;
-  text-decoration:none;
-  font-size:9px;
-  letter-spacing:2.5px;
-  transition:.3s;
-  cursor:pointer;
-  background:#ffffff0a;
-}
-.hero-button:hover{
-  background:var(--pink);
-  color:#180f20;
-  transform:translateY(-3px);
-}
-.hero-bottom{
-  position:absolute;
-  bottom:28px;
-  left:0;
-  width:100%;
-  text-align:center;
-  color:#c7b8ca;
-  font-size:9px;
-  letter-spacing:4px;
-}
+.hero-sub{font-size:clamp(18px,2.2vw,27px);margin-top:12px;color:#fff}
+.hero-button{display:inline-block;margin-top:35px;padding:15px 25px;border:1px solid #e8c5df;color:white;text-decoration:none;font-size:9px;letter-spacing:2.5px;transition:.3s;cursor:pointer;background:#ffffff0a}
+.hero-button:hover{background:var(--pink);color:#180f20;transform:translateY(-3px)}
+.hero-bottom{position:absolute;bottom:28px;left:0;width:100%;text-align:center;color:#c7b8ca;font-size:9px;letter-spacing:4px}
 
-/* HANGING ROPE */
-.rope{
-  position:absolute;
-  top:-210px;
-  right:10%;
-  width:42px;
-  height:255px;
-  z-index:3;
-  opacity:0;
-  transform-origin:50% 0;
-  pointer-events:none;
-  animation:
-    ropeDrop 1.35s cubic-bezier(.2,.8,.25,1) .35s forwards,
-    ropeSway 4.8s ease-in-out 1.7s infinite;
-}
-.rope::before{
-  content:"";
-  position:absolute;
-  left:18px;
-  top:0;
-  width:7px;
-  height:100%;
-  border-radius:8px;
-  background:repeating-linear-gradient(
-    145deg,
-    #fff0f7 0 3px,
-    #d7a9c8 3px 5px,
-    #8e6688 5px 7px,
-    #f4dce9 7px 9px
-  );
-  box-shadow:0 0 8px #e9b3d977,1px 0 3px #fff9;
-}
-.rope::after{
-  content:"";
-  position:absolute;
-  left:10px;
-  bottom:-9px;
-  width:23px;
-  height:21px;
-  border:3px solid #d8b6cc;
-  border-top-color:#f8eaf3;
-  border-radius:50% 50% 55% 55%;
-  background:linear-gradient(135deg,#fff1f8,#b889a9);
-  box-shadow:0 4px 12px #0007,0 0 15px #e9b3d966;
-}
-@keyframes ropeDrop{
-  0%{top:-210px;opacity:0;transform:rotate(-9deg)}
-  68%{top:0;opacity:1;transform:rotate(5deg)}
-  84%{top:0;transform:rotate(-3deg)}
-  100%{top:0;opacity:1;transform:rotate(0deg)}
-}
-@keyframes ropeSway{
-  0%,100%{transform:rotate(0deg)}
-  25%{transform:rotate(4deg)}
-  55%{transform:rotate(-3.5deg)}
-  78%{transform:rotate(2deg)}
-}
-.glow{
-  position:absolute;
-  width:280px;
-  height:280px;
-  border-radius:50%;
-  filter:blur(100px);
-  opacity:.18;
-}
+.rope{position:absolute;top:-210px;right:10%;width:42px;height:255px;z-index:3;opacity:0;transform-origin:50% 0;pointer-events:none;animation:ropeDrop 1.35s cubic-bezier(.2,.8,.25,1) .35s forwards,ropeSway 4.8s ease-in-out 1.7s infinite}
+.rope:before{content:"";position:absolute;left:18px;top:0;width:7px;height:100%;border-radius:8px;background:repeating-linear-gradient(145deg,#fff0f7 0 3px,#d7a9c8 3px 5px,#8e6688 5px 7px,#f4dce9 7px 9px);box-shadow:0 0 8px #e9b3d977,1px 0 3px #fff9}
+.rope:after{content:"";position:absolute;left:10px;bottom:-9px;width:23px;height:21px;border:3px solid #d8b6cc;border-top-color:#f8eaf3;border-radius:50% 50% 55% 55%;background:linear-gradient(135deg,#fff1f8,#b889a9);box-shadow:0 4px 12px #0007,0 0 15px #e9b3d966}
+@keyframes ropeDrop{0%{top:-210px;opacity:0;transform:rotate(-9deg)}68%{top:0;opacity:1;transform:rotate(5deg)}84%{top:0;transform:rotate(-3deg)}100%{top:0;opacity:1;transform:rotate(0)}}
+@keyframes ropeSway{0%,100%{transform:rotate(0)}25%{transform:rotate(4deg)}55%{transform:rotate(-3.5deg)}78%{transform:rotate(2deg)}}
+.glow{position:absolute;width:280px;height:280px;border-radius:50%;filter:blur(100px);opacity:.18}
 .glow.one{background:#df9bcf;top:10%;left:-120px}
 .glow.two{background:#6d9bc8;bottom:0;right:15%}
 
-/* PORTFOLIO SECTION */
-.portfolio{
-  min-height:100vh;
-  padding:110px 5% 100px;
-  position:relative;
-  background:
-    radial-gradient(ellipse at 50% 45%,#303447,transparent 68%),
-    #10111b;
-  overflow:hidden;
-}
-.section-heading{
-  text-align:center;
-  margin-bottom:68px;
-}
-.section-heading h2{
-  font-family:Cinzel,serif;
-  font-size:clamp(30px,5vw,54px);
-  font-weight:400;
-  margin:17px 0;
-}
+.portfolio{min-height:100vh;padding:110px 5% 100px;position:relative;background:radial-gradient(ellipse at 50% 45%,#303447,transparent 68%),#10111b;overflow:hidden}
+.section-heading{text-align:center;margin-bottom:68px}
+.section-heading h2{font-family:Cinzel,serif;font-size:clamp(30px,5vw,54px);font-weight:400;margin:17px 0}
 .section-heading h2 span{color:var(--pink)}
-.section-heading p:last-child{
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:1px;
-}
+.section-heading p:last-child{color:var(--muted);font-size:11px;letter-spacing:1px}
 
-/* DOORS GRID */
-.door-grid{
-  max-width:1250px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:24px;
-  align-items:end;
-}
-.door-item{
-  min-width:0;
-  position:relative;
-  transition:opacity .5s,transform .65s,filter .5s;
-}
-.door-frame{
-  height:365px;
-  position:relative;
-  padding:8px 8px 0;
-  perspective:1200px;
-  background:linear-gradient(
-    90deg,
-    #171923,
-    #55505b 12%,
-    #171923 24%,
-    #6c626a 50%,
-    #171923 78%,
-    #4b4650
-  );
-  border-radius:82px 82px 3px 3px;
-  box-shadow:
-    0 18px 38px #0009,
-    inset 0 0 0 2px #e2c17c,
-    0 0 24px #b78de322;
-  overflow:hidden;
-}
-.door-frame:before{
-  content:"";
-  position:absolute;
-  inset:7px 7px 0;
-  border:2px solid #c5a96e;
-  border-bottom:0;
-  border-radius:76px 76px 0 0;
-  pointer-events:none;
-  z-index:4;
-}
-.door{
-  width:100%;
-  height:100%;
-  position:relative;
-  z-index:2;
-  transform-origin:left center;
-  transform-style:preserve-3d;
-  border:1px solid #1b1b22;
-  color:#fff;
-  cursor:pointer;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:center;
-  gap:16px;
-  padding-top:75px;
-  border-radius:72px 72px 0 0;
-  box-shadow:
-    inset 0 0 0 7px #111722,
-    inset 0 0 0 10px #ffffff35;
-  transition:filter .35s,transform 1.25s cubic-bezier(.7,0,.2,1);
-  background:var(--door-color);
-}
-.door:before{
-  content:"";
-  position:absolute;
-  inset:18px 13px 0;
-  border:1px solid #ffffff35;
-  border-radius:58px 58px 0 0;
-  pointer-events:none;
-}
-.door:after{
-  content:"";
-  position:absolute;
-  inset:30px 22px 0;
-  border:1px solid #1115;
-  border-radius:48px 48px 0 0;
-  pointer-events:none;
-}
+.door-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:end}
+.door-item{min-width:0;position:relative;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1),filter .45s ease}
+.door-grid.has-hover .door-item:not(.selected){opacity:0;transform:scale(.72) translateY(24px);filter:blur(5px);pointer-events:none}
+.door-grid.has-hover .door-item.selected{transform:scale(1.08);filter:brightness(1.14);z-index:6}
+.door-grid.has-hover .door-item.selected .door-frame{box-shadow:0 24px 55px #000b,inset 0 0 0 2px #f4d78b,0 0 38px #e9b3d966}
 
-/* DIFFERENT COLORS FOR ALL 8 DOORS */
-.door-item:nth-child(1){
-  --door-color:repeating-linear-gradient(
-    90deg,#07518a 0 5px,#1685bd 6px 10px,#08639b 11px 15px
-  );
-}
-.door-item:nth-child(2){
-  --door-color:repeating-linear-gradient(
-    90deg,#171827 0 5px,#41415a 6px 10px,#24263c 11px 15px
-  );
-}
-.door-item:nth-child(3){
-  --door-color:repeating-linear-gradient(
-    90deg,#267a62 0 5px,#57b68a 6px 10px,#328c70 11px 15px
-  );
-}
-.door-item:nth-child(4){
-  --door-color:repeating-linear-gradient(
-    90deg,#b84b24 0 5px,#f18a3d 6px 10px,#d5652b 11px 15px
-  );
-}
-.door-item:nth-child(5){
-  --door-color:repeating-linear-gradient(
-    90deg,#553a91 0 5px,#9270d2 6px 10px,#6c4aaa 11px 15px
-  );
-}
-.door-item:nth-child(6){
-  --door-color:repeating-linear-gradient(
-    90deg,#9a376e 0 5px,#df78a9 6px 10px,#b84e83 11px 15px
-  );
-}
-.door-item:nth-child(7){
-  --door-color:repeating-linear-gradient(
-    90deg,#8a6825 0 5px,#d9b85c 6px 10px,#a88736 11px 15px
-  );
-}
-.door-item:nth-child(8){
-  --door-color:repeating-linear-gradient(
-    90deg,#176b7b 0 5px,#4ab2bc 6px 10px,#278996 11px 15px
-  );
-}
-.door:hover{filter:brightness(1.2)}
-.door-item.opening .door{
-  transform:rotateY(-105deg);
-  filter:brightness(.7);
-}
-.door-num{
-  position:absolute;
-  top:35px;
-  font-size:8px;
-  letter-spacing:3px;
-  color:#fff5d7;
-}
-.door strong{
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(18px,2vw,25px);
-  line-height:1.05;
-  letter-spacing:1px;
-  text-shadow:0 2px 7px #000;
-}
-.door small{
-  font-size:7px;
-  letter-spacing:1.5px;
-  color:#fff0c8;
-}
-.door-label{
-  position:absolute;
-  top:13%;
-  left:50%;
-  transform:translateX(-50%);
-  background:linear-gradient(#f4df9b,#c79c45);
-  color:#49371c;
-  padding:6px 12px;
-  font-size:8px;
-  letter-spacing:1px;
-  white-space:nowrap;
-  z-index:3;
-  border-radius:3px;
-  box-shadow:0 2px 6px #0008;
-  border:1px solid #fff1c0;
-}
-.door-knob{
-  position:absolute;
-  right:14px;
-  top:52%;
-  width:13px;
-  height:13px;
-  border-radius:50%;
-  background:radial-gradient(
-    circle at 30% 30%,
-    #fff5c9,#d9aa4e 60%,#80501f
-  );
-  box-shadow:0 0 10px #f5c58b,0 1px 3px #000;
-  z-index:4;
-}
+.door-frame{height:365px;position:relative;padding:8px 8px 0;perspective:1200px;background:linear-gradient(90deg,#171923,#55505b 12%,#171923 24%,#6c626a 50%,#171923 78%,#4b4650);border-radius:82px 82px 3px 3px;box-shadow:0 18px 38px #0009,inset 0 0 0 2px #e2c17c,0 0 24px #b78de322;overflow:hidden}
+.door-frame:before{content:"";position:absolute;inset:7px 7px 0;border:2px solid #c5a96e;border-bottom:0;border-radius:76px 76px 0 0;pointer-events:none;z-index:4}
+.door{width:100%;height:100%;position:relative;z-index:2;transform-origin:left center;transform-style:preserve-3d;border:1px solid #1b1b22;color:#fff;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:16px;padding-top:75px;border-radius:72px 72px 0 0;box-shadow:inset 0 0 0 7px #111722,inset 0 0 0 10px #ffffff35;transition:transform 1.05s cubic-bezier(.65,0,.25,1),filter .3s;background:var(--door-color);backface-visibility:visible}
+.door:before{content:"";position:absolute;inset:18px 13px 0;border:1px solid #ffffff35;border-radius:58px 58px 0 0;pointer-events:none}
+.door:after{content:"";position:absolute;inset:30px 22px 0;border:1px solid #1115;border-radius:48px 48px 0 0;pointer-events:none}
 
-/* HOVER DESCRIPTION */
-.door-hover-info{
-  position:absolute;
-  z-index:5;
-  left:14px;
-  right:14px;
-  top:48%;
-  padding:13px 10px 12px;
-  text-align:center;
-  color:#fff;
-  background:linear-gradient(145deg,#171525ed,#30243bea);
-  border:1px solid #f0d49b;
-  border-radius:8px;
-  font-size:10px;
-  line-height:1.65;
-  letter-spacing:.35px;
-  opacity:0;
-  transform:translateY(12px);
-  pointer-events:none;
-  transition:opacity .3s ease,transform .3s ease;
-  box-shadow:0 8px 24px #0008;
-}
-.door-hover-info span{
-  display:block;
-  margin-top:7px;
-  color:#f4d58c;
-  font-size:7px;
-  letter-spacing:1.7px;
-}
-.door-item:hover .door-hover-info,
-.door-item:focus-within .door-hover-info{
-  opacity:1;
-  transform:translateY(0);
-}
-.door-item:hover .door strong,
-.door-item:hover .door small,
-.door-item:hover .door-num{
-  opacity:.12;
-  transition:opacity .25s;
-}
-.door-item:hover .door{
-  filter:brightness(1.18) saturate(1.15);
-}
-.door-title{
-  text-align:center;
-  margin-top:16px;
-  font-size:9px;
-  letter-spacing:1.5px;
-  color:#e8c9e4;
-}
-.door-grid.has-hover .door-item:not(.selected){
-  opacity:0;
-  transform:scale(.75) translateY(25px);
-  filter:blur(6px);
-  pointer-events:none;
-}
-.door-grid.has-hover .door-item.selected{
-  transform:scale(1.08);
-  filter:brightness(1.12);
-  z-index:5;
-}
+.door-item:nth-child(1){--door-color:repeating-linear-gradient(90deg,#073f70 0 5px,#168bc4 6px 10px,#07588d 11px 15px)}
+.door-item:nth-child(2){--door-color:repeating-linear-gradient(90deg,#292044 0 5px,#7460a8 6px 10px,#41315f 11px 15px)}
+.door-item:nth-child(3){--door-color:repeating-linear-gradient(90deg,#12634f 0 5px,#58c59a 6px 10px,#23866c 11px 15px)}
+.door-item:nth-child(4){--door-color:repeating-linear-gradient(90deg,#a53c38 0 5px,#f18b65 6px 10px,#c95145 11px 15px)}
+.door-item:nth-child(5){--door-color:repeating-linear-gradient(90deg,#443080 0 5px,#a184e4 6px 10px,#694cae 11px 15px)}
+.door-item:nth-child(6){--door-color:repeating-linear-gradient(90deg,#87305f 0 5px,#ee91bd 6px 10px,#b94f83 11px 15px)}
+.door-item:nth-child(7){--door-color:repeating-linear-gradient(90deg,#80601d 0 5px,#efd078 6px 10px,#b28b35 11px 15px)}
+.door-item:nth-child(8){--door-color:repeating-linear-gradient(90deg,#105a78 0 5px,#55c8d0 6px 10px,#21899b 11px 15px)}
 
-/* GALLERY */
-.gallery-page{
-  display:none;
-  min-height:100vh;
-  padding:110px 6% 90px;
-  background:radial-gradient(ellipse at 50% 10%,#42264a,transparent 65%),#100b16;
-}
-.gallery-page.visible{
-  display:block;
-  animation:enter .8s ease both;
-}
-.gallery-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:55px;
-  gap:20px;
-}
-.back-button{
-  border:1px solid #d8a8cf;
-  background:transparent;
-  color:white;
-  padding:13px 20px;
-  font-size:9px;
-  letter-spacing:2px;
-  cursor:pointer;
-}
-.back-button:hover{
-  background:var(--pink);
-  color:#160d20;
-}
+.door:hover{filter:brightness(1.18) saturate(1.1)}
+.door-item.opening .door{transform:rotateY(105deg);filter:brightness(.75)}
+.door-num{position:absolute;top:35px;font-size:8px;letter-spacing:3px;color:#fff5d7}
+.door strong{font-family:"Cormorant Garamond",serif;font-size:clamp(18px,2vw,25px);line-height:1.05;letter-spacing:1px;text-shadow:0 2px 7px #000}
+.door small{font-size:7px;letter-spacing:1.5px;color:#fff0c8}
+.door-label{position:absolute;top:13%;left:50%;transform:translateX(-50%);background:linear-gradient(#f4df9b,#c79c45);color:#49371c;padding:6px 12px;font-size:8px;letter-spacing:1px;white-space:nowrap;z-index:3;border-radius:3px;box-shadow:0 2px 6px #0008;border:1px solid #fff1c0}
+.door-knob{position:absolute;right:14px;top:52%;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff5c9,#d9aa4e 60%,#80501f);box-shadow:0 0 10px #f5c58b,0 1px 3px #000;z-index:4}
+.door-hover-info{position:absolute;z-index:5;left:14px;right:14px;top:48%;padding:13px 10px 12px;text-align:center;color:#fff;background:linear-gradient(145deg,#171525ed,#30243bea);border:1px solid #f0d49b;border-radius:8px;font-size:10px;line-height:1.65;letter-spacing:.35px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 8px 24px #0008}
+.door-hover-info span{display:block;margin-top:7px;color:#f4d58c;font-size:7px;letter-spacing:1.7px}
+.door-item:hover .door-hover-info{opacity:1;transform:translateY(0)}
+.door-item:hover .door strong,.door-item:hover .door small,.door-item:hover .door-num{opacity:.12;transition:opacity .25s}
+.door-title{text-align:center;margin-top:16px;font-size:9px;letter-spacing:1.5px;color:#e8c9e4}
+
+/* Gallery zooms in as one clean page; no category flash or pop-up effect */
+.gallery-page{display:none;position:fixed;inset:0;z-index:50;overflow-y:auto;padding:100px 6% 70px;background:radial-gradient(ellipse at 50% 10%,#42264a,transparent 65%),#100b16}
+.gallery-page.visible{display:block;animation:pageZoom .65s cubic-bezier(.2,.75,.25,1) both}
+@keyframes pageZoom{from{opacity:.4;transform:scale(1.13)}to{opacity:1;transform:scale(1)}}
+.gallery-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:55px;gap:20px}
+.back-button{border:1px solid #d8a8cf;background:transparent;color:white;padding:13px 20px;font-size:9px;letter-spacing:2px;cursor:pointer}
+.back-button:hover{background:var(--pink);color:#160d20}
 .gallery-heading{text-align:center}
-.gallery-heading h2{
-  font-family:Cinzel,serif;
-  font-size:clamp(30px,5vw,60px);
-  font-weight:400;
-  color:var(--pink);
-  margin:12px 0;
-}
-.gallery-heading p{
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:3px;
-}
-.art-grid{
-  max-width:1250px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:25px;
-}
-.art-card{
-  background:#1c1323;
-  border:1px solid #a67b9b44;
-  padding:12px;
-  overflow:hidden;
-  transition:.4s;
-}
-.art-card:hover{
-  transform:translateY(-7px);
-  border-color:var(--pink);
-  box-shadow:0 15px 35px #0008;
-}
-.art-card img{
-  width:100%;
-  height:280px;
-  object-fit:contain;
-  display:block;
-  background:#100b16;
-}
-.art-card p{
-  text-align:center;
-  color:#e8c9e4;
-  font-size:10px;
-  letter-spacing:2px;
-  padding:17px 5px 8px;
-}
-.no-art{
-  grid-column:1/-1;
-  text-align:center;
-  padding:80px 20px;
-  color:var(--muted);
-  line-height:2;
-}
+.gallery-heading h2{font-family:Cinzel,serif;font-size:clamp(30px,5vw,60px);font-weight:400;color:var(--pink);margin:12px 0}
+.gallery-heading p{color:var(--muted);font-size:10px;letter-spacing:3px}
+.art-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
+.art-card{background:#1c1323;border:1px solid #a67b9b44;padding:12px;overflow:hidden;transition:.3s}
+.art-card:hover{border-color:var(--pink)}
+.art-card img{width:100%;height:280px;object-fit:contain;display:block;background:#100b16}
+.art-card p{text-align:center;color:#e8c9e4;font-size:10px;letter-spacing:2px;padding:17px 5px 8px}
+.no-art{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--muted);line-height:2}
 
-/* ABOUT AND CONTACT */
-.about,.contact{
-  text-align:center;
-  padding:100px 20px;
-  background:#191020;
-}
-.about h2,.contact h2{
-  font-family:Cinzel,serif;
-  font-weight:400;
-  font-size:clamp(30px,5vw,55px);
-  margin:20px 0;
-}
+.about,.contact{text-align:center;padding:100px 20px;background:#191020}
+.about h2,.contact h2{font-family:Cinzel,serif;font-weight:400;font-size:clamp(30px,5vw,55px);margin:20px 0}
 .about h2 span,.contact h2 span{color:var(--pink)}
-.about p:last-child{
-  max-width:650px;
-  margin:20px auto 0;
-  color:#cbb9d0;
-  font-size:13px;
-  line-height:2;
-}
+.about p:last-child{max-width:650px;margin:20px auto 0;color:#cbb9d0;font-size:13px;line-height:2}
 .contact{background:#120c19}
-.contact a{
-  display:inline-block;
-  margin-top:25px;
-  padding:15px 28px;
-  border:1px solid var(--pink);
-  text-decoration:none;
-  color:white;
-  font-size:10px;
-  letter-spacing:3px;
-}
-footer{
-  padding:25px;
-  background:#09060e;
-  color:#a48ba9;
-  text-align:center;
-  font-size:9px;
-  letter-spacing:3px;
-}
+.contact a{display:inline-block;margin-top:25px;padding:15px 28px;border:1px solid var(--pink);text-decoration:none;color:white;font-size:10px;letter-spacing:3px}
+footer{padding:25px;background:#09060e;color:#a48ba9;text-align:center;font-size:9px;letter-spacing:3px}
 
-/* RESPONSIVE */
 @media(max-width:1000px){
   .door-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
@@ -658,33 +112,16 @@ footer{
   .nav{padding:0 4%;height:65px}
   .nav-links{gap:10px}
   .nav-links a{font-size:7px;letter-spacing:.7px}
-  .hero{padding:110px 7% 70px;align-items:center}
-  .hero-content{width:100%;margin-top:20px}
+  .hero{padding:110px 7% 70px}
   .hero h1{font-size:clamp(65px,15vw,100px)}
-  .hero-bottom{left:7%}
   .rope{right:7%;height:165px}
-  .door-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:24px 15px;
-  }
-  .door-frame{
-    height:300px;
-    border-radius:65px 65px 0 0;
-  }
-  .door{
-    border-radius:58px 58px 0 0;
-    padding-top:65px;
-  }
+  .door-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 15px}
+  .door-frame{height:300px;border-radius:65px 65px 0 0}
+  .door{border-radius:58px 58px 0 0;padding-top:65px}
   .door strong{font-size:21px}
-  .art-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-  }
+  .art-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .art-card img{height:180px}
-  .gallery-top{
-    align-items:flex-start;
-    flex-direction:column;
-  }
+  .gallery-top{align-items:flex-start;flex-direction:column}
   .gallery-heading{text-align:left}
 }
 @media(max-width:380px){
@@ -692,6 +129,8 @@ footer{
 }
 @media(prefers-reduced-motion:reduce){
   .rope{animation:none;top:0;opacity:1;transform:none}
+  .gallery-page.visible{animation:none}
+  .door{transition:none}
 }
 </style>
 </head>
@@ -708,7 +147,6 @@ footer{
   </div>
 </nav>
 
-<!-- HOME -->
 <section class="hero" id="home">
   <div class="glow one"></div>
   <div class="glow two"></div>
@@ -717,26 +155,13 @@ footer{
   <div class="hero-content">
     <p class="kicker">✦ WELCOME TO MY WORLD ✦</p>
     <h1>Hi, I'm <span>ANNA.</span></h1>
-
-    <div class="hero-sub">
-      <span>I am a</span>
-      <div class="designer-card" id="designerCard">
-        <div class="designer-card-inner">
-          <div class="designer-front">Graphic Designer</div>
-          <div class="designer-back">Furry Artist</div>
-        </div>
-      </div>
-    </div>
-
-    <button class="hero-button" id="exploreButton">
-      EXPLORE MY WORLD ↓
-    </button>
+    <div class="hero-sub">Graphic Designer</div>
+    <button class="hero-button" id="exploreButton">EXPLORE MY WORLD ↓</button>
   </div>
 
   <p class="hero-bottom">ART · DESIGN · IMAGINATION</p>
 </section>
 
-<!-- PORTFOLIO DOORS -->
 <section class="portfolio" id="portfolio">
   <div class="section-heading">
     <p class="kicker">A LITTLE WORLD OF CREATIVITY</p>
@@ -746,7 +171,6 @@ footer{
 
   <div class="door-grid" id="doorGrid">
 
-    <!-- 01 LOGO -->
     <div class="door-item" data-category="logo">
       <div class="door-frame">
         <button class="door" type="button">
@@ -754,17 +178,13 @@ footer{
           <span class="door-num">01</span>
           <strong>LOGO<br>DESIGN</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Unique logos, badges and creative brand identities.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Unique logos, badges and creative brand identities.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Logo Designs</p>
     </div>
 
-    <!-- 02 BANNER -->
     <div class="door-item" data-category="banner">
       <div class="door-frame">
         <button class="door" type="button">
@@ -772,17 +192,13 @@ footer{
           <span class="door-num">02</span>
           <strong>BANNER<br>DESIGN</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Eye-catching banners for channels, profiles and streams.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Eye-catching banners for channels, profiles and streams.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Banner Designs</p>
     </div>
 
-    <!-- 03 EMOTES -->
     <div class="door-item" data-category="emotes">
       <div class="door-frame">
         <button class="door" type="button">
@@ -790,17 +206,13 @@ footer{
           <span class="door-num">03</span>
           <strong>EMOTE<br>DESIGN</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Cute and expressive emotes made for your community.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Cute and expressive emotes made for your community.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Emotes</p>
     </div>
 
-    <!-- 04 PNG -->
     <div class="door-item" data-category="png">
       <div class="door-frame">
         <button class="door" type="button">
@@ -808,17 +220,13 @@ footer{
           <span class="door-num">04</span>
           <strong>PNG<br>ART</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Transparent PNG artwork, cut-outs and stream assets.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Transparent PNG artwork, cut-outs and stream assets.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">PNG Artwork</p>
     </div>
 
-    <!-- 05 MODEL -->
     <div class="door-item" data-category="model">
       <div class="door-frame">
         <button class="door" type="button">
@@ -826,17 +234,13 @@ footer{
           <span class="door-num">05</span>
           <strong>MODEL<br>DESIGN</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Original character and avatar model designs.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Original character and avatar model designs.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Model Designs</p>
     </div>
 
-    <!-- 06 CHARACTER ART -->
     <div class="door-item" data-category="character">
       <div class="door-frame">
         <button class="door" type="button">
@@ -844,17 +248,13 @@ footer{
           <span class="door-num">06</span>
           <strong>CHARACTER<br>ART</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Character illustrations, portraits and custom concepts.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Character illustrations, portraits and custom concepts.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Character Art</p>
     </div>
 
-    <!-- 07 ART SCENE -->
     <div class="door-item" data-category="scene">
       <div class="door-frame">
         <button class="door" type="button">
@@ -862,17 +262,13 @@ footer{
           <span class="door-num">07</span>
           <strong>ART<br>SCENE</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Atmospheric illustrations, backgrounds and story scenes.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Atmospheric illustrations, backgrounds and story scenes.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Art Scenes</p>
     </div>
 
-    <!-- 08 3D ROOM -->
     <div class="door-item" data-category="room">
       <div class="door-frame">
         <button class="door" type="button">
@@ -880,10 +276,7 @@ footer{
           <span class="door-num">08</span>
           <strong>3D<br>ROOM</strong>
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">
-            Beautiful 3D rooms, cozy spaces and environment designs.
-            <span>CLICK TO EXPLORE</span>
-          </div>
+          <div class="door-hover-info">Beautiful 3D rooms, cozy spaces and environment designs.<span>CLICK TO EXPLORE</span></div>
           <i class="door-knob"></i>
         </button>
       </div>
@@ -893,35 +286,24 @@ footer{
   </div>
 </section>
 
-<!-- GALLERY PAGE -->
 <section class="gallery-page" id="galleryPage">
   <div class="gallery-top">
-    <button class="back-button" id="backButton">
-      ← BACK TO DOORS
-    </button>
-
+    <button class="back-button" id="backButton">← BACK TO DOORS</button>
     <div class="gallery-heading">
       <p class="kicker">ANNA'S CREATIVE COLLECTION</p>
       <h2 id="galleryTitle">LOGO DESIGNS</h2>
       <p id="gallerySubtitle">A COLLECTION OF MY WORK</p>
     </div>
   </div>
-
   <div class="art-grid" id="artGrid"></div>
 </section>
 
-<!-- ABOUT -->
 <section class="about" id="about">
   <p class="kicker">A LITTLE ABOUT ME</p>
   <h2>HELLO, I'M <span>ANNA</span></h2>
-  <p>
-    I'm a digital artist creating model designs, character art,
-    logos, banners, emotes, PNG artwork and creative 3D environments.
-    Welcome to my portfolio!
-  </p>
+  <p>I'm a digital artist creating model designs, character art, logos, banners, emotes, PNG artwork and creative 3D environments. Welcome to my portfolio!</p>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
   <p class="kicker">HAVE A PROJECT IN MIND?</p>
   <h2>LET'S CREATE SOMETHING <span>MAGICAL</span></h2>
@@ -931,146 +313,74 @@ footer{
 <footer>© 2026 ANNA · DIGITAL ARTIST</footer>
 
 <script>
-/* ALL CATEGORY GALLERIES */
-const categories = {
-
+const categories={
   logo:{
     title:"LOGO DESIGNS",
     subtitle:"CREATIVE BRAND IDENTITIES",
     folder:"assets/logo/",
-    files:[
-      "logo-1.png",
-      "logo-2.png",
-      "logo-3.png",
-      "logo-4.png",
-      "logo-5.png"
-    ]
+    files:["logo-1.png","logo-2.png","logo-3.png","logo-4.png","logo-5.png"]
   },
-
   banner:{
     title:"BANNER DESIGNS",
     subtitle:"STREAM AND SOCIAL GRAPHICS",
     folder:"assets/banner/",
-    files:[
-      "banner-1.png",
-      "banner-2.png",
-      "banner-3.png",
-      "banner-4.png",
-      "banner-5.png",
-      "banner-6.png",
-      "banner-7.png"
-    ]
+    files:["banner-1.png","banner-2.png","banner-3.png","banner-4.png","banner-5.png","banner-6.png","banner-7.png"]
   },
-
   emotes:{
     title:"EMOTE DESIGNS",
     subtitle:"EXPRESS YOURSELF",
     folder:"assets/emotes/",
-    files:[
-      "emote-1.png",
-      "emote-2.png",
-      "emote-3.png",
-      "emote-4.png"
-    ]
+    files:["emote-1.png","emote-2.png","emote-3.png","emote-4.png"]
   },
-
   png:{
     title:"PNG ARTWORK",
     subtitle:"TRANSPARENT PNG COLLECTION",
     folder:"assets/png/",
-    files:[
-      "png-1.png",
-      "png-2.png",
-      "png-3.png",
-      "png-4.png",
-      "png-5.png"
-    ]
+    files:["png-1.png","png-2.png","png-3.png","png-4.png","png-5.png"]
   },
-
   model:{
     title:"MODEL DESIGNS",
     subtitle:"ORIGINAL MODEL COLLECTION",
     folder:"assets/model/",
-    files:[
-      "model-1.png",
-      "model-2.png",
-      "model-3.png",
-      "model-4.png",
-      "model-5.png"
-    ]
+    files:["model-1.png","model-2.png","model-3.png","model-4.png","model-5.png"]
   },
-
   character:{
     title:"CHARACTER ART",
     subtitle:"CHARACTER ILLUSTRATION COLLECTION",
     folder:"assets/character-art/",
-    files:[
-      "character-1.png",
-      "character-2.png",
-      "character-3.png",
-      "character-4.png",
-      "character-5.png"
-    ]
+    files:["character-1.png","character-2.png","character-3.png","character-4.png","character-5.png"]
   },
-
   scene:{
     title:"ART SCENES",
     subtitle:"MY CREATIVE ARTWORK",
     folder:"assets/art-scene/",
-    files:[
-      "scene-1.png",
-      "scene-2.png",
-      "scene-3.png",
-      "scene-4.png"
-    ]
+    files:["scene-1.png","scene-2.png","scene-3.png","scene-4.png"]
   },
-
   room:{
     title:"3D ROOM DESIGNS",
     subtitle:"3D ENVIRONMENTS AND COZY SPACES",
     folder:"assets/3d-room/",
-    files:[
-      "room-1.png",
-      "room-2.png",
-      "room-3.png",
-      "room-4.png"
-    ]
+    files:["room-1.png","room-2.png","room-3.png","room-4.png"]
   }
 };
 
-const doorGrid = document.getElementById("doorGrid");
-const doors = document.querySelectorAll(".door-item");
-const galleryPage = document.getElementById("galleryPage");
-const artGrid = document.getElementById("artGrid");
+const galleryPage=document.getElementById("galleryPage");
+const artGrid=document.getElementById("artGrid");
+let busy=false;
 
-let busy = false;
-
-/* EXPLORE BUTTON */
 document.getElementById("exploreButton").addEventListener("click",()=>{
-  if(busy)return;
-
-  busy = true;
-
-  document.getElementById("designerCard").classList.add("flipped");
-
-  setTimeout(()=>{
-    document.getElementById("portfolio").scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-    busy = false;
-  },900);
+  document.getElementById("portfolio").scrollIntoView({behavior:"smooth",block:"start"});
 });
 
-/* DOOR HOVER AND CLICK */
-doors.forEach(item=>{
+const doorGrid=document.getElementById("doorGrid");
 
+document.querySelectorAll(".door-item").forEach(item=>{
   item.addEventListener("mouseenter",()=>{
     if(busy)return;
 
     doorGrid.classList.add("has-hover");
 
-    doors.forEach(d=>d.classList.remove("selected"));
+    document.querySelectorAll(".door-item").forEach(d=>d.classList.remove("selected"));
 
     item.classList.add("selected");
   });
@@ -1078,126 +388,95 @@ doors.forEach(item=>{
   item.querySelector(".door").addEventListener("click",()=>{
     openGallery(item.dataset.category,item);
   });
-
 });
 
-/* REMOVE HOVER WHEN MOUSE LEAVES */
 doorGrid.addEventListener("mouseleave",()=>{
-  doorGrid.classList.remove("has-hover");
-
-  doors.forEach(d=>d.classList.remove("selected"));
-});
-
-/* OPEN SELECTED DOOR AND SHOW GALLERY */
-function openGallery(key,item){
-
   if(busy)return;
 
-  const cat = categories[key];
-
-  if(!cat)return;
-
-  busy = true;
-
   doorGrid.classList.remove("has-hover");
 
-  doors.forEach(d=>d.classList.remove("selected"));
+  document.querySelectorAll(".door-item").forEach(d=>d.classList.remove("selected"));
+});
 
-  item.classList.add("opening");
+function openGallery(key,item){
+  if(busy)return;
 
-  /*
-    Door opens first.
-    Gallery appears directly after the door animation.
-    No purple flash or extra zoom transition.
-  */
+  const cat=categories[key];
+  if(!cat)return;
+
+  busy=true;
+
+  doorGrid.classList.add("has-hover");
+
+  document.querySelectorAll(".door-item").forEach(d=>d.classList.remove("selected"));
+
+  item.classList.add("selected");
+
+  // Other doors fade away; the chosen door grows, then swings inward.
+  setTimeout(()=>{
+    item.classList.add("opening");
+  },420);
 
   setTimeout(()=>{
+    document.getElementById("galleryTitle").textContent=cat.title;
+    document.getElementById("gallerySubtitle").textContent=cat.subtitle;
 
-    document.getElementById("galleryTitle").textContent = cat.title;
+    artGrid.innerHTML="";
 
-    document.getElementById("gallerySubtitle").textContent = cat.subtitle;
+    let loadedCount=0;
 
-    artGrid.innerHTML = "";
+    cat.files.forEach((file,index)=>{
+      const card=document.createElement("article");
+      card.className="art-card";
 
-    cat.files.forEach((file,i)=>{
+      const img=document.createElement("img");
+      img.src=cat.folder+file;
+      img.alt=cat.title+" artwork "+(index+1);
 
-      const card = document.createElement("article");
-      card.className = "art-card";
+      const caption=document.createElement("p");
+      caption.textContent="ARTWORK "+String(index+1).padStart(2,"0");
 
-      const img = document.createElement("img");
+      img.onload=()=>{
+        loadedCount++;
+      };
 
-      img.src = cat.folder + file;
-      img.alt = cat.title + " artwork " + (i+1);
-
-      const p = document.createElement("p");
-
-      p.textContent = "ARTWORK " + String(i+1).padStart(2,"0");
-
-      img.onerror = ()=>{
-
+      img.onerror=()=>{
         card.remove();
 
         if(!artGrid.querySelector(".art-card")){
-
-          artGrid.innerHTML =
-            '<div class="no-art">No artwork found yet.<br>Check the image folder and filenames.</div>';
-
+          artGrid.innerHTML='<div class="no-art">Your artwork will appear here.<br>Add your own images to this category folder.</div>';
         }
-
       };
 
-      card.append(img,p);
-
+      card.append(img,caption);
       artGrid.append(card);
-
-    });
-
-    /* HIDE OTHER SECTIONS */
-    [".hero",".portfolio",".about",".contact","footer"].forEach(sel=>{
-      document.querySelector(sel).style.display = "none";
     });
 
     galleryPage.classList.add("visible");
-
-    window.scrollTo({
-      top:0,
-      behavior:"instant"
-    });
+    galleryPage.scrollTop=0;
+    window.scrollTo(0,0);
 
     item.classList.remove("opening");
 
-    busy = false;
-
-  },720);
-
+    busy=false;
+  },1320);
 }
 
-/* BACK TO DOORS */
 document.getElementById("backButton").addEventListener("click",()=>{
-
   if(busy)return;
-
-  busy = true;
 
   galleryPage.classList.remove("visible");
 
-  [".hero",".portfolio",".about",".contact","footer"].forEach(sel=>{
-    document.querySelector(sel).style.display = "";
-  });
-
-  doors.forEach(d=>{
-    d.classList.remove("opening","selected");
-  });
-
   doorGrid.classList.remove("has-hover");
+
+  document.querySelectorAll(".door-item").forEach(d=>{
+    d.classList.remove("selected","opening");
+  });
 
   window.scrollTo({
     top:document.getElementById("portfolio").offsetTop,
-    behavior:"instant"
+    behavior:"smooth"
   });
-
-  busy = false;
-
 });
 </script>
 
