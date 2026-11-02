@@ -4,141 +4,826 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ANNA — Digital Artist</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--bg:#10111b;--pink:#e9b3d9;--gold:#d7b76d;--muted:#b9a9bd}
+:root{
+  --bg:#0b1018;
+  --pink:#e8c99a;
+  --gold:#d9b875;
+  --muted:#b8b0a5;
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:#f8eff7;font-family:Montserrat,sans-serif;overflow-x:hidden}
 
-.nav{height:76px;position:absolute;top:0;left:0;width:100%;padding:0 7%;display:flex;align-items:center;justify-content:space-between;z-index:20;border-bottom:1px solid #ffffff20;background:#11131b55}
-.logo{color:white;font-family:Cinzel,serif;letter-spacing:5px;font-size:19px;text-decoration:none}
+body{
+  background:var(--bg);
+  color:#f8eff7;
+  font-family:Montserrat,sans-serif;
+  overflow-x:hidden;
+}
+
+/* NAVIGATION */
+
+.nav{
+  height:76px;
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:20;
+  border-bottom:1px solid #ffffff20;
+  background:#11182088;
+  backdrop-filter:blur(12px);
+}
+
+.logo{
+  color:white;
+  font-family:Cinzel,serif;
+  letter-spacing:5px;
+  font-size:19px;
+  text-decoration:none;
+}
+
 .logo span{color:var(--pink)}
-.nav-links{display:flex;gap:28px}
-.nav-links a{color:#e6d8e7;text-decoration:none;font-size:9px;letter-spacing:1.7px;transition:.3s}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+}
+
+.nav-links a{
+  color:#e6d8e7;
+  text-decoration:none;
+  font-size:9px;
+  letter-spacing:1.7px;
+  transition:.3s;
+}
+
 .nav-links a:hover{color:var(--pink)}
 
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:125px 8% 85px;background:radial-gradient(ellipse at 50% 48%,#3d2c49 0%,transparent 48%),linear-gradient(120deg,#11101b,#211a2b 58%,#11101b)}
-.hero:before{content:"";position:absolute;inset:0;opacity:.10;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:42px 42px}
-.hero-content{position:relative;z-index:3;width:100%;max-width:850px;animation:enter 1s ease both}
-@keyframes enter{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
-.kicker{color:var(--pink);font-size:10px;letter-spacing:4px}
-.hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(76px,12vw,150px);line-height:.92;font-weight:500;letter-spacing:2px;margin:25px 0 20px;text-shadow:0 0 45px #e9b3d933}
-.hero h1 span{color:var(--pink);font-style:italic}
-.hero-sub{font-size:clamp(18px,2.2vw,27px);margin-top:12px;color:#fff}
-.hero-button{display:inline-block;margin-top:35px;padding:15px 25px;border:1px solid #e8c5df;color:white;text-decoration:none;font-size:9px;letter-spacing:2.5px;transition:.3s;cursor:pointer;background:#ffffff0a}
-.hero-button:hover{background:var(--pink);color:#180f20;transform:translateY(-3px)}
-.hero-bottom{position:absolute;bottom:28px;left:0;width:100%;text-align:center;color:#c7b8ca;font-size:9px;letter-spacing:4px}
+/* HOME */
 
-.rope{position:absolute;top:-210px;right:10%;width:42px;height:255px;z-index:3;opacity:0;transform-origin:50% 0;pointer-events:none;animation:ropeDrop 1.35s cubic-bezier(.2,.8,.25,1) .35s forwards,ropeSway 4.8s ease-in-out 1.7s infinite}
-.rope:before{content:"";position:absolute;left:18px;top:0;width:7px;height:100%;border-radius:8px;background:repeating-linear-gradient(145deg,#fff0f7 0 3px,#d7a9c8 3px 5px,#8e6688 5px 7px,#f4dce9 7px 9px);box-shadow:0 0 8px #e9b3d977,1px 0 3px #fff9}
-.rope:after{content:"";position:absolute;left:10px;bottom:-9px;width:23px;height:21px;border:3px solid #d8b6cc;border-top-color:#f8eaf3;border-radius:50% 50% 55% 55%;background:linear-gradient(135deg,#fff1f8,#b889a9);box-shadow:0 4px 12px #0007,0 0 15px #e9b3d966}
-@keyframes ropeDrop{0%{top:-210px;opacity:0;transform:rotate(-9deg)}68%{top:0;opacity:1;transform:rotate(5deg)}84%{top:0;transform:rotate(-3deg)}100%{top:0;opacity:1;transform:rotate(0)}}
-@keyframes ropeSway{0%,100%{transform:rotate(0)}25%{transform:rotate(4deg)}55%{transform:rotate(-3.5deg)}78%{transform:rotate(2deg)}}
-.glow{position:absolute;width:280px;height:280px;border-radius:50%;filter:blur(100px);opacity:.18}
-.glow.one{background:#df9bcf;top:10%;left:-120px}
-.glow.two{background:#6d9bc8;bottom:0;right:15%}
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  padding:125px 8% 85px;
+  background:
+    radial-gradient(ellipse at 50% 48%,#263b42 0%,transparent 48%),
+    linear-gradient(125deg,#090e16,#17252b 55%,#0b1018);
+}
 
-.portfolio{min-height:100vh;padding:110px 5% 100px;position:relative;background:radial-gradient(ellipse at 50% 45%,#303447,transparent 68%),#10111b;overflow:hidden}
-.section-heading{text-align:center;margin-bottom:68px}
-.section-heading h2{font-family:Cinzel,serif;font-size:clamp(30px,5vw,54px);font-weight:400;margin:17px 0}
-.section-heading h2 span{color:var(--pink)}
-.section-heading p:last-child{color:var(--muted);font-size:11px;letter-spacing:1px}
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.07;
+  background-image:radial-gradient(#fff 1px,transparent 1px);
+  background-size:58px 58px;
+}
 
-.door-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:end}
-.door-item{min-width:0;position:relative;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1),filter .45s ease}
-.door-grid.has-hover .door-item:not(.selected){opacity:0;transform:scale(.72) translateY(24px);filter:blur(5px);pointer-events:none}
-.door-grid.has-hover .door-item.selected{transform:scale(1.08);filter:brightness(1.14);z-index:6}
-.door-grid.has-hover .door-item.selected .door-frame{box-shadow:0 24px 55px #000b,inset 0 0 0 2px #f4d78b,0 0 38px #e9b3d966}
+.hero-content{
+  position:relative;
+  z-index:3;
+  width:100%;
+  max-width:1000px;
+  animation:enter 1.2s ease both;
+}
 
-.door-frame{height:365px;position:relative;padding:8px 8px 0;perspective:1200px;background:linear-gradient(90deg,#171923,#55505b 12%,#171923 24%,#6c626a 50%,#171923 78%,#4b4650);border-radius:82px 82px 3px 3px;box-shadow:0 18px 38px #0009,inset 0 0 0 2px #e2c17c,0 0 24px #b78de322;overflow:hidden}
-.door-frame:before{content:"";position:absolute;inset:7px 7px 0;border:2px solid #c5a96e;border-bottom:0;border-radius:76px 76px 0 0;pointer-events:none;z-index:4}
-.door{width:100%;height:100%;position:relative;z-index:2;transform-origin:left center;transform-style:preserve-3d;border:1px solid #1b1b22;color:#fff;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:16px;padding-top:75px;border-radius:72px 72px 0 0;box-shadow:inset 0 0 0 7px #111722,inset 0 0 0 10px #ffffff35;transition:transform 1.05s cubic-bezier(.65,0,.25,1),filter .3s;background:var(--door-color);backface-visibility:visible}
-.door:before{content:"";position:absolute;inset:18px 13px 0;border:1px solid #ffffff35;border-radius:58px 58px 0 0;pointer-events:none}
-.door:after{content:"";position:absolute;inset:30px 22px 0;border:1px solid #1115;border-radius:48px 48px 0 0;pointer-events:none}
+@keyframes enter{
+  from{opacity:0;transform:translateY(35px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-.door-item:nth-child(1){--door-color:repeating-linear-gradient(90deg,#073f70 0 5px,#168bc4 6px 10px,#07588d 11px 15px)}
-.door-item:nth-child(2){--door-color:repeating-linear-gradient(90deg,#292044 0 5px,#7460a8 6px 10px,#41315f 11px 15px)}
-.door-item:nth-child(3){--door-color:repeating-linear-gradient(90deg,#12634f 0 5px,#58c59a 6px 10px,#23866c 11px 15px)}
-.door-item:nth-child(4){--door-color:repeating-linear-gradient(90deg,#a53c38 0 5px,#f18b65 6px 10px,#c95145 11px 15px)}
-.door-item:nth-child(5){--door-color:repeating-linear-gradient(90deg,#443080 0 5px,#a184e4 6px 10px,#694cae 11px 15px)}
-.door-item:nth-child(6){--door-color:repeating-linear-gradient(90deg,#87305f 0 5px,#ee91bd 6px 10px,#b94f83 11px 15px)}
-.door-item:nth-child(7){--door-color:repeating-linear-gradient(90deg,#80601d 0 5px,#efd078 6px 10px,#b28b35 11px 15px)}
-.door-item:nth-child(8){--door-color:repeating-linear-gradient(90deg,#105a78 0 5px,#55c8d0 6px 10px,#21899b 11px 15px)}
+.kicker{
+  color:var(--pink);
+  font-size:10px;
+  letter-spacing:4px;
+}
 
-.door:hover{filter:brightness(1.18) saturate(1.1)}
-.door-item.opening .door{transform:rotateY(105deg);filter:brightness(.75)}
-.door-num{position:absolute;top:35px;font-size:8px;letter-spacing:3px;color:#fff5d7}
-.door strong{font-family:"Cormorant Garamond",serif;font-size:clamp(18px,2vw,25px);line-height:1.05;letter-spacing:1px;text-shadow:0 2px 7px #000}
-.door small{font-size:7px;letter-spacing:1.5px;color:#fff0c8}
-.door-label{position:absolute;top:13%;left:50%;transform:translateX(-50%);background:linear-gradient(#f4df9b,#c79c45);color:#49371c;padding:6px 12px;font-size:8px;letter-spacing:1px;white-space:nowrap;z-index:3;border-radius:3px;box-shadow:0 2px 6px #0008;border:1px solid #fff1c0}
-.door-knob{position:absolute;right:14px;top:52%;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff5c9,#d9aa4e 60%,#80501f);box-shadow:0 0 10px #f5c58b,0 1px 3px #000;z-index:4}
-.door-hover-info{position:absolute;z-index:5;left:14px;right:14px;top:48%;padding:13px 10px 12px;text-align:center;color:#fff;background:linear-gradient(145deg,#171525ed,#30243bea);border:1px solid #f0d49b;border-radius:8px;font-size:10px;line-height:1.65;letter-spacing:.35px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s ease,transform .3s ease;box-shadow:0 8px 24px #0008}
-.door-hover-info span{display:block;margin-top:7px;color:#f4d58c;font-size:7px;letter-spacing:1.7px}
-.door-item:hover .door-hover-info{opacity:1;transform:translateY(0)}
-.door-item:hover .door strong,.door-item:hover .door small,.door-item:hover .door-num{opacity:.12;transition:opacity .25s}
-.door-title{text-align:center;margin-top:16px;font-size:9px;letter-spacing:1.5px;color:#e8c9e4}
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(48px,10vw,132px);
+  line-height:1;
+  font-weight:500;
+  letter-spacing:1px;
+  white-space:nowrap;
+  margin:25px 0 20px;
+  color:#fff8eb;
+  text-shadow:
+    0 8px 35px #d8b87535,
+    0 0 65px #e8c99a22;
+}
 
-/* Gallery zooms in as one clean page; no category flash or pop-up effect */
-.gallery-page{display:none;position:fixed;inset:0;z-index:50;overflow-y:auto;padding:100px 6% 70px;background:radial-gradient(ellipse at 50% 10%,#42264a,transparent 65%),#100b16}
-.gallery-page.visible{display:block;animation:pageZoom .65s cubic-bezier(.2,.75,.25,1) both}
-@keyframes pageZoom{from{opacity:.4;transform:scale(1.13)}to{opacity:1;transform:scale(1)}}
-.gallery-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:55px;gap:20px}
-.back-button{border:1px solid #d8a8cf;background:transparent;color:white;padding:13px 20px;font-size:9px;letter-spacing:2px;cursor:pointer}
-.back-button:hover{background:var(--pink);color:#160d20}
+.hero-sub{
+  font-size:clamp(12px,1.5vw,17px);
+  margin-top:12px;
+  color:#e7d7bd;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.hero-button{
+  display:inline-block;
+  margin-top:35px;
+  padding:15px 25px;
+  border:1px solid #c7a86b;
+  color:#f8ead1;
+  text-decoration:none;
+  font-size:9px;
+  letter-spacing:3px;
+  transition:.4s;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ffffff0c,#d9b87512);
+  box-shadow:0 8px 30px #0005;
+}
+
+.hero-button:hover{
+  background:linear-gradient(135deg,#f1dfb6,#b99150);
+  color:#172027;
+  transform:translateY(-4px);
+  box-shadow:0 12px 35px #d9b87544;
+}
+
+.hero-bottom{
+  position:absolute;
+  bottom:28px;
+  left:0;
+  width:100%;
+  text-align:center;
+  color:#c7b8ca;
+  font-size:9px;
+  letter-spacing:4px;
+}
+
+.glow{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.18;
+}
+
+.glow.one{
+  background:#c49b59;
+  top:10%;
+  left:-120px;
+  opacity:.12;
+}
+
+.glow.two{
+  background:#4d8790;
+  bottom:0;
+  right:15%;
+  opacity:.16;
+}
+
+/* PORTFOLIO */
+
+.portfolio{
+  min-height:100vh;
+  padding:110px 5% 100px;
+  position:relative;
+  background:
+    radial-gradient(ellipse at 50% 35%,#26383b 0%,transparent 65%),
+    linear-gradient(180deg,#0b1018,#101923 55%,#0b1018);
+  overflow:hidden;
+}
+
+.section-heading{
+  text-align:center;
+  margin-bottom:68px;
+}
+
+.section-heading h2{
+  font-family:Cinzel,serif;
+  font-size:clamp(30px,5vw,54px);
+  font-weight:400;
+  margin:17px 0;
+}
+
+.section-heading h2 span{color:#e8c99a}
+
+.section-heading p:last-child{
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+/* DOOR GRID */
+
+.door-grid{
+  max-width:1320px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(15px,2.2vw,30px);
+  align-items:end;
+}
+
+.door-item{
+  min-width:0;
+  position:relative;
+  filter:drop-shadow(0 22px 22px #0008);
+  transition:
+    opacity .45s ease,
+    transform .65s cubic-bezier(.2,.8,.2,1),
+    filter .45s ease;
+}
+
+/* HOVER: OTHER DOORS DISAPPEAR */
+
+.door-grid.has-hover .door-item:not(.selected){
+  opacity:0;
+  transform:scale(.72) translateY(24px);
+  filter:blur(5px);
+  pointer-events:none;
+}
+
+.door-grid.has-hover .door-item.selected{
+  transform:scale(1.1) translateY(-8px);
+  filter:brightness(1.13);
+  z-index:6;
+}
+
+.door-grid.has-hover .door-item.selected .door-frame{
+  box-shadow:
+    0 30px 65px #000d,
+    inset 0 0 0 2px #f5dfa9,
+    0 0 48px #d9b87566;
+}
+
+/* PREMIUM GOLDEN DOOR FRAME */
+
+.door-frame{
+  height:390px;
+  position:relative;
+  padding:9px 9px 0;
+  border-radius:150px 150px 5px 5px;
+  perspective:1500px;
+
+  background:linear-gradient(
+    90deg,
+    #090d12,
+    #9b8151 5%,
+    #252b2b 12%,
+    #bca16a 16%,
+    #171d20 22%,
+    #333c3b 50%,
+    #111719 78%,
+    #a88b54 94%,
+    #090d12
+  );
+
+  box-shadow:
+    0 25px 50px #000b,
+    inset 0 0 0 2px #e8d29b,
+    0 0 30px #d9b87516;
+
+  overflow:visible;
+}
+
+.door-frame:before{
+  content:"";
+  position:absolute;
+  inset:8px 8px 0;
+  border:2px solid #e2c68b;
+  border-bottom:0;
+  border-radius:140px 140px 0 0;
+  box-shadow:
+    inset 0 0 0 5px #ffffff12,
+    0 0 14px #d9b87555;
+  pointer-events:none;
+  z-index:4;
+}
+
+/* DOOR */
+
+.door{
+  width:100%;
+  height:100%;
+  position:relative;
+  z-index:2;
+
+  transform-origin:left center;
+  transform-style:preserve-3d;
+
+  border:1px solid #e4c98d;
+  color:#fff;
+  cursor:pointer;
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+
+  gap:17px;
+  padding-top:106px;
+
+  border-radius:132px 132px 0 0;
+
+  background-image:var(--door-color);
+
+  box-shadow:
+    inset 0 0 0 7px #111820,
+    inset 0 0 0 10px #e4c98d55,
+    inset 0 0 35px #0009;
+
+  transition:
+    transform 1.15s cubic-bezier(.65,0,.25,1),
+    filter .35s,
+    box-shadow .35s;
+
+  backface-visibility:visible;
+}
+
+/* DECORATIVE DOOR PANELS */
+
+.door:before{
+  content:"";
+  position:absolute;
+  inset:19px 15px 0;
+  border:2px solid #e6d2a277;
+  border-radius:116px 116px 0 0;
+  box-shadow:inset 0 0 0 5px #ffffff0b;
+  pointer-events:none;
+  z-index:1;
+}
+
+.door:after{
+  content:"";
+  position:absolute;
+  inset:42px 27px 0;
+  border:1px solid #f2dfb655;
+  border-radius:100px 100px 0 0;
+  background:linear-gradient(180deg,#ffffff0a,transparent 45%);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* EIGHT PREMIUM DOOR COLORS */
+
+.door-item:nth-child(1){
+  --door-color:linear-gradient(110deg,#102e42,#1d6680 48%,#102a3b);
+}
+
+.door-item:nth-child(2){
+  --door-color:linear-gradient(110deg,#28213d,#68518b 48%,#302443);
+}
+
+.door-item:nth-child(3){
+  --door-color:linear-gradient(110deg,#123c35,#327e69 48%,#12372f);
+}
+
+.door-item:nth-child(4){
+  --door-color:linear-gradient(110deg,#542d2b,#a65a48 48%,#512b2a);
+}
+
+.door-item:nth-child(5){
+  --door-color:linear-gradient(110deg,#302747,#69549a 48%,#302443);
+}
+
+.door-item:nth-child(6){
+  --door-color:linear-gradient(110deg,#512c43,#a35b79 48%,#4b293f);
+}
+
+.door-item:nth-child(7){
+  --door-color:linear-gradient(110deg,#55411f,#a88946 48%,#493718);
+}
+
+.door-item:nth-child(8){
+  --door-color:linear-gradient(110deg,#163c4b,#397d89 48%,#153541);
+}
+
+.door:hover{
+  filter:brightness(1.18) saturate(1.1);
+}
+
+/* DOOR OPEN ANIMATION */
+
+.door-item.opening .door{
+  transform:rotateY(-108deg);
+  filter:brightness(.7);
+}
+
+/* DOOR DETAILS */
+
+.door-num{
+  position:absolute;
+  top:33px;
+  font-size:8px;
+  letter-spacing:4px;
+  color:#f5dfad;
+}
+
+.door strong{
+  position:relative;
+  z-index:2;
+  color:#fff8e9;
+  font-family:Cinzel,serif;
+  font-size:clamp(15px,1.7vw,22px);
+  letter-spacing:1.2px;
+  text-shadow:0 3px 10px #000b;
+  line-height:1.2;
+}
+
+.door small{
+  position:relative;
+  z-index:2;
+  color:#f2dba9;
+  font-size:7px;
+  letter-spacing:2.5px;
+}
+
+.door-label{
+  position:absolute;
+  top:17%;
+  left:50%;
+  transform:translateX(-50%);
+
+  padding:8px 15px;
+  border:1px solid #f7e3b0;
+
+  background:linear-gradient(
+    180deg,
+    #f7e8bd,
+    #c7a35e 55%,
+    #9b7439
+  );
+
+  color:#382a17;
+  font-family:Cinzel,serif;
+  font-size:8px;
+  letter-spacing:2px;
+  white-space:nowrap;
+  z-index:3;
+  box-shadow:0 4px 12px #0009,0 0 12px #f3d99b55;
+}
+
+/* GOLDEN HANDLE */
+
+.door-knob{
+  position:absolute;
+  right:17px;
+  top:58%;
+  width:16px;
+  height:16px;
+  border:1px solid #f6e3b5;
+  border-radius:50%;
+
+  background:radial-gradient(
+    circle at 30% 25%,
+    #fffbdc,
+    #d7b56d 42%,
+    #765126 80%
+  );
+
+  box-shadow:
+    0 0 0 3px #171d20,
+    0 0 0 4px #d7b56d,
+    0 3px 8px #000b;
+
+  z-index:5;
+}
+
+/* HOVER DESCRIPTION */
+
+.door-hover-info{
+  position:absolute;
+  z-index:5;
+  left:20px;
+  right:20px;
+  top:47%;
+
+  padding:17px 12px;
+
+  text-align:center;
+  color:#f8f0df;
+
+  background:linear-gradient(
+    145deg,
+    #101a20f5,
+    #243238f2
+  );
+
+  border:1px solid #e4c98d;
+  border-radius:3px;
+
+  font-size:10px;
+  line-height:1.65;
+
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+
+  transition:
+    opacity .3s ease,
+    transform .3s ease;
+
+  box-shadow:0 12px 30px #000b;
+}
+
+.door-hover-info span{
+  display:block;
+  margin-top:7px;
+  color:#e8c99a;
+  font-size:7px;
+  letter-spacing:1.7px;
+}
+
+.door-item:hover .door-hover-info{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.door-item:hover .door strong,
+.door-item:hover .door small,
+.door-item:hover .door-num{
+  opacity:.12;
+  transition:opacity .25s;
+}
+
+.door-title{
+  text-align:center;
+  margin-top:16px;
+  color:#e8d6b5;
+  font-family:Cinzel,serif;
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.door-item:hover .door-frame{
+  box-shadow:
+    0 28px 60px #000c,
+    inset 0 0 0 2px #f5dfa9,
+    0 0 35px #d9b87535;
+}
+
+/* GALLERY */
+
+.gallery-page{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:50;
+  overflow-y:auto;
+  padding:100px 6% 70px;
+
+  background:
+    radial-gradient(ellipse at 50% 10%,#294044,transparent 65%),
+    #0b1018;
+}
+
+.gallery-page.visible{
+  display:block;
+  animation:pageZoom .65s cubic-bezier(.2,.75,.25,1) both;
+}
+
+@keyframes pageZoom{
+  from{opacity:.4;transform:scale(1.13)}
+  to{opacity:1;transform:scale(1)}
+}
+
+.gallery-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:55px;
+  gap:20px;
+}
+
+.back-button{
+  border:1px solid #d9b875;
+  background:transparent;
+  color:#f8ead1;
+  padding:13px 20px;
+  font-size:9px;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.back-button:hover{
+  background:#d9b875;
+  color:#101820;
+}
+
 .gallery-heading{text-align:center}
-.gallery-heading h2{font-family:Cinzel,serif;font-size:clamp(30px,5vw,60px);font-weight:400;color:var(--pink);margin:12px 0}
-.gallery-heading p{color:var(--muted);font-size:10px;letter-spacing:3px}
-.art-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
-.art-card{background:#1c1323;border:1px solid #a67b9b44;padding:12px;overflow:hidden;transition:.3s}
-.art-card:hover{border-color:var(--pink)}
-.art-card img{width:100%;height:280px;object-fit:contain;display:block;background:#100b16}
-.art-card p{text-align:center;color:#e8c9e4;font-size:10px;letter-spacing:2px;padding:17px 5px 8px}
-.no-art{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--muted);line-height:2}
 
-.about,.contact{text-align:center;padding:100px 20px;background:#191020}
-.about h2,.contact h2{font-family:Cinzel,serif;font-weight:400;font-size:clamp(30px,5vw,55px);margin:20px 0}
-.about h2 span,.contact h2 span{color:var(--pink)}
-.about p:last-child{max-width:650px;margin:20px auto 0;color:#cbb9d0;font-size:13px;line-height:2}
-.contact{background:#120c19}
-.contact a{display:inline-block;margin-top:25px;padding:15px 28px;border:1px solid var(--pink);text-decoration:none;color:white;font-size:10px;letter-spacing:3px}
-footer{padding:25px;background:#09060e;color:#a48ba9;text-align:center;font-size:9px;letter-spacing:3px}
+.gallery-heading h2{
+  font-family:Cinzel,serif;
+  font-size:clamp(30px,5vw,60px);
+  font-weight:400;
+  color:#e8c99a;
+  margin:12px 0;
+}
+
+.gallery-heading p{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:3px;
+}
+
+.art-grid{
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:25px;
+}
+
+.art-card{
+  background:#172228;
+  border:1px solid #b99a6255;
+  padding:12px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.art-card:hover{
+  border-color:#e8c99a;
+  box-shadow:0 12px 32px #0008;
+}
+
+.art-card img{
+  width:100%;
+  height:280px;
+  object-fit:contain;
+  display:block;
+  background:#100b16;
+}
+
+.art-card p{
+  text-align:center;
+  color:#e8c9e4;
+  font-size:10px;
+  letter-spacing:2px;
+  padding:17px 5px 8px;
+}
+
+.no-art{
+  grid-column:1/-1;
+  text-align:center;
+  padding:80px 20px;
+  color:var(--muted);
+  line-height:2;
+}
+
+/* ABOUT + CONTACT */
+
+.about,.contact{
+  text-align:center;
+  padding:100px 20px;
+  background:#121d22;
+}
+
+.about h2,.contact h2{
+  font-family:Cinzel,serif;
+  font-weight:400;
+  font-size:clamp(30px,5vw,55px);
+  margin:20px 0;
+}
+
+.about h2 span,.contact h2 span{
+  color:#e8c99a;
+}
+
+.about p:last-child{
+  max-width:650px;
+  margin:20px auto 0;
+  color:#cbb9d0;
+  font-size:13px;
+  line-height:2;
+}
+
+.contact{background:#0c141a}
+
+.contact a{
+  display:inline-block;
+  margin-top:25px;
+  padding:15px 28px;
+  border:1px solid #d9b875;
+  text-decoration:none;
+  color:#f3dfb7;
+  font-size:10px;
+  letter-spacing:3px;
+  transition:.3s;
+}
+
+.contact a:hover{
+  background:#d9b875;
+  color:#101820;
+}
+
+footer{
+  padding:25px;
+  background:#070c11;
+  color:#b8a37d;
+  text-align:center;
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+/* RESPONSIVE */
 
 @media(max-width:1000px){
-  .door-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .door-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
 }
+
 @media(max-width:650px){
-  .nav{padding:0 4%;height:65px}
+
+  .nav{
+    padding:0 4%;
+    height:65px;
+  }
+
   .nav-links{gap:10px}
-  .nav-links a{font-size:7px;letter-spacing:.7px}
-  .hero{padding:110px 7% 70px}
-  .hero h1{font-size:clamp(65px,15vw,100px)}
-  .rope{right:7%;height:165px}
-  .door-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 15px}
-  .door-frame{height:300px;border-radius:65px 65px 0 0}
-  .door{border-radius:58px 58px 0 0;padding-top:65px}
-  .door strong{font-size:21px}
-  .art-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+
+  .nav-links a{
+    font-size:7px;
+    letter-spacing:.7px;
+  }
+
+  .hero{
+    padding:110px 7% 70px;
+  }
+
+  .hero h1{
+    font-size:clamp(42px,10vw,72px);
+    letter-spacing:0;
+  }
+
+  .door-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px 15px;
+  }
+
+  .door-frame{
+    height:315px;
+    border-radius:120px 120px 0 0;
+  }
+
+  .door{
+    border-radius:110px 110px 0 0;
+    padding-top:88px;
+  }
+
+  .door strong{font-size:17px}
+
+  .art-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+
   .art-card img{height:180px}
-  .gallery-top{align-items:flex-start;flex-direction:column}
+
+  .gallery-top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
   .gallery-heading{text-align:left}
 }
+
 @media(max-width:380px){
-  .door-grid{grid-template-columns:1fr;max-width:260px}
+  .door-grid{
+    grid-template-columns:1fr;
+    max-width:260px;
+  }
 }
+
 @media(prefers-reduced-motion:reduce){
-  .rope{animation:none;top:0;opacity:1;transform:none}
-  .gallery-page.visible{animation:none}
   .door{transition:none}
+  .door-grid .door-item{transition:none}
+  .gallery-page.visible{animation:none}
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- NAVIGATION -->
+
 <nav class="nav">
   <a href="#home" class="logo">ANNA<span> ✦</span></a>
+
   <div class="nav-links">
     <a href="#home">HOME</a>
     <a href="#portfolio">PORTFOLIO</a>
@@ -147,322 +832,617 @@ footer{padding:25px;background:#09060e;color:#a48ba9;text-align:center;font-size
   </div>
 </nav>
 
+<!-- HOME -->
+
 <section class="hero" id="home">
+
   <div class="glow one"></div>
   <div class="glow two"></div>
-  <div class="rope"></div>
 
   <div class="hero-content">
+
     <p class="kicker">✦ WELCOME TO MY WORLD ✦</p>
-    <h1>Hi, I'm <span>ANNA.</span></h1>
+
+    <h1>Hi, I'm ANNA.</h1>
+
     <div class="hero-sub">Graphic Designer</div>
-    <button class="hero-button" id="exploreButton">EXPLORE MY WORLD ↓</button>
+
+    <button class="hero-button" id="exploreButton">
+      EXPLORE MY WORLD ↓
+    </button>
+
   </div>
 
-  <p class="hero-bottom">ART · DESIGN · IMAGINATION</p>
+  <p class="hero-bottom">
+    ART · DESIGN · IMAGINATION
+  </p>
+
 </section>
 
+<!-- PORTFOLIO -->
+
 <section class="portfolio" id="portfolio">
+
   <div class="section-heading">
+
     <p class="kicker">A LITTLE WORLD OF CREATIVITY</p>
+
     <h2>CHOOSE YOUR <span>DESTINATION</span></h2>
+
     <p>Hover over a door and click to explore.</p>
+
   </div>
 
   <div class="door-grid" id="doorGrid">
 
+    <!-- DOOR 1 -->
+
     <div class="door-item" data-category="logo">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">LOGO</span>
           <span class="door-num">01</span>
+
           <strong>LOGO<br>DESIGN</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Unique logos, badges and creative brand identities.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Unique logos, badges and creative brand identities.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">Logo Designs</p>
+
     </div>
+
+    <!-- DOOR 2 -->
 
     <div class="door-item" data-category="banner">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">BANNER</span>
           <span class="door-num">02</span>
+
           <strong>BANNER<br>DESIGN</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Eye-catching banners for channels, profiles and streams.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Eye-catching banners for channels, profiles and streams.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">Banner Designs</p>
+
     </div>
+
+    <!-- DOOR 3 -->
 
     <div class="door-item" data-category="emotes">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">EMOTES</span>
           <span class="door-num">03</span>
+
           <strong>EMOTE<br>DESIGN</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Cute and expressive emotes made for your community.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Cute and expressive emotes made for your community.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">Emotes</p>
+
     </div>
+
+    <!-- DOOR 4 -->
 
     <div class="door-item" data-category="png">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">PNG</span>
           <span class="door-num">04</span>
+
           <strong>PNG<br>ART</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Transparent PNG artwork, cut-outs and stream assets.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Transparent PNG artwork, cut-outs and stream assets.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">PNG Artwork</p>
+
     </div>
+
+    <!-- DOOR 5 -->
 
     <div class="door-item" data-category="model">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">MODEL</span>
           <span class="door-num">05</span>
+
           <strong>MODEL<br>DESIGN</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Original character and avatar model designs.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Original character and avatar model designs.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">Model Designs</p>
+
     </div>
+
+    <!-- DOOR 6 -->
 
     <div class="door-item" data-category="character">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">CHARACTER ART</span>
           <span class="door-num">06</span>
+
           <strong>CHARACTER<br>ART</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Character illustrations, portraits and custom concepts.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Character illustrations, portraits and custom concepts.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">Character Art</p>
+
     </div>
+
+    <!-- DOOR 7 -->
 
     <div class="door-item" data-category="scene">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">ART SCENE</span>
           <span class="door-num">07</span>
+
           <strong>ART<br>SCENE</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Atmospheric illustrations, backgrounds and story scenes.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Atmospheric illustrations, backgrounds and story scenes.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">Art Scenes</p>
+
     </div>
+
+    <!-- DOOR 8 -->
 
     <div class="door-item" data-category="room">
+
       <div class="door-frame">
+
         <button class="door" type="button">
+
           <span class="door-label">3D ROOM</span>
           <span class="door-num">08</span>
+
           <strong>3D<br>ROOM</strong>
+
           <small>ENTER WORLD ↗</small>
-          <div class="door-hover-info">Beautiful 3D rooms, cozy spaces and environment designs.<span>CLICK TO EXPLORE</span></div>
+
+          <div class="door-hover-info">
+            Beautiful 3D rooms, cozy spaces and environment designs.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+
           <i class="door-knob"></i>
+
         </button>
+
       </div>
+
       <p class="door-title">3D Rooms</p>
+
     </div>
 
   </div>
+
 </section>
+
+<!-- GALLERY -->
 
 <section class="gallery-page" id="galleryPage">
+
   <div class="gallery-top">
-    <button class="back-button" id="backButton">← BACK TO DOORS</button>
+
+    <button class="back-button" id="backButton">
+      ← BACK TO DOORS
+    </button>
+
     <div class="gallery-heading">
+
       <p class="kicker">ANNA'S CREATIVE COLLECTION</p>
+
       <h2 id="galleryTitle">LOGO DESIGNS</h2>
+
       <p id="gallerySubtitle">A COLLECTION OF MY WORK</p>
+
     </div>
+
   </div>
+
   <div class="art-grid" id="artGrid"></div>
+
 </section>
+
+<!-- ABOUT -->
 
 <section class="about" id="about">
+
   <p class="kicker">A LITTLE ABOUT ME</p>
+
   <h2>HELLO, I'M <span>ANNA</span></h2>
-  <p>I'm a digital artist creating model designs, character art, logos, banners, emotes, PNG artwork and creative 3D environments. Welcome to my portfolio!</p>
+
+  <p>
+    I'm a digital artist creating model designs, character art,
+    logos, banners, emotes, PNG artwork and creative 3D environments.
+    Welcome to my portfolio!
+  </p>
+
 </section>
+
+<!-- CONTACT -->
 
 <section class="contact" id="contact">
+
   <p class="kicker">HAVE A PROJECT IN MIND?</p>
+
   <h2>LET'S CREATE SOMETHING <span>MAGICAL</span></h2>
-  <a href="mailto:YOUR-EMAIL@example.com">CONTACT ME ↗</a>
+
+  <a href="mailto:YOUR-EMAIL@example.com">
+    CONTACT ME ↗
+  </a>
+
 </section>
 
-<footer>© 2026 ANNA · DIGITAL ARTIST</footer>
+<footer>
+  © 2026 ANNA · DIGITAL ARTIST
+</footer>
 
 <script>
+
+/* CATEGORY IMAGES */
+
 const categories={
+
   logo:{
     title:"LOGO DESIGNS",
     subtitle:"CREATIVE BRAND IDENTITIES",
     folder:"assets/logo/",
-    files:["logo-1.png","logo-2.png","logo-3.png","logo-4.png","logo-5.png"]
+    files:[
+      "logo-1.png",
+      "logo-2.png",
+      "logo-3.png",
+      "logo-4.png",
+      "logo-5.png"
+    ]
   },
+
   banner:{
     title:"BANNER DESIGNS",
     subtitle:"STREAM AND SOCIAL GRAPHICS",
     folder:"assets/banner/",
-    files:["banner-1.png","banner-2.png","banner-3.png","banner-4.png","banner-5.png","banner-6.png","banner-7.png"]
+    files:[
+      "banner-1.png",
+      "banner-2.png",
+      "banner-3.png",
+      "banner-4.png",
+      "banner-5.png",
+      "banner-6.png",
+      "banner-7.png"
+    ]
   },
+
   emotes:{
     title:"EMOTE DESIGNS",
     subtitle:"EXPRESS YOURSELF",
     folder:"assets/emotes/",
-    files:["emote-1.png","emote-2.png","emote-3.png","emote-4.png"]
+    files:[
+      "emote-1.png",
+      "emote-2.png",
+      "emote-3.png",
+      "emote-4.png"
+    ]
   },
+
   png:{
     title:"PNG ARTWORK",
     subtitle:"TRANSPARENT PNG COLLECTION",
     folder:"assets/png/",
-    files:["png-1.png","png-2.png","png-3.png","png-4.png","png-5.png"]
+    files:[
+      "png-1.png",
+      "png-2.png",
+      "png-3.png",
+      "png-4.png",
+      "png-5.png"
+    ]
   },
+
   model:{
     title:"MODEL DESIGNS",
     subtitle:"ORIGINAL MODEL COLLECTION",
     folder:"assets/model/",
-    files:["model-1.png","model-2.png","model-3.png","model-4.png","model-5.png"]
+    files:[
+      "model-1.png",
+      "model-2.png",
+      "model-3.png",
+      "model-4.png",
+      "model-5.png"
+    ]
   },
+
   character:{
     title:"CHARACTER ART",
     subtitle:"CHARACTER ILLUSTRATION COLLECTION",
     folder:"assets/character-art/",
-    files:["character-1.png","character-2.png","character-3.png","character-4.png","character-5.png"]
+    files:[
+      "character-1.png",
+      "character-2.png",
+      "character-3.png",
+      "character-4.png",
+      "character-5.png"
+    ]
   },
+
   scene:{
     title:"ART SCENES",
     subtitle:"MY CREATIVE ARTWORK",
     folder:"assets/art-scene/",
-    files:["scene-1.png","scene-2.png","scene-3.png","scene-4.png"]
+    files:[
+      "scene-1.png",
+      "scene-2.png",
+      "scene-3.png",
+      "scene-4.png"
+    ]
   },
+
   room:{
     title:"3D ROOM DESIGNS",
     subtitle:"3D ENVIRONMENTS AND COZY SPACES",
     folder:"assets/3d-room/",
-    files:["room-1.png","room-2.png","room-3.png","room-4.png"]
+    files:[
+      "room-1.png",
+      "room-2.png",
+      "room-3.png",
+      "room-4.png"
+    ]
   }
+
 };
+
+/* ELEMENTS */
 
 const galleryPage=document.getElementById("galleryPage");
 const artGrid=document.getElementById("artGrid");
-let busy=false;
-
-document.getElementById("exploreButton").addEventListener("click",()=>{
-  document.getElementById("portfolio").scrollIntoView({behavior:"smooth",block:"start"});
-});
-
 const doorGrid=document.getElementById("doorGrid");
 
+let busy=false;
+
+/* EXPLORE BUTTON */
+
+document.getElementById("exploreButton").addEventListener("click",()=>{
+
+  document.getElementById("portfolio").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+});
+
+/* DOOR HOVER */
+
 document.querySelectorAll(".door-item").forEach(item=>{
+
   item.addEventListener("mouseenter",()=>{
+
     if(busy)return;
 
     doorGrid.classList.add("has-hover");
 
-    document.querySelectorAll(".door-item").forEach(d=>d.classList.remove("selected"));
+    document.querySelectorAll(".door-item").forEach(d=>{
+      d.classList.remove("selected");
+    });
 
     item.classList.add("selected");
+
   });
+
+  /* DOOR CLICK */
 
   item.querySelector(".door").addEventListener("click",()=>{
+
     openGallery(item.dataset.category,item);
+
   });
+
 });
 
+/* REMOVE HOVER WHEN MOUSE LEAVES */
+
 doorGrid.addEventListener("mouseleave",()=>{
+
   if(busy)return;
 
   doorGrid.classList.remove("has-hover");
 
-  document.querySelectorAll(".door-item").forEach(d=>d.classList.remove("selected"));
+  document.querySelectorAll(".door-item").forEach(d=>{
+    d.classList.remove("selected");
+  });
+
 });
 
+/* OPEN GALLERY */
+
 function openGallery(key,item){
+
   if(busy)return;
 
   const cat=categories[key];
+
   if(!cat)return;
 
   busy=true;
 
   doorGrid.classList.add("has-hover");
 
-  document.querySelectorAll(".door-item").forEach(d=>d.classList.remove("selected"));
+  document.querySelectorAll(".door-item").forEach(d=>{
+    d.classList.remove("selected");
+  });
 
   item.classList.add("selected");
 
-  // Other doors fade away; the chosen door grows, then swings inward.
-  setTimeout(()=>{
-    item.classList.add("opening");
-  },420);
+  /* DOOR SWINGS INWARD */
 
   setTimeout(()=>{
+
+    item.classList.add("opening");
+
+  },420);
+
+  /* GALLERY APPEARS */
+
+  setTimeout(()=>{
+
     document.getElementById("galleryTitle").textContent=cat.title;
+
     document.getElementById("gallerySubtitle").textContent=cat.subtitle;
 
     artGrid.innerHTML="";
 
-    let loadedCount=0;
-
     cat.files.forEach((file,index)=>{
+
       const card=document.createElement("article");
+
       card.className="art-card";
 
       const img=document.createElement("img");
+
       img.src=cat.folder+file;
+
       img.alt=cat.title+" artwork "+(index+1);
 
       const caption=document.createElement("p");
-      caption.textContent="ARTWORK "+String(index+1).padStart(2,"0");
 
-      img.onload=()=>{
-        loadedCount++;
-      };
+      caption.textContent=
+        "ARTWORK "+String(index+1).padStart(2,"0");
 
       img.onerror=()=>{
+
         card.remove();
 
         if(!artGrid.querySelector(".art-card")){
-          artGrid.innerHTML='<div class="no-art">Your artwork will appear here.<br>Add your own images to this category folder.</div>';
+
+          artGrid.innerHTML=
+            '<div class="no-art">Your artwork will appear here.<br>Add your own images to this category folder.</div>';
+
         }
+
       };
 
       card.append(img,caption);
+
       artGrid.append(card);
+
     });
 
     galleryPage.classList.add("visible");
+
     galleryPage.scrollTop=0;
+
     window.scrollTo(0,0);
 
     item.classList.remove("opening");
 
     busy=false;
+
   },1320);
+
 }
 
+/* BACK BUTTON */
+
 document.getElementById("backButton").addEventListener("click",()=>{
+
   if(busy)return;
 
   galleryPage.classList.remove("visible");
@@ -470,14 +1450,21 @@ document.getElementById("backButton").addEventListener("click",()=>{
   doorGrid.classList.remove("has-hover");
 
   document.querySelectorAll(".door-item").forEach(d=>{
+
     d.classList.remove("selected","opening");
+
   });
 
   window.scrollTo({
+
     top:document.getElementById("portfolio").offsetTop,
+
     behavior:"smooth"
+
   });
+
 });
+
 </script>
 
 </body>
