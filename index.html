@@ -1,1470 +1,765 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ANNA — Digital Artist</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>ANNA | Graphic Designer</title>
 
 <style>
-:root{
-  --bg:#0b1018;
-  --pink:#e8c99a;
-  --gold:#d9b875;
-  --muted:#b8b0a5;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --green: #071c17;
+  --green2: #102b23;
+  --gold: #d7bd83;
+  --gold-light: #f0dfb4;
+  --cream: #f3ead7;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-
-body{
-  background:var(--bg);
-  color:#f8eff7;
-  font-family:Montserrat,sans-serif;
-  overflow-x:hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* NAVIGATION */
-
-.nav{
-  height:76px;
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  padding:0 7%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  z-index:20;
-  border-bottom:1px solid #ffffff20;
-  background:#11182088;
-  backdrop-filter:blur(12px);
-}
-
-.logo{
-  color:white;
-  font-family:Cinzel,serif;
-  letter-spacing:5px;
-  font-size:19px;
-  text-decoration:none;
-}
-
-.logo span{color:var(--pink)}
-
-.nav-links{
-  display:flex;
-  gap:28px;
-}
-
-.nav-links a{
-  color:#e6d8e7;
-  text-decoration:none;
-  font-size:9px;
-  letter-spacing:1.7px;
-  transition:.3s;
-}
-
-.nav-links a:hover{color:var(--pink)}
-
-/* HOME */
-
-.hero{
-  min-height:100vh;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  overflow:hidden;
-  padding:125px 8% 85px;
+body {
   background:
-    radial-gradient(ellipse at 50% 48%,#263b42 0%,transparent 48%),
-    linear-gradient(125deg,#090e16,#17252b 55%,#0b1018);
+    radial-gradient(ellipse at top, #173b2d 0%, #091c16 48%, #050e0b 100%);
+  color: var(--cream);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.hero:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  opacity:.07;
-  background-image:radial-gradient(#fff 1px,transparent 1px);
-  background-size:58px 58px;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .12;
+  background-image: radial-gradient(#d7bd83 0.6px, transparent 0.6px);
+  background-size: 24px 24px;
+  z-index: -1;
 }
 
-.hero-content{
-  position:relative;
-  z-index:3;
-  width:100%;
-  max-width:1000px;
-  animation:enter 1.2s ease both;
+header {
+  padding: 28px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d7bd832b;
 }
 
-@keyframes enter{
-  from{opacity:0;transform:translateY(35px)}
-  to{opacity:1;transform:translateY(0)}
+.brand {
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  letter-spacing: 5px;
 }
 
-.kicker{
-  color:var(--pink);
-  font-size:10px;
-  letter-spacing:4px;
+nav a {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-left: 28px;
+  transition: .3s;
 }
 
-.hero h1{
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(48px,10vw,132px);
-  line-height:1;
-  font-weight:500;
-  letter-spacing:1px;
-  white-space:nowrap;
-  margin:25px 0 20px;
-  color:#fff8eb;
-  text-shadow:
-    0 8px 35px #d8b87535,
-    0 0 65px #e8c99a22;
+nav a:hover {
+  color: var(--gold);
 }
 
-.hero-sub{
-  font-size:clamp(12px,1.5vw,17px);
-  margin-top:12px;
-  color:#e7d7bd;
-  letter-spacing:3px;
-  text-transform:uppercase;
+.hero {
+  text-align: center;
+  padding: 100px 20px 75px;
 }
 
-.hero-button{
-  display:inline-block;
-  margin-top:35px;
-  padding:15px 25px;
-  border:1px solid #c7a86b;
-  color:#f8ead1;
-  text-decoration:none;
-  font-size:9px;
-  letter-spacing:3px;
-  transition:.4s;
-  cursor:pointer;
-  background:linear-gradient(135deg,#ffffff0c,#d9b87512);
-  box-shadow:0 8px 30px #0005;
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 8vw, 94px);
+  font-weight: 500;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  white-space: nowrap;
 }
 
-.hero-button:hover{
-  background:linear-gradient(135deg,#f1dfb6,#b99150);
-  color:#172027;
-  transform:translateY(-4px);
-  box-shadow:0 12px 35px #d9b87544;
+.hero p {
+  margin-top: 12px;
+  color: #d6c9ae;
+  letter-spacing: 7px;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
-.hero-bottom{
-  position:absolute;
-  bottom:28px;
-  left:0;
-  width:100%;
-  text-align:center;
-  color:#c7b8ca;
-  font-size:9px;
-  letter-spacing:4px;
+.hero-line {
+  width: 75px;
+  height: 1px;
+  background: var(--gold);
+  margin: 32px auto 0;
 }
 
-.glow{
-  position:absolute;
-  width:280px;
-  height:280px;
-  border-radius:50%;
-  filter:blur(100px);
-  opacity:.18;
+.section-heading {
+  text-align: center;
+  margin-bottom: 48px;
 }
 
-.glow.one{
-  background:#c49b59;
-  top:10%;
-  left:-120px;
-  opacity:.12;
+.section-heading h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 39px;
+  font-weight: 500;
+  color: var(--gold-light);
 }
 
-.glow.two{
-  background:#4d8790;
-  bottom:0;
-  right:15%;
-  opacity:.16;
+.section-heading p {
+  margin-top: 10px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #b9ad94;
 }
 
-/* PORTFOLIO */
+.portfolio {
+  padding: 30px 7% 110px;
+}
 
-.portfolio{
-  min-height:100vh;
-  padding:110px 5% 100px;
-  position:relative;
+.doors {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  perspective: 1200px;
+}
+
+.door-card {
+  text-align: center;
+  transition: opacity .4s ease, filter .4s ease, transform .4s ease;
+  min-width: 0;
+}
+
+.doors.has-hover .door-card:not(.active) {
+  opacity: .65;
+  filter: brightness(.75);
+  transform: scale(.98);
+}
+
+.door-card.active {
+  opacity: 1;
+  filter: brightness(1.12);
+  transform: scale(1.045);
+  z-index: 2;
+}
+
+.door {
+  width: 100%;
+  height: 255px;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.door-panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform .9s cubic-bezier(.2,.8,.2,1);
+  border: 1px solid var(--gold);
+  border-radius: 95px 95px 5px 5px;
   background:
-    radial-gradient(ellipse at 50% 35%,#26383b 0%,transparent 65%),
-    linear-gradient(180deg,#0b1018,#101923 55%,#0b1018);
-  overflow:hidden;
-}
-
-.section-heading{
-  text-align:center;
-  margin-bottom:68px;
-}
-
-.section-heading h2{
-  font-family:Cinzel,serif;
-  font-size:clamp(30px,5vw,54px);
-  font-weight:400;
-  margin:17px 0;
-}
-
-.section-heading h2 span{color:#e8c99a}
-
-.section-heading p:last-child{
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:1px;
-}
-
-/* DOOR GRID */
-
-.door-grid{
-  max-width:1320px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:clamp(15px,2.2vw,30px);
-  align-items:end;
-}
-
-.door-item{
-  min-width:0;
-  position:relative;
-  filter:drop-shadow(0 22px 22px #0008);
-  transition:
-    opacity .45s ease,
-    transform .65s cubic-bezier(.2,.8,.2,1),
-    filter .45s ease;
-}
-
-/* HOVER: OTHER DOORS DISAPPEAR */
-
-.door-grid.has-hover .door-item:not(.selected){
-  opacity:0;
-  transform:scale(.72) translateY(24px);
-  filter:blur(5px);
-  pointer-events:none;
-}
-
-.door-grid.has-hover .door-item.selected{
-  transform:scale(1.1) translateY(-8px);
-  filter:brightness(1.13);
-  z-index:6;
-}
-
-.door-grid.has-hover .door-item.selected .door-frame{
+    linear-gradient(145deg, #1b3d30, #0b2119 60%, #071710);
   box-shadow:
-    0 30px 65px #000d,
-    inset 0 0 0 2px #f5dfa9,
-    0 0 48px #d9b87566;
+    inset 0 0 0 5px #d7bd8312,
+    inset 0 0 35px #0008,
+    0 15px 35px #0005;
 }
 
-/* PREMIUM GOLDEN DOOR FRAME */
+.door-panel::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid #d7bd8360;
+  border-radius: 85px 85px 2px 2px;
+  pointer-events: none;
+}
 
-.door-frame{
-  height:390px;
-  position:relative;
-  padding:9px 9px 0;
-  border-radius:150px 150px 5px 5px;
-  perspective:1500px;
+.door-panel::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 75%;
+  top: 13%;
+  right: 14px;
+  background: linear-gradient(transparent, #d7bd8370, transparent);
+}
 
-  background:linear-gradient(
-    90deg,
-    #090d12,
-    #9b8151 5%,
-    #252b2b 12%,
-    #bca16a 16%,
-    #171d20 22%,
-    #333c3b 50%,
-    #111719 78%,
-    #a88b54 94%,
-    #090d12
-  );
-
+.door-card.active .door-panel {
   box-shadow:
-    0 25px 50px #000b,
-    inset 0 0 0 2px #e8d29b,
-    0 0 30px #d9b87516;
-
-  overflow:visible;
+    inset 0 0 0 5px #d7bd831d,
+    inset 0 0 45px #d7bd8312,
+    0 0 25px #d7bd8340,
+    0 20px 40px #0008;
+  border-color: var(--gold-light);
 }
 
-.door-frame:before{
-  content:"";
-  position:absolute;
-  inset:8px 8px 0;
-  border:2px solid #e2c68b;
-  border-bottom:0;
-  border-radius:140px 140px 0 0;
-  box-shadow:
-    inset 0 0 0 5px #ffffff12,
-    0 0 14px #d9b87555;
-  pointer-events:none;
-  z-index:4;
+.door-number {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #d7bd8370;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  letter-spacing: 3px;
 }
 
-/* DOOR */
-
-.door{
-  width:100%;
-  height:100%;
-  position:relative;
-  z-index:2;
-
-  transform-origin:left center;
-  transform-style:preserve-3d;
-
-  border:1px solid #e4c98d;
-  color:#fff;
-  cursor:pointer;
-  overflow:hidden;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:center;
-
-  gap:17px;
-  padding-top:106px;
-
-  border-radius:132px 132px 0 0;
-
-  background-image:var(--door-color);
-
-  box-shadow:
-    inset 0 0 0 7px #111820,
-    inset 0 0 0 10px #e4c98d55,
-    inset 0 0 35px #0009;
-
-  transition:
-    transform 1.15s cubic-bezier(.65,0,.25,1),
-    filter .35s,
-    box-shadow .35s;
-
-  backface-visibility:visible;
+.door-symbol {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 43px;
+  color: var(--gold);
+  text-shadow: 0 0 20px #d7bd8350;
 }
 
-/* DECORATIVE DOOR PANELS */
-
-.door:before{
-  content:"";
-  position:absolute;
-  inset:19px 15px 0;
-  border:2px solid #e6d2a277;
-  border-radius:116px 116px 0 0;
-  box-shadow:inset 0 0 0 5px #ffffff0b;
-  pointer-events:none;
-  z-index:1;
+.door-name {
+  position: absolute;
+  width: 100%;
+  bottom: 31px;
+  left: 0;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--gold-light);
 }
 
-.door:after{
-  content:"";
-  position:absolute;
-  inset:42px 27px 0;
-  border:1px solid #f2dfb655;
-  border-radius:100px 100px 0 0;
-  background:linear-gradient(180deg,#ffffff0a,transparent 45%);
-  pointer-events:none;
-  z-index:1;
+.door-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  right: 23px;
+  top: 55%;
+  background: radial-gradient(circle at 30% 30%, #fff0bd, #b18c4f 65%, #654820);
+  box-shadow: 0 0 10px #d7bd8380;
 }
 
-/* EIGHT PREMIUM DOOR COLORS */
-
-.door-item:nth-child(1){
-  --door-color:linear-gradient(110deg,#102e42,#1d6680 48%,#102a3b);
+.door-description {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 1.3px;
+  line-height: 1.7;
+  margin-top: 15px;
+  min-height: 35px;
+  opacity: 0;
+  transition: opacity .3s;
 }
 
-.door-item:nth-child(2){
-  --door-color:linear-gradient(110deg,#28213d,#68518b 48%,#302443);
+.door-card.active .door-description {
+  opacity: 1;
 }
 
-.door-item:nth-child(3){
-  --door-color:linear-gradient(110deg,#123c35,#327e69 48%,#12372f);
+.door-card.opening .door-panel {
+  transform: rotateY(-100deg);
 }
 
-.door-item:nth-child(4){
-  --door-color:linear-gradient(110deg,#542d2b,#a65a48 48%,#512b2a);
+.gallery-section {
+  display: none;
+  padding: 35px 7% 100px;
+  max-width: 1250px;
+  margin: auto;
 }
 
-.door-item:nth-child(5){
-  --door-color:linear-gradient(110deg,#302747,#69549a 48%,#302443);
+.gallery-section.show {
+  display: block;
+  animation: galleryIn .8s ease both;
 }
 
-.door-item:nth-child(6){
-  --door-color:linear-gradient(110deg,#512c43,#a35b79 48%,#4b293f);
+@keyframes galleryIn {
+  from { opacity: 0; transform: scale(.92); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-.door-item:nth-child(7){
-  --door-color:linear-gradient(110deg,#55411f,#a88946 48%,#493718);
+.gallery-top {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.door-item:nth-child(8){
-  --door-color:linear-gradient(110deg,#163c4b,#397d89 48%,#153541);
+.gallery-top h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  color: var(--gold-light);
 }
 
-.door:hover{
-  filter:brightness(1.18) saturate(1.1);
+.gallery-top p {
+  color: #b9ad94;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-top: 10px;
 }
 
-/* DOOR OPEN ANIMATION */
-
-.door-item.opening .door{
-  transform:rotateY(-108deg);
-  filter:brightness(.7);
+.back-btn {
+  margin-top: 25px;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  background: transparent;
+  padding: 12px 25px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 10px;
+  transition: .3s;
 }
 
-/* DOOR DETAILS */
-
-.door-num{
-  position:absolute;
-  top:33px;
-  font-size:8px;
-  letter-spacing:4px;
-  color:#f5dfad;
+.back-btn:hover {
+  background: var(--gold);
+  color: var(--green);
 }
 
-.door strong{
-  position:relative;
-  z-index:2;
-  color:#fff8e9;
-  font-family:Cinzel,serif;
-  font-size:clamp(15px,1.7vw,22px);
-  letter-spacing:1.2px;
-  text-shadow:0 3px 10px #000b;
-  line-height:1.2;
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
 }
 
-.door small{
-  position:relative;
-  z-index:2;
-  color:#f2dba9;
-  font-size:7px;
-  letter-spacing:2.5px;
+.gallery-item {
+  border: 1px solid #d7bd8350;
+  padding: 8px;
+  background: #10261e;
+  cursor: pointer;
+  transition: .35s;
+  min-height: 160px;
 }
 
-.door-label{
-  position:absolute;
-  top:17%;
-  left:50%;
-  transform:translateX(-50%);
-
-  padding:8px 15px;
-  border:1px solid #f7e3b0;
-
-  background:linear-gradient(
-    180deg,
-    #f7e8bd,
-    #c7a35e 55%,
-    #9b7439
-  );
-
-  color:#382a17;
-  font-family:Cinzel,serif;
-  font-size:8px;
-  letter-spacing:2px;
-  white-space:nowrap;
-  z-index:3;
-  box-shadow:0 4px 12px #0009,0 0 12px #f3d99b55;
+.gallery-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 10px 30px #d7bd8320;
 }
 
-/* GOLDEN HANDLE */
-
-.door-knob{
-  position:absolute;
-  right:17px;
-  top:58%;
-  width:16px;
-  height:16px;
-  border:1px solid #f6e3b5;
-  border-radius:50%;
-
-  background:radial-gradient(
-    circle at 30% 25%,
-    #fffbdc,
-    #d7b56d 42%,
-    #765126 80%
-  );
-
-  box-shadow:
-    0 0 0 3px #171d20,
-    0 0 0 4px #d7b56d,
-    0 3px 8px #000b;
-
-  z-index:5;
+.gallery-item img {
+  width: 100%;
+  display: block;
+  max-height: 350px;
+  object-fit: contain;
 }
 
-/* HOVER DESCRIPTION */
-
-.door-hover-info{
-  position:absolute;
-  z-index:5;
-  left:20px;
-  right:20px;
-  top:47%;
-
-  padding:17px 12px;
-
-  text-align:center;
-  color:#f8f0df;
-
-  background:linear-gradient(
-    145deg,
-    #101a20f5,
-    #243238f2
-  );
-
-  border:1px solid #e4c98d;
-  border-radius:3px;
-
-  font-size:10px;
-  line-height:1.65;
-
-  opacity:0;
-  transform:translateY(12px);
-  pointer-events:none;
-
-  transition:
-    opacity .3s ease,
-    transform .3s ease;
-
-  box-shadow:0 12px 30px #000b;
+.empty-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 65px 20px;
+  border: 1px dashed #d7bd8360;
+  color: #c7b998;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
 }
 
-.door-hover-info span{
-  display:block;
-  margin-top:7px;
-  color:#e8c99a;
-  font-size:7px;
-  letter-spacing:1.7px;
+.about, .contact {
+  text-align: center;
+  padding: 85px 20px;
+  border-top: 1px solid #d7bd8325;
 }
 
-.door-item:hover .door-hover-info{
-  opacity:1;
-  transform:translateY(0);
+.about h2, .contact h2 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold-light);
+  font-size: 42px;
+  font-weight: 500;
 }
 
-.door-item:hover .door strong,
-.door-item:hover .door small,
-.door-item:hover .door-num{
-  opacity:.12;
-  transition:opacity .25s;
+.about p {
+  max-width: 560px;
+  margin: 20px auto 0;
+  line-height: 2;
+  color: #c6bda9;
+  font-size: 13px;
 }
 
-.door-title{
-  text-align:center;
-  margin-top:16px;
-  color:#e8d6b5;
-  font-family:Cinzel,serif;
-  font-size:9px;
-  letter-spacing:2px;
-  text-transform:uppercase;
+.contact a {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 30px;
+  color: var(--gold-light);
+  border: 1px solid var(--gold);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2px;
+  transition: .3s;
 }
 
-.door-item:hover .door-frame{
-  box-shadow:
-    0 28px 60px #000c,
-    inset 0 0 0 2px #f5dfa9,
-    0 0 35px #d9b87535;
+.contact a:hover {
+  background: var(--gold);
+  color: var(--green);
 }
 
-/* GALLERY */
-
-.gallery-page{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:50;
-  overflow-y:auto;
-  padding:100px 6% 70px;
-
-  background:
-    radial-gradient(ellipse at 50% 10%,#294044,transparent 65%),
-    #0b1018;
+footer {
+  padding: 30px;
+  text-align: center;
+  border-top: 1px solid #d7bd8325;
+  color: #a99d83;
+  font-size: 10px;
+  letter-spacing: 2px;
 }
 
-.gallery-page.visible{
-  display:block;
-  animation:pageZoom .65s cubic-bezier(.2,.75,.25,1) both;
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #020906ed;
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
 }
 
-@keyframes pageZoom{
-  from{opacity:.4;transform:scale(1.13)}
-  to{opacity:1;transform:scale(1)}
+.lightbox.show {
+  display: flex;
 }
 
-.gallery-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:55px;
-  gap:20px;
+.lightbox img {
+  max-width: 85vw;
+  max-height: 85vh;
+  object-fit: contain;
 }
 
-.back-button{
-  border:1px solid #d9b875;
-  background:transparent;
-  color:#f8ead1;
-  padding:13px 20px;
-  font-size:9px;
-  letter-spacing:2px;
-  cursor:pointer;
-  transition:.3s;
+.lightbox button {
+  position: absolute;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
-.back-button:hover{
-  background:#d9b875;
-  color:#101820;
+.lightbox .close {
+  top: 25px;
+  right: 25px;
 }
 
-.gallery-heading{text-align:center}
-
-.gallery-heading h2{
-  font-family:Cinzel,serif;
-  font-size:clamp(30px,5vw,60px);
-  font-weight:400;
-  color:#e8c99a;
-  margin:12px 0;
+.lightbox .prev {
+  left: 20px;
 }
 
-.gallery-heading p{
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:3px;
+.lightbox .next {
+  right: 20px;
 }
 
-.art-grid{
-  max-width:1250px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:25px;
+@media(max-width: 850px) {
+  .doors { grid-template-columns: repeat(2, 1fr); }
+  .door { height: 230px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.art-card{
-  background:#172228;
-  border:1px solid #b99a6255;
-  padding:12px;
-  overflow:hidden;
-  transition:.3s;
+@media(max-width: 500px) {
+  header { padding: 20px 5%; }
+  nav a { margin-left: 10px; font-size: 9px; }
+  .brand { font-size: 23px; }
+  .hero { padding: 75px 10px 55px; }
+  .hero h1 { font-size: 43px; }
+  .hero p { font-size: 9px; letter-spacing: 4px; }
+  .portfolio { padding: 20px 5% 70px; }
+  .doors { gap: 17px; }
+  .door { height: 205px; }
+  .door-name { font-size: 18px; }
+  .door-symbol { font-size: 35px; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-top h2 { font-size: 37px; }
 }
-
-.art-card:hover{
-  border-color:#e8c99a;
-  box-shadow:0 12px 32px #0008;
-}
-
-.art-card img{
-  width:100%;
-  height:280px;
-  object-fit:contain;
-  display:block;
-  background:#100b16;
-}
-
-.art-card p{
-  text-align:center;
-  color:#e8c9e4;
-  font-size:10px;
-  letter-spacing:2px;
-  padding:17px 5px 8px;
-}
-
-.no-art{
-  grid-column:1/-1;
-  text-align:center;
-  padding:80px 20px;
-  color:var(--muted);
-  line-height:2;
-}
-
-/* ABOUT + CONTACT */
-
-.about,.contact{
-  text-align:center;
-  padding:100px 20px;
-  background:#121d22;
-}
-
-.about h2,.contact h2{
-  font-family:Cinzel,serif;
-  font-weight:400;
-  font-size:clamp(30px,5vw,55px);
-  margin:20px 0;
-}
-
-.about h2 span,.contact h2 span{
-  color:#e8c99a;
-}
-
-.about p:last-child{
-  max-width:650px;
-  margin:20px auto 0;
-  color:#cbb9d0;
-  font-size:13px;
-  line-height:2;
-}
-
-.contact{background:#0c141a}
-
-.contact a{
-  display:inline-block;
-  margin-top:25px;
-  padding:15px 28px;
-  border:1px solid #d9b875;
-  text-decoration:none;
-  color:#f3dfb7;
-  font-size:10px;
-  letter-spacing:3px;
-  transition:.3s;
-}
-
-.contact a:hover{
-  background:#d9b875;
-  color:#101820;
-}
-
-footer{
-  padding:25px;
-  background:#070c11;
-  color:#b8a37d;
-  text-align:center;
-  font-size:9px;
-  letter-spacing:3px;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1000px){
-  .door-grid{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
-}
-
-@media(max-width:650px){
-
-  .nav{
-    padding:0 4%;
-    height:65px;
-  }
-
-  .nav-links{gap:10px}
-
-  .nav-links a{
-    font-size:7px;
-    letter-spacing:.7px;
-  }
-
-  .hero{
-    padding:110px 7% 70px;
-  }
-
-  .hero h1{
-    font-size:clamp(42px,10vw,72px);
-    letter-spacing:0;
-  }
-
-  .door-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:24px 15px;
-  }
-
-  .door-frame{
-    height:315px;
-    border-radius:120px 120px 0 0;
-  }
-
-  .door{
-    border-radius:110px 110px 0 0;
-    padding-top:88px;
-  }
-
-  .door strong{font-size:17px}
-
-  .art-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-  }
-
-  .art-card img{height:180px}
-
-  .gallery-top{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .gallery-heading{text-align:left}
-}
-
-@media(max-width:380px){
-  .door-grid{
-    grid-template-columns:1fr;
-    max-width:260px;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-  .door{transition:none}
-  .door-grid .door-item{transition:none}
-  .gallery-page.visible{animation:none}
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
-
-<nav class="nav">
-  <a href="#home" class="logo">ANNA<span> ✦</span></a>
-
-  <div class="nav-links">
+<header>
+  <div class="brand">ANNA.</div>
+  <nav>
     <a href="#home">HOME</a>
     <a href="#portfolio">PORTFOLIO</a>
     <a href="#about">ABOUT</a>
     <a href="#contact">CONTACT</a>
-  </div>
-</nav>
-
-<!-- HOME -->
+  </nav>
+</header>
 
 <section class="hero" id="home">
-
-  <div class="glow one"></div>
-  <div class="glow two"></div>
-
-  <div class="hero-content">
-
-    <p class="kicker">✦ WELCOME TO MY WORLD ✦</p>
-
-    <h1>Hi, I'm ANNA.</h1>
-
-    <div class="hero-sub">Graphic Designer</div>
-
-    <button class="hero-button" id="exploreButton">
-      EXPLORE MY WORLD ↓
-    </button>
-
-  </div>
-
-  <p class="hero-bottom">
-    ART · DESIGN · IMAGINATION
-  </p>
-
+  <h1>Hi, I'm ANNA.</h1>
+  <p>Graphic Designer</p>
+  <div class="hero-line"></div>
 </section>
-
-<!-- PORTFOLIO -->
 
 <section class="portfolio" id="portfolio">
-
   <div class="section-heading">
-
-    <p class="kicker">A LITTLE WORLD OF CREATIVITY</p>
-
-    <h2>CHOOSE YOUR <span>DESTINATION</span></h2>
-
-    <p>Hover over a door and click to explore.</p>
-
+    <h2>My Creative World</h2>
+    <p>EXPLORE MY COLLECTION</p>
   </div>
 
-  <div class="door-grid" id="doorGrid">
-
-    <!-- DOOR 1 -->
-
-    <div class="door-item" data-category="logo">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">LOGO</span>
-          <span class="door-num">01</span>
-
-          <strong>LOGO<br>DESIGN</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Unique logos, badges and creative brand identities.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">Logo Designs</p>
-
-    </div>
-
-    <!-- DOOR 2 -->
-
-    <div class="door-item" data-category="banner">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">BANNER</span>
-          <span class="door-num">02</span>
-
-          <strong>BANNER<br>DESIGN</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Eye-catching banners for channels, profiles and streams.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">Banner Designs</p>
-
-    </div>
-
-    <!-- DOOR 3 -->
-
-    <div class="door-item" data-category="emotes">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">EMOTES</span>
-          <span class="door-num">03</span>
-
-          <strong>EMOTE<br>DESIGN</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Cute and expressive emotes made for your community.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">Emotes</p>
-
-    </div>
-
-    <!-- DOOR 4 -->
-
-    <div class="door-item" data-category="png">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">PNG</span>
-          <span class="door-num">04</span>
-
-          <strong>PNG<br>ART</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Transparent PNG artwork, cut-outs and stream assets.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">PNG Artwork</p>
-
-    </div>
-
-    <!-- DOOR 5 -->
-
-    <div class="door-item" data-category="model">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">MODEL</span>
-          <span class="door-num">05</span>
-
-          <strong>MODEL<br>DESIGN</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Original character and avatar model designs.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">Model Designs</p>
-
-    </div>
-
-    <!-- DOOR 6 -->
-
-    <div class="door-item" data-category="character">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">CHARACTER ART</span>
-          <span class="door-num">06</span>
-
-          <strong>CHARACTER<br>ART</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Character illustrations, portraits and custom concepts.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">Character Art</p>
-
-    </div>
-
-    <!-- DOOR 7 -->
-
-    <div class="door-item" data-category="scene">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">ART SCENE</span>
-          <span class="door-num">07</span>
-
-          <strong>ART<br>SCENE</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Atmospheric illustrations, backgrounds and story scenes.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">Art Scenes</p>
-
-    </div>
-
-    <!-- DOOR 8 -->
-
-    <div class="door-item" data-category="room">
-
-      <div class="door-frame">
-
-        <button class="door" type="button">
-
-          <span class="door-label">3D ROOM</span>
-          <span class="door-num">08</span>
-
-          <strong>3D<br>ROOM</strong>
-
-          <small>ENTER WORLD ↗</small>
-
-          <div class="door-hover-info">
-            Beautiful 3D rooms, cozy spaces and environment designs.
-            <span>CLICK TO EXPLORE</span>
-          </div>
-
-          <i class="door-knob"></i>
-
-        </button>
-
-      </div>
-
-      <p class="door-title">3D Rooms</p>
-
-    </div>
-
-  </div>
-
+  <div class="doors" id="doors"></div>
 </section>
 
-<!-- GALLERY -->
-
-<section class="gallery-page" id="galleryPage">
-
+<section class="gallery-section" id="gallery">
   <div class="gallery-top">
-
-    <button class="back-button" id="backButton">
-      ← BACK TO DOORS
-    </button>
-
-    <div class="gallery-heading">
-
-      <p class="kicker">ANNA'S CREATIVE COLLECTION</p>
-
-      <h2 id="galleryTitle">LOGO DESIGNS</h2>
-
-      <p id="gallerySubtitle">A COLLECTION OF MY WORK</p>
-
-    </div>
-
+    <h2 id="galleryTitle"></h2>
+    <p>MY CREATIVE COLLECTION</p>
+    <button class="back-btn" onclick="closeGallery()">← BACK TO DOORS</button>
   </div>
-
-  <div class="art-grid" id="artGrid"></div>
-
+  <div class="gallery-grid" id="galleryGrid"></div>
 </section>
-
-<!-- ABOUT -->
 
 <section class="about" id="about">
-
-  <p class="kicker">A LITTLE ABOUT ME</p>
-
-  <h2>HELLO, I'M <span>ANNA</span></h2>
-
+  <h2>About Me</h2>
   <p>
-    I'm a digital artist creating model designs, character art,
-    logos, banners, emotes, PNG artwork and creative 3D environments.
-    Welcome to my portfolio!
+    Hello! I'm ANNA, a Graphic Designer passionate about creating
+    beautiful visual experiences, unique artwork and creative designs.
+    Welcome to my creative world.
   </p>
-
 </section>
 
-<!-- CONTACT -->
-
 <section class="contact" id="contact">
-
-  <p class="kicker">HAVE A PROJECT IN MIND?</p>
-
-  <h2>LET'S CREATE SOMETHING <span>MAGICAL</span></h2>
-
-  <a href="mailto:YOUR-EMAIL@example.com">
-    CONTACT ME ↗
-  </a>
-
+  <h2>Let's Create Together</h2>
+  <a href="mailto:YOUR-EMAIL@example.com">CONTACT ME</a>
 </section>
 
 <footer>
-  © 2026 ANNA · DIGITAL ARTIST
+  © 2026 ANNA. ALL RIGHTS RESERVED.
 </footer>
 
+<div class="lightbox" id="lightbox">
+  <button class="close" onclick="closeLightbox()">✕</button>
+  <button class="prev" onclick="changeImage(-1)">❮</button>
+  <img id="lightboxImage" src="" alt="Artwork">
+  <button class="next" onclick="changeImage(1)">❯</button>
+</div>
+
 <script>
-
-/* CATEGORY IMAGES */
-
-const categories={
-
-  logo:{
-    title:"LOGO DESIGNS",
-    subtitle:"CREATIVE BRAND IDENTITIES",
-    folder:"assets/logo/",
-    files:[
-      "logo-1.png",
-      "logo-2.png",
-      "logo-3.png",
-      "logo-4.png",
-      "logo-5.png"
-    ]
+const categories = [
+  {
+    name: "Logo Design",
+    symbol: "✧",
+    description: "Unique identities & beautiful branding",
+    folder: "assets/logo/",
+    prefix: "logo"
   },
-
-  banner:{
-    title:"BANNER DESIGNS",
-    subtitle:"STREAM AND SOCIAL GRAPHICS",
-    folder:"assets/banner/",
-    files:[
-      "banner-1.png",
-      "banner-2.png",
-      "banner-3.png",
-      "banner-4.png",
-      "banner-5.png",
-      "banner-6.png",
-      "banner-7.png"
-    ]
+  {
+    name: "Banner Design",
+    symbol: "◇",
+    description: "Creative banners & visual layouts",
+    folder: "assets/banner/",
+    prefix: "banner"
   },
-
-  emotes:{
-    title:"EMOTE DESIGNS",
-    subtitle:"EXPRESS YOURSELF",
-    folder:"assets/emotes/",
-    files:[
-      "emote-1.png",
-      "emote-2.png",
-      "emote-3.png",
-      "emote-4.png"
-    ]
+  {
+    name: "Emotes",
+    symbol: "♡",
+    description: "Expressive digital emote artwork",
+    folder: "assets/emotes/",
+    prefix: "emote"
   },
-
-  png:{
-    title:"PNG ARTWORK",
-    subtitle:"TRANSPARENT PNG COLLECTION",
-    folder:"assets/png/",
-    files:[
-      "png-1.png",
-      "png-2.png",
-      "png-3.png",
-      "png-4.png",
-      "png-5.png"
-    ]
+  {
+    name: "PNG Artwork",
+    symbol: "✦",
+    description: "Creative transparent PNG designs",
+    folder: "assets/png/",
+    prefix: "png"
   },
-
-  model:{
-    title:"MODEL DESIGNS",
-    subtitle:"ORIGINAL MODEL COLLECTION",
-    folder:"assets/model/",
-    files:[
-      "model-1.png",
-      "model-2.png",
-      "model-3.png",
-      "model-4.png",
-      "model-5.png"
-    ]
+  {
+    name: "Model Design",
+    symbol: "❖",
+    description: "Custom digital model designs",
+    folder: "assets/model/",
+    prefix: "model"
   },
-
-  character:{
-    title:"CHARACTER ART",
-    subtitle:"CHARACTER ILLUSTRATION COLLECTION",
-    folder:"assets/character-art/",
-    files:[
-      "character-1.png",
-      "character-2.png",
-      "character-3.png",
-      "character-4.png",
-      "character-5.png"
-    ]
+  {
+    name: "Character Art",
+    symbol: "✿",
+    description: "Original character illustrations",
+    folder: "assets/character-art/",
+    prefix: "character"
   },
-
-  scene:{
-    title:"ART SCENES",
-    subtitle:"MY CREATIVE ARTWORK",
-    folder:"assets/art-scene/",
-    files:[
-      "scene-1.png",
-      "scene-2.png",
-      "scene-3.png",
-      "scene-4.png"
-    ]
+  {
+    name: "Art Scene",
+    symbol: "❋",
+    description: "Beautiful artistic environments",
+    folder: "assets/art-scene/",
+    prefix: "scene"
   },
-
-  room:{
-    title:"3D ROOM DESIGNS",
-    subtitle:"3D ENVIRONMENTS AND COZY SPACES",
-    folder:"assets/3d-room/",
-    files:[
-      "room-1.png",
-      "room-2.png",
-      "room-3.png",
-      "room-4.png"
-    ]
+  {
+    name: "3D Room",
+    symbol: "⌂",
+    description: "Immersive 3D room designs",
+    folder: "assets/3d-room/",
+    prefix: "room"
   }
+];
 
-};
+const doorsContainer = document.getElementById("doors");
+const gallery = document.getElementById("gallery");
+const portfolio = document.querySelector(".portfolio");
 
-/* ELEMENTS */
+let currentImages = [];
+let currentIndex = 0;
+let activeCategory = null;
 
-const galleryPage=document.getElementById("galleryPage");
-const artGrid=document.getElementById("artGrid");
-const doorGrid=document.getElementById("doorGrid");
+categories.forEach((category, index) => {
+  const card = document.createElement("div");
+  card.className = "door-card";
 
-let busy=false;
+  card.innerHTML = `
+    <div class="door" role="button" tabindex="0"
+         aria-label="Open ${category.name}">
+      <div class="door-panel">
+        <div class="door-number">0${index + 1}</div>
+        <div class="door-symbol">${category.symbol}</div>
+        <div class="door-name">${category.name}</div>
+        <div class="door-handle"></div>
+      </div>
+    </div>
+    <div class="door-description">${category.description}</div>
+  `;
 
-/* EXPLORE BUTTON */
+  const door = card.querySelector(".door");
 
-document.getElementById("exploreButton").addEventListener("click",()=>{
-
-  document.getElementById("portfolio").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-
-});
-
-/* DOOR HOVER */
-
-document.querySelectorAll(".door-item").forEach(item=>{
-
-  item.addEventListener("mouseenter",()=>{
-
-    if(busy)return;
-
-    doorGrid.classList.add("has-hover");
-
-    document.querySelectorAll(".door-item").forEach(d=>{
-      d.classList.remove("selected");
+  card.addEventListener("mouseenter", () => {
+    doorsContainer.classList.add("has-hover");
+    document.querySelectorAll(".door-card").forEach(item => {
+      item.classList.remove("active");
     });
-
-    item.classList.add("selected");
-
+    card.classList.add("active");
   });
 
-  /* DOOR CLICK */
+  door.addEventListener("click", () => openCategory(index, card));
 
-  item.querySelector(".door").addEventListener("click",()=>{
-
-    openGallery(item.dataset.category,item);
-
+  door.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openCategory(index, card);
+    }
   });
 
+  doorsContainer.appendChild(card);
 });
 
-/* REMOVE HOVER WHEN MOUSE LEAVES */
-
-doorGrid.addEventListener("mouseleave",()=>{
-
-  if(busy)return;
-
-  doorGrid.classList.remove("has-hover");
-
-  document.querySelectorAll(".door-item").forEach(d=>{
-    d.classList.remove("selected");
+doorsContainer.addEventListener("mouseleave", () => {
+  doorsContainer.classList.remove("has-hover");
+  document.querySelectorAll(".door-card").forEach(item => {
+    item.classList.remove("active");
   });
-
 });
 
-/* OPEN GALLERY */
+function openCategory(index, card) {
+  if (activeCategory !== null) return;
 
-function openGallery(key,item){
+  activeCategory = index;
+  card.classList.add("opening");
 
-  if(busy)return;
+  setTimeout(() => {
+    portfolio.style.display = "none";
+    gallery.classList.add("show");
 
-  const cat=categories[key];
+    const category = categories[index];
+    document.getElementById("galleryTitle").textContent = category.name;
 
-  if(!cat)return;
+    loadGallery(category);
 
-  busy=true;
-
-  doorGrid.classList.add("has-hover");
-
-  document.querySelectorAll(".door-item").forEach(d=>{
-    d.classList.remove("selected");
-  });
-
-  item.classList.add("selected");
-
-  /* DOOR SWINGS INWARD */
-
-  setTimeout(()=>{
-
-    item.classList.add("opening");
-
-  },420);
-
-  /* GALLERY APPEARS */
-
-  setTimeout(()=>{
-
-    document.getElementById("galleryTitle").textContent=cat.title;
-
-    document.getElementById("gallerySubtitle").textContent=cat.subtitle;
-
-    artGrid.innerHTML="";
-
-    cat.files.forEach((file,index)=>{
-
-      const card=document.createElement("article");
-
-      card.className="art-card";
-
-      const img=document.createElement("img");
-
-      img.src=cat.folder+file;
-
-      img.alt=cat.title+" artwork "+(index+1);
-
-      const caption=document.createElement("p");
-
-      caption.textContent=
-        "ARTWORK "+String(index+1).padStart(2,"0");
-
-      img.onerror=()=>{
-
-        card.remove();
-
-        if(!artGrid.querySelector(".art-card")){
-
-          artGrid.innerHTML=
-            '<div class="no-art">Your artwork will appear here.<br>Add your own images to this category folder.</div>';
-
-        }
-
-      };
-
-      card.append(img,caption);
-
-      artGrid.append(card);
-
+    gallery.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
     });
-
-    galleryPage.classList.add("visible");
-
-    galleryPage.scrollTop=0;
-
-    window.scrollTo(0,0);
-
-    item.classList.remove("opening");
-
-    busy=false;
-
-  },1320);
-
+  }, 700);
 }
 
-/* BACK BUTTON */
+function loadGallery(category) {
+  const grid = document.getElementById("galleryGrid");
+  grid.innerHTML = "";
+  let found = 0;
+  let checked = 0;
 
-document.getElementById("backButton").addEventListener("click",()=>{
+  // Add more filenames here if you have more artwork.
+  const maxImages = 30;
 
-  if(busy)return;
+  for (let i = 1; i <= maxImages; i++) {
+    const img = new Image();
+    const src = category.folder + category.prefix + "-" + i + ".png";
 
-  galleryPage.classList.remove("visible");
+    img.onload = () => {
+      found++;
+      const item = document.createElement("div");
+      item.className = "gallery-item";
 
-  doorGrid.classList.remove("has-hover");
+      const displayed = document.createElement("img");
+      displayed.src = src;
+      displayed.alt = category.name + " artwork " + i;
 
-  document.querySelectorAll(".door-item").forEach(d=>{
+      item.appendChild(displayed);
+      item.addEventListener("click", () => openLightbox(src));
+      grid.appendChild(item);
 
-    d.classList.remove("selected","opening");
+      const message = grid.querySelector(".empty-message");
+      if (message) message.remove();
+    };
 
+    img.onerror = () => {
+      checked++;
+      if (checked === maxImages && found === 0) {
+        grid.innerHTML = '<div class="empty-message">Your artwork will appear here ✧</div>';
+      }
+    };
+
+    img.src = src;
+  }
+}
+
+function closeGallery() {
+  gallery.classList.remove("show");
+  portfolio.style.display = "block";
+
+  document.querySelectorAll(".door-card").forEach(card => {
+    card.classList.remove("opening", "active");
   });
 
-  window.scrollTo({
+  doorsContainer.classList.remove("has-hover");
+  activeCategory = null;
 
-    top:document.getElementById("portfolio").offsetTop,
+  portfolio.scrollIntoView({ behavior: "smooth" });
+}
 
-    behavior:"smooth"
+function openLightbox(src) {
+  currentImages = [...document.querySelectorAll(".gallery-item img")]
+    .map(img => img.src);
 
-  });
+  currentIndex = currentImages.indexOf(new URL(src, location.href).href);
+  if (currentIndex < 0) currentIndex = 0;
 
+  document.getElementById("lightboxImage").src = src;
+  document.getElementById("lightbox").classList.add("show");
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").classList.remove("show");
+}
+
+function changeImage(direction) {
+  if (!currentImages.length) return;
+
+  currentIndex =
+    (currentIndex + direction + currentImages.length) % currentImages.length;
+
+  document.getElementById("lightboxImage").src = currentImages[currentIndex];
+}
+
+document.getElementById("lightbox").addEventListener("click", event => {
+  if (event.target.id === "lightbox") closeLightbox();
 });
 
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeLightbox();
+  if (event.key === "ArrowRight") changeImage(1);
+  if (event.key === "ArrowLeft") changeImage(-1);
+});
 </script>
 
 </body>
