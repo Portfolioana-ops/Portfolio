@@ -1,697 +1,697 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ANNA — Digital Artist</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg: #100b16;
-  --pink: #e9b3d9;
-  --gold: #c9a879;
-  --muted: #b9a9bd;
+:root{
+  --bg:#10111b;
+  --pink:#e9b3d9;
+  --gold:#d7b76d;
+  --muted:#b9a9bd;
+  --ink:#171923;
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: #f8eff7;
-  font-family: Montserrat, sans-serif;
-  overflow-x: hidden;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:#f8eff7;
+  font-family:Montserrat,sans-serif;
+  overflow-x:hidden;
 }
-
-button, a { font: inherit; }
+button,a{font:inherit}
 
 /* NAVIGATION */
-
-.nav {
-  height: 76px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 0 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 20;
-  border-bottom: 1px solid #ffffff18;
+.nav{
+  height:76px;
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  padding:0 7%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:20;
+  border-bottom:1px solid #ffffff20;
+  background:#11131b55;
 }
-
-.logo {
-  color: white;
-  font-family: Cinzel, serif;
-  letter-spacing: 5px;
-  font-size: 19px;
-  text-decoration: none;
+.logo{
+  color:white;
+  font-family:Cinzel,serif;
+  letter-spacing:5px;
+  font-size:19px;
+  text-decoration:none;
 }
-
-.logo span { color: var(--pink); }
-
-.nav-links {
-  display: flex;
-  gap: 30px;
+.logo span{color:var(--pink)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{
+  color:#e6d8e7;
+  text-decoration:none;
+  font-size:9px;
+  letter-spacing:1.7px;
+  transition:.3s;
 }
+.nav-links a:hover{color:var(--pink)}
 
-.nav-links a {
-  color: #e6d8e7;
-  text-decoration: none;
-  font-size: 9px;
-  letter-spacing: 2px;
-  transition: .3s;
-}
-
-.nav-links a:hover { color: var(--pink); }
-
-/* INTRO PAGE */
-
-.hero {
-  min-height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  overflow: hidden;
+/* HOME PAGE */
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  padding:125px 8% 85px;
   background:
-    radial-gradient(ellipse at 50% 45%, #65416d66, transparent 55%),
-    linear-gradient(135deg, #100b16, #24152c 55%, #100b16);
+    radial-gradient(ellipse at 50% 48%,#3d2c49 0%,transparent 48%),
+    linear-gradient(120deg,#11101b,#211a2b 58%,#11101b);
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.10;
+  background-image:radial-gradient(#fff 1px,transparent 1px);
+  background-size:42px 42px;
+}
+.hero-content{
+  position:relative;
+  z-index:3;
+  width:100%;
+  max-width:850px;
+  animation:enter 1s ease both;
+}
+@keyframes enter{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.kicker{
+  color:var(--pink);
+  font-size:10px;
+  letter-spacing:4px;
+}
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(76px,12vw,150px);
+  line-height:.92;
+  font-weight:500;
+  letter-spacing:2px;
+  margin:25px 0 20px;
+  text-shadow:0 0 45px #e9b3d933;
+}
+.hero h1 span{color:var(--pink);font-style:italic}
+.hero-sub{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  font-size:clamp(18px,2.2vw,27px);
+  margin-top:12px;
+}
+.designer-card{
+  width:min(330px,75vw);
+  height:58px;
+  position:relative;
+  perspective:900px;
+  display:inline-block;
+  vertical-align:middle;
+}
+.designer-card-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .9s cubic-bezier(.7,0,.2,1);
+  animation:roleFlip 5s infinite;
+}
+.designer-card.flipped .designer-card-inner{
+  transform:rotateY(180deg);
+}
+@keyframes roleFlip{
+  0%,38%{transform:rotateY(0)}
+  48%,88%{transform:rotateY(180deg)}
+  100%{transform:rotateY(360deg)}
+}
+.designer-front,.designer-back{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  backface-visibility:hidden;
+  background:#fff;
+  color:#26303c;
+  font-size:clamp(15px,2vw,22px);
+  font-weight:500;
+  letter-spacing:.3px;
+  padding:8px 15px;
+  box-shadow:0 9px 25px #0005;
+  transform:rotate(-2deg);
+}
+.designer-back{
+  background:var(--pink);
+  transform:rotateY(180deg) rotate(-2deg);
+}
+.hero-button{
+  display:inline-block;
+  margin-top:35px;
+  padding:15px 25px;
+  border:1px solid #e8c5df;
+  color:white;
+  text-decoration:none;
+  font-size:9px;
+  letter-spacing:2.5px;
+  transition:.3s;
+  cursor:pointer;
+  background:#ffffff0a;
+}
+.hero-button:hover{
+  background:var(--pink);
+  color:#180f20;
+  transform:translateY(-3px);
+}
+.hero-bottom{
+  position:absolute;
+  bottom:28px;
+  left:0;
+  width:100%;
+  text-align:center;
+  color:#c7b8ca;
+  font-size:9px;
+  letter-spacing:4px;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .15;
-  background-image: radial-gradient(#fff 1px, transparent 1px);
-  background-size: 48px 48px;
+/* HANGING ROPE */
+.rope{
+  position:absolute;
+  top:-210px;
+  right:10%;
+  width:42px;
+  height:255px;
+  z-index:3;
+  opacity:0;
+  transform-origin:50% 0;
+  pointer-events:none;
+  animation:
+    ropeDrop 1.35s cubic-bezier(.2,.8,.25,1) .35s forwards,
+    ropeSway 4.8s ease-in-out 1.7s infinite;
 }
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  animation: heroEnter 1.5s ease both;
+.rope::before{
+  content:"";
+  position:absolute;
+  left:18px;
+  top:0;
+  width:7px;
+  height:100%;
+  border-radius:8px;
+  background:repeating-linear-gradient(
+    145deg,
+    #fff0f7 0 3px,
+    #d7a9c8 3px 5px,
+    #8e6688 5px 7px,
+    #f4dce9 7px 9px
+  );
+  box-shadow:0 0 8px #e9b3d977,1px 0 3px #fff9;
 }
-
-@keyframes heroEnter {
-  from { opacity: 0; transform: translateY(35px); }
-  to { opacity: 1; transform: translateY(0); }
+.rope::after{
+  content:"";
+  position:absolute;
+  left:10px;
+  bottom:-9px;
+  width:23px;
+  height:21px;
+  border:3px solid #d8b6cc;
+  border-top-color:#f8eaf3;
+  border-radius:50% 50% 55% 55%;
+  background:linear-gradient(135deg,#fff1f8,#b889a9);
+  box-shadow:0 4px 12px #0007,0 0 15px #e9b3d966;
 }
-
-.kicker {
-  color: var(--pink);
-  font-size: 10px;
-  letter-spacing: 5px;
+@keyframes ropeDrop{
+  0%{top:-210px;opacity:0;transform:rotate(-9deg)}
+  68%{top:0;opacity:1;transform:rotate(5deg)}
+  84%{top:0;transform:rotate(-3deg)}
+  100%{top:0;opacity:1;transform:rotate(0deg)}
 }
-
-.hero h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 400;
-  font-size: clamp(75px, 14vw, 160px);
-  line-height: 1;
-  margin: 25px 0;
-  letter-spacing: 5px;
-  text-shadow: 0 0 55px #e4a5d955;
+@keyframes ropeSway{
+  0%,100%{transform:rotate(0deg)}
+  25%{transform:rotate(4deg)}
+  55%{transform:rotate(-3.5deg)}
+  78%{transform:rotate(2deg)}
 }
-
-.hero h1 span {
-  color: var(--pink);
-  font-style: italic;
+.glow{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.18;
 }
+.glow.one{background:#df9bcf;top:10%;left:-120px}
+.glow.two{background:#6d9bc8;bottom:0;right:15%}
 
-/* WHITE FLIPPING BOX */
-
-.hero-sub {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  color: #fff;
-  font-size: 13px;
-  letter-spacing: 2px;
-  margin-top: 10px;
-}
-
-.designer-card {
-  width: 205px;
-  height: 48px;
-  position: relative;
-  perspective: 900px;
-  display: inline-block;
-}
-
-.designer-card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 1s cubic-bezier(.7,0,.2,1);
-}
-
-.designer-card.flipped .designer-card-inner {
-  transform: rotateY(180deg);
-}
-
-.designer-front,
-.designer-back {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backface-visibility: hidden;
-  background: #fff;
-  color: #24152c;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 8px;
-}
-
-.designer-back {
-  background: var(--pink);
-  transform: rotateY(180deg);
-  color: #24152c;
-}
-
-.hero-button {
-  display: inline-block;
-  margin-top: 42px;
-  padding: 16px 30px;
-  border: 1px solid #d8a7ce;
-  color: white;
-  text-decoration: none;
-  font-size: 9px;
-  letter-spacing: 3px;
-  transition: .4s;
-  cursor: pointer;
-  background: transparent;
-}
-
-.hero-button:hover {
-  background: var(--pink);
-  color: #180f20;
-  box-shadow: 0 0 35px #e5a4d677;
-  transform: translateY(-4px);
-}
-
-.hero-bottom {
-  position: absolute;
-  bottom: 30px;
-  color: #b49dbb;
-  font-size: 9px;
-  letter-spacing: 5px;
-}
-
-.glow {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: .2;
-  animation: float 8s ease-in-out infinite alternate;
-}
-
-.glow.one { background: #e77bd3; top: 10%; left: -120px; }
-.glow.two { background: #7965e5; bottom: 0; right: -120px; animation-delay: -3s; }
-
-@keyframes float {
-  to { transform: translate(60px, -45px) scale(1.2); }
-}
-
-/* DOOR LANDING PAGE */
-
-.portfolio {
-  min-height: 100vh;
-  padding: 115px 5% 100px;
-  position: relative;
+/* PORTFOLIO SECTION */
+.portfolio{
+  min-height:100vh;
+  padding:110px 5% 100px;
+  position:relative;
   background:
-    radial-gradient(ellipse at 50% 50%, #422749, transparent 70%),
-    #100b16;
-  overflow: hidden;
+    radial-gradient(ellipse at 50% 45%,#303447,transparent 68%),
+    #10111b;
+  overflow:hidden;
+}
+.section-heading{
+  text-align:center;
+  margin-bottom:68px;
+}
+.section-heading h2{
+  font-family:Cinzel,serif;
+  font-size:clamp(30px,5vw,54px);
+  font-weight:400;
+  margin:17px 0;
+}
+.section-heading h2 span{color:var(--pink)}
+.section-heading p:last-child{
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:1px;
 }
 
-.section-heading {
-  text-align: center;
-  margin-bottom: 75px;
+/* DOORS GRID */
+.door-grid{
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px;
+  align-items:end;
 }
-
-.section-heading h2 {
-  font-family: Cinzel, serif;
-  font-size: clamp(30px, 5vw, 55px);
-  font-weight: 400;
-  margin: 18px 0;
+.door-item{
+  min-width:0;
+  position:relative;
+  transition:opacity .5s,transform .65s,filter .5s;
 }
-
-.section-heading h2 span { color: var(--pink); }
-
-.section-heading p:last-child {
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-.door-grid {
-  max-width: 1250px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 22px;
-  align-items: center;
-}
-
-/* DOOR DESIGN */
-
-.door-item {
-  min-width: 0;
-  position: relative;
-  transition:
-    opacity .55s ease,
-    transform .7s cubic-bezier(.2,.8,.2,1),
-    filter .5s ease;
-}
-
-.door-frame {
-  height: 390px;
-  position: relative;
-  padding: 9px;
-  perspective: 1400px;
-  transform-style: preserve-3d;
-  background: linear-gradient(135deg, #b38b65, #493046 35%, #b18a67);
+.door-frame{
+  height:365px;
+  position:relative;
+  padding:8px 8px 0;
+  perspective:1200px;
+  background:linear-gradient(
+    90deg,
+    #171923,
+    #55505b 12%,
+    #171923 24%,
+    #6c626a 50%,
+    #171923 78%,
+    #4b4650
+  );
+  border-radius:82px 82px 3px 3px;
   box-shadow:
-    0 0 0 2px #d4b08b44,
-    0 20px 45px #000b;
+    0 18px 38px #0009,
+    inset 0 0 0 2px #e2c17c,
+    0 0 24px #b78de322;
+  overflow:hidden;
 }
-
-.door-frame::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border: 1px solid #f0d1a477;
-  pointer-events: none;
-  z-index: 4;
+.door-frame:before{
+  content:"";
+  position:absolute;
+  inset:7px 7px 0;
+  border:2px solid #c5a96e;
+  border-bottom:0;
+  border-radius:76px 76px 0 0;
+  pointer-events:none;
+  z-index:4;
 }
-
-/* LIGHT INSIDE THE DOORWAY */
-
-.door-frame::after {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse at center, #f9d9f3, #b56eb5 25%, #60386f 60%, #170e22 100%);
-  box-shadow: inset 0 0 55px #e9a5dc;
-}
-
-.door {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 2;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  border: 2px solid #9a7659;
-  color: white;
-  cursor: pointer;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  background:
-    linear-gradient(90deg, #ffffff12, transparent 20%, #0004),
-    repeating-linear-gradient(90deg, transparent 0 35px, #ffffff0a 36px 38px),
-    linear-gradient(145deg, #62405d, #24172e 50%, #68435b);
+.door{
+  width:100%;
+  height:100%;
+  position:relative;
+  z-index:2;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  border:1px solid #1b1b22;
+  color:#fff;
+  cursor:pointer;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  gap:16px;
+  padding-top:75px;
+  border-radius:72px 72px 0 0;
   box-shadow:
-    inset 0 0 0 8px #1b1220,
-    inset 0 0 0 10px #b9918955;
-  transition:
-    filter .4s,
-    transform 1.35s cubic-bezier(.7,0,.2,1);
+    inset 0 0 0 7px #111722,
+    inset 0 0 0 10px #ffffff35;
+  transition:filter .35s,transform 1.25s cubic-bezier(.7,0,.2,1);
+  background:var(--door-color);
+}
+.door:before{
+  content:"";
+  position:absolute;
+  inset:18px 13px 0;
+  border:1px solid #ffffff35;
+  border-radius:58px 58px 0 0;
+  pointer-events:none;
+}
+.door:after{
+  content:"";
+  position:absolute;
+  inset:30px 22px 0;
+  border:1px solid #1115;
+  border-radius:48px 48px 0 0;
+  pointer-events:none;
 }
 
-.door::before,
-.door::after {
-  content: "";
-  position: absolute;
-  border: 1px solid #dfb5d477;
-  pointer-events: none;
+/* DIFFERENT COLORS FOR ALL 8 DOORS */
+.door-item:nth-child(1){
+  --door-color:repeating-linear-gradient(
+    90deg,#07518a 0 5px,#1685bd 6px 10px,#08639b 11px 15px
+  );
+}
+.door-item:nth-child(2){
+  --door-color:repeating-linear-gradient(
+    90deg,#171827 0 5px,#41415a 6px 10px,#24263c 11px 15px
+  );
+}
+.door-item:nth-child(3){
+  --door-color:repeating-linear-gradient(
+    90deg,#267a62 0 5px,#57b68a 6px 10px,#328c70 11px 15px
+  );
+}
+.door-item:nth-child(4){
+  --door-color:repeating-linear-gradient(
+    90deg,#b84b24 0 5px,#f18a3d 6px 10px,#d5652b 11px 15px
+  );
+}
+.door-item:nth-child(5){
+  --door-color:repeating-linear-gradient(
+    90deg,#553a91 0 5px,#9270d2 6px 10px,#6c4aaa 11px 15px
+  );
+}
+.door-item:nth-child(6){
+  --door-color:repeating-linear-gradient(
+    90deg,#9a376e 0 5px,#df78a9 6px 10px,#b84e83 11px 15px
+  );
+}
+.door-item:nth-child(7){
+  --door-color:repeating-linear-gradient(
+    90deg,#8a6825 0 5px,#d9b85c 6px 10px,#a88736 11px 15px
+  );
+}
+.door-item:nth-child(8){
+  --door-color:repeating-linear-gradient(
+    90deg,#176b7b 0 5px,#4ab2bc 6px 10px,#278996 11px 15px
+  );
+}
+.door:hover{filter:brightness(1.2)}
+.door-item.opening .door{
+  transform:rotateY(-105deg);
+  filter:brightness(.7);
+}
+.door-num{
+  position:absolute;
+  top:35px;
+  font-size:8px;
+  letter-spacing:3px;
+  color:#fff5d7;
+}
+.door strong{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(18px,2vw,25px);
+  line-height:1.05;
+  letter-spacing:1px;
+  text-shadow:0 2px 7px #000;
+}
+.door small{
+  font-size:7px;
+  letter-spacing:1.5px;
+  color:#fff0c8;
+}
+.door-label{
+  position:absolute;
+  top:13%;
+  left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(#f4df9b,#c79c45);
+  color:#49371c;
+  padding:6px 12px;
+  font-size:8px;
+  letter-spacing:1px;
+  white-space:nowrap;
+  z-index:3;
+  border-radius:3px;
+  box-shadow:0 2px 6px #0008;
+  border:1px solid #fff1c0;
+}
+.door-knob{
+  position:absolute;
+  right:14px;
+  top:52%;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:radial-gradient(
+    circle at 30% 30%,
+    #fff5c9,#d9aa4e 60%,#80501f
+  );
+  box-shadow:0 0 10px #f5c58b,0 1px 3px #000;
+  z-index:4;
 }
 
-.door::before { inset: 20px; }
-.door::after { inset: 30px 35px; }
-
-.door:hover {
-  filter: brightness(1.35);
-  box-shadow: inset 0 0 35px #f2b6e644, 0 0 25px #d28acb55;
+/* HOVER DESCRIPTION */
+.door-hover-info{
+  position:absolute;
+  z-index:5;
+  left:14px;
+  right:14px;
+  top:48%;
+  padding:13px 10px 12px;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(145deg,#171525ed,#30243bea);
+  border:1px solid #f0d49b;
+  border-radius:8px;
+  font-size:10px;
+  line-height:1.65;
+  letter-spacing:.35px;
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+  box-shadow:0 8px 24px #0008;
+}
+.door-hover-info span{
+  display:block;
+  margin-top:7px;
+  color:#f4d58c;
+  font-size:7px;
+  letter-spacing:1.7px;
+}
+.door-item:hover .door-hover-info,
+.door-item:focus-within .door-hover-info{
+  opacity:1;
+  transform:translateY(0);
+}
+.door-item:hover .door strong,
+.door-item:hover .door small,
+.door-item:hover .door-num{
+  opacity:.12;
+  transition:opacity .25s;
+}
+.door-item:hover .door{
+  filter:brightness(1.18) saturate(1.15);
+}
+.door-title{
+  text-align:center;
+  margin-top:16px;
+  font-size:9px;
+  letter-spacing:1.5px;
+  color:#e8c9e4;
+}
+.door-grid.has-hover .door-item:not(.selected){
+  opacity:0;
+  transform:scale(.75) translateY(25px);
+  filter:blur(6px);
+  pointer-events:none;
+}
+.door-grid.has-hover .door-item.selected{
+  transform:scale(1.08);
+  filter:brightness(1.12);
+  z-index:5;
 }
 
-/* OPEN INWARD */
-
-.door-item.opening .door {
-  transform: rotateY(-110deg);
-  filter: brightness(.75);
+/* GALLERY */
+.gallery-page{
+  display:none;
+  min-height:100vh;
+  padding:110px 6% 90px;
+  background:radial-gradient(ellipse at 50% 10%,#42264a,transparent 65%),#100b16;
+}
+.gallery-page.visible{
+  display:block;
+  animation:enter .8s ease both;
+}
+.gallery-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:55px;
+  gap:20px;
+}
+.back-button{
+  border:1px solid #d8a8cf;
+  background:transparent;
+  color:white;
+  padding:13px 20px;
+  font-size:9px;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+.back-button:hover{
+  background:var(--pink);
+  color:#160d20;
+}
+.gallery-heading{text-align:center}
+.gallery-heading h2{
+  font-family:Cinzel,serif;
+  font-size:clamp(30px,5vw,60px);
+  font-weight:400;
+  color:var(--pink);
+  margin:12px 0;
+}
+.gallery-heading p{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:3px;
+}
+.art-grid{
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:25px;
+}
+.art-card{
+  background:#1c1323;
+  border:1px solid #a67b9b44;
+  padding:12px;
+  overflow:hidden;
+  transition:.4s;
+}
+.art-card:hover{
+  transform:translateY(-7px);
+  border-color:var(--pink);
+  box-shadow:0 15px 35px #0008;
+}
+.art-card img{
+  width:100%;
+  height:280px;
+  object-fit:contain;
+  display:block;
+  background:#100b16;
+}
+.art-card p{
+  text-align:center;
+  color:#e8c9e4;
+  font-size:10px;
+  letter-spacing:2px;
+  padding:17px 5px 8px;
+}
+.no-art{
+  grid-column:1/-1;
+  text-align:center;
+  padding:80px 20px;
+  color:var(--muted);
+  line-height:2;
 }
 
-.door-item.opening .door-frame {
-  box-shadow: 0 0 65px #e9a5dc88, 0 20px 45px #000b;
+/* ABOUT AND CONTACT */
+.about,.contact{
+  text-align:center;
+  padding:100px 20px;
+  background:#191020;
+}
+.about h2,.contact h2{
+  font-family:Cinzel,serif;
+  font-weight:400;
+  font-size:clamp(30px,5vw,55px);
+  margin:20px 0;
+}
+.about h2 span,.contact h2 span{color:var(--pink)}
+.about p:last-child{
+  max-width:650px;
+  margin:20px auto 0;
+  color:#cbb9d0;
+  font-size:13px;
+  line-height:2;
+}
+.contact{background:#120c19}
+.contact a{
+  display:inline-block;
+  margin-top:25px;
+  padding:15px 28px;
+  border:1px solid var(--pink);
+  text-decoration:none;
+  color:white;
+  font-size:10px;
+  letter-spacing:3px;
+}
+footer{
+  padding:25px;
+  background:#09060e;
+  color:#a48ba9;
+  text-align:center;
+  font-size:9px;
+  letter-spacing:3px;
 }
 
-.door-num {
-  position: absolute;
-  top: 38px;
-  font-size: 9px;
-  letter-spacing: 4px;
-  color: #eac3dd;
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .door-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
-
-.door-icon {
-  font-size: 38px;
-  color: #f1c3e6;
-  text-shadow: 0 0 20px #f6b6ed;
-}
-
-.door strong {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 28px;
-  line-height: 1.1;
-  letter-spacing: 2px;
-  font-weight: 600;
-  text-shadow: 0 3px 12px #000;
-}
-
-.door small {
-  font-size: 8px;
-  letter-spacing: 2px;
-  color: #edc1e5;
-}
-
-.door-knob {
-  position: absolute;
-  right: 17px;
-  top: 50%;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff3c8, #bd8c55 60%, #70432c);
-  box-shadow: 0 0 12px #f5c58b;
-}
-
-.door-title {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: #e8c9e4;
-}
-
-/* HOVER: ONLY ONE DOOR VISIBLE */
-
-.door-grid.has-hover .door-item:not(.selected) {
-  opacity: 0;
-  transform: scale(.72) translateY(30px);
-  filter: blur(8px);
-  pointer-events: none;
-}
-
-.door-grid.has-hover .door-item.selected {
-  transform: scale(1.12);
-  filter: brightness(1.15);
-  z-index: 5;
-}
-
-.door-grid.has-hover .door-item.selected .door-frame {
-  box-shadow: 0 0 0 2px #d9b2a0, 0 0 50px #e9a5dc55, 0 25px 55px #000c;
-}
-
-/* CINEMATIC CAMERA ENTERING DOOR */
-
-.transition-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background:
-    radial-gradient(ellipse at center, #f9d9f3 0%, #b56eb5 12%, #60386f 35%, #100b16 75%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  clip-path: circle(0% at var(--zoom-x, 50%) var(--zoom-y, 50%));
-  transition:
-    clip-path 1.45s cubic-bezier(.7,0,.2,1),
-    opacity .2s,
-    visibility .2s;
-}
-
-.transition-screen.active {
-  opacity: 1;
-  visibility: visible;
-  clip-path: circle(150% at var(--zoom-x, 50%) var(--zoom-y, 50%));
-}
-
-.transition-text {
-  text-align: center;
-  font-family: Cinzel, serif;
-  letter-spacing: 5px;
-  color: var(--pink);
-  font-size: 20px;
-  text-shadow: 0 0 25px #e9b3d9;
-  animation: transitionText 1s ease infinite alternate;
-}
-
-@keyframes transitionText {
-  to { opacity: .45; transform: scale(1.05); }
-}
-
-/* GALLERY PAGE */
-
-.gallery-page {
-  display: none;
-  min-height: 100vh;
-  padding: 115px 6% 90px;
-  background:
-    radial-gradient(ellipse at 50% 10%, #42264a, transparent 65%),
-    #100b16;
-  animation: galleryEnter .85s ease both;
-}
-
-.gallery-page.visible { display: block; }
-
-@keyframes galleryEnter {
-  from { opacity: 0; transform: translateY(35px) scale(.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.gallery-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 55px;
-  gap: 20px;
-}
-
-.back-button {
-  border: 1px solid #d8a8cf;
-  background: transparent;
-  color: white;
-  padding: 13px 20px;
-  font-size: 9px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.back-button:hover {
-  background: var(--pink);
-  color: #160d20;
-}
-
-.gallery-heading { text-align: center; }
-
-.gallery-heading h2 {
-  font-family: Cinzel, serif;
-  font-size: clamp(30px, 5vw, 60px);
-  font-weight: 400;
-  color: var(--pink);
-  margin: 12px 0;
-}
-
-.gallery-heading p {
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-.art-grid {
-  max-width: 1250px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 25px;
-}
-
-.art-card {
-  background: #1c1323;
-  border: 1px solid #a67b9b44;
-  padding: 12px;
-  overflow: hidden;
-  animation: artEnter .7s both;
-  transition: transform .4s, border-color .4s, box-shadow .4s;
-}
-
-.art-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--pink);
-  box-shadow: 0 15px 35px #0008, 0 0 25px #d88bc522;
-}
-
-.art-card img {
-  width: 100%;
-  height: 280px;
-  object-fit: contain;
-  display: block;
-  background: #100b16;
-}
-
-.art-card p {
-  text-align: center;
-  color: #e8c9e4;
-  font-size: 10px;
-  letter-spacing: 2px;
-  padding: 17px 5px 8px;
-}
-
-@keyframes artEnter {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.no-art {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 80px 20px;
-  color: var(--muted);
-  line-height: 2;
-}
-
-/* ABOUT & CONTACT */
-
-.about, .contact {
-  text-align: center;
-  padding: 100px 20px;
-  background: #191020;
-}
-
-.about h2, .contact h2 {
-  font-family: Cinzel, serif;
-  font-weight: 400;
-  font-size: clamp(30px, 5vw, 55px);
-  margin: 20px 0;
-}
-
-.about h2 span, .contact h2 span { color: var(--pink); }
-
-.about p:last-child {
-  max-width: 650px;
-  margin: 20px auto 0;
-  color: #cbb9d0;
-  font-size: 13px;
-  line-height: 2;
-}
-
-.contact { background: #120c19; }
-
-.contact a {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 15px 28px;
-  border: 1px solid var(--pink);
-  text-decoration: none;
-  color: white;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
-
-.contact a:hover {
-  background: var(--pink);
-  color: #160d20;
-}
-
-footer {
-  padding: 25px;
-  background: #09060e;
-  color: #a48ba9;
-  text-align: center;
-  font-size: 9px;
-  letter-spacing: 3px;
-}
-
-/* MOBILE */
-
-@media(max-width:1000px) {
-  .door-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-
-@media(max-width:650px) {
-  .nav { padding: 0 4%; }
-  .nav-links { gap: 11px; }
-  .nav-links a { font-size: 8px; }
-
-  .hero-sub {
-    gap: 7px;
-    font-size: 11px;
+@media(max-width:650px){
+  .nav{padding:0 4%;height:65px}
+  .nav-links{gap:10px}
+  .nav-links a{font-size:7px;letter-spacing:.7px}
+  .hero{padding:110px 7% 70px;align-items:center}
+  .hero-content{width:100%;margin-top:20px}
+  .hero h1{font-size:clamp(65px,15vw,100px)}
+  .hero-bottom{left:7%}
+  .rope{right:7%;height:165px}
+  .door-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:24px 15px;
   }
-
-  .designer-card {
-    width: 175px;
-    height: 44px;
+  .door-frame{
+    height:300px;
+    border-radius:65px 65px 0 0;
   }
-
-  .designer-front, .designer-back {
-    font-size: 9px;
+  .door{
+    border-radius:58px 58px 0 0;
+    padding-top:65px;
   }
-
-  .door-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 25px 15px;
+  .door strong{font-size:21px}
+  .art-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
   }
-
-  .door-frame { height: 330px; }
-  .door strong { font-size: 22px; }
-
-  .art-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+  .art-card img{height:180px}
+  .gallery-top{
+    align-items:flex-start;
+    flex-direction:column;
   }
-
-  .art-card img { height: 180px; }
-
-  .gallery-top {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .gallery-heading { text-align: left; }
+  .gallery-heading{text-align:left}
 }
-
-@media(max-width:380px) {
-  .door-grid {
-    grid-template-columns: 1fr;
-    max-width: 260px;
-  }
+@media(max-width:380px){
+  .door-grid{grid-template-columns:1fr;max-width:260px}
+}
+@media(prefers-reduced-motion:reduce){
+  .rope{animation:none;top:0;opacity:1;transform:none}
 }
 </style>
 </head>
@@ -708,24 +708,22 @@ footer {
   </div>
 </nav>
 
-<!-- HOME PAGE -->
-
+<!-- HOME -->
 <section class="hero" id="home">
   <div class="glow one"></div>
   <div class="glow two"></div>
+  <div class="rope"></div>
 
   <div class="hero-content">
     <p class="kicker">✦ WELCOME TO MY WORLD ✦</p>
-
-    <h1>Hi, I'm <span>ANNA</span></h1>
+    <h1>Hi, I'm <span>ANNA.</span></h1>
 
     <div class="hero-sub">
-      <span>I'm</span>
-
+      <span>I am a</span>
       <div class="designer-card" id="designerCard">
         <div class="designer-card-inner">
-          <div class="designer-front">GRAPHIC DESIGNER</div>
-          <div class="designer-back">FURRY ARTIST</div>
+          <div class="designer-front">Graphic Designer</div>
+          <div class="designer-back">Furry Artist</div>
         </div>
       </div>
     </div>
@@ -738,8 +736,7 @@ footer {
   <p class="hero-bottom">ART · DESIGN · IMAGINATION</p>
 </section>
 
-<!-- DOORS PAGE -->
-
+<!-- PORTFOLIO DOORS -->
 <section class="portfolio" id="portfolio">
   <div class="section-heading">
     <p class="kicker">A LITTLE WORLD OF CREATIVITY</p>
@@ -749,83 +746,163 @@ footer {
 
   <div class="door-grid" id="doorGrid">
 
-    <div class="door-item" data-category="vtuber">
-      <div class="door-frame">
-        <button class="door" type="button">
-          <span class="door-num">01</span>
-          <span class="door-icon">✧</span>
-          <strong>VTUBER<br>MODEL</strong>
-          <small>ENTER WORLD ↗</small>
-          <i class="door-knob"></i>
-        </button>
-      </div>
-      <p class="door-title">VTuber Models</p>
-    </div>
-
+    <!-- 01 LOGO -->
     <div class="door-item" data-category="logo">
       <div class="door-frame">
         <button class="door" type="button">
-          <span class="door-num">02</span>
-          <span class="door-icon">✦</span>
+          <span class="door-label">LOGO</span>
+          <span class="door-num">01</span>
           <strong>LOGO<br>DESIGN</strong>
           <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Unique logos, badges and creative brand identities.
+            <span>CLICK TO EXPLORE</span>
+          </div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Logo Designs</p>
     </div>
 
+    <!-- 02 BANNER -->
     <div class="door-item" data-category="banner">
       <div class="door-frame">
         <button class="door" type="button">
-          <span class="door-num">03</span>
-          <span class="door-icon">❋</span>
+          <span class="door-label">BANNER</span>
+          <span class="door-num">02</span>
           <strong>BANNER<br>DESIGN</strong>
           <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Eye-catching banners for channels, profiles and streams.
+            <span>CLICK TO EXPLORE</span>
+          </div>
           <i class="door-knob"></i>
         </button>
       </div>
-      <p class="door-title">Banners</p>
+      <p class="door-title">Banner Designs</p>
     </div>
 
+    <!-- 03 EMOTES -->
     <div class="door-item" data-category="emotes">
       <div class="door-frame">
         <button class="door" type="button">
-          <span class="door-num">04</span>
-          <span class="door-icon">♡</span>
+          <span class="door-label">EMOTES</span>
+          <span class="door-num">03</span>
           <strong>EMOTE<br>DESIGN</strong>
           <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Cute and expressive emotes made for your community.
+            <span>CLICK TO EXPLORE</span>
+          </div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Emotes</p>
     </div>
 
+    <!-- 04 PNG -->
+    <div class="door-item" data-category="png">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-label">PNG</span>
+          <span class="door-num">04</span>
+          <strong>PNG<br>ART</strong>
+          <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Transparent PNG artwork, cut-outs and stream assets.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">PNG Artwork</p>
+    </div>
+
+    <!-- 05 MODEL -->
+    <div class="door-item" data-category="model">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-label">MODEL</span>
+          <span class="door-num">05</span>
+          <strong>MODEL<br>DESIGN</strong>
+          <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Original character and avatar model designs.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">Model Designs</p>
+    </div>
+
+    <!-- 06 CHARACTER ART -->
+    <div class="door-item" data-category="character">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-label">CHARACTER ART</span>
+          <span class="door-num">06</span>
+          <strong>CHARACTER<br>ART</strong>
+          <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Character illustrations, portraits and custom concepts.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">Character Art</p>
+    </div>
+
+    <!-- 07 ART SCENE -->
     <div class="door-item" data-category="scene">
       <div class="door-frame">
         <button class="door" type="button">
-          <span class="door-num">05</span>
-          <span class="door-icon">☾</span>
+          <span class="door-label">ART SCENE</span>
+          <span class="door-num">07</span>
           <strong>ART<br>SCENE</strong>
           <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Atmospheric illustrations, backgrounds and story scenes.
+            <span>CLICK TO EXPLORE</span>
+          </div>
           <i class="door-knob"></i>
         </button>
       </div>
       <p class="door-title">Art Scenes</p>
     </div>
 
+    <!-- 08 3D ROOM -->
+    <div class="door-item" data-category="room">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-label">3D ROOM</span>
+          <span class="door-num">08</span>
+          <strong>3D<br>ROOM</strong>
+          <small>ENTER WORLD ↗</small>
+          <div class="door-hover-info">
+            Beautiful 3D rooms, cozy spaces and environment designs.
+            <span>CLICK TO EXPLORE</span>
+          </div>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">3D Rooms</p>
+    </div>
+
   </div>
 </section>
 
-<!-- SEPARATE CATEGORY PAGE -->
-
+<!-- GALLERY PAGE -->
 <section class="gallery-page" id="galleryPage">
   <div class="gallery-top">
-    <button class="back-button" id="backButton">← BACK TO DOORS</button>
+    <button class="back-button" id="backButton">
+      ← BACK TO DOORS
+    </button>
 
     <div class="gallery-heading">
       <p class="kicker">ANNA'S CREATIVE COLLECTION</p>
-      <h2 id="galleryTitle">VTUBER MODELS</h2>
+      <h2 id="galleryTitle">LOGO DESIGNS</h2>
       <p id="gallerySubtitle">A COLLECTION OF MY WORK</p>
     </div>
   </div>
@@ -833,12 +910,18 @@ footer {
   <div class="art-grid" id="artGrid"></div>
 </section>
 
+<!-- ABOUT -->
 <section class="about" id="about">
   <p class="kicker">A LITTLE ABOUT ME</p>
   <h2>HELLO, I'M <span>ANNA</span></h2>
-  <p>I'm a digital artist creating VTuber designs, logos, banners, emotes and creative visuals. Welcome to my portfolio!</p>
+  <p>
+    I'm a digital artist creating model designs, character art,
+    logos, banners, emotes, PNG artwork and creative 3D environments.
+    Welcome to my portfolio!
+  </p>
 </section>
 
+<!-- CONTACT -->
 <section class="contact" id="contact">
   <p class="kicker">HAVE A PROJECT IN MIND?</p>
   <h2>LET'S CREATE SOMETHING <span>MAGICAL</span></h2>
@@ -847,38 +930,15 @@ footer {
 
 <footer>© 2026 ANNA · DIGITAL ARTIST</footer>
 
-<!-- CINEMATIC TRANSITION -->
-
-<div class="transition-screen" id="transitionScreen">
-  <div class="transition-text">ENTERING ANNA'S WORLD ✦</div>
-</div>
-
 <script>
-/* ARTWORK FILES */
-
+/* ALL CATEGORY GALLERIES */
 const categories = {
-  vtuber: {
-    title: "VTUBER MODELS",
-    subtitle: "CHARACTER DESIGN COLLECTION",
-    folder: "assets/vtuber-model/",
-    files: [
-      "model-1.png",
-      "model-2.png",
-      "model-3.png",
-      "model-4.png",
-      "model-5.png",
-      "model-6.png",
-      "model-7.png",
-      "model-8.png",
-      "model-9.png"
-    ]
-  },
 
-  logo: {
-    title: "LOGO DESIGNS",
-    subtitle: "CREATIVE BRAND IDENTITIES",
-    folder: "assets/logo/",
-    files: [
+  logo:{
+    title:"LOGO DESIGNS",
+    subtitle:"CREATIVE BRAND IDENTITIES",
+    folder:"assets/logo/",
+    files:[
       "logo-1.png",
       "logo-2.png",
       "logo-3.png",
@@ -887,11 +947,11 @@ const categories = {
     ]
   },
 
-  banner: {
-    title: "BANNER DESIGNS",
-    subtitle: "STREAM AND SOCIAL GRAPHICS",
-    folder: "assets/banner/",
-    files: [
+  banner:{
+    title:"BANNER DESIGNS",
+    subtitle:"STREAM AND SOCIAL GRAPHICS",
+    folder:"assets/banner/",
+    files:[
       "banner-1.png",
       "banner-2.png",
       "banner-3.png",
@@ -902,11 +962,11 @@ const categories = {
     ]
   },
 
-  emotes: {
-    title: "EMOTE DESIGNS",
-    subtitle: "EXPRESS YOURSELF",
-    folder: "assets/emotes/",
-    files: [
+  emotes:{
+    title:"EMOTE DESIGNS",
+    subtitle:"EXPRESS YOURSELF",
+    folder:"assets/emotes/",
+    files:[
       "emote-1.png",
       "emote-2.png",
       "emote-3.png",
@@ -914,206 +974,232 @@ const categories = {
     ]
   },
 
-  scene: {
-    title: "ART SCENES",
-    subtitle: "MY CREATIVE ARTWORK",
-    folder: "assets/art-scene/",
-    files: [
+  png:{
+    title:"PNG ARTWORK",
+    subtitle:"TRANSPARENT PNG COLLECTION",
+    folder:"assets/png/",
+    files:[
+      "png-1.png",
+      "png-2.png",
+      "png-3.png",
+      "png-4.png",
+      "png-5.png"
+    ]
+  },
+
+  model:{
+    title:"MODEL DESIGNS",
+    subtitle:"ORIGINAL MODEL COLLECTION",
+    folder:"assets/model/",
+    files:[
+      "model-1.png",
+      "model-2.png",
+      "model-3.png",
+      "model-4.png",
+      "model-5.png"
+    ]
+  },
+
+  character:{
+    title:"CHARACTER ART",
+    subtitle:"CHARACTER ILLUSTRATION COLLECTION",
+    folder:"assets/character-art/",
+    files:[
+      "character-1.png",
+      "character-2.png",
+      "character-3.png",
+      "character-4.png",
+      "character-5.png"
+    ]
+  },
+
+  scene:{
+    title:"ART SCENES",
+    subtitle:"MY CREATIVE ARTWORK",
+    folder:"assets/art-scene/",
+    files:[
       "scene-1.png",
       "scene-2.png",
-      "scene-3.png"
+      "scene-3.png",
+      "scene-4.png"
+    ]
+  },
+
+  room:{
+    title:"3D ROOM DESIGNS",
+    subtitle:"3D ENVIRONMENTS AND COZY SPACES",
+    folder:"assets/3d-room/",
+    files:[
+      "room-1.png",
+      "room-2.png",
+      "room-3.png",
+      "room-4.png"
     ]
   }
 };
 
 const doorGrid = document.getElementById("doorGrid");
 const doors = document.querySelectorAll(".door-item");
-const transitionScreen = document.getElementById("transitionScreen");
 const galleryPage = document.getElementById("galleryPage");
 const artGrid = document.getElementById("artGrid");
 
 let busy = false;
-let currentCategory = null;
 
-/* FLIP WHITE BOX TO SHOW FURRY ARTIST */
-
-document.getElementById("exploreButton").addEventListener("click", () => {
-  if (busy) return;
+/* EXPLORE BUTTON */
+document.getElementById("exploreButton").addEventListener("click",()=>{
+  if(busy)return;
 
   busy = true;
 
-  const card = document.getElementById("designerCard");
-  card.classList.add("flipped");
+  document.getElementById("designerCard").classList.add("flipped");
 
-  /* Let the flip finish, then move to the doors */
-  setTimeout(() => {
-    document.querySelector(".hero").style.display = "none";
-
+  setTimeout(()=>{
     document.getElementById("portfolio").scrollIntoView({
-      behavior: "instant",
-      block: "start"
+      behavior:"smooth",
+      block:"start"
     });
-
     busy = false;
-  }, 1100);
+  },900);
 });
 
-/* HOVER EFFECT */
+/* DOOR HOVER AND CLICK */
+doors.forEach(item=>{
 
-doors.forEach(door => {
-  door.addEventListener("mouseenter", () => {
-    if (busy) return;
+  item.addEventListener("mouseenter",()=>{
+    if(busy)return;
 
     doorGrid.classList.add("has-hover");
-    doors.forEach(item => item.classList.remove("selected"));
-    door.classList.add("selected");
+
+    doors.forEach(d=>d.classList.remove("selected"));
+
+    item.classList.add("selected");
   });
+
+  item.querySelector(".door").addEventListener("click",()=>{
+    openGallery(item.dataset.category,item);
+  });
+
 });
 
-doorGrid.addEventListener("mouseleave", () => {
+/* REMOVE HOVER WHEN MOUSE LEAVES */
+doorGrid.addEventListener("mouseleave",()=>{
   doorGrid.classList.remove("has-hover");
-  doors.forEach(item => item.classList.remove("selected"));
+
+  doors.forEach(d=>d.classList.remove("selected"));
 });
 
-/* OPEN CATEGORY PAGE */
+/* OPEN SELECTED DOOR AND SHOW GALLERY */
+function openGallery(key,item){
 
-function openGallery(categoryKey, doorElement) {
-  if (busy) return;
+  if(busy)return;
 
-  const category = categories[categoryKey];
-  if (!category) return;
+  const cat = categories[key];
+
+  if(!cat)return;
 
   busy = true;
-  currentCategory = categoryKey;
 
-  /* Remove hover effects while opening */
   doorGrid.classList.remove("has-hover");
-  doors.forEach(item => item.classList.remove("selected"));
 
-  /* Find the selected door position */
-  const door = doorElement.querySelector(".door");
-  const rect = door.getBoundingClientRect();
+  doors.forEach(d=>d.classList.remove("selected"));
 
-  const centerX = rect.left + rect.width / 2;
-  const centerY = rect.top + rect.height / 2;
+  item.classList.add("opening");
 
-  const xPercent = (centerX / window.innerWidth) * 100;
-  const yPercent = (centerY / window.innerHeight) * 100;
+  /*
+    Door opens first.
+    Gallery appears directly after the door animation.
+    No purple flash or extra zoom transition.
+  */
 
-  transitionScreen.style.setProperty("--zoom-x", xPercent + "%");
-  transitionScreen.style.setProperty("--zoom-y", yPercent + "%");
+  setTimeout(()=>{
 
-  /* Door opens inward */
-  doorElement.classList.add("opening");
+    document.getElementById("galleryTitle").textContent = cat.title;
 
-  /* Camera zooms through the open door */
-  setTimeout(() => {
-    transitionScreen.classList.add("active");
-  }, 1050);
-
-  /* Prepare gallery while transition is happening */
-  setTimeout(() => {
-    document.getElementById("galleryTitle").textContent = category.title;
-    document.getElementById("gallerySubtitle").textContent = category.subtitle;
+    document.getElementById("gallerySubtitle").textContent = cat.subtitle;
 
     artGrid.innerHTML = "";
 
-    category.files.forEach((filename, index) => {
+    cat.files.forEach((file,i)=>{
+
       const card = document.createElement("article");
       card.className = "art-card";
-      card.style.animationDelay = (index * 0.08) + "s";
 
-      const image = document.createElement("img");
-      image.src = category.folder + filename;
-      image.alt = category.title + " artwork " + (index + 1);
+      const img = document.createElement("img");
 
-      const caption = document.createElement("p");
-      caption.textContent = "ARTWORK " + String(index + 1).padStart(2, "0");
+      img.src = cat.folder + file;
+      img.alt = cat.title + " artwork " + (i+1);
 
-      image.onerror = () => {
+      const p = document.createElement("p");
+
+      p.textContent = "ARTWORK " + String(i+1).padStart(2,"0");
+
+      img.onerror = ()=>{
+
         card.remove();
 
-        if (artGrid.querySelectorAll(".art-card").length === 0) {
+        if(!artGrid.querySelector(".art-card")){
+
           artGrid.innerHTML =
-            '<div class="no-art">No artwork found yet.<br>Please check the image folder and filenames.</div>';
+            '<div class="no-art">No artwork found yet.<br>Check the image folder and filenames.</div>';
+
         }
+
       };
 
-      card.appendChild(image);
-      card.appendChild(caption);
-      artGrid.appendChild(card);
+      card.append(img,p);
+
+      artGrid.append(card);
+
     });
 
-    /* Hide original page sections */
-    document.querySelector(".hero").style.display = "none";
-    document.querySelector(".portfolio").style.display = "none";
-    document.querySelector(".about").style.display = "none";
-    document.querySelector(".contact").style.display = "none";
-    document.querySelector("footer").style.display = "none";
+    /* HIDE OTHER SECTIONS */
+    [".hero",".portfolio",".about",".contact","footer"].forEach(sel=>{
+      document.querySelector(sel).style.display = "none";
+    });
 
     galleryPage.classList.add("visible");
 
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({
+      top:0,
+      behavior:"instant"
+    });
 
-    /* Let the camera transition finish */
-    setTimeout(() => {
-      transitionScreen.classList.remove("active");
-      busy = false;
-    }, 700);
+    item.classList.remove("opening");
 
-  }, 2200);
+    busy = false;
+
+  },720);
+
 }
 
-/* DOOR CLICK */
-
-doors.forEach(door => {
-  door.querySelector(".door").addEventListener("click", () => {
-    openGallery(door.dataset.category, door);
-  });
-});
-
 /* BACK TO DOORS */
+document.getElementById("backButton").addEventListener("click",()=>{
 
-document.getElementById("backButton").addEventListener("click", () => {
-  if (busy) return;
+  if(busy)return;
 
   busy = true;
 
-  transitionScreen.style.setProperty("--zoom-x", "50%");
-  transitionScreen.style.setProperty("--zoom-y", "50%");
-  transitionScreen.classList.add("active");
+  galleryPage.classList.remove("visible");
 
-  setTimeout(() => {
-    galleryPage.classList.remove("visible");
+  [".hero",".portfolio",".about",".contact","footer"].forEach(sel=>{
+    document.querySelector(sel).style.display = "";
+  });
 
-    document.querySelector(".hero").style.display = "";
-    document.querySelector(".portfolio").style.display = "";
-    document.querySelector(".about").style.display = "";
-    document.querySelector(".contact").style.display = "";
-    document.querySelector("footer").style.display = "";
+  doors.forEach(d=>{
+    d.classList.remove("opening","selected");
+  });
 
-    /* Reset every door */
-    doors.forEach(door => {
-      door.classList.remove("opening");
-      door.classList.remove("selected");
-    });
+  doorGrid.classList.remove("has-hover");
 
-    doorGrid.classList.remove("has-hover");
+  window.scrollTo({
+    top:document.getElementById("portfolio").offsetTop,
+    behavior:"instant"
+  });
 
-    window.scrollTo({
-      top: document.getElementById("portfolio").offsetTop,
-      behavior: "instant"
-    });
+  busy = false;
 
-    setTimeout(() => {
-      transitionScreen.classList.remove("active");
-      busy = false;
-    }, 700);
-
-  }, 1500);
 });
 </script>
 
 </body>
 </html>
-```
