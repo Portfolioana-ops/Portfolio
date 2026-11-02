@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,10 +114,10 @@ button, a { font: inherit; }
 .hero h1 {
   font-family: "Cormorant Garamond", serif;
   font-weight: 400;
-  font-size: clamp(65px, 13vw, 145px);
+  font-size: clamp(75px, 14vw, 160px);
   line-height: 1;
   margin: 25px 0;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
   text-shadow: 0 0 55px #e4a5d955;
 }
 
@@ -125,18 +126,60 @@ button, a { font: inherit; }
   font-style: italic;
 }
 
-/* WHITE DESIGNER BOX */
+/* WHITE FLIPPING BOX */
 
 .hero-sub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.designer-card {
+  width: 205px;
+  height: 48px;
+  position: relative;
+  perspective: 900px;
   display: inline-block;
+}
+
+.designer-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(.7,0,.2,1);
+}
+
+.designer-card.flipped .designer-card-inner {
+  transform: rotateY(180deg);
+}
+
+.designer-front,
+.designer-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
   background: #fff;
   color: #24152c;
-  padding: 15px 30px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  box-shadow: 0 0 35px #e9b3d944;
+  padding: 8px;
+}
+
+.designer-back {
+  background: var(--pink);
+  transform: rotateY(180deg);
+  color: #24152c;
 }
 
 .hero-button {
@@ -183,119 +226,6 @@ button, a { font: inherit; }
 
 @keyframes float {
   to { transform: translate(60px, -45px) scale(1.2); }
-}
-
-/* SECOND PAGE - FURRY ARTIST */
-
-.artist-page {
-  min-height: 100vh;
-  display: none;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  overflow: hidden;
-  padding: 100px 20px;
-  background:
-    radial-gradient(ellipse at 50% 45%, #754b8066, transparent 55%),
-    linear-gradient(135deg, #100b16, #2c1935 55%, #100b16);
-}
-
-.artist-page.visible {
-  display: flex;
-  animation: artistPageIn 1.2s ease both;
-}
-
-@keyframes artistPageIn {
-  from {
-    opacity: 0;
-    transform: perspective(1400px) rotateY(-90deg);
-    transform-origin: left center;
-  }
-  to {
-    opacity: 1;
-    transform: perspective(1400px) rotateY(0);
-  }
-}
-
-.artist-page::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .15;
-  background-image: radial-gradient(#fff 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-.artist-content {
-  position: relative;
-  z-index: 2;
-}
-
-.artist-content h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(65px, 13vw, 145px);
-  font-weight: 400;
-  color: var(--pink);
-  text-shadow: 0 0 55px #e4a5d955;
-  margin: 25px 0;
-}
-
-.artist-content p {
-  color: #d4c5d8;
-  font-size: 11px;
-  letter-spacing: 4px;
-}
-
-.artist-back {
-  margin-top: 45px;
-  padding: 15px 30px;
-  border: 1px solid #d8a7ce;
-  background: transparent;
-  color: white;
-  font-size: 9px;
-  letter-spacing: 3px;
-  cursor: pointer;
-  transition: .4s;
-}
-
-.artist-back:hover {
-  background: var(--pink);
-  color: #180f20;
-  box-shadow: 0 0 35px #e5a4d677;
-}
-
-/* PAGE FLIP TRANSITION */
-
-.page-flip {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  pointer-events: none;
-  background: linear-gradient(110deg, #100b16, #4b2c50, #100b16);
-  transform: perspective(1500px) rotateY(90deg);
-  transform-origin: left center;
-  opacity: 0;
-}
-
-.page-flip.active {
-  animation: flipPage 1.15s ease-in-out forwards;
-}
-
-@keyframes flipPage {
-  0% {
-    opacity: 1;
-    transform: perspective(1500px) rotateY(90deg);
-  }
-  45% {
-    opacity: 1;
-    transform: perspective(1500px) rotateY(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: perspective(1500px) rotateY(-90deg);
-  }
 }
 
 /* DOOR LANDING PAGE */
@@ -362,19 +292,6 @@ button, a { font: inherit; }
     0 20px 45px #000b;
 }
 
-/* LIGHT BEHIND THE OPEN DOOR */
-
-.door-frame::after {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse at center, #f4c5ec 0%, #b56eb5 20%, #60386f 48%, #170e22 80%);
-  box-shadow: 0 0 55px #e9a5dc;
-  opacity: .85;
-}
-
 .door-frame::before {
   content: "";
   position: absolute;
@@ -384,6 +301,18 @@ button, a { font: inherit; }
   z-index: 4;
 }
 
+/* LIGHT INSIDE THE DOORWAY */
+
+.door-frame::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at center, #f9d9f3, #b56eb5 25%, #60386f 60%, #170e22 100%);
+  box-shadow: inset 0 0 55px #e9a5dc;
+}
+
 .door {
   width: 100%;
   height: 100%;
@@ -391,7 +320,7 @@ button, a { font: inherit; }
   z-index: 2;
   transform-origin: left center;
   transform-style: preserve-3d;
-  backface-visibility: visible;
+  backface-visibility: hidden;
   border: 2px solid #9a7659;
   color: white;
   cursor: pointer;
@@ -429,15 +358,15 @@ button, a { font: inherit; }
   box-shadow: inset 0 0 35px #f2b6e644, 0 0 25px #d28acb55;
 }
 
-/* DOOR OPENS INWARD */
+/* OPEN INWARD */
 
 .door-item.opening .door {
-  transform: rotateY(-112deg);
-  filter: brightness(.65);
+  transform: rotateY(-110deg);
+  filter: brightness(.75);
 }
 
 .door-item.opening .door-frame {
-  box-shadow: 0 0 60px #e9a5dc88, 0 20px 45px #000b;
+  box-shadow: 0 0 65px #e9a5dc88, 0 20px 45px #000b;
 }
 
 .door-num {
@@ -507,18 +436,14 @@ button, a { font: inherit; }
   box-shadow: 0 0 0 2px #d9b2a0, 0 0 50px #e9a5dc55, 0 25px 55px #000c;
 }
 
-/* CINEMATIC CAMERA TRANSITION */
+/* CINEMATIC CAMERA ENTERING DOOR */
 
 .transition-screen {
   position: fixed;
   inset: 0;
   z-index: 100;
   background:
-    radial-gradient(ellipse at var(--zoom-x, 50%) var(--zoom-y, 50%),
-      #f9d9f3 0%,
-      #b56eb5 12%,
-      #60386f 32%,
-      #100b16 75%);
+    radial-gradient(ellipse at center, #f9d9f3 0%, #b56eb5 12%, #60386f 35%, #100b16 75%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -526,9 +451,9 @@ button, a { font: inherit; }
   visibility: hidden;
   clip-path: circle(0% at var(--zoom-x, 50%) var(--zoom-y, 50%));
   transition:
-    clip-path 1.3s cubic-bezier(.7,0,.2,1),
-    opacity .3s,
-    visibility .3s;
+    clip-path 1.45s cubic-bezier(.7,0,.2,1),
+    opacity .2s,
+    visibility .2s;
 }
 
 .transition-screen.active {
@@ -724,17 +649,49 @@ footer {
   .nav { padding: 0 4%; }
   .nav-links { gap: 11px; }
   .nav-links a { font-size: 8px; }
-  .door-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 15px; }
+
+  .hero-sub {
+    gap: 7px;
+    font-size: 11px;
+  }
+
+  .designer-card {
+    width: 175px;
+    height: 44px;
+  }
+
+  .designer-front, .designer-back {
+    font-size: 9px;
+  }
+
+  .door-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 15px;
+  }
+
   .door-frame { height: 330px; }
   .door strong { font-size: 22px; }
-  .art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+  .art-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
   .art-card img { height: 180px; }
-  .gallery-top { align-items: flex-start; flex-direction: column; }
+
+  .gallery-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .gallery-heading { text-align: left; }
 }
 
 @media(max-width:380px) {
-  .door-grid { grid-template-columns: 1fr; max-width: 260px; }
+  .door-grid {
+    grid-template-columns: 1fr;
+    max-width: 260px;
+  }
 }
 </style>
 </head>
@@ -751,7 +708,7 @@ footer {
   </div>
 </nav>
 
-<!-- FIRST PAGE -->
+<!-- HOME PAGE -->
 
 <section class="hero" id="home">
   <div class="glow one"></div>
@@ -759,34 +716,26 @@ footer {
 
   <div class="hero-content">
     <p class="kicker">✦ WELCOME TO MY WORLD ✦</p>
+
     <h1>Hi, I'm <span>ANNA</span></h1>
-    <p class="hero-sub">I'm a Graphic Designer</p>
-    <br>
-    <button class="hero-button" onclick="showArtistPage()">
-      TURN THE PAGE ↓
+
+    <div class="hero-sub">
+      <span>I'm</span>
+
+      <div class="designer-card" id="designerCard">
+        <div class="designer-card-inner">
+          <div class="designer-front">GRAPHIC DESIGNER</div>
+          <div class="designer-back">FURRY ARTIST</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="hero-button" id="exploreButton">
+      EXPLORE MY WORLD ↓
     </button>
   </div>
 
   <p class="hero-bottom">ART · DESIGN · IMAGINATION</p>
-</section>
-
-<!-- SECOND PAGE - FURRY ARTIST -->
-
-<section class="artist-page" id="artistPage">
-  <div class="glow one"></div>
-  <div class="glow two"></div>
-
-  <div class="artist-content">
-    <p class="kicker">✦ A LITTLE MORE ABOUT ME ✦</p>
-    <h2>Furry Artist</h2>
-    <p>DIGITAL ARTIST · VTUBER DESIGNER · CREATOR</p>
-
-    <button class="artist-back" onclick="enterPortfolio()">
-      ENTER MY PORTFOLIO ↗
-    </button>
-  </div>
-
-  <p class="hero-bottom">WELCOME TO MY CREATIVE UNIVERSE</p>
 </section>
 
 <!-- DOORS PAGE -->
@@ -898,10 +847,8 @@ footer {
 
 <footer>© 2026 ANNA · DIGITAL ARTIST</footer>
 
-<!-- PAGE FLIP -->
-<div class="page-flip" id="pageFlip"></div>
+<!-- CINEMATIC TRANSITION -->
 
-<!-- CINEMATIC DOOR TRANSITION -->
 <div class="transition-screen" id="transitionScreen">
   <div class="transition-text">ENTERING ANNA'S WORLD ✦</div>
 </div>
@@ -984,63 +931,32 @@ const doors = document.querySelectorAll(".door-item");
 const transitionScreen = document.getElementById("transitionScreen");
 const galleryPage = document.getElementById("galleryPage");
 const artGrid = document.getElementById("artGrid");
-const pageFlip = document.getElementById("pageFlip");
 
 let busy = false;
+let currentCategory = null;
 
-/* FIRST PAGE TO FURRY ARTIST PAGE */
+/* FLIP WHITE BOX TO SHOW FURRY ARTIST */
 
-function showArtistPage() {
+document.getElementById("exploreButton").addEventListener("click", () => {
   if (busy) return;
 
   busy = true;
-  pageFlip.classList.remove("active");
 
-  void pageFlip.offsetWidth;
-  pageFlip.classList.add("active");
+  const card = document.getElementById("designerCard");
+  card.classList.add("flipped");
 
+  /* Let the flip finish, then move to the doors */
   setTimeout(() => {
     document.querySelector(".hero").style.display = "none";
 
-    const artistPage = document.getElementById("artistPage");
-    artistPage.classList.add("visible");
-
-    window.scrollTo({ top: 0, behavior: "instant" });
-
-    setTimeout(() => {
-      pageFlip.classList.remove("active");
-      busy = false;
-    }, 350);
-
-  }, 550);
-}
-
-/* FURRY ARTIST PAGE TO DOORS */
-
-function enterPortfolio() {
-  if (busy) return;
-
-  busy = true;
-  pageFlip.classList.remove("active");
-
-  void pageFlip.offsetWidth;
-  pageFlip.classList.add("active");
-
-  setTimeout(() => {
-    document.getElementById("artistPage").classList.remove("visible");
-
-    document.querySelector(".portfolio").scrollIntoView({
+    document.getElementById("portfolio").scrollIntoView({
       behavior: "instant",
       block: "start"
     });
 
-    setTimeout(() => {
-      pageFlip.classList.remove("active");
-      busy = false;
-    }, 350);
-
-  }, 550);
-}
+    busy = false;
+  }, 1100);
+});
 
 /* HOVER EFFECT */
 
@@ -1059,24 +975,24 @@ doorGrid.addEventListener("mouseleave", () => {
   doors.forEach(item => item.classList.remove("selected"));
 });
 
-/* OPEN CATEGORY PAGE WITH DOOR ANIMATION */
+/* OPEN CATEGORY PAGE */
 
 function openGallery(categoryKey, doorElement) {
   if (busy) return;
 
   const category = categories[categoryKey];
-
   if (!category) return;
 
   busy = true;
+  currentCategory = categoryKey;
 
-  /* OPEN THE SELECTED DOOR INWARD */
+  /* Remove hover effects while opening */
+  doorGrid.classList.remove("has-hover");
+  doors.forEach(item => item.classList.remove("selected"));
 
-  doorElement.classList.add("opening");
-
-  /* CAMERA ZOOM STARTS FROM THE SELECTED DOOR */
-
-  const rect = doorElement.querySelector(".door").getBoundingClientRect();
+  /* Find the selected door position */
+  const door = doorElement.querySelector(".door");
+  const rect = door.getBoundingClientRect();
 
   const centerX = rect.left + rect.width / 2;
   const centerY = rect.top + rect.height / 2;
@@ -1087,12 +1003,15 @@ function openGallery(categoryKey, doorElement) {
   transitionScreen.style.setProperty("--zoom-x", xPercent + "%");
   transitionScreen.style.setProperty("--zoom-y", yPercent + "%");
 
+  /* Door opens inward */
+  doorElement.classList.add("opening");
+
+  /* Camera zooms through the open door */
   setTimeout(() => {
     transitionScreen.classList.add("active");
-  }, 850);
+  }, 1050);
 
-  /* GALLERY APPEARS AFTER CAMERA ENTERS */
-
+  /* Prepare gallery while transition is happening */
   setTimeout(() => {
     document.getElementById("galleryTitle").textContent = category.title;
     document.getElementById("gallerySubtitle").textContent = category.subtitle;
@@ -1125,8 +1044,8 @@ function openGallery(categoryKey, doorElement) {
       artGrid.appendChild(card);
     });
 
+    /* Hide original page sections */
     document.querySelector(".hero").style.display = "none";
-    document.getElementById("artistPage").classList.remove("visible");
     document.querySelector(".portfolio").style.display = "none";
     document.querySelector(".about").style.display = "none";
     document.querySelector(".contact").style.display = "none";
@@ -1136,12 +1055,13 @@ function openGallery(categoryKey, doorElement) {
 
     window.scrollTo({ top: 0, behavior: "instant" });
 
+    /* Let the camera transition finish */
     setTimeout(() => {
       transitionScreen.classList.remove("active");
       busy = false;
-    }, 450);
+    }, 700);
 
-  }, 2050);
+  }, 2200);
 }
 
 /* DOOR CLICK */
@@ -1167,14 +1087,12 @@ document.getElementById("backButton").addEventListener("click", () => {
     galleryPage.classList.remove("visible");
 
     document.querySelector(".hero").style.display = "";
-    document.getElementById("artistPage").classList.remove("visible");
     document.querySelector(".portfolio").style.display = "";
     document.querySelector(".about").style.display = "";
     document.querySelector(".contact").style.display = "";
     document.querySelector("footer").style.display = "";
 
-    /* RESET DOORS */
-
+    /* Reset every door */
     doors.forEach(door => {
       door.classList.remove("opening");
       door.classList.remove("selected");
@@ -1190,11 +1108,12 @@ document.getElementById("backButton").addEventListener("click", () => {
     setTimeout(() => {
       transitionScreen.classList.remove("active");
       busy = false;
-    }, 450);
+    }, 700);
 
-  }, 650);
+  }, 1500);
 });
 </script>
 
 </body>
 </html>
+```
