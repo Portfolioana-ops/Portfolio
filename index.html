@@ -4,232 +4,927 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anna | Creative Portfolio</title>
+<title>ANNA — Digital Artist</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:#100b19;color:#f7eaf5;font-family:Montserrat,sans-serif;overflow-x:hidden}
-:root{--pink:#efa9dc;--purple:#a98ae8}
+:root {
+  --bg: #100b16;
+  --pink: #e9b3d9;
+  --gold: #c9a879;
+  --muted: #b9a9bd;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: #f8eff7;
+  font-family: Montserrat, sans-serif;
+  overflow-x: hidden;
+}
+
+button, a { font: inherit; }
 
 /* NAVIGATION */
-nav{position:absolute;top:0;width:100%;height:75px;padding:0 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff20;z-index:20}
-.logo{font-size:20px;letter-spacing:5px;font-weight:800;color:white;text-decoration:none}
-.logo span{color:var(--pink)}
-.navlinks{display:flex;gap:28px}
-.navlinks a{color:#ead8ec;text-decoration:none;font-size:10px;letter-spacing:2px;transition:.3s}
-.navlinks a:hover{color:var(--pink)}
 
-/* HERO PAGE */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at center,#492c59 0%,#21132c 40%,#100b19 78%)}
-.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:55px 55px;opacity:.2}
-.hero-content{position:relative;z-index:2;padding:20px}
-.eyebrow{font-size:10px;letter-spacing:5px;color:var(--pink)}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(85px,16vw,180px);font-weight:500;letter-spacing:7px;margin:20px 0;text-shadow:0 0 45px #d88bc755}
-.hero h1 span{color:var(--pink);font-style:italic}
-.hero-sub{font-size:13px;letter-spacing:2px;color:#d7c4dc}
-.enter{display:inline-block;margin-top:45px;padding:16px 30px;border:1px solid #e9a6d6;color:white;text-decoration:none;font-size:10px;letter-spacing:3px;transition:.4s}
-.enter:hover{background:var(--pink);color:#160d20;box-shadow:0 0 30px #e9a6d688;transform:translateY(-4px)}
-.hero-foot{position:absolute;bottom:30px;font-size:9px;letter-spacing:5px;color:#a995b3}
-.glow{position:absolute;width:300px;height:300px;border-radius:50%;filter:blur(100px);opacity:.3;animation:float 8s infinite alternate}
-.glow.one{background:#dc70d3;left:-100px;top:15%}
-.glow.two{background:#7563e8;right:-100px;bottom:5%}
-@keyframes float{to{transform:translate(60px,-50px) scale(1.2)}}
-
-/* PORTFOLIO */
-.portfolio{padding:110px 5% 100px;min-height:100vh;background:radial-gradient(ellipse at center,#392043,#100b19 70%)}
-.heading{text-align:center;margin-bottom:70px}
-.heading h2,.about h2,.contact h2{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,65px);font-weight:500;margin:15px 0}
-.heading h2 span,.about h2 span,.contact h2 span{color:var(--pink);font-style:italic}
-.heading p:last-child{font-size:12px;color:#c4b0ca}
-
-/* DOOR GRID */
-.door-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;perspective:1500px}
-.door-card{min-width:0;position:relative;z-index:1}
-.door-card.active{z-index:10}
-.door-room{height:390px;position:relative;perspective:1100px;background:#08060d;border:6px solid #513755;box-shadow:0 0 0 2px #c18acb55,0 20px 40px #0009,inset 0 0 30px #d38bc522}
-.door-room:after{content:"";position:absolute;inset:8px;border:1px solid #d9a9d577;pointer-events:none;z-index:4}
-
-/* CONTENT INSIDE THE DOOR */
-.inside-gallery{position:absolute;inset:12px;background:radial-gradient(ellipse,#6b426d,#170e21 75%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:12px;overflow-y:auto;opacity:0;transition:opacity .8s .35s;z-index:1}
-.door-card.active .inside-gallery{opacity:1}
-.inside-gallery img{width:100%;max-height:145px;object-fit:contain;border:1px solid #e5addc88;background:#ffffff0c}
-.art-caption{font-size:8px;color:#f5d6ee;text-align:center}
-.empty{font-size:10px;text-align:center;color:#f3d2ee;line-height:1.8}
-
-/* THE DOOR ITSELF */
-.door-face{position:absolute;inset:0;width:100%;height:100%;border:2px solid #a87ba0;cursor:pointer;transform-origin:left center;transform-style:preserve-3d;transition:transform 1.2s cubic-bezier(.2,.75,.2,1),filter .4s;background:linear-gradient(90deg,#ffffff0b,transparent 25%,#0003),repeating-linear-gradient(90deg,transparent 0 35px,#ffffff08 36px 38px),linear-gradient(135deg,#69436c,#291a38 55%,#603653);box-shadow:inset 0 0 0 8px #180f22,inset 0 0 0 10px #bd8bb255,8px 8px 20px #000a;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;z-index:3}
-.door-face:before{content:"";position:absolute;inset:20px;border:1px solid #e9b7df88;pointer-events:none}
-.door-face:hover{filter:brightness(1.3)}
-.door-card.active .door-face{transform:rotateY(-110deg);filter:brightness(.75)}
-.door-number{position:absolute;top:38px;font-size:10px;letter-spacing:4px;color:#f3c1e8}
-.door-symbol{font-size:38px;color:#f6c8ed;text-shadow:0 0 20px #ffb6ef}
-.door-face strong{font-family:'Cormorant Garamond',serif;font-size:27px;line-height:1.1;letter-spacing:2px;text-shadow:0 3px 10px #000}
-.door-face small{font-size:8px;letter-spacing:2px;color:#f2bde7}
-.knob{position:absolute;right:18px;top:50%;height:11px;width:11px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff2c9,#c58d58 60%,#71432e);box-shadow:0 0 12px #f6c38d88}
-.door-caption{text-align:center;margin-top:18px;font-size:10px;letter-spacing:2px;color:#e8c8e5}
-.hint{text-align:center;margin-top:55px;font-size:9px;letter-spacing:4px;color:#bd9bbc}
-
-/* OTHER SECTIONS */
-.about,.contact{text-align:center;padding:110px 20px;background:#170f21}
-.about p:last-child{max-width:650px;margin:20px auto;color:#cdbbd3;font-size:13px;line-height:2}
-.contact{background:linear-gradient(135deg,#291632,#100b19)}
-.contact a{display:inline-block;margin-top:25px;padding:16px 28px;border:1px solid var(--pink);color:white;text-decoration:none;font-size:10px;letter-spacing:3px;transition:.3s}
-.contact a:hover{background:var(--pink);color:#160d20}
-footer{text-align:center;padding:25px;background:#09060e;color:#a38aa8;font-size:9px;letter-spacing:3px}
-
-/* RESPONSIVE */
-@media(max-width:1000px){.door-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:650px){
- nav{padding:0 4%}
- .navlinks{gap:11px}
- .navlinks a{font-size:8px;letter-spacing:1px}
- .door-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 14px}
- .door-room{height:340px}
- .door-face strong{font-size:22px}
- .portfolio{padding-left:4%;padding-right:4%}
+.nav {
+  height: 76px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 20;
+  border-bottom: 1px solid #ffffff18;
 }
-@media(max-width:380px){.door-grid{grid-template-columns:1fr;max-width:260px}.door-room{height:390px}}
+
+.logo {
+  color: white;
+  font-family: Cinzel, serif;
+  letter-spacing: 5px;
+  font-size: 19px;
+  text-decoration: none;
+}
+
+.logo span { color: var(--pink); }
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: #e6d8e7;
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 2px;
+  transition: .3s;
+}
+
+.nav-links a:hover { color: var(--pink); }
+
+/* INTRO PAGE */
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%, #65416d66, transparent 55%),
+    linear-gradient(135deg, #100b16, #24152c 55%, #100b16);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .15;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: heroEnter 1.5s ease both;
+}
+
+@keyframes heroEnter {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.kicker {
+  color: var(--pink);
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.hero h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-size: clamp(85px, 16vw, 180px);
+  line-height: 1;
+  margin: 25px 0;
+  letter-spacing: 7px;
+  text-shadow: 0 0 55px #e4a5d955;
+}
+
+.hero h1 span {
+  color: var(--pink);
+  font-style: italic;
+}
+
+.hero-sub {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #d4c5d8;
+}
+
+.hero-button {
+  display: inline-block;
+  margin-top: 42px;
+  padding: 16px 30px;
+  border: 1px solid #d8a7ce;
+  color: white;
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 3px;
+  transition: .4s;
+}
+
+.hero-button:hover {
+  background: var(--pink);
+  color: #180f20;
+  box-shadow: 0 0 35px #e5a4d677;
+  transform: translateY(-4px);
+}
+
+.hero-bottom {
+  position: absolute;
+  bottom: 30px;
+  color: #b49dbb;
+  font-size: 9px;
+  letter-spacing: 5px;
+}
+
+.glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .2;
+  animation: float 8s ease-in-out infinite alternate;
+}
+
+.glow.one { background: #e77bd3; top: 10%; left: -120px; }
+.glow.two { background: #7965e5; bottom: 0; right: -120px; animation-delay: -3s; }
+
+@keyframes float {
+  to { transform: translate(60px, -45px) scale(1.2); }
+}
+
+/* DOOR LANDING PAGE */
+
+.portfolio {
+  min-height: 100vh;
+  padding: 115px 5% 100px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 50%, #422749, transparent 70%),
+    #100b16;
+  overflow: hidden;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 75px;
+}
+
+.section-heading h2 {
+  font-family: Cinzel, serif;
+  font-size: clamp(30px, 5vw, 55px);
+  font-weight: 400;
+  margin: 18px 0;
+}
+
+.section-heading h2 span { color: var(--pink); }
+
+.section-heading p:last-child {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.door-grid {
+  max-width: 1250px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 22px;
+  align-items: center;
+}
+
+/* DOOR DESIGN */
+
+.door-item {
+  min-width: 0;
+  position: relative;
+  transition:
+    opacity .55s ease,
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    filter .5s ease;
+}
+
+.door-frame {
+  height: 390px;
+  position: relative;
+  padding: 9px;
+  background: linear-gradient(135deg, #b38b65, #493046 35%, #b18a67);
+  box-shadow:
+    0 0 0 2px #d4b08b44,
+    0 20px 45px #000b;
+}
+
+.door-frame::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #f0d1a477;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.door {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 2px solid #9a7659;
+  color: white;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background:
+    linear-gradient(90deg, #ffffff12, transparent 20%, #0004),
+    repeating-linear-gradient(90deg, transparent 0 35px, #ffffff0a 36px 38px),
+    linear-gradient(145deg, #62405d, #24172e 50%, #68435b);
+  box-shadow:
+    inset 0 0 0 8px #1b1220,
+    inset 0 0 0 10px #b9918955;
+  transition: filter .4s, transform .4s;
+}
+
+.door::before,
+.door::after {
+  content: "";
+  position: absolute;
+  border: 1px solid #dfb5d477;
+  pointer-events: none;
+}
+
+.door::before { inset: 20px; }
+.door::after { inset: 30px 35px; }
+
+.door:hover {
+  filter: brightness(1.35);
+  box-shadow: inset 0 0 35px #f2b6e644, 0 0 25px #d28acb55;
+}
+
+.door-num {
+  position: absolute;
+  top: 38px;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: #eac3dd;
+}
+
+.door-icon {
+  font-size: 38px;
+  color: #f1c3e6;
+  text-shadow: 0 0 20px #f6b6ed;
+}
+
+.door strong {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-shadow: 0 3px 12px #000;
+}
+
+.door small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #edc1e5;
+}
+
+.door-knob {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff3c8, #bd8c55 60%, #70432c);
+  box-shadow: 0 0 12px #f5c58b;
+}
+
+.door-title {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #e8c9e4;
+}
+
+/* HOVER: ONLY ONE DOOR VISIBLE */
+
+.door-grid.has-hover .door-item:not(.selected) {
+  opacity: 0;
+  transform: scale(.72) translateY(30px);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.door-grid.has-hover .door-item.selected {
+  transform: scale(1.12);
+  filter: brightness(1.15);
+  z-index: 5;
+}
+
+.door-grid.has-hover .door-item.selected .door-frame {
+  box-shadow: 0 0 0 2px #d9b2a0, 0 0 50px #e9a5dc55, 0 25px 55px #000c;
+}
+
+/* PAGE TRANSITION */
+
+.transition-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #100b16;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  clip-path: circle(0% at 50% 50%);
+  transition:
+    clip-path .85s cubic-bezier(.7,0,.2,1),
+    opacity .4s,
+    visibility .4s;
+}
+
+.transition-screen.active {
+  opacity: 1;
+  visibility: visible;
+  clip-path: circle(150% at 50% 50%);
+}
+
+.transition-text {
+  text-align: center;
+  font-family: Cinzel, serif;
+  letter-spacing: 5px;
+  color: var(--pink);
+  font-size: 20px;
+  animation: transitionText 1s ease infinite alternate;
+}
+
+@keyframes transitionText {
+  to { opacity: .45; transform: scale(1.05); }
+}
+
+/* GALLERY PAGE */
+
+.gallery-page {
+  display: none;
+  min-height: 100vh;
+  padding: 115px 6% 90px;
+  background:
+    radial-gradient(ellipse at 50% 10%, #42264a, transparent 65%),
+    #100b16;
+  animation: galleryEnter .85s ease both;
+}
+
+.gallery-page.visible { display: block; }
+
+@keyframes galleryEnter {
+  from { opacity: 0; transform: translateY(35px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.gallery-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 55px;
+  gap: 20px;
+}
+
+.back-button {
+  border: 1px solid #d8a8cf;
+  background: transparent;
+  color: white;
+  padding: 13px 20px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.back-button:hover {
+  background: var(--pink);
+  color: #160d20;
+}
+
+.gallery-heading { text-align: center; }
+
+.gallery-heading h2 {
+  font-family: Cinzel, serif;
+  font-size: clamp(30px, 5vw, 60px);
+  font-weight: 400;
+  color: var(--pink);
+  margin: 12px 0;
+}
+
+.gallery-heading p {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+.art-grid {
+  max-width: 1250px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.art-card {
+  background: #1c1323;
+  border: 1px solid #a67b9b44;
+  padding: 12px;
+  overflow: hidden;
+  animation: artEnter .7s both;
+  transition: transform .4s, border-color .4s, box-shadow .4s;
+}
+
+.art-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--pink);
+  box-shadow: 0 15px 35px #0008, 0 0 25px #d88bc522;
+}
+
+.art-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  display: block;
+  background: #100b16;
+}
+
+.art-card p {
+  text-align: center;
+  color: #e8c9e4;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 17px 5px 8px;
+}
+
+@keyframes artEnter {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.no-art {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--muted);
+  line-height: 2;
+}
+
+/* ABOUT & CONTACT */
+
+.about, .contact {
+  text-align: center;
+  padding: 100px 20px;
+  background: #191020;
+}
+
+.about h2, .contact h2 {
+  font-family: Cinzel, serif;
+  font-weight: 400;
+  font-size: clamp(30px, 5vw, 55px);
+  margin: 20px 0;
+}
+
+.about h2 span, .contact h2 span { color: var(--pink); }
+
+.about p:last-child {
+  max-width: 650px;
+  margin: 20px auto 0;
+  color: #cbb9d0;
+  font-size: 13px;
+  line-height: 2;
+}
+
+.contact { background: #120c19; }
+
+.contact a {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 15px 28px;
+  border: 1px solid var(--pink);
+  text-decoration: none;
+  color: white;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+.contact a:hover {
+  background: var(--pink);
+  color: #160d20;
+}
+
+footer {
+  padding: 25px;
+  background: #09060e;
+  color: #a48ba9;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px) {
+  .door-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media(max-width:650px) {
+  .nav { padding: 0 4%; }
+  .nav-links { gap: 11px; }
+  .nav-links a { font-size: 8px; }
+  .door-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 15px; }
+  .door-frame { height: 330px; }
+  .door strong { font-size: 22px; }
+  .art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .art-card img { height: 180px; }
+  .gallery-top { align-items: flex-start; flex-direction: column; }
+  .gallery-heading { text-align: left; }
+}
+
+@media(max-width:380px) {
+  .door-grid { grid-template-columns: 1fr; max-width: 260px; }
+}
 </style>
 </head>
 
 <body>
 
-<nav>
-<a href="#home" class="logo">ANNA<span>✦</span></a>
-<div class="navlinks">
-<a href="#home">HOME</a>
-<a href="#portfolio">PORTFOLIO</a>
-<a href="#about">ABOUT</a>
-<a href="#contact">CONTACT</a>
-</div>
+<nav class="nav">
+  <a href="#home" class="logo">ANNA<span> ✦</span></a>
+  <div class="nav-links">
+    <a href="#home">HOME</a>
+    <a href="#portfolio">PORTFOLIO</a>
+    <a href="#about">ABOUT</a>
+    <a href="#contact">CONTACT</a>
+  </div>
 </nav>
 
-<!-- FIRST PAGE -->
+<!-- HOME PAGE -->
+
 <section class="hero" id="home">
-<div class="glow one"></div>
-<div class="glow two"></div>
-<div class="hero-content">
-<p class="eyebrow">✦ DIGITAL ARTIST · VTUBER DESIGNER ✦</p>
-<h1>I'M <span>ANNA</span></h1>
-<p class="hero-sub">Welcome to my little creative universe.</p>
-<a href="#portfolio" class="enter">ENTER MY WORLD ↓</a>
-</div>
-<div class="hero-foot">ART · DESIGN · IMAGINATION</div>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <div class="hero-content">
+    <p class="kicker">✦ DIGITAL ARTIST · VTUBER DESIGNER ✦</p>
+    <h1>I'M <span>ANNA</span></h1>
+    <p class="hero-sub">Welcome to my little creative universe.</p>
+    <a href="#portfolio" class="hero-button">EXPLORE MY WORLD ↓</a>
+  </div>
+
+  <p class="hero-bottom">ART · DESIGN · IMAGINATION</p>
 </section>
 
-<!-- SECOND PAGE -->
+<!-- DOORS PAGE -->
+
 <section class="portfolio" id="portfolio">
-<div class="heading">
-<p class="eyebrow">A DOOR TO EVERY CREATION</p>
-<h2>EXPLORE MY <span>WORLD</span></h2>
-<p>Choose a door and discover what's inside.</p>
-</div>
+  <div class="section-heading">
+    <p class="kicker">A LITTLE WORLD OF CREATIVITY</p>
+    <h2>CHOOSE YOUR <span>DESTINATION</span></h2>
+    <p>Hover over a door and click to explore.</p>
+  </div>
 
-<div class="door-grid">
+  <div class="door-grid" id="doorGrid">
 
-<div class="door-card" data-type="vtuber">
-<div class="door-room">
-<div class="inside-gallery"></div>
-<button class="door-face"><span class="door-number">01</span><span class="door-symbol">✧</span><strong>VTUBER<br>MODEL</strong><small>OPEN DOOR ↗</small><i class="knob"></i></button>
-</div>
-<p class="door-caption">VTuber Model</p>
-</div>
+    <div class="door-item" data-category="vtuber">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-num">01</span>
+          <span class="door-icon">✧</span>
+          <strong>VTUBER<br>MODEL</strong>
+          <small>ENTER WORLD ↗</small>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">VTuber Models</p>
+    </div>
 
-<div class="door-card" data-type="logo">
-<div class="door-room">
-<div class="inside-gallery"></div>
-<button class="door-face"><span class="door-number">02</span><span class="door-symbol">✦</span><strong>LOGO<br>DESIGN</strong><small>OPEN DOOR ↗</small><i class="knob"></i></button>
-</div>
-<p class="door-caption">Logo Design</p>
-</div>
+    <div class="door-item" data-category="logo">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-num">02</span>
+          <span class="door-icon">✦</span>
+          <strong>LOGO<br>DESIGN</strong>
+          <small>ENTER WORLD ↗</small>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">Logo Designs</p>
+    </div>
 
-<div class="door-card" data-type="banner">
-<div class="door-room">
-<div class="inside-gallery"></div>
-<button class="door-face"><span class="door-number">03</span><span class="door-symbol">❋</span><strong>BANNER<br>DESIGN</strong><small>OPEN DOOR ↗</small><i class="knob"></i></button>
-</div>
-<p class="door-caption">Banners</p>
-</div>
+    <div class="door-item" data-category="banner">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-num">03</span>
+          <span class="door-icon">❋</span>
+          <strong>BANNER<br>DESIGN</strong>
+          <small>ENTER WORLD ↗</small>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">Banners</p>
+    </div>
 
-<div class="door-card" data-type="emotes">
-<div class="door-room">
-<div class="inside-gallery"></div>
-<button class="door-face"><span class="door-number">04</span><span class="door-symbol">♡</span><strong>EMOTE<br>DESIGN</strong><small>OPEN DOOR ↗</small><i class="knob"></i></button>
-</div>
-<p class="door-caption">Emotes</p>
-</div>
+    <div class="door-item" data-category="emotes">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-num">04</span>
+          <span class="door-icon">♡</span>
+          <strong>EMOTE<br>DESIGN</strong>
+          <small>ENTER WORLD ↗</small>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">Emotes</p>
+    </div>
 
-<div class="door-card" data-type="scene">
-<div class="door-room">
-<div class="inside-gallery"></div>
-<button class="door-face"><span class="door-number">05</span><span class="door-symbol">☾</span><strong>ART<br>SCENE</strong><small>OPEN DOOR ↗</small><i class="knob"></i></button>
-</div>
-<p class="door-caption">Art Scene</p>
-</div>
+    <div class="door-item" data-category="scene">
+      <div class="door-frame">
+        <button class="door" type="button">
+          <span class="door-num">05</span>
+          <span class="door-icon">☾</span>
+          <strong>ART<br>SCENE</strong>
+          <small>ENTER WORLD ↗</small>
+          <i class="door-knob"></i>
+        </button>
+      </div>
+      <p class="door-title">Art Scenes</p>
+    </div>
 
-</div>
-<p class="hint">✦ CLICK A DOOR TO OPEN IT ✦</p>
+  </div>
+</section>
+
+<!-- SEPARATE CATEGORY PAGE -->
+
+<section class="gallery-page" id="galleryPage">
+  <div class="gallery-top">
+    <button class="back-button" id="backButton">← BACK TO DOORS</button>
+
+    <div class="gallery-heading">
+      <p class="kicker">ANNA'S CREATIVE COLLECTION</p>
+      <h2 id="galleryTitle">VTUBER MODELS</h2>
+      <p id="gallerySubtitle">A COLLECTION OF MY WORK</p>
+    </div>
+  </div>
+
+  <div class="art-grid" id="artGrid"></div>
 </section>
 
 <section class="about" id="about">
-<p class="eyebrow">A LITTLE ABOUT ME</p>
-<h2>HELLO, I'M <span>ANNA</span></h2>
-<p>I'm a digital artist creating VTuber designs, logos, banners, emotes and creative visuals. Welcome to my portfolio!</p>
+  <p class="kicker">A LITTLE ABOUT ME</p>
+  <h2>HELLO, I'M <span>ANNA</span></h2>
+  <p>I'm a digital artist creating VTuber designs, logos, banners, emotes and creative visuals. Welcome to my portfolio!</p>
 </section>
 
 <section class="contact" id="contact">
-<p class="eyebrow">HAVE A PROJECT IN MIND?</p>
-<h2>LET'S CREATE SOMETHING <span>MAGICAL</span></h2>
-<a href="mailto:YOUR-EMAIL@example.com">CONTACT ME ↗</a>
+  <p class="kicker">HAVE A PROJECT IN MIND?</p>
+  <h2>LET'S CREATE SOMETHING <span>MAGICAL</span></h2>
+  <a href="mailto:YOUR-EMAIL@example.com">CONTACT ME ↗</a>
 </section>
 
 <footer>© 2026 ANNA · DIGITAL ARTIST</footer>
 
+<!-- TRANSITION -->
+<div class="transition-screen" id="transitionScreen">
+  <div class="transition-text">ENTERING ANNA'S WORLD ✦</div>
+</div>
+
 <script>
-const categories={
-vtuber:{folder:"assets/vtuber-model/",files:["model-1.png","model-2.png","model-3.png","model-4.png"]},
-logo:{folder:"assets/logo/",files:["logo-1.png","logo-2.png","logo-3.png","logo-4.png","logo-5.png"]},
-banner:{folder:"assets/banner/",files:["banner-1.png","banner-2.png","banner-3.png","banner-4.png","banner-5.png","banner-6.png","banner-7.png"]},
-emotes:{folder:"assets/emotes/",files:["emote-1.png","emote-2.png","emote-3.png","emote-4.png"]},
-scene:{folder:"assets/art-scene/",files:["scene-1.png","scene-2.png","scene-3.png"]}
+/* ARTWORK FILES */
+
+const categories = {
+  vtuber: {
+    title: "VTUBER MODELS",
+    subtitle: "CHARACTER DESIGN COLLECTION",
+    folder: "assets/vtuber-model/",
+    files: [
+      "model-1.png",
+      "model-2.png",
+      "model-3.png",
+      "model-4.png",
+      "model-5.png",
+      "model-6.png",
+      "model-7.png",
+      "model-8.png",
+      "model-9.png"
+    ]
+  },
+
+  logo: {
+    title: "LOGO DESIGNS",
+    subtitle: "CREATIVE BRAND IDENTITIES",
+    folder: "assets/logo/",
+    files: [
+      "logo-1.png",
+      "logo-2.png",
+      "logo-3.png",
+      "logo-4.png",
+      "logo-5.png"
+    ]
+  },
+
+  banner: {
+    title: "BANNER DESIGNS",
+    subtitle: "STREAM AND SOCIAL GRAPHICS",
+    folder: "assets/banner/",
+    files: [
+      "banner-1.png",
+      "banner-2.png",
+      "banner-3.png",
+      "banner-4.png",
+      "banner-5.png",
+      "banner-6.png",
+      "banner-7.png"
+    ]
+  },
+
+  emotes: {
+    title: "EMOTE DESIGNS",
+    subtitle: "EXPRESS YOURSELF",
+    folder: "assets/emotes/",
+    files: [
+      "emote-1.png",
+      "emote-2.png",
+      "emote-3.png",
+      "emote-4.png"
+    ]
+  },
+
+  scene: {
+    title: "ART SCENES",
+    subtitle: "MY CREATIVE ARTWORK",
+    folder: "assets/art-scene/",
+    files: [
+      "scene-1.png",
+      "scene-2.png",
+      "scene-3.png"
+    ]
+  }
 };
 
-document.querySelectorAll(".door-card").forEach(door=>{
-const button=door.querySelector(".door-face");
-const gallery=door.querySelector(".inside-gallery");
-const category=categories[door.dataset.type];
+const doorGrid = document.getElementById("doorGrid");
+const doors = document.querySelectorAll(".door-item");
+const transitionScreen = document.getElementById("transitionScreen");
+const galleryPage = document.getElementById("galleryPage");
+const artGrid = document.getElementById("artGrid");
 
-category.files.forEach((file,index)=>{
-const image=document.createElement("img");
-image.src=category.folder+file;
-image.alt=door.dataset.type+" artwork "+(index+1);
+let busy = false;
 
-const caption=document.createElement("p");
-caption.className="art-caption";
-caption.textContent="Artwork "+(index+1);
+/* HOVER EFFECT */
 
-const item=document.createElement("div");
-item.appendChild(image);
-item.appendChild(caption);
+doors.forEach(door => {
+  door.addEventListener("mouseenter", () => {
+    if (busy) return;
 
-image.onerror=()=>item.remove();
-gallery.appendChild(item);
+    doorGrid.classList.add("has-hover");
+    doors.forEach(item => item.classList.remove("selected"));
+    door.classList.add("selected");
+  });
 });
 
-button.addEventListener("click",()=>{
-const wasOpen=door.classList.contains("active");
-
-document.querySelectorAll(".door-card").forEach(other=>{
-other.classList.remove("active");
+doorGrid.addEventListener("mouseleave", () => {
+  doorGrid.classList.remove("has-hover");
+  doors.forEach(item => item.classList.remove("selected"));
 });
 
-if(!wasOpen){
-door.classList.add("active");
+/* OPEN CATEGORY PAGE */
+
+function openGallery(categoryKey) {
+  if (busy) return;
+
+  busy = true;
+
+  const category = categories[categoryKey];
+
+  if (!category) {
+    busy = false;
+    return;
+  }
+
+  transitionScreen.classList.add("active");
+
+  setTimeout(() => {
+    document.getElementById("galleryTitle").textContent = category.title;
+    document.getElementById("gallerySubtitle").textContent = category.subtitle;
+
+    artGrid.innerHTML = "";
+
+    let validImages = 0;
+
+    category.files.forEach((filename, index) => {
+      const card = document.createElement("article");
+      card.className = "art-card";
+      card.style.animationDelay = (index * 0.08) + "s";
+
+      const image = document.createElement("img");
+      image.src = category.folder + filename;
+      image.alt = category.title + " artwork " + (index + 1);
+
+      const caption = document.createElement("p");
+      caption.textContent = "ARTWORK " + String(index + 1).padStart(2, "0");
+
+      image.onload = () => {
+        validImages++;
+      };
+
+      image.onerror = () => {
+        card.remove();
+
+        if (artGrid.querySelectorAll(".art-card").length === 0) {
+          artGrid.innerHTML =
+            '<div class="no-art">No artwork found yet.<br>Please check the image folder and filenames.</div>';
+        }
+      };
+
+      card.appendChild(image);
+      card.appendChild(caption);
+      artGrid.appendChild(card);
+    });
+
+    document.querySelector(".hero").style.display = "none";
+    document.querySelector(".portfolio").style.display = "none";
+    document.querySelector(".about").style.display = "none";
+    document.querySelector(".contact").style.display = "none";
+    document.querySelector("footer").style.display = "none";
+    document.querySelector(".nav").style.position = "absolute";
+
+    galleryPage.classList.add("visible");
+    window.scrollTo({top: 0, behavior: "instant"});
+
+    setTimeout(() => {
+      transitionScreen.classList.remove("active");
+      busy = false;
+    }, 450);
+
+  }, 650);
 }
+
+/* DOOR CLICK */
+
+doors.forEach(door => {
+  door.querySelector(".door").addEventListener("click", () => {
+    openGallery(door.dataset.category);
+  });
 });
+
+/* BACK TO DOORS */
+
+document.getElementById("backButton").addEventListener("click", () => {
+  if (busy) return;
+
+  busy = true;
+  transitionScreen.classList.add("active");
+
+  setTimeout(() => {
+    galleryPage.classList.remove("visible");
+
+    document.querySelector(".hero").style.display = "";
+    document.querySelector(".portfolio").style.display = "";
+    document.querySelector(".about").style.display = "";
+    document.querySelector(".contact").style.display = "";
+    document.querySelector("footer").style.display = "";
+    document.querySelector(".nav").style.position = "";
+
+    window.scrollTo({top: document.getElementById("portfolio").offsetTop, behavior: "instant"});
+
+    setTimeout(() => {
+      transitionScreen.classList.remove("active");
+      busy = false;
+    }, 450);
+
+  }, 650);
 });
 </script>
 
