@@ -1,4 +1,3 @@
-
 const categories = {
   vtuber: {
     title: "VTuber Model",
@@ -32,47 +31,45 @@ const categories = {
 };
 
 const doors = document.querySelectorAll(".door-card");
-const gallery = document.getElementById("artwork");
-const title = document.getElementById("gallery-title");
 
 doors.forEach((door) => {
-  door.addEventListener("click", function(event) {
-    event.preventDefault();
+  const button = door.querySelector(".door-face");
+  const gallery = door.querySelector(".inside-gallery");
+  const category = categories[door.dataset.type];
 
-    const category = categories[this.dataset.type];
+  category.images.forEach((filename, index) => {
+    const card = document.createElement("div");
+    card.className = "artwork-card";
 
-    if (!category) return;
+    const image = document.createElement("img");
+    image.src = category.folder + filename;
+    image.alt = category.title + " " + (index + 1);
 
-    title.textContent = category.title;
-    gallery.innerHTML = "";
+    const caption = document.createElement("p");
+    caption.textContent = category.title + " · " + (index + 1);
 
-    category.images.forEach((filename, index) => {
-      const card = document.createElement("div");
-      card.className = "artwork-card";
+    image.onerror = () => card.remove();
 
-      const image = document.createElement("img");
-      image.src = category.folder + filename;
-      image.alt = category.title + " " + (index + 1);
-
-      const caption = document.createElement("p");
-      caption.textContent = category.title + " — " + (index + 1);
-
-      image.onerror = function() {
-        card.remove();
-
-        if (gallery.children.length === 0) {
-          gallery.textContent =
-            "Artwork coming soon. Add your images to this folder.";
-        }
-      };
-
-      card.appendChild(image);
-      card.appendChild(caption);
-      gallery.appendChild(card);
-    });
-
-    document.getElementById("gallery").scrollIntoView({
-      behavior: "smooth"
-    });
+    card.appendChild(image);
+    card.appendChild(caption);
+    gallery.appendChild(card);
   });
+
+  button.addEventListener("click", () => {
+    const isAlreadyOpen = door.classList.contains("active");
+
+    doors.forEach((otherDoor) => {
+      otherDoor.classList.remove("active");
+      otherDoor.querySelector(".door-face").setAttribute("aria-expanded", "false");
+    });
+
+    if (!isAlreadyOpen) {
+      door.classList.add("active");
+      button.setAttribute("aria-expanded", "true");
+    } else {
+      button.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  button.setAttribute("aria-expanded", "false");
 });
