@@ -1,77 +1,139 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ANNA | Digital Artist</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna | Digital Artist</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <a href="#" class="logo">ANNA<span>.</span></a>
-  <nav>
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-    <a href="#contact">CONTACT</a>
-  </nav>
-</header>
+  <header class="topbar">
+    <a class="brand" href="#home">ANNA<span>✦</span></a>
+    <nav>
+      <a href="#home">HOME</a>
+      <a href="#portfolio">PORTFOLIO</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
 
-<section class="hero" id="home">
-  <p>✦ DIGITAL ARTIST & VISUAL CREATOR ✦</p>
-  <h1>I'M <span>ANNA</span></h1>
-  <p>Welcome to my creative world.</p>
-  <p class="hint">HOVER OVER A DOOR TO EXPLORE</p>
-</section>
+  <!-- FIRST PAGE -->
+  <main>
+    <section class="hero" id="home">
+      <div class="orb orb-one"></div>
+      <div class="orb orb-two"></div>
 
-<section class="doors">
+      <p class="eyebrow">✦ DIGITAL ARTIST • VTUBER DESIGNER ✦</p>
+      <h1>I'M <span>ANNA</span></h1>
+      <p class="hero-subtitle">Welcome to my little creative universe.</p>
+      <a class="explore-btn" href="#portfolio">ENTER MY WORLD <span>↓</span></a>
+      <div class="hero-bottom">ART • DESIGN • IMAGINATION</div>
+    </section>
 
-<a href="#gallery" class="door-card" data-type="vtuber">
-  <div class="door"><span>01</span><h2>VTUBER<br>MODEL</h2><small>EXPLORE ↗</small></div>
-  <p>VTuber Model</p>
-</a>
+    <!-- SECOND PAGE: DOORS -->
+    <section class="portfolio" id="portfolio">
+      <div class="section-heading">
+        <p class="eyebrow">A DOOR TO EVERY CREATION</p>
+        <h2>EXPLORE MY <span>WORLD</span></h2>
+        <p>Choose a door and discover what's inside.</p>
+      </div>
 
-<a href="#gallery" class="door-card" data-type="logo">
-  <div class="door"><span>02</span><h2>LOGO<br>DESIGN</h2><small>EXPLORE ↗</small></div>
-  <p>Logo</p>
-</a>
+      <div class="door-grid">
 
-<a href="#gallery" class="door-card" data-type="banner">
-  <div class="door"><span>03</span><h2>BANNER<br>DESIGN</h2><small>EXPLORE ↗</small></div>
-  <p>Banner</p>
-</a>
+        <article class="door-card" data-type="vtuber">
+          <div class="door-room">
+            <div class="room-label">01 · CHARACTER DESIGN</div>
+            <div class="inside-gallery"></div>
+            <button class="door-face" aria-label="Open VTuber Model door">
+              <span class="door-number">01</span>
+              <span class="door-symbol">✧</span>
+              <strong>VTUBER<br>MODEL</strong>
+              <small>OPEN DOOR ↗</small>
+              <i class="knob"></i>
+            </button>
+          </div>
+          <p class="door-caption">VTuber Model</p>
+        </article>
 
-<a href="#gallery" class="door-card" data-type="emotes">
-  <div class="door"><span>04</span><h2>EMOTE<br>DESIGN</h2><small>EXPLORE ↗</small></div>
-  <p>Emotes</p>
-</a>
+        <article class="door-card" data-type="logo">
+          <div class="door-room">
+            <div class="room-label">02 · BRAND IDENTITY</div>
+            <div class="inside-gallery"></div>
+            <button class="door-face" aria-label="Open Logo door">
+              <span class="door-number">02</span>
+              <span class="door-symbol">✦</span>
+              <strong>LOGO<br>DESIGN</strong>
+              <small>OPEN DOOR ↗</small>
+              <i class="knob"></i>
+            </button>
+          </div>
+          <p class="door-caption">Logo Design</p>
+        </article>
 
-<a href="#gallery" class="door-card" data-type="scene">
-  <div class="door"><span>05</span><h2>ART<br>SCENE</h2><small>EXPLORE ↗</small></div>
-  <p>Art Scene</p>
-</a>
+        <article class="door-card" data-type="banner">
+          <div class="door-room">
+            <div class="room-label">03 · STREAM GRAPHICS</div>
+            <div class="inside-gallery"></div>
+            <button class="door-face" aria-label="Open Banner door">
+              <span class="door-number">03</span>
+              <span class="door-symbol">❋</span>
+              <strong>BANNER<br>DESIGN</strong>
+              <small>OPEN DOOR ↗</small>
+              <i class="knob"></i>
+            </button>
+          </div>
+          <p class="door-caption">Banners</p>
+        </article>
 
-</section>
+        <article class="door-card" data-type="emotes">
+          <div class="door-room">
+            <div class="room-label">04 · EXPRESS YOURSELF</div>
+            <div class="inside-gallery"></div>
+            <button class="door-face" aria-label="Open Emotes door">
+              <span class="door-number">04</span>
+              <span class="door-symbol">♡</span>
+              <strong>EMOTE<br>DESIGN</strong>
+              <small>OPEN DOOR ↗</small>
+              <i class="knob"></i>
+            </button>
+          </div>
+          <p class="door-caption">Emotes</p>
+        </article>
 
-<section id="about">
-<h2>ABOUT <span>ANNA</span></h2>
-<p>Hi! I'm Anna, a digital artist creating artwork, VTuber designs and creative visuals.</p>
-</section>
+        <article class="door-card" data-type="scene">
+          <div class="door-room">
+            <div class="room-label">05 · CREATIVE ART</div>
+            <div class="inside-gallery"></div>
+            <button class="door-face" aria-label="Open Art Scene door">
+              <span class="door-number">05</span>
+              <span class="door-symbol">☾</span>
+              <strong>ART<br>SCENE</strong>
+              <small>OPEN DOOR ↗</small>
+              <i class="knob"></i>
+            </button>
+          </div>
+          <p class="door-caption">Art Scene</p>
+        </article>
 
-<section id="gallery">
-<h2 id="gallery-title">MY ARTWORK</h2>
-<div id="artwork">Choose a door to explore my artwork.</div>
-</section>
+      </div>
+      <p class="door-hint">✦ CLICK A DOOR TO OPEN IT ✦</p>
+    </section>
 
-<section id="contact">
-<h2>LET'S CREATE SOMETHING BEAUTIFUL</h2>
-<a href="mailto:YOUR-EMAIL@example.com">CONTACT ME ↗</a>
-</section>
+    <section class="about" id="about">
+      <p class="eyebrow">A LITTLE ABOUT ME</p>
+      <h2>HELLO, I'M <span>ANNA</span></h2>
+      <p>I'm a digital artist creating VTuber designs, logos, banners, emotes and creative visuals. Welcome to my portfolio!</p>
+    </section>
 
-<footer>© 2026 ANNA | DIGITAL ARTIST</footer>
+    <section class="contact" id="contact">
+      <p class="eyebrow">HAVE A PROJECT IN MIND?</p>
+      <h2>LET'S CREATE SOMETHING <span>MAGICAL</span></h2>
+      <a href="mailto:YOUR-EMAIL@example.com">CONTACT ME ↗</a>
+    </section>
+  </main>
 
-<script src="script.js"></script>
+  <footer>© 2026 ANNA · DIGITAL ARTIST</footer>
+  <script src="script.js"></script>
 </body>
 </html>
-
