@@ -1,1265 +1,266 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#100b17">
-<title>ANNA — Digital Artist</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Anna — Graphic Designer & VTuber Artist</title>
+<meta name="description" content="Anna's portfolio: VTuber models, logos, banners, emotes, art scenes and 3D art rooms.">
+<meta name="theme-color" content="#0c0813">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg:#100b17;
-  --panel:#1b1423;
-  --pink:#e6b4d4;
-  --gold:#c8a878;
-  --text:#f5edf5;
-  --muted:#b7aaba;
-  --line:rgba(230,180,212,.17);
-  --serif:"Cormorant Garamond",Georgia,serif;
-  --sans:"DM Sans",Arial,sans-serif;
-}
+:root{--bg:#0c0813;--ink:#f1eefb;--mute:#a79fc0;--pink:#ff4fa3;--cyan:#5ee7ff;--gold:#ffd36b;--line:#2a2140;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--ink);font:300 1.05rem/1.6 Outfit,system-ui,sans-serif;padding-top:env(safe-area-inset-top)}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:8px;top:8px;background:#fff;color:#000;padding:8px;z-index:99}
+a{color:inherit}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 
-* {box-sizing:border-box;margin:0;padding:0}
-html {scroll-behavior:smooth;scroll-padding-top:90px}
-body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--sans);
-  overflow-x:hidden;
-}
-a {text-decoration:none;color:inherit}
-button {font:inherit}
+/* Navbar */
+.nav{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:16px 5vw;z-index:10;background:linear-gradient(var(--bg),transparent)}
+.logo{font:700 1.3rem Unbounded;text-decoration:none;color:var(--pink)}
+.nav nav a{margin-left:22px;text-decoration:none;color:var(--mute)}
+.nav nav a:hover{color:var(--ink)}
 
-#particles {
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index:2;
-}
+/* Hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:2vw;padding:90px 5vw 40px;position:relative}
+#disco{width:100%;height:min(70vh,560px);order:2;cursor:grab;touch-action:pan-y}
+#disco:active{cursor:grabbing}
+.kicker{color:var(--cyan);margin-bottom:14px}
+h1{font:700 clamp(2.2rem,5.5vw,4.6rem)/1.05 Unbounded;margin-bottom:20px;background:linear-gradient(100deg,var(--ink),var(--pink) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{max-width:46ch;color:var(--mute);margin-bottom:28px}
+.btn{display:inline-block;padding:13px 26px;border-radius:99px;background:var(--pink);color:#1a0a14;font-weight:500;text-decoration:none;margin:0 8px 8px 0;transition:transform .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
+.clock{position:absolute;left:5vw;bottom:20px;color:var(--mute);font-size:.85rem}
 
-.noise {
-  position:fixed;
-  inset:0;
-  z-index:3;
-  pointer-events:none;
-  opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
-}
+/* Marquee */
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;font:500 1.4rem Unbounded;color:var(--gold);white-space:nowrap}
+.marquee div{display:inline-flex;animation:mq 28s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
 
-.ambient {
-  position:absolute;
-  width:450px;
-  height:450px;
-  border-radius:50%;
-  filter:blur(120px);
-  opacity:.13;
-  pointer-events:none;
-}
-.ambient.one {background:#a34f91;top:100px;left:-250px}
-.ambient.two {background:#9670a8;top:1000px;right:-260px}
+/* Sections */
+section:not(.hero){padding:90px 5vw;max-width:1200px;margin:auto}
+h2{font:700 clamp(1.8rem,4vw,3rem) Unbounded;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.card{background:#150f24;border:1px solid var(--line);border-radius:22px;padding:18px;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--pink)}
+.art{aspect-ratio:4/3;border-radius:14px;margin-bottom:16px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--b))}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.art b{font:700 3rem Unbounded;color:#ffffff88}
+.card h3{font:500 1.15rem Unbounded;margin-bottom:6px}
+.card p{color:var(--mute);margin-bottom:10px}
+.card code{color:var(--cyan);font-size:.85rem}
+.c1{--a:#ff4fa3;--b:#5b2a86}.c2{--a:#5ee7ff;--b:#2a3b86}.c3{--a:#ffd36b;--b:#c2410c}
+.c4{--a:#a78bfa;--b:#ec4899}.c5{--a:#34d399;--b:#1e3a8a}.c6{--a:#f472b6;--b:#0e7490}
+.about p,.contact p{max-width:60ch;color:var(--mute);font-size:1.15rem}
+.contact a{color:var(--pink)}
+footer{text-align:center;padding:40px 5vw calc(40px + env(safe-area-inset-bottom));color:var(--mute);border-top:1px solid var(--line);font-size:.9rem}
 
-.section-wrap {
-  width:min(1120px,86%);
-  margin:auto;
-  position:relative;
-  z-index:4;
-}
-
-/* NAVIGATION */
-
-header {
-  height:82px;
-  padding:0 7%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:rgba(16,11,23,.88);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.brand {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:.22em;
-}
-.brand-mark {
-  width:33px;
-  height:33px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--gold);
-  color:var(--gold);
-  font:24px var(--serif);
-}
-.brand-dot {color:var(--pink)}
-
-nav {
-  display:flex;
-  align-items:center;
-  gap:36px;
-}
-nav a {
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  transition:.3s;
-}
-nav a:hover,nav a.active {color:var(--pink)}
-nav .nav-cta {
-  border:1px solid #e6b4d455;
-  padding:12px 17px;
-  color:var(--text);
-}
-
-.menu-toggle {
-  display:none;
-  background:none;
-  border:0;
-  color:var(--pink);
-  font-size:25px;
-}
-
-/* HERO */
-
-.hero {
-  min-height:690px;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  align-items:center;
-  padding:85px 0 110px;
-}
-
-.eyebrow,.section-label,.mini-kicker,.card-number {
-  color:var(--gold);
-  font-size:9px;
-  letter-spacing:.22em;
-  font-weight:600;
-}
-.eyebrow {
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.eyebrow-line {width:28px;height:1px;background:var(--gold)}
-.eyebrow-star {color:var(--pink)}
-
-.hero-kicker {
-  color:var(--pink);
-  font:italic 24px var(--serif);
-  margin-top:48px;
-}
-.hero h1 {
-  font:500 clamp(80px,12vw,155px)/.82 var(--serif);
-  letter-spacing:-.055em;
-  margin:18px 0 25px;
-}
-.hero h1 em {color:var(--pink);font-weight:400}
-.hero-period {color:var(--gold)}
-.hero-subtitle {font-size:17px;margin-bottom:14px}
-.hero-description {
-  color:var(--muted);
-  font-size:12px;
-  line-height:2;
-  max-width:420px;
-}
-
-.hero-actions {
-  display:flex;
-  align-items:center;
-  gap:27px;
-  margin-top:34px;
-}
-.button {
-  display:inline-flex;
-  align-items:center;
-  gap:25px;
-  padding:16px 21px;
-  font-size:9px;
-  letter-spacing:.13em;
-  text-transform:uppercase;
-  transition:.3s;
-  cursor:pointer;
-}
-.button-primary {
-  background:linear-gradient(110deg,#e4b6d5,#c9a77c);
-  color:#211526;
-}
-.button-primary:hover {
-  transform:translateY(-4px);
-  box-shadow:0 12px 35px #d99dc544;
-}
-.text-link {
-  color:var(--pink);
-  font-size:10px;
-  border-bottom:1px solid #e6b4d466;
-  padding-bottom:7px;
-}
-.hero-note {
-  margin-top:45px;
-  color:#a99baa;
-  font-size:9px;
-  letter-spacing:.12em;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.pulse-dot {
-  width:7px;height:7px;
-  background:#a9c7a5;
-  border-radius:50%;
-  box-shadow:0 0 0 5px #a9c7a51a;
-}
-
-/* HERO ART */
-
-.hero-art {
-  height:470px;
-  position:relative;
-  display:grid;
-  place-items:center;
-}
-.art-halo {
-  position:absolute;
-  width:340px;
-  height:400px;
-  border-radius:50%;
-  background:radial-gradient(ellipse,#a45c9a44,transparent 68%);
-  filter:blur(15px);
-  animation:breathe 6s infinite;
-}
-.art-frame {
-  width:290px;
-  height:390px;
-  display:grid;
-  place-items:center;
-  position:relative;
-  border:1px solid #d8b6c45e;
-  background:linear-gradient(145deg,#38223c99,#171020cc 65%);
-  box-shadow:0 20px 80px #0008,inset 0 0 70px #d7a5d311;
-  transform:rotate(3deg);
-  animation:float 7s ease-in-out infinite;
-}
-.art-frame:before {
-  content:"";
-  position:absolute;
-  inset:13px;
-  border:1px solid #c8a8784a;
-}
-.art-monogram {
-  font:180px var(--serif);
-  color:#e8c8dd;
-  text-shadow:0 0 50px #e6b4d477;
-}
-.art-monogram span {
-  color:var(--gold);
-  font-size:25px;
-  vertical-align:top;
-}
-.art-caption {
-  position:absolute;
-  bottom:33px;
-  left:28px;
-  right:28px;
-  display:flex;
-  justify-content:space-between;
-  color:#cdb8cb;
-  font-size:7px;
-  letter-spacing:.2em;
-}
-.orbit {
-  position:absolute;
-  border:1px solid #dcb9d52c;
-  border-radius:50%;
-}
-.orbit-a {width:420px;height:220px;transform:rotate(-28deg)}
-.orbit-b {width:480px;height:290px;transform:rotate(50deg)}
-.float-star {
-  position:absolute;
-  color:var(--gold);
-  text-shadow:0 0 18px var(--pink);
-  animation:twinkle 3s infinite;
-}
-.star-one {top:50px;right:75px;font-size:25px}
-.star-two {bottom:60px;left:40px;font-size:19px;animation-delay:1s}
-.star-three {top:110px;left:65px;font-size:15px;animation-delay:1.7s}
-.side-label {
-  position:absolute;
-  right:-10px;
-  top:50%;
-  writing-mode:vertical-rl;
-  font-size:7px;
-  letter-spacing:.3em;
-  color:#89788c;
-}
-.scroll-cue {
-  position:absolute;
-  bottom:30px;
-  left:0;
-  display:flex;
-  align-items:center;
-  gap:13px;
-  color:#8f8092;
-  font-size:8px;
-  letter-spacing:.2em;
-}
-.scroll-cue span {width:35px;height:1px;background:var(--gold)}
-
-/* ABOUT */
-
-.intro {
-  padding:105px 0 95px;
-  border-top:1px solid var(--line);
-}
-.section-label {display:flex;gap:14px;align-items:center}
-.section-label span {color:var(--pink)}
-.intro-grid {
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:8%;
-  align-items:center;
-  margin-top:45px;
-}
-.intro h2,.portfolio h2,.contact h2 {
-  font:500 clamp(40px,6vw,68px)/.98 var(--serif);
-}
-h2 em {color:var(--pink);font-weight:400}
-.intro-copy {max-width:430px}
-.intro-copy p,.contact-copy {
-  color:var(--muted);
-  font-size:12px;
-  line-height:2.1;
-  margin-bottom:15px;
-}
-.under-link {
-  display:inline-block;
-  color:var(--pink);
-  font-size:10px;
-  border-bottom:1px solid #e6b4d466;
-  padding-bottom:7px;
-  margin-top:10px;
-}
-.stats-row {
-  display:flex;
-  gap:80px;
-  border-top:1px solid var(--line);
-  margin-top:75px;
-  padding-top:26px;
-}
-.stats-row div {display:flex;flex-direction:column;gap:8px}
-.stats-row strong {font:32px var(--serif);color:var(--pink)}
-.stats-row span {font-size:8px;letter-spacing:.17em;color:#9b8c9d}
-
-/* PORTFOLIO */
-
-.portfolio {
-  padding:90px 0 115px;
-  border-top:1px solid var(--line);
-}
-.portfolio-heading {
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin:42px 0;
-}
-.mini-kicker {margin-bottom:15px}
-.heading-aside {
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.9;
-  text-align:right;
-}
-.category-grid {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:22px;
-}
-.category-card {
-  display:block;
-  border:1px solid rgba(230,180,212,.13);
-  background:#171020;
-  overflow:hidden;
-  transition:.4s;
-  cursor:pointer;
-}
-.category-card:hover {
-  transform:translateY(-7px);
-  border-color:#e6b4d477;
-  box-shadow:0 20px 60px #0005;
-}
-.card-art {
-  height:235px;
-  position:relative;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-  background:radial-gradient(ellipse at 50% 45%,rgba(190,122,190,.22),transparent 67%),linear-gradient(135deg,#25192e,#130e1a);
-}
-.card-large .card-art {height:300px}
-.card-art:after {
-  content:"";
-  position:absolute;
-  inset:12px;
-  border:1px solid #e6b4d41e;
-  pointer-events:none;
-}
-.art-word {
-  position:absolute;
-  bottom:22px;
-  left:25px;
-  font-size:7px;
-  letter-spacing:.25em;
-  color:#cbb9cb;
-}
-.art-ring {
-  width:165px;height:165px;
-  border:1px solid #e5b9d677;
-  border-radius:50%;
-  box-shadow:0 0 55px #e3a9d322;
-  position:absolute;
-}
-.art-ring:before,.art-ring:after {
-  content:"";
-  position:absolute;
-  inset:14px;
-  border:1px solid #c8a87866;
-  border-radius:50%;
-}
-.art-ring:after {
-  inset:-18px;
-  border-style:dashed;
-  animation:spin 35s linear infinite;
-}
-.art-gem {font-size:90px;color:#edc9e5;text-shadow:0 0 30px #e6b4d4;z-index:1}
-.art-logo .logo-letter {font:135px var(--serif);color:#e7c9d9}
-.logo-letter span {color:var(--gold)}
-.logo-orbit {position:absolute;font-size:35px;color:var(--gold)}
-.banner-lines {
-  position:absolute;
-  width:65%;height:65%;
-  border:1px solid #b7a2d866;
-  transform:skew(-14deg);
-}
-.banner-type {
-  font:48px/.8 var(--serif);
-  text-align:center;
-  color:#eee0ed;
-  z-index:1;
-}
-.banner-type em {color:var(--pink)}
-.emoji-face {
-  position:absolute;
-  width:70px;height:70px;
-  border:1px solid #e6b4d477;
-  border-radius:24px;
-  display:grid;
-  place-items:center;
-  font-size:35px;
-  color:#f0c7dd;
-  background:linear-gradient(145deg,#59334f,#26172e);
-}
-.face-one {transform:translate(-65px,-10px) rotate(-12deg)}
-.face-two {transform:translate(15px,-40px) rotate(8deg)}
-.face-three {transform:translate(80px,25px) rotate(14deg)}
-.scene-moon {
-  position:absolute;
-  width:100px;height:100px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#f3d5dd,#c9a878);
-  top:35px;right:25%;
-}
-.scene-mountain {
-  position:absolute;
-  bottom:0;width:100%;height:55%;
-  background:linear-gradient(145deg,#4c385d,#1d2638);
-  clip-path:polygon(0 100%,23% 30%,40% 67%,62% 10%,100% 100%);
-}
-.scene-spark {position:absolute;z-index:2;font-size:35px;color:#f5d9df;top:70px;left:25%}
-.cube {
-  width:58px;height:58px;
-  position:absolute;
-  border:1px solid #d9bb9c;
-  background:linear-gradient(135deg,#d9b9a533,#7f5a8044);
-  transform:rotate(30deg) skew(-8deg,-8deg);
-}
-.cube-one {left:30%;top:27%}
-.cube-two {left:47%;top:45%;width:85px;height:85px}
-.cube-three {left:62%;top:20%;width:38px;height:38px}
-
-.card-info {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:21px 24px 23px;
-}
-.card-number {font-size:7px}
-.card-info h3 {font:500 29px var(--serif);margin:7px 0 3px}
-.card-info p {font-size:10px;color:var(--muted)}
-.card-arrow {
-  width:34px;height:34px;
-  border:1px solid #e6b4d44a;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  color:var(--pink);
-  transition:.3s;
-}
-.category-card:hover .card-arrow {
-  background:var(--pink);
-  color:#1a1020;
-  transform:rotate(45deg);
-}
-
-/* GALLERY VIEW */
-
-#galleryView {
-  display:none;
-  min-height:75vh;
-  padding:90px 0 110px;
-}
-#galleryView.show {display:block}
-#homeContent.hide {display:none}
-.gallery-heading {
-  font:500 clamp(60px,10vw,110px)/1 var(--serif);
-  margin:30px 0 12px;
-}
-.gallery-heading span {color:var(--pink)}
-.gallery-description {font-size:12px;color:var(--muted)}
-.gallery-toolbar {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin:35px 0;
-}
-.filter-btn {
-  border:1px solid var(--line);
-  padding:10px 15px;
-  color:var(--muted);
-  background:transparent;
-  font-size:9px;
-  letter-spacing:.1em;
-  cursor:pointer;
-  transition:.3s;
-}
-.filter-btn:hover,.filter-btn.active {
-  color:#1a1020;
-  background:var(--pink);
-}
-.gallery-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-.gallery-item {
-  position:relative;
-  min-height:230px;
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:radial-gradient(circle at 50% 45%,#75496d66,transparent 70%),#1a1221;
-}
-.gallery-item img {
-  width:100%;
-  height:100%;
-  min-height:230px;
-  object-fit:cover;
-  display:block;
-  transition:.5s;
-}
-.gallery-item:hover img {transform:scale(1.06)}
-.gallery-item span {
-  position:absolute;
-  bottom:14px;
-  left:15px;
-  color:white;
-  font-size:9px;
-  text-shadow:0 2px 8px #000;
-}
-.gallery-placeholder {
-  display:grid;
-  place-items:center;
-  min-height:230px;
-  color:var(--pink);
-  font:italic 26px var(--serif);
-}
-.gallery-back {margin-top:35px}
-
-/* QUOTE */
-
-.quote-band {
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  background:radial-gradient(ellipse at center,#3b203b88,transparent 68%),#130d1a;
-  padding:75px 7%;
-  text-align:center;
-}
-.quote-mark {font:90px var(--serif);color:var(--gold)}
-.quote-inner p {font:clamp(36px,5vw,57px)/1 var(--serif);margin:20px 0}
-.quote-inner em {color:var(--pink)}
-
-/* CONTACT */
-
-.contact {padding:100px 0}
-.contact-panel {
-  margin-top:40px;
-  padding:55px 7%;
-  border:1px solid #e6b4d433;
-  background:radial-gradient(ellipse at 80% 50%,#73436b33,transparent 50%),linear-gradient(120deg,#211628,#171020);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:40px;
-}
-.contact h2 {font-size:clamp(48px,7vw,78px)}
-.contact-side {display:flex;flex-direction:column;align-items:center;gap:20px}
-.contact-orb {
-  width:105px;height:105px;
-  border:1px solid #c8a87888;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  color:var(--pink);
-  font-size:40px;
-  animation:breathe 5s infinite;
-}
-.contact-hint {font-size:8px;color:#897b8e}
-
-/* FOOTER */
-
-footer {
-  border-top:1px solid var(--line);
-  padding:25px 0 32px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-footer p,footer a.back-top {
-  font-size:8px;
-  letter-spacing:.15em;
-  color:#98899a;
-}
-
-/* REVEAL */
-
-.reveal {
-  opacity:0;
-  transform:translateY(24px);
-  transition:opacity .8s ease,transform .8s ease;
-}
-.reveal.visible {opacity:1;transform:translateY(0)}
-
-/* ANIMATIONS */
-
-@keyframes float {
-  0%,100% {transform:translateY(0) rotate(3deg)}
-  50% {transform:translateY(-14px) rotate(1deg)}
-}
-@keyframes breathe {
-  0%,100% {transform:scale(1);opacity:.75}
-  50% {transform:scale(1.08);opacity:1}
-}
-@keyframes twinkle {
-  0%,100% {opacity:.4;transform:scale(.8)}
-  50% {opacity:1;transform:scale(1.2)}
-}
-@keyframes spin {to {transform:rotate(360deg)}}
-
-/* RESPONSIVE */
-
-@media(max-width:760px) {
-  header {height:70px;padding:0 7%}
-  .menu-toggle {display:block}
-  nav {
-    display:none;
-    position:absolute;
-    top:70px;left:0;right:0;
-    background:#130d1b;
-    padding:25px 7% 30px;
-    border-bottom:1px solid var(--line);
-    flex-direction:column;
-    align-items:flex-start;
-    gap:24px;
-  }
-  nav.open {display:flex}
-  .hero {grid-template-columns:1fr;padding:75px 0 95px}
-  .hero-art {height:390px;margin-top:30px}
-  .art-frame {width:235px;height:320px}
-  .art-monogram {font-size:145px}
-  .orbit-a {width:310px;height:180px}
-  .orbit-b {width:340px;height:220px}
-  .intro-grid {grid-template-columns:1fr;gap:25px}
-  .stats-row {gap:25px;justify-content:space-between}
-  .stats-row span {font-size:6px}
-  .portfolio-heading {align-items:flex-start;flex-direction:column;gap:20px}
-  .heading-aside {text-align:left}
-  .category-grid {grid-template-columns:1fr}
-  .card-art,.card-large .card-art {height:245px}
-  .contact-panel {flex-direction:column;align-items:flex-start;padding:38px 8%}
-  .contact-side {align-items:flex-start}
-  footer {gap:20px;flex-wrap:wrap}
-  .gallery-grid {grid-template-columns:1fr 1fr}
-}
-@media(max-width:460px) {
-  .gallery-grid {grid-template-columns:1fr}
-  .hero-actions {align-items:flex-start;flex-direction:column}
-}
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-  }
-  .reveal {opacity:1;transform:none}
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr}
+  #disco{order:0;height:340px}
+  .nav nav a{margin-left:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .marquee div{animation:none}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
 
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div class="noise"></div>
-<div class="ambient one"></div>
-<div class="ambient two"></div>
-<canvas id="particles"></canvas>
-
-<header>
-  <a href="#" class="brand" id="brandHome">
-    <span class="brand-mark">A</span>
-    <span>ANNA<span class="brand-dot">.</span></span>
-  </a>
-
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-
-  <nav id="nav">
-    <a href="#home" class="active">Home</a>
-    <a href="#about">About</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#contact" class="nav-cta">Contact ↗</a>
-  </nav>
+<header class="nav">
+  <a class="logo" href="#top">Anna</a>
+  <nav><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
 </header>
 
-<main id="homeContent">
+<main id="main">
 
-<!-- HERO -->
-<section class="hero section-wrap" id="home">
-
-  <div class="hero-copy reveal">
-    <div class="eyebrow">
-      <span class="eyebrow-line"></span>
-      DIGITAL ARTIST
-      <span class="eyebrow-star">✦</span>
-      COMMISSIONS OPEN
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <canvas id="disco" aria-label="Spinning disco ball. Click to send a pulse."></canvas>
+    <div class="hero-text">
+      <p class="kicker">Graphic design · VTuber art · 3D rooms</p>
+      <h1>I design characters worth streaming.</h1>
+      <p class="sub">Models, logos, banners, emotes and whole worlds for creators. Drag the ball to spin it, click to send a pulse.</p>
+      <a class="btn" href="#work">See the work</a>
+      <a class="btn ghost" href="#contact">Book a commission</a>
     </div>
+    <div class="clock">PKT <span id="clock">--:--:--</span></div>
+  </section>
 
-    <p class="hero-kicker">your creative little universe</p>
-
-    <h1>I'M <em>ANNA</em><span class="hero-period">.</span></h1>
-
-    <p class="hero-subtitle">
-      Bringing your characters, streams & ideas to life.
-    </p>
-
-    <p class="hero-description">
-      A digital artist crafting expressive VTuber visuals,
-      dreamy graphics and little details that make your
-      world feel like yours.
-    </p>
-
-    <div class="hero-actions">
-      <a href="#portfolio" class="button button-primary">
-        Explore my work <span>↘</span>
-      </a>
-      <a href="#contact" class="text-link">
-        Let's create together ↗
-      </a>
-    </div>
-
-    <div class="hero-note">
-      <span class="pulse-dot"></span>
-      Available for selected commissions
-    </div>
-  </div>
-
-  <div class="hero-art reveal">
-    <div class="orbit orbit-a"></div>
-    <div class="orbit orbit-b"></div>
-    <div class="art-halo"></div>
-
-    <div class="art-frame">
-      <div class="art-monogram">A<span>✦</span></div>
-      <div class="art-caption">
-        <span>CREATIVE</span>
-        <span>UNIVERSE / 001</span>
-      </div>
-    </div>
-
-    <span class="float-star star-one">✧</span>
-    <span class="float-star star-two">✦</span>
-    <span class="float-star star-three">✧</span>
-
-    <div class="side-label">ART • DESIGN • IMAGINATION</div>
-  </div>
-
-  <a href="#about" class="scroll-cue">
-    <span></span> SCROLL TO EXPLORE
-  </a>
-</section>
-
-<!-- ABOUT -->
-<section class="intro section-wrap" id="about">
-  <div class="section-label"><span>01</span> A LITTLE INTRODUCTION</div>
-
-  <div class="intro-grid">
-    <h2 class="reveal">
-      Made with <em>feeling.</em><br>
-      Designed to be <em>remembered.</em>
-    </h2>
-
-    <div class="intro-copy reveal">
-      <p>
-        Hey! I'm Anna, a digital artist with a love for
-        character design, atmosphere and visual storytelling.
-        I create artwork for creators who want their online
-        world to feel special.
-      </p>
-      <p>
-        From a stream-ready identity to a full character look,
-        every piece is made with care, personality and a
-        touch of magic.
-      </p>
-      <a class="under-link" href="#contact">Have a project in mind? ↗</a>
-    </div>
-  </div>
-
-  <div class="stats-row reveal">
-    <div><strong>06</strong><span>ART CATEGORIES</span></div>
-    <div><strong>∞</strong><span>CREATIVE POSSIBILITIES</span></div>
-    <div><strong>♡</strong><span>MADE WITH CARE</span></div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section class="portfolio section-wrap" id="portfolio">
-  <div class="section-label"><span>02</span> SELECTED WORKS</div>
-
-  <div class="portfolio-heading reveal">
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
     <div>
-      <p class="mini-kicker">THE ART GALLERY</p>
-      <h2>Explore the <em>collection.</em></h2>
+      <span>VTuber Model ✦ Logo ✦ Banner ✦ Emotes ✦ Art Scene ✦ 3D Art Room ✦ </span>
+      <span>VTuber Model ✦ Logo ✦ Banner ✦ Emotes ✦ Art Scene ✦ 3D Art Room ✦ </span>
     </div>
-    <p class="heading-aside">
-      A little something for every corner<br>
-      of your creative universe.
+  </div>
+
+  <!-- WORK: har card ka apna folder hai -->
+  <section class="work" id="work">
+    <h2>Six folders, one style.</h2>
+    <div class="grid">
+
+      <article class="card c1">
+        <div class="art"><img src="assets/vtuber-model/preview.webp" alt="" onerror="this.remove()"><b>V</b></div>
+        <h3>VTuber Model</h3>
+        <p>Rigged-ready layered characters with expression sheets.</p>
+        <code>assets/vtuber-model/</code>
+      </article>
+
+      <article class="card c2">
+        <div class="art"><img src="assets/logo/preview.webp" alt="" onerror="this.remove()"><b>L</b></div>
+        <h3>Logo</h3>
+        <p>Marks that read at 32px and on a banner.</p>
+        <code>assets/logo/</code>
+      </article>
+
+      <article class="card c3">
+        <div class="art"><img src="assets/banner/preview.webp" alt="" onerror="this.remove()"><b>B</b></div>
+        <h3>Banner</h3>
+        <p>Channel headers and stream panels that match your brand.</p>
+        <code>assets/banner/</code>
+      </article>
+
+      <article class="card c4">
+        <div class="art"><img src="assets/emotes/preview.webp" alt="" onerror="this.remove()"><b>E</b></div>
+        <h3>Emotes</h3>
+        <p>Expressive sets in 28, 56 and 112px.</p>
+        <code>assets/emotes/</code>
+      </article>
+
+      <article class="card c5">
+        <div class="art"><img src="assets/art-scene/preview.webp" alt="" onerror="this.remove()"><b>A</b></div>
+        <h3>Art Scene</h3>
+        <p>Illustrated backdrops and key art for streams and covers.</p>
+        <code>assets/art-scene/</code>
+      </article>
+
+      <article class="card c6">
+        <div class="art"><img src="assets/3d-art-room/preview.webp" alt="" onerror="this.remove()"><b>3D</b></div>
+        <h3>3D Art Room</h3>
+        <p>Real-time rooms you can walk through, built in Blender.</p>
+        <code>assets/3d-art-room/</code>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <h2>Hi, I'm Anna.</h2>
+    <p>I turn rough ideas into characters, logos and worlds that feel like one brand. Every project starts with a short call, then sketches, then a polished set ready for streaming.</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Let's make something.</h2>
+    <p>
+      <a href="mailto:hello@example.com">hello@example.com</a> ·
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a> ·
+      <a href="https://discord.com/" target="_blank" rel="noopener">Discord</a>
     </p>
-  </div>
-
-  <div class="category-grid">
-
-    <a class="category-card card-large reveal" href="#gallery/VTuber-Models">
-      <div class="card-art">
-        <span class="art-ring"></span>
-        <span class="art-gem">✧</span>
-        <span class="art-word">CHARACTER DESIGN</span>
-      </div>
-      <div class="card-info">
-        <div>
-          <span class="card-number">01 / CHARACTER</span>
-          <h3>VTuber Models</h3>
-          <p>Characters with a story to tell.</p>
-        </div>
-        <span class="card-arrow">↗</span>
-      </div>
-    </a>
-
-    <a class="category-card reveal" href="#gallery/Logos">
-      <div class="card-art art-logo">
-        <span class="logo-orbit">✦</span>
-        <span class="logo-letter">A<span>.</span></span>
-        <span class="art-word">YOUR IDENTITY</span>
-      </div>
-      <div class="card-info">
-        <div>
-          <span class="card-number">02 / BRANDING</span>
-          <h3>Logos</h3>
-          <p>A signature look for your name.</p>
-        </div>
-        <span class="card-arrow">↗</span>
-      </div>
-    </a>
-
-    <a class="category-card reveal" href="#gallery/Banners">
-      <div class="card-art">
-        <span class="banner-lines"></span>
-        <span class="banner-type">STREAM<br><em>YOUR WAY</em></span>
-        <span class="art-word">CHANNEL DESIGN</span>
-      </div>
-      <div class="card-info">
-        <div>
-          <span class="card-number">03 / CHANNEL</span>
-          <h3>Banners</h3>
-          <p>Make your space feel like you.</p>
-        </div>
-        <span class="card-arrow">↗</span>
-      </div>
-    </a>
-
-    <a class="category-card reveal" href="#gallery/Emotes">
-      <div class="card-art">
-        <span class="emoji-face face-one">✿</span>
-        <span class="emoji-face face-two">♡</span>
-        <span class="emoji-face face-three">☆</span>
-        <span class="art-word">SMALL EXPRESSIONS</span>
-      </div>
-      <div class="card-info">
-        <div>
-          <span class="card-number">04 / EXPRESSIONS</span>
-          <h3>Emotes</h3>
-          <p>Big feelings, tiny icons.</p>
-        </div>
-        <span class="card-arrow">↗</span>
-      </div>
-    </a>
-
-    <a class="category-card reveal" href="#gallery/Artscene">
-      <div class="card-art">
-        <span class="scene-moon"></span>
-        <span class="scene-mountain"></span>
-        <span class="scene-spark">✧</span>
-        <span class="art-word">WORLDS & MOMENTS</span>
-      </div>
-      <div class="card-info">
-        <div>
-          <span class="card-number">05 / ILLUSTRATION</span>
-          <h3>Artscene</h3>
-          <p>Atmosphere in every frame.</p>
-        </div>
-        <span class="card-arrow">↗</span>
-      </div>
-    </a>
-
-    <a class="category-card reveal" href="#gallery/3D-Artroom">
-      <div class="card-art">
-        <span class="cube cube-one"></span>
-        <span class="cube cube-two"></span>
-        <span class="cube cube-three"></span>
-        <span class="art-word">SPACE IN 3D</span>
-      </div>
-      <div class="card-info">
-        <div>
-          <span class="card-number">06 / SPATIAL ART</span>
-          <h3>3D Artroom</h3>
-          <p>Little spaces with big personality.</p>
-        </div>
-        <span class="card-arrow">↗</span>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- QUOTE -->
-<section class="quote-band">
-  <div class="quote-inner reveal">
-    <span class="quote-mark">“</span>
-    <p>Every idea deserves<br>a little <em>magic.</em></p>
-    <span class="quote-mark">✦</span>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact section-wrap" id="contact">
-  <div class="section-label"><span>03</span> LET'S MAKE SOMETHING</div>
-
-  <div class="contact-panel reveal">
-    <div>
-      <p class="mini-kicker">YOUR IDEA, MY CANVAS</p>
-      <h2>Have a project<br>in <em>mind?</em></h2>
-      <p class="contact-copy">
-        Tell me what you're dreaming up.
-        Let's turn it into something lovely.
-      </p>
-    </div>
-
-    <div class="contact-side">
-      <div class="contact-orb">✧</div>
-      <a class="button button-primary" href="mailto:your-email@example.com">
-        Get in touch <span>↗</span>
-      </a>
-      <p class="contact-hint">Replace with your commission email.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
 </main>
 
-<!-- GALLERY PAGE INSIDE SAME HTML -->
-<section id="galleryView" class="section-wrap">
-  <p class="eyebrow">
-    <span class="eyebrow-line"></span>
-    ANNA'S COLLECTION
-  </p>
+<footer>© 2026 Anna. All artwork belongs to its creator.</footer>
 
-  <h1 class="gallery-heading" id="galleryTitle">Gallery<span>.</span></h1>
-  <p class="gallery-description" id="galleryDescription"></p>
-
-  <div class="gallery-toolbar" id="galleryToolbar"></div>
-  <div class="gallery-grid" id="galleryGrid"></div>
-
-  <a href="#portfolio" class="button button-primary gallery-back">
-    ← Back to portfolio
-  </a>
-</section>
-
-<footer class="section-wrap">
-  <a href="#" class="brand">
-    <span class="brand-mark">A</span>
-    <span>ANNA<span class="brand-dot">.</span></span>
-  </a>
-  <p>© <span id="year"></span> ANNA — Digital Artist</p>
-  <a href="#home" class="back-top">BACK TO TOP ↑</a>
-</footer>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* MOBILE MENU */
-const menuToggle = document.getElementById("menuToggle");
-const nav = document.getElementById("nav");
-
-menuToggle.addEventListener("click", () => {
-  nav.classList.toggle("open");
-});
-
-nav.querySelectorAll("a").forEach(a => {
-  a.addEventListener("click", () => nav.classList.remove("open"));
-});
-
-/* YEAR */
-document.getElementById("year").textContent = new Date().getFullYear();
-
-/* SCROLL REVEAL */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-}, {threshold:.12});
-
-function observeReveal() {
-  document.querySelectorAll(".reveal:not(.visible)").forEach(el => {
-    observer.observe(el);
-  });
-}
-observeReveal();
-
-/* PARTICLES */
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-let W,H,particles=[];
-
-function resizeCanvas() {
-  const dpr = Math.min(devicePixelRatio || 1,2);
-  W = innerWidth;
-  H = innerHeight;
-  canvas.width = W*dpr;
-  canvas.height = H*dpr;
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-
-  const count = W < 700 ? 22 : 48;
-
-  particles = Array.from({length:count},()=>({
-    x:Math.random()*W,
-    y:Math.random()*H,
-    r:Math.random()*1.5+.4,
-    speed:Math.random()*.25+.06,
-    phase:Math.random()*6
-  }));
-}
-
-function animateParticles() {
-  ctx.clearRect(0,0,W,H);
-
-  particles.forEach(p=>{
-    p.y -= p.speed;
-    p.phase += .02;
-    p.x += Math.sin(p.phase)*.12;
-
-    if(p.y < -5) {
-      p.y = H+5;
-      p.x = Math.random()*W;
-    }
-
-    const alpha = .2 + (Math.sin(p.phase)+1)*.2;
-
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle = `rgba(235,190,222,${alpha})`;
-    ctx.fill();
-
-    if(p.r > 1.3) {
-      ctx.fillRect(p.x-3,p.y-.35,6,.7);
-      ctx.fillRect(p.x-.35,p.y-3,.7,6);
-    }
-  });
-
-  requestAnimationFrame(animateParticles);
-}
-
-resizeCanvas();
-animateParticles();
-addEventListener("resize",resizeCanvas);
-
-/* GALLERY DATA
-   Apni images ke paths yahan add karo.
-   Example:
-   {title:"Model 01",src:"VTuber-Models/model-01.png"}
-*/
-const galleryData = {
-  "VTuber-Models": {
-    title:"VTuber Models",
-    description:"Characters with a story to tell.",
-    images:[]
-  },
-  "Logos": {
-    title:"Logos",
-    description:"A signature look for your name.",
-    images:[]
-  },
-  "Banners": {
-    title:"Banners",
-    description:"Make your creative space feel like you.",
-    images:[]
-  },
-  "Emotes": {
-    title:"Emotes",
-    description:"Big feelings, tiny icons.",
-    images:[]
-  },
-  "Artscene": {
-    title:"Artscene",
-    description:"Atmosphere in every frame.",
-    images:[]
-  },
-  "3D-Artroom": {
-    title:"3D Artroom",
-    description:"Little spaces with big personality.",
-    images:[]
-  }
+/* ---------- PKT clock ---------- */
+const clk = document.getElementById('clock');
+const tick = () => {
+  try { clk.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Karachi' }); } catch (e) {}
 };
+tick(); setInterval(tick, 1000);
 
-const homeContent = document.getElementById("homeContent");
-const galleryView = document.getElementById("galleryView");
-const galleryTitle = document.getElementById("galleryTitle");
-const galleryDescription = document.getElementById("galleryDescription");
-const galleryGrid = document.getElementById("galleryGrid");
-const galleryToolbar = document.getElementById("galleryToolbar");
+/* ---------- Disco ball + sparkle particles ---------- */
+(function () {
+  const cv = document.getElementById('disco');
+  if (!cv || !window.THREE) return;
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-function showGallery(category) {
-  const data = galleryData[category];
+  const r = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
+  r.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const s = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+  cam.position.z = 7;
 
-  if(!data) return;
+  // Mirror ball
+  const ball = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.8, 3),
+    new THREE.MeshStandardMaterial({ color: 0xdedaf0, metalness: 1, roughness: 0.12, flatShading: true })
+  );
+  s.add(ball);
 
-  homeContent.classList.add("hide");
-  galleryView.classList.add("show");
+  // Lights
+  s.add(new THREE.AmbientLight(0x6a5aa0, 0.6));
+  const l1 = new THREE.PointLight(0xff4fa3, 2.2, 30); l1.position.set(5, 3, 5);
+  const l2 = new THREE.PointLight(0x5ee7ff, 2.2, 30); l2.position.set(-5, -2, 4);
+  s.add(l1, l2);
 
-  galleryTitle.textContent = data.title + ".";
-  galleryDescription.textContent = data.description;
+  // Sparkle particles (pink, cyan, gold, white)
+  const N = 260, pos = new Float32Array(N * 3), col = new Float32Array(N * 3), base = [];
+  const pal = [[1, .31, .64], [.37, .9, 1], [1, .83, .42], [1, 1, 1]];
+  for (let i = 0; i < N; i++) {
+    const a = Math.random() * 6.28, b = Math.acos(2 * Math.random() - 1), d = 2.4 + Math.random() * 2.6;
+    pos.set([d * Math.sin(b) * Math.cos(a), d * Math.sin(b) * Math.sin(a), d * Math.cos(b)], i * 3);
+    col.set(pal[i % 4], i * 3);
+    base.push(Math.random() * 6.28);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const pts = new THREE.Points(g, new THREE.PointsMaterial({ size: 0.08, vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false }));
+  s.add(pts);
 
-  galleryToolbar.innerHTML = "";
+  // Click pulse ring
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(1.9, 1.95, 64),
+    new THREE.MeshBasicMaterial({ color: 0xff4fa3, transparent: true, opacity: 0, side: 2 })
+  );
+  s.add(ring);
 
-  Object.keys(galleryData).forEach(name => {
-    const btn = document.createElement("button");
-    btn.className = "filter-btn" + (name === category ? " active" : "");
-    btn.textContent = name.replaceAll("-"," ");
+  // Interaction
+  let vx = reduce ? 0 : 0.004, drag = false, lx = 0, pulse = 0, moved = 0, t = 0;
+  const size = () => {
+    const w = cv.clientWidth, h = cv.clientHeight;
+    r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+  };
+  size(); addEventListener('resize', size);
 
-    btn.addEventListener("click",()=>{
-      location.hash = "gallery/" + name;
-    });
-
-    galleryToolbar.appendChild(btn);
+  cv.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; moved = 0; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - lx; lx = e.clientX; moved += Math.abs(dx);
+    ball.rotation.y += dx * 0.01; vx = dx * 0.002;
   });
+  cv.addEventListener('pointerup', () => { drag = false; if (moved < 4) pulse = 1; });
 
-  galleryGrid.innerHTML = "";
-
-  if(data.images.length === 0) {
-    for(let i=1;i<=3;i++) {
-      const item = document.createElement("div");
-      item.className = "gallery-item";
-
-      const placeholder = document.createElement("div");
-      placeholder.className = "gallery-placeholder";
-      placeholder.textContent = "Your artwork";
-
-      const label = document.createElement("span");
-      label.textContent = "ADD YOUR IMAGE " + String(i).padStart(2,"0");
-
-      item.append(placeholder,label);
-      galleryGrid.appendChild(item);
-    }
-  } else {
-    data.images.forEach((art,index)=>{
-      const item = document.createElement("a");
-      item.className = "gallery-item";
-      item.href = art.src;
-      item.target = "_blank";
-      item.rel = "noopener";
-
-      const img = document.createElement("img");
-      img.src = art.src;
-      img.alt = art.title || "ANNA artwork";
-      img.loading = "lazy";
-
-      const label = document.createElement("span");
-      label.textContent = art.title || "Artwork " + (index+1);
-
-      item.append(img,label);
-      galleryGrid.appendChild(item);
-    });
-  }
-
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function showHome() {
-  homeContent.classList.remove("hide");
-  galleryView.classList.remove("show");
-  observeReveal();
-}
-
-function handleRoute() {
-  const route = location.hash;
-
-  if(route.startsWith("#gallery/")) {
-    const category = decodeURIComponent(route.slice(9));
-    showGallery(category);
-  } else {
-    showHome();
-  }
-}
-
-window.addEventListener("hashchange",handleRoute);
-handleRoute();
-
-/* HOME BRAND LINK */
-document.getElementById("brandHome").addEventListener("click",()=>{
-  if(location.hash !== "#home") {
-    location.hash = "home";
-  }
-});
+  // Animation loop
+  (function loop() {
+    requestAnimationFrame(loop); t += 0.016;
+    if (!drag) { ball.rotation.y += vx; vx += ((reduce ? 0 : 0.004) - vx) * 0.02; }
+    pts.rotation.y -= 0.0015;
+    ball.position.y = Math.sin(t) * 0.08;
+    const p = g.attributes.position;
+    for (let i = 0; i < N; i++) p.array[i * 3 + 1] += Math.sin(t * 2 + base[i]) * 0.0025;
+    p.needsUpdate = true;
+    pts.material.size = 0.07 + Math.sin(t * 3) * 0.02;
+    if (pulse > 0) { pulse -= 0.02; ring.material.opacity = pulse; ring.scale.setScalar(1 + (1 - pulse) * 2.2); }
+    else ring.material.opacity = 0;
+    r.render(s, cam);
+  })();
+})();
 </script>
-
 </body>
 </html>
