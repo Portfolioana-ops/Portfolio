@@ -3,263 +3,380 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Anna — Graphic Designer & VTuber Artist</title>
-<meta name="description" content="Anna's portfolio: VTuber models, logos, banners, emotes, art scenes and 3D art rooms.">
+<title>Anna — Graphic Designer, VTuber Artist & 3D Room Builder</title>
+<meta name="description" content="Anna designs VTuber models, logos, banners, emotes, art scenes and 3D art rooms for creators.">
 <meta name="theme-color" content="#0c0813">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
-:root{--bg:#0c0813;--ink:#f1eefb;--mute:#a79fc0;--pink:#ff4fa3;--cyan:#5ee7ff;--gold:#ffd36b;--line:#2a2140;color-scheme:dark}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg);color:var(--ink);font:300 1.05rem/1.6 Outfit,system-ui,sans-serif;padding-top:env(safe-area-inset-top)}
-.skip{position:absolute;left:-999px}
-.skip:focus{left:8px;top:8px;background:#fff;color:#000;padding:8px;z-index:99}
-a{color:inherit}
-a:focus-visible,.btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+:root{--bg:#0c0813;--bg2:#150f24;--ink:#f1eefb;--mute:#a79fc0;--pink:#ff4fa3;--cyan:#5ee7ff;--gold:#ffd36b;--line:#2a2140;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--ink);font:300 1.05rem/1.6 Outfit,system-ui,sans-serif;overflow-x:hidden;padding-top:env(safe-area-inset-top)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;color:#000;padding:8px;z-index:99}
+::selection{background:var(--pink);color:#1a0a14}
 
-/* Navbar */
-.nav{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:16px 5vw;z-index:10;background:linear-gradient(var(--bg),transparent)}
-.logo{font:700 1.3rem Unbounded;text-decoration:none;color:var(--pink)}
-.nav nav a{margin-left:22px;text-decoration:none;color:var(--mute)}
-.nav nav a:hover{color:var(--ink)}
+/* cursor glow + trail canvas */
+#trail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+#glow{position:fixed;left:0;top:0;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(255,79,163,.16),transparent 65%);transition:opacity .3s}
+#bar{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--pink),var(--gold),var(--cyan));z-index:60}
 
-/* Hero */
-.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:2vw;padding:90px 5vw 40px;position:relative}
-#disco{width:100%;height:min(70vh,560px);order:2;cursor:grab;touch-action:pan-y}
-#disco:active{cursor:grabbing}
+/* nav */
+.nav{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;z-index:40;transition:background .3s,backdrop-filter .3s}
+.nav.solid{background:rgba(12,8,19,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{font:700 1.3rem Unbounded;color:var(--pink);display:flex;align-items:center;gap:10px}
+.logo i{width:22px;height:22px;border-radius:50%;background:conic-gradient(var(--pink),var(--gold),var(--cyan),var(--pink));animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.links{display:flex;gap:26px;align-items:center}.links a{color:var(--mute);transition:color .2s}.links a:hover{color:var(--ink)}
+.burger{display:none;width:44px;height:44px}
+.burger span{display:block;width:24px;height:2px;background:var(--ink);margin:6px auto;transition:.3s}
+.btn{display:inline-block;padding:13px 26px;border-radius:99px;background:var(--pink);color:#1a0a14;font-weight:500;margin:0 8px 8px 0;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px -8px var(--pink)}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--cyan);box-shadow:none}
+.nav .btn{padding:9px 20px;margin:0}
+
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:2vw;padding:100px 5vw 70px;position:relative;z-index:2}
+#disco{width:100%;height:min(72vh,600px);order:2;cursor:grab;touch-action:pan-y}#disco:active{cursor:grabbing}
 .kicker{color:var(--cyan);margin-bottom:14px}
-h1{font:700 clamp(2.2rem,5.5vw,4.6rem)/1.05 Unbounded;margin-bottom:20px;background:linear-gradient(100deg,var(--ink),var(--pink) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{font:700 clamp(2.3rem,5.6vw,4.8rem)/1.05 Unbounded;margin-bottom:22px;background:linear-gradient(100deg,var(--ink),var(--pink) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{max-width:46ch;color:var(--mute);margin-bottom:28px}
-.btn{display:inline-block;padding:13px 26px;border-radius:99px;background:var(--pink);color:#1a0a14;font-weight:500;text-decoration:none;margin:0 8px 8px 0;transition:transform .2s}
-.btn:hover{transform:translateY(-3px)}
-.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
-.clock{position:absolute;left:5vw;bottom:20px;color:var(--mute);font-size:.85rem}
+.hint{position:absolute;left:5vw;bottom:22px;color:var(--mute);font-size:.85rem;display:flex;gap:18px;align-items:center}
+.hint b{display:inline-block;width:1px;height:34px;background:linear-gradient(var(--pink),transparent);animation:drip 1.8s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* Marquee */
-.marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;font:500 1.4rem Unbounded;color:var(--gold);white-space:nowrap}
-.marquee div{display:inline-flex;animation:mq 28s linear infinite}
+/* marquee */
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;white-space:nowrap;position:relative;z-index:2;background:var(--bg)}
+.marquee div{display:inline-flex;animation:mq 30s linear infinite}
+.marquee span{font:500 1.35rem Unbounded;color:var(--gold);padding-right:2rem}
+.marquee.alt span{color:var(--cyan)}.marquee.alt div{animation-direction:reverse;animation-duration:38s}
 @keyframes mq{to{transform:translateX(-50%)}}
+.marquee:hover div{animation-play-state:paused}
 
-/* Sections */
-section:not(.hero){padding:90px 5vw;max-width:1200px;margin:auto}
-h2{font:700 clamp(1.8rem,4vw,3rem) Unbounded;margin-bottom:36px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
-.card{background:#150f24;border:1px solid var(--line);border-radius:22px;padding:18px;transition:transform .3s,border-color .3s}
-.card:hover{transform:translateY(-6px);border-color:var(--pink)}
-.art{aspect-ratio:4/3;border-radius:14px;margin-bottom:16px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--b))}
-.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.art b{font:700 3rem Unbounded;color:#ffffff88}
-.card h3{font:500 1.15rem Unbounded;margin-bottom:6px}
-.card p{color:var(--mute);margin-bottom:10px}
-.card code{color:var(--cyan);font-size:.85rem}
-.c1{--a:#ff4fa3;--b:#5b2a86}.c2{--a:#5ee7ff;--b:#2a3b86}.c3{--a:#ffd36b;--b:#c2410c}
-.c4{--a:#a78bfa;--b:#ec4899}.c5{--a:#34d399;--b:#1e3a8a}.c6{--a:#f472b6;--b:#0e7490}
-.about p,.contact p{max-width:60ch;color:var(--mute);font-size:1.15rem}
-.contact a{color:var(--pink)}
-footer{text-align:center;padding:40px 5vw calc(40px + env(safe-area-inset-bottom));color:var(--mute);border-top:1px solid var(--line);font-size:.9rem}
+/* sections */
+section.s{padding:110px 5vw;max-width:1240px;margin:auto;position:relative;z-index:2}
+.eyebrow{color:var(--cyan);margin-bottom:12px}
+h2{font:700 clamp(1.8rem,4vw,3.1rem)/1.1 Unbounded;margin-bottom:22px}
+.lead{max-width:60ch;color:var(--mute);font-size:1.15rem;margin-bottom:38px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.stat{border-top:1px solid var(--line);padding-top:16px}
+.stat strong{display:block;font:700 clamp(2.4rem,5vw,3.8rem) Unbounded;color:var(--pink)}
+.stat span{color:var(--mute)}
 
-@media(max-width:800px){
-  .hero{grid-template-columns:1fr}
-  #disco{order:0;height:340px}
-  .nav nav a{margin-left:12px}
+/* gallery tabs */
+.tabs{display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:start}
+.tablist{display:flex;flex-direction:column;gap:8px}
+.tab{text-align:left;padding:16px 18px;border:1px solid var(--line);border-radius:16px;font:500 1rem Unbounded;color:var(--mute);transition:.25s}
+.tab small{display:block;font:300 .85rem Outfit;color:var(--mute);margin-top:2px}
+.tab:hover{border-color:var(--pink);color:var(--ink)}
+.tab[aria-selected=true]{background:var(--bg2);border-color:var(--pink);color:var(--ink);transform:translateX(8px)}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:26px;padding:22px;display:none;grid-template-columns:1.2fr 1fr;gap:26px;animation:fade .5s}
+.panel.on{display:grid}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.art{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--b))}
+.art::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 45%)}
+.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.art b{font:700 4rem Unbounded;color:#ffffff99;position:relative;z-index:0}
+.panel h3{font:700 1.5rem Unbounded;margin-bottom:10px}.panel p{color:var(--mute);margin-bottom:14px}
+.panel ul{list-style:none;margin-bottom:16px}.panel li{padding:8px 0;border-bottom:1px solid var(--line)}
+.panel li::before{content:"✦ ";color:var(--gold)}
+.panel code{color:var(--cyan);font-size:.85rem}
+.p1{--a:#ff4fa3;--b:#5b2a86}.p2{--a:#5ee7ff;--b:#2a3b86}.p3{--a:#ffd36b;--b:#c2410c}.p4{--a:#a78bfa;--b:#ec4899}.p5{--a:#34d399;--b:#1e3a8a}.p6{--a:#f472b6;--b:#0e7490}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.svc a{border:1px solid var(--line);border-radius:20px;padding:24px;background:var(--bg2);position:relative;overflow:hidden;transition:transform .3s,border-color .3s}
+.svc a::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,0),rgba(255,79,163,.22),transparent 60%);opacity:0;transition:opacity .3s}
+.svc a:hover{transform:translateY(-6px);border-color:var(--pink)}.svc a:hover::before{opacity:1}
+.svc h3{font:500 1.05rem Unbounded;margin-bottom:8px;position:relative}.svc p{color:var(--mute);position:relative}
+
+/* work scroller */
+.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 5vw 24px;margin:0 -5vw;cursor:grab;scrollbar-width:thin;scrollbar-color:var(--pink) var(--line)}
+.rail.drag{cursor:grabbing;scroll-snap-type:none}
+.work{flex:0 0 min(78vw,380px);scroll-snap-align:start;background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:16px;transition:transform .3s,border-color .3s;user-select:none}
+.work:hover{transform:translateY(-8px) rotate(-.6deg);border-color:var(--gold)}
+.work .art{margin-bottom:14px}.work h3{font:500 1.05rem Unbounded}.work p{color:var(--mute);font-size:.95rem}
+
+/* process */
+.steps{display:grid;gap:0}
+.step{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:26px 0;border-top:1px solid var(--line);transition:padding .3s}
+.step:hover{padding-left:14px}
+.step i{font:700 1.8rem Unbounded;color:var(--pink);font-style:normal}
+.step h3{font:500 1.2rem Unbounded;margin-bottom:6px}.step p{color:var(--mute);max-width:60ch}
+
+/* about */
+.about{display:grid;grid-template-columns:340px 1fr;gap:44px;align-items:center}
+.avatar{aspect-ratio:1;border-radius:50%;background:conic-gradient(from 0deg,var(--pink),var(--gold),var(--cyan),var(--pink));padding:6px;animation:spin 14s linear infinite}
+.avatar div{width:100%;height:100%;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font:700 4rem Unbounded;animation:spin 14s linear infinite reverse}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+blockquote{border-left:3px solid var(--pink);padding-left:18px;margin-top:22px;color:var(--ink);font-size:1.2rem}
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:60px}
+.val{border:1px solid var(--line);border-radius:20px;padding:22px}.val h3{font:500 1rem Unbounded;color:var(--gold);margin-bottom:8px}.val p{color:var(--mute)}
+
+/* contact */
+.contact{text-align:center;padding:120px 5vw 90px;position:relative;z-index:2}
+.contact h2{font-size:clamp(2rem,6vw,4.5rem);margin:20px auto}
+.contact .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px}
+footer{border-top:1px solid var(--line);padding:50px 5vw calc(30px + env(safe-area-inset-bottom));position:relative;z-index:2;background:var(--bg)}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;max-width:1240px;margin:auto}
+footer h4{font:500 .95rem Unbounded;margin-bottom:12px;color:var(--gold)}
+footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mute)}footer li a:hover{color:var(--pink)}
+.fbot{max-width:1240px;margin:36px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--mute);font-size:.9rem}
+.fbot a{color:var(--cyan)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+ .hero{grid-template-columns:1fr;padding-top:90px}#disco{order:0;height:340px}
+ .tabs{grid-template-columns:1fr}.tablist{flex-direction:row;overflow-x:auto}.tab{flex:0 0 auto;white-space:nowrap}.tab small{display:none}.tab[aria-selected=true]{transform:none}
+ .panel.on{grid-template-columns:1fr}.about{grid-template-columns:1fr}.avatar{max-width:240px}
+ .fgrid{grid-template-columns:1fr 1fr}
+ .burger{display:block}
+ .links{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;gap:28px;font:700 1.6rem Unbounded;transform:translateY(-100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:-1}
+ .links.open{transform:none}.nav .btn{display:none}
 }
-@media(prefers-reduced-motion:reduce){
-  .marquee div{animation:none}
-  html{scroll-behavior:auto}
-}
+@media(hover:none){#glow{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}}
 </style>
 </head>
-
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div id="bar"></div><div id="glow"></div><canvas id="trail" aria-hidden="true"></canvas>
 
-<header class="nav">
-  <a class="logo" href="#top">Anna</a>
-  <nav><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+<header class="nav" id="nav">
+ <a class="logo" href="#top"><i></i>Anna</a>
+ <nav class="links" id="links">
+  <a href="#studio">Studio</a><a href="#gallery">Gallery</a><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#about">About</a>
+ </nav>
+ <a class="btn" href="#contact">Commission me</a>
+ <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 
 <main id="main">
+<section class="hero" id="top">
+ <canvas id="disco" aria-label="Spinning disco ball. Drag to spin, click to send a pulse."></canvas>
+ <div>
+  <p class="kicker">Graphic design · VTuber art · 3D rooms · Since 2023</p>
+  <h1>I design characters worth streaming.</h1>
+  <p class="sub">Models, logos, banners, emotes and whole worlds for creators who want a channel that feels like one brand. Drag the ball, click it, and move your cursor — everything sparkles.</p>
+  <a class="btn" href="#gallery">See the gallery</a><a class="btn ghost" href="#contact">Book a commission</a>
+ </div>
+ <div class="hint"><b></b>Scroll · PKT <span id="clock">--:--:--</span></div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <canvas id="disco" aria-label="Spinning disco ball. Click to send a pulse."></canvas>
-    <div class="hero-text">
-      <p class="kicker">Graphic design · VTuber art · 3D rooms</p>
-      <h1>I design characters worth streaming.</h1>
-      <p class="sub">Models, logos, banners, emotes and whole worlds for creators. Drag the ball to spin it, click to send a pulse.</p>
-      <a class="btn" href="#work">See the work</a>
-      <a class="btn ghost" href="#contact">Book a commission</a>
-    </div>
-    <div class="clock">PKT <span id="clock">--:--:--</span></div>
-  </section>
+<div class="marquee" aria-hidden="true"><div>
+ <span>Photoshop ✦ Illustrator ✦ Clip Studio ✦ Live2D ✦ Blender ✦ Procreate ✦ After Effects ✦ Figma ✦ </span>
+ <span>Photoshop ✦ Illustrator ✦ Clip Studio ✦ Live2D ✦ Blender ✦ Procreate ✦ After Effects ✦ Figma ✦ </span>
+</div></div>
 
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div>
-      <span>VTuber Model ✦ Logo ✦ Banner ✦ Emotes ✦ Art Scene ✦ 3D Art Room ✦ </span>
-      <span>VTuber Model ✦ Logo ✦ Banner ✦ Emotes ✦ Art Scene ✦ 3D Art Room ✦ </span>
-    </div>
+<section class="s" id="studio">
+ <p class="eyebrow rv">The studio</p>
+ <h2 class="rv">One artist, every layer.</h2>
+ <p class="lead rv">Concept, line art, colour, rigging and 3D — made by one person, so your logo, model, emotes and room all look like they belong together.</p>
+ <div class="stats rv">
+  <div class="stat"><strong data-n="2023" data-plain="1">0</strong><span>Year I started</span></div>
+  <div class="stat"><strong data-n="6">0</strong><span>Things I make</span></div>
+  <div class="stat"><strong data-n="120" data-suf="+">0</strong><span>Projects delivered</span></div>
+  <div class="stat"><strong data-n="5">0</strong><span>Steps, no surprises</span></div>
+ </div>
+</section>
+
+<section class="s" id="gallery">
+ <p class="eyebrow rv">Gallery</p>
+ <h2 class="rv">Six folders, one style.</h2>
+ <div class="tabs rv">
+  <div class="tablist" role="tablist" id="tablist"></div>
+  <div id="panels"></div>
+ </div>
+</section>
+
+<div class="marquee alt" aria-hidden="true"><div>
+ <span>VTuber Model ✦ Logo ✦ Banner ✦ Emotes ✦ Art Scene ✦ 3D Art Room ✦ </span>
+ <span>VTuber Model ✦ Logo ✦ Banner ✦ Emotes ✦ Art Scene ✦ 3D Art Room ✦ </span>
+</div></div>
+
+<section class="s" id="services">
+ <p class="eyebrow rv">Services</p>
+ <h2 class="rv">What I can make for you.</h2>
+ <div class="svc rv">
+  <a href="#contact"><h3>Custom VTuber model</h3><p>Full-body or bust-up, layered and ready for rigging.</p></a>
+  <a href="#contact"><h3>Logo & brand mark</h3><p>A simple mark that works on a banner and as an avatar.</p></a>
+  <a href="#contact"><h3>Banners & panels</h3><p>Headers, overlays and stream panels in your colours.</p></a>
+  <a href="#contact"><h3>Emote sets</h3><p>Sub emotes and badges that stay readable at 28px.</p></a>
+  <a href="#contact"><h3>Art scenes</h3><p>Illustrated backdrops, key art and cover pieces.</p></a>
+  <a href="#contact"><h3>3D art rooms</h3><p>Real-time rooms for streams, shows and virtual events.</p></a>
+  <a href="#contact"><h3>Animated overlays</h3><p>Looping scenes, alerts and starting-soon screens.</p></a>
+  <a href="#contact"><h3>Not sure yet?</h3><p>Tell me your idea. I'll suggest a starting point.</p></a>
+ </div>
+</section>
+
+<section class="s" id="work">
+ <p class="eyebrow rv">Selected work</p>
+ <h2 class="rv">Drag to travel.</h2>
+ <div class="rail rv" id="rail"></div>
+</section>
+
+<section class="s" id="process">
+ <p class="eyebrow rv">How I work</p>
+ <h2 class="rv">Five steps. No surprises.</h2>
+ <div class="steps">
+  <div class="step rv"><i>01</i><div><h3>Brief</h3><p>You tell me who you are, what you stream and the mood you want.</p></div></div>
+  <div class="step rv"><i>02</i><div><h3>Sketch</h3><p>Rough thumbnails and a colour palette. You pick a direction.</p></div></div>
+  <div class="step rv"><i>03</i><div><h3>Render</h3><p>Line art, colour and polish. You review each stage.</p></div></div>
+  <div class="step rv"><i>04</i><div><h3>Revise</h3><p>Changes until it feels right, within the agreed rounds.</p></div></div>
+  <div class="step rv"><i>05</i><div><h3>Deliver</h3><p>Final files in every size you need, plus a usage guide.</p></div></div>
+ </div>
+</section>
+
+<section class="s" id="about">
+ <div class="about">
+  <div class="avatar rv"><div><img src="assets/logo/anna.webp" alt="Anna" onerror="this.remove();this.parentNode.textContent='A'"></div></div>
+  <div class="rv">
+   <p class="eyebrow">About</p>
+   <h2>Hi, I'm Anna.</h2>
+   <p class="lead" style="margin-bottom:0">I turn rough ideas into characters, logos and worlds that feel like one brand. I love bright colours, soft light and the sparkle of a disco ball in a dark room.</p>
+   <blockquote>Your channel should look like you on your best day.</blockquote>
   </div>
+ </div>
+ <div class="values">
+  <div class="val rv"><h3>Clear</h3><p>Simple shapes that read on a phone screen.</p></div>
+  <div class="val rv"><h3>Consistent</h3><p>Every piece matches the rest of your brand.</p></div>
+  <div class="val rv"><h3>Honest</h3><p>Fair prices, clear timelines, no hidden fees.</p></div>
+  <div class="val rv"><h3>Yours</h3><p>You get the source files and the rights you paid for.</p></div>
+ </div>
+</section>
 
-  <!-- WORK: har card ka apna folder hai -->
-  <section class="work" id="work">
-    <h2>Six folders, one style.</h2>
-    <div class="grid">
-
-      <article class="card c1">
-        <div class="art"><img src="assets/vtuber-model/preview.webp" alt="" onerror="this.remove()"><b>V</b></div>
-        <h3>VTuber Model</h3>
-        <p>Rigged-ready layered characters with expression sheets.</p>
-        <code>assets/vtuber-model/</code>
-      </article>
-
-      <article class="card c2">
-        <div class="art"><img src="assets/logo/preview.webp" alt="" onerror="this.remove()"><b>L</b></div>
-        <h3>Logo</h3>
-        <p>Marks that read at 32px and on a banner.</p>
-        <code>assets/logo/</code>
-      </article>
-
-      <article class="card c3">
-        <div class="art"><img src="assets/banner/preview.webp" alt="" onerror="this.remove()"><b>B</b></div>
-        <h3>Banner</h3>
-        <p>Channel headers and stream panels that match your brand.</p>
-        <code>assets/banner/</code>
-      </article>
-
-      <article class="card c4">
-        <div class="art"><img src="assets/emotes/preview.webp" alt="" onerror="this.remove()"><b>E</b></div>
-        <h3>Emotes</h3>
-        <p>Expressive sets in 28, 56 and 112px.</p>
-        <code>assets/emotes/</code>
-      </article>
-
-      <article class="card c5">
-        <div class="art"><img src="assets/art-scene/preview.webp" alt="" onerror="this.remove()"><b>A</b></div>
-        <h3>Art Scene</h3>
-        <p>Illustrated backdrops and key art for streams and covers.</p>
-        <code>assets/art-scene/</code>
-      </article>
-
-      <article class="card c6">
-        <div class="art"><img src="assets/3d-art-room/preview.webp" alt="" onerror="this.remove()"><b>3D</b></div>
-        <h3>3D Art Room</h3>
-        <p>Real-time rooms you can walk through, built in Blender.</p>
-        <code>assets/3d-art-room/</code>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <h2>Hi, I'm Anna.</h2>
-    <p>I turn rough ideas into characters, logos and worlds that feel like one brand. Every project starts with a short call, then sketches, then a polished set ready for streaming.</p>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <h2>Let's make something.</h2>
-    <p>
-      <a href="mailto:hello@example.com">hello@example.com</a> ·
-      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a> ·
-      <a href="https://discord.com/" target="_blank" rel="noopener">Discord</a>
-    </p>
-  </section>
-
+<section class="contact" id="contact">
+ <p class="eyebrow rv">Let's talk</p>
+ <h2 class="rv">Have a character in mind?</h2>
+ <p class="lead rv" style="margin:0 auto">Send a short message with your idea, your budget and your deadline.</p>
+ <div class="row rv">
+  <a class="btn" href="mailto:hello@example.com?subject=Commission%20request">hello@example.com</a>
+  <a class="btn ghost" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+  <a class="btn ghost" href="https://discord.com/" target="_blank" rel="noopener">Discord</a>
+  <a class="btn ghost" href="https://wa.me/920000000000" target="_blank" rel="noopener">WhatsApp</a>
+ </div>
+</section>
 </main>
 
-<footer>© 2026 Anna. All artwork belongs to its creator.</footer>
+<footer>
+ <div class="fgrid">
+  <div><a class="logo" href="#top"><i></i>Anna</a><p style="margin-top:12px;max-width:34ch">VTuber models, logos, banners, emotes, art scenes and 3D art rooms.</p></div>
+  <div><h4>Gallery</h4><ul><li><a href="#gallery">VTuber Model</a></li><li><a href="#gallery">Logo</a></li><li><a href="#gallery">Banner</a></li></ul></div>
+  <div><h4>More</h4><ul><li><a href="#gallery">Emotes</a></li><li><a href="#gallery">Art Scene</a></li><li><a href="#gallery">3D Art Room</a></li></ul></div>
+  <div><h4>Studio</h4><ul><li><a href="#services">Services</a></li><li><a href="#process">Process</a></li><li><a href="#contact">Contact</a></li></ul></div>
+ </div>
+ <div class="fbot"><span>© 2026 Anna. All artwork belongs to its creator.</span><span>PKT <b id="clock2" style="font-weight:400">--:--:--</b> · <a href="#top">Back to top ↑</a></span></div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ---------- PKT clock ---------- */
-const clk = document.getElementById('clock');
-const tick = () => {
-  try { clk.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Karachi' }); } catch (e) {}
-};
-tick(); setInterval(tick, 1000);
+/* ===== DATA: har category ka folder ===== */
+const CATS=[
+ {k:'vtuber-model',t:'VTuber Model',s:'Layered characters',l:'V',d:'A full character made in layers, ready for a rigger. Includes expression sheet and colour palette.',f:['Full-body or bust-up','Separate layers for rigging','Expression sheet','Colour palette & style guide']},
+ {k:'logo',t:'Logo',s:'Marks & avatars',l:'L',d:'A simple mark that works as your avatar, watermark and banner signature.',f:['3 concept directions','Light and dark versions','SVG and PNG files','Social avatar crops']},
+ {k:'banner',t:'Banner',s:'Headers & panels',l:'B',d:'Channel headers and stream panels that match your character and colours.',f:['YouTube, Twitch & X sizes','Stream panels set','Starting-soon screen','Editable source file']},
+ {k:'emotes',t:'Emotes',s:'Sub emotes & badges',l:'E',d:'Expressive sets that stay readable at tiny sizes.',f:['Sets of 5, 8 or 12','28, 56 and 112px exports','Sub badges','Animated option']},
+ {k:'art-scene',t:'Art Scene',s:'Backdrops & key art',l:'A',d:'Illustrated backgrounds and key art for streams, covers and posters.',f:['Full illustrated scene','Character integration','Wallpaper sizes','Print-ready file']},
+ {k:'3d-art-room',t:'3D Art Room',s:'Real-time rooms',l:'3D',d:'A 3D room built in Blender for streams, shows and virtual events.',f:['Custom room layout','Lighting & props','GLB / FBX export','Camera angle presets']}
+];
+const $=s=>document.querySelector(s);
+/* tabs + panels + work rail */
+const tl=$('#tablist'),pn=$('#panels'),rail=$('#rail');
+CATS.forEach((c,i)=>{
+ tl.insertAdjacentHTML('beforeend',`<button class="tab" role="tab" aria-selected="${i==0}" data-i="${i}">${c.t}<small>${c.s}</small></button>`);
+ pn.insertAdjacentHTML('beforeend',`<div class="panel p${i+1}${i==0?' on':''}" role="tabpanel"><div class="art"><img src="assets/${c.k}/preview.webp" alt="${c.t} preview" onerror="this.remove()"><b>${c.l}</b></div><div><h3>${c.t}</h3><p>${c.d}</p><ul>${c.f.map(x=>'<li>'+x+'</li>').join('')}</ul><code>assets/${c.k}/</code></div></div>`);
+ rail.insertAdjacentHTML('beforeend',`<article class="work p${i+1}"><div class="art"><img src="assets/${c.k}/work1.webp" alt="" draggable="false" onerror="this.remove()"><b>${c.l}</b></div><h3>${c.t}</h3><p>${c.s} · sample project</p></article>`);
+});
+tl.addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
+ tl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t===b));
+ pn.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('on',i==b.dataset.i))});
+/* drag rail */
+(()=>{let d=false,x=0,s=0;
+ rail.addEventListener('pointerdown',e=>{d=true;x=e.clientX;s=rail.scrollLeft;rail.classList.add('drag')});
+ addEventListener('pointermove',e=>{if(d)rail.scrollLeft=s-(e.clientX-x)});
+ addEventListener('pointerup',()=>{d=false;rail.classList.remove('drag')})})();
 
-/* ---------- Disco ball + sparkle particles ---------- */
-(function () {
-  const cv = document.getElementById('disco');
-  if (!cv || !window.THREE) return;
-  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* clocks */
+const clk=[$('#clock'),$('#clock2')];
+const tick=()=>{try{const t=new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Karachi'});clk.forEach(c=>c.textContent=t)}catch(e){}};tick();setInterval(tick,1000);
 
-  const r = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
-  r.setPixelRatio(Math.min(devicePixelRatio, 2));
-  const s = new THREE.Scene();
-  const cam = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-  cam.position.z = 7;
+/* nav, burger, progress */
+const nav=$('#nav'),bar=$('#bar'),links=$('#links'),bg=$('#burger');
+addEventListener('scroll',()=>{nav.classList.toggle('solid',scrollY>40);
+ bar.style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+bg.onclick=()=>{const o=links.classList.toggle('open');bg.setAttribute('aria-expanded',o)};
+links.addEventListener('click',e=>{if(e.target.closest('a')){links.classList.remove('open');bg.setAttribute('aria-expanded',false)}});
 
-  // Mirror ball
-  const ball = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(1.8, 3),
-    new THREE.MeshStandardMaterial({ color: 0xdedaf0, metalness: 1, roughness: 0.12, flatShading: true })
-  );
-  s.add(ball);
+/* reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
+ e.target.querySelectorAll('[data-n]').forEach(n=>{const T=+n.dataset.n,suf=n.dataset.suf||'',pl=n.dataset.plain;let v=0;
+  const st=performance.now();(function f(t){const p=Math.min((t-st)/1400,1);v=Math.round(T*(1-Math.pow(1-p,3)));n.textContent=v+(p==1?suf:'');if(p<1)requestAnimationFrame(f)})(st)})
+}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-  // Lights
-  s.add(new THREE.AmbientLight(0x6a5aa0, 0.6));
-  const l1 = new THREE.PointLight(0xff4fa3, 2.2, 30); l1.position.set(5, 3, 5);
-  const l2 = new THREE.PointLight(0x5ee7ff, 2.2, 30); l2.position.set(-5, -2, 4);
-  s.add(l1, l2);
+/* service card spotlight */
+document.querySelectorAll('.svc a').forEach(a=>a.addEventListener('pointermove',e=>{const r=a.getBoundingClientRect();a.style.setProperty('--mx',(e.clientX-r.left)+'px');a.style.setProperty('--my',(e.clientY-r.top)+'px')}));
 
-  // Sparkle particles (pink, cyan, gold, white)
-  const N = 260, pos = new Float32Array(N * 3), col = new Float32Array(N * 3), base = [];
-  const pal = [[1, .31, .64], [.37, .9, 1], [1, .83, .42], [1, 1, 1]];
-  for (let i = 0; i < N; i++) {
-    const a = Math.random() * 6.28, b = Math.acos(2 * Math.random() - 1), d = 2.4 + Math.random() * 2.6;
-    pos.set([d * Math.sin(b) * Math.cos(a), d * Math.sin(b) * Math.sin(a), d * Math.cos(b)], i * 3);
-    col.set(pal[i % 4], i * 3);
-    base.push(Math.random() * 6.28);
-  }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  g.setAttribute('color', new THREE.BufferAttribute(col, 3));
-  const pts = new THREE.Points(g, new THREE.PointsMaterial({ size: 0.08, vertexColors: true, transparent: true, opacity: 0.9, depthWrite: false }));
-  s.add(pts);
+/* ===== CURSOR: glow + disco particle trail ===== */
+(()=>{
+ const cv=$('#trail'),c=cv.getContext('2d'),glow=$('#glow');
+ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ let W,H,P=[],mx=-999,my=-999,lx=-999,ly=-999;
+ const rs=()=>{const dpr=Math.min(devicePixelRatio,2);W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr;c.setTransform(dpr,0,0,dpr,0,0)};rs();addEventListener('resize',rs);
+ const cols=['#ff4fa3','#5ee7ff','#ffd36b','#ffffff','#a78bfa'];
+ const spawn=(x,y,n,burst)=>{for(let i=0;i<n;i++){const a=Math.random()*6.28,sp=(burst?2+Math.random()*4:Math.random()*1.2);
+  P.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-.3,life:1,dec:.015+Math.random()*.02,s:1.5+Math.random()*3.2,c:cols[Math.random()*cols.length|0],star:Math.random()<.35})}};
+ addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;glow.style.transform=`translate(${mx}px,${my}px)`;
+  if(reduce)return;const d=Math.hypot(mx-lx,my-ly);if(d>6){spawn(mx,my,Math.min(4,1+d/14|0));lx=mx;ly=my}},{passive:true});
+ addEventListener('pointerdown',e=>{if(!reduce)spawn(e.clientX,e.clientY,26,true)});
+ (function loop(){requestAnimationFrame(loop);c.clearRect(0,0,innerWidth,innerHeight);
+  for(let i=P.length-1;i>=0;i--){const p=P[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.03;p.vx*=.98;p.life-=p.dec;
+   if(p.life<=0){P.splice(i,1);continue}
+   c.globalAlpha=p.life;c.fillStyle=p.c;c.shadowColor=p.c;c.shadowBlur=10;
+   if(p.star){c.save();c.translate(p.x,p.y);c.rotate(p.life*6);c.fillRect(-p.s,-.6,p.s*2,1.2);c.fillRect(-.6,-p.s,1.2,p.s*2);c.restore()}
+   else{c.beginPath();c.arc(p.x,p.y,p.s*p.life,0,6.28);c.fill()}}
+  c.globalAlpha=1;c.shadowBlur=0;if(P.length>500)P.splice(0,P.length-500)})();
+})();
 
-  // Click pulse ring
-  const ring = new THREE.Mesh(
-    new THREE.RingGeometry(1.9, 1.95, 64),
-    new THREE.MeshBasicMaterial({ color: 0xff4fa3, transparent: true, opacity: 0, side: 2 })
-  );
-  s.add(ring);
-
-  // Interaction
-  let vx = reduce ? 0 : 0.004, drag = false, lx = 0, pulse = 0, moved = 0, t = 0;
-  const size = () => {
-    const w = cv.clientWidth, h = cv.clientHeight;
-    r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
-  };
-  size(); addEventListener('resize', size);
-
-  cv.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; moved = 0; cv.setPointerCapture(e.pointerId); });
-  cv.addEventListener('pointermove', e => {
-    if (!drag) return;
-    const dx = e.clientX - lx; lx = e.clientX; moved += Math.abs(dx);
-    ball.rotation.y += dx * 0.01; vx = dx * 0.002;
-  });
-  cv.addEventListener('pointerup', () => { drag = false; if (moved < 4) pulse = 1; });
-
-  // Animation loop
-  (function loop() {
-    requestAnimationFrame(loop); t += 0.016;
-    if (!drag) { ball.rotation.y += vx; vx += ((reduce ? 0 : 0.004) - vx) * 0.02; }
-    pts.rotation.y -= 0.0015;
-    ball.position.y = Math.sin(t) * 0.08;
-    const p = g.attributes.position;
-    for (let i = 0; i < N; i++) p.array[i * 3 + 1] += Math.sin(t * 2 + base[i]) * 0.0025;
-    p.needsUpdate = true;
-    pts.material.size = 0.07 + Math.sin(t * 3) * 0.02;
-    if (pulse > 0) { pulse -= 0.02; ring.material.opacity = pulse; ring.scale.setScalar(1 + (1 - pulse) * 2.2); }
-    else ring.material.opacity = 0;
-    r.render(s, cam);
-  })();
+/* ===== DISCO BALL (three.js) ===== */
+(()=>{
+ const cv=$('#disco');if(!cv||!window.THREE)return;
+ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ const r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});r.setPixelRatio(Math.min(devicePixelRatio,2));
+ const s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,1,.1,100);cam.position.z=7;
+ const ball=new THREE.Mesh(new THREE.IcosahedronGeometry(1.8,3),new THREE.MeshStandardMaterial({color:0xdedaf0,metalness:1,roughness:.12,flatShading:true}));s.add(ball);
+ const cap=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,2,8),new THREE.MeshBasicMaterial({color:0x6a5aa0}));cap.position.y=2.8;s.add(cap);
+ s.add(new THREE.AmbientLight(0x6a5aa0,.6));
+ const l1=new THREE.PointLight(0xff4fa3,2.4,30),l2=new THREE.PointLight(0x5ee7ff,2.4,30),l3=new THREE.PointLight(0xffd36b,1.4,30);
+ l1.position.set(5,3,5);l2.position.set(-5,-2,4);l3.position.set(0,5,-3);s.add(l1,l2,l3);
+ const N=300,pos=new Float32Array(N*3),col=new Float32Array(N*3),base=[];
+ const pal=[[1,.31,.64],[.37,.9,1],[1,.83,.42],[1,1,1]];
+ for(let i=0;i<N;i++){const a=Math.random()*6.28,b=Math.acos(2*Math.random()-1),d=2.4+Math.random()*2.8;
+  pos.set([d*Math.sin(b)*Math.cos(a),d*Math.sin(b)*Math.sin(a),d*Math.cos(b)],i*3);col.set(pal[i%4],i*3);base.push(Math.random()*6.28)}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));
+ const pts=new THREE.Points(g,new THREE.PointsMaterial({size:.08,vertexColors:true,transparent:true,opacity:.9,depthWrite:false}));s.add(pts);
+ const ring=new THREE.Mesh(new THREE.RingGeometry(1.9,1.95,64),new THREE.MeshBasicMaterial({color:0xff4fa3,transparent:true,opacity:0,side:2}));s.add(ring);
+ let vx=reduce?0:.004,drag=false,lx=0,pulse=0,moved=0,t=0,tx=0,ty=0;
+ const size=()=>{const w=cv.clientWidth,h=cv.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};size();addEventListener('resize',size);
+ addEventListener('pointermove',e=>{tx=(e.clientX/innerWidth-.5)*.5;ty=(e.clientY/innerHeight-.5)*.3},{passive:true});
+ cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;moved=0;cv.setPointerCapture(e.pointerId)});
+ cv.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;moved+=Math.abs(dx);ball.rotation.y+=dx*.01;vx=dx*.002});
+ cv.addEventListener('pointerup',()=>{drag=false;if(moved<4)pulse=1});
+ (function loop(){requestAnimationFrame(loop);t+=.016;
+  if(!drag){ball.rotation.y+=vx;vx+=((reduce?0:.004)-vx)*.02}
+  ball.rotation.x+=(ty-ball.rotation.x)*.04;s.rotation.y+=(tx-s.rotation.y)*.04;
+  pts.rotation.y-=.0015;ball.position.y=Math.sin(t)*.08;
+  l1.position.x=Math.cos(t)*5;l1.position.z=Math.sin(t)*5;l2.position.x=-Math.cos(t*.8)*5;l2.position.z=-Math.sin(t*.8)*5;
+  const p=g.attributes.position;for(let i=0;i<N;i++)p.array[i*3+1]+=Math.sin(t*2+base[i])*.0025;p.needsUpdate=true;
+  pts.material.size=.07+Math.sin(t*3)*.02;
+  if(pulse>0){pulse-=.02;ring.material.opacity=pulse;ring.scale.setScalar(1+(1-pulse)*2.4)}else ring.material.opacity=0;
+  r.render(s,cam)})();
 })();
 </script>
 </body>
