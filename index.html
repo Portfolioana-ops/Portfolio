@@ -19,20 +19,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;color:#000;padding:8px;z-index:99}
 ::selection{background:var(--pink);color:#1a0a14}
 
-/* cursor glow + trail canvas */
+/* cursor effects */
 #trail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
-#glow{position:fixed;left:0;top:0;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(255,79,163,.16),transparent 65%);transition:opacity .3s}
+#glow{position:fixed;left:0;top:0;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(255,79,163,.16),transparent 65%)}
 #bar{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--pink),var(--gold),var(--cyan));z-index:60}
 
 /* nav */
-.nav{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;z-index:40;transition:background .3s,backdrop-filter .3s}
+.nav{position:fixed;inset:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;z-index:40;transition:background .3s}
 .nav.solid{background:rgba(12,8,19,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .logo{font:700 1.3rem Unbounded;color:var(--pink);display:flex;align-items:center;gap:10px}
 .logo i{width:22px;height:22px;border-radius:50%;background:conic-gradient(var(--pink),var(--gold),var(--cyan),var(--pink));animation:spin 6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.links{display:flex;gap:26px;align-items:center}.links a{color:var(--mute);transition:color .2s}.links a:hover{color:var(--ink)}
+.links{display:flex;gap:26px}.links a{color:var(--mute);transition:color .2s}.links a:hover{color:var(--ink)}
 .burger{display:none;width:44px;height:44px}
-.burger span{display:block;width:24px;height:2px;background:var(--ink);margin:6px auto;transition:.3s}
+.burger span{display:block;width:24px;height:2px;background:var(--ink);margin:6px auto}
 .btn{display:inline-block;padding:13px 26px;border-radius:99px;background:var(--pink);color:#1a0a14;font-weight:500;margin:0 8px 8px 0;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px -8px var(--pink)}
 .btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--cyan);box-shadow:none}
@@ -42,7 +42,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:2vw;padding:100px 5vw 70px;position:relative;z-index:2}
 #disco{width:100%;height:min(72vh,600px);order:2;cursor:grab;touch-action:pan-y}#disco:active{cursor:grabbing}
 .kicker{color:var(--cyan);margin-bottom:14px}
-h1{font:700 clamp(2.3rem,5.6vw,4.8rem)/1.05 Unbounded;margin-bottom:22px;background:linear-gradient(100deg,var(--ink),var(--pink) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{font:700 clamp(3.2rem,9vw,7.5rem)/1 Unbounded;margin-bottom:18px;background:linear-gradient(100deg,var(--ink),var(--pink) 60%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font:500 clamp(1.1rem,2.2vw,1.6rem)/1.3 Unbounded;margin-bottom:14px}
 .sub{max-width:46ch;color:var(--mute);margin-bottom:28px}
 .hint{position:absolute;left:5vw;bottom:22px;color:var(--mute);font-size:.85rem;display:flex;gap:18px;align-items:center}
 .hint b{display:inline-block;width:1px;height:34px;background:linear-gradient(var(--pink),transparent);animation:drip 1.8s ease-in-out infinite}
@@ -54,7 +55,6 @@ h1{font:700 clamp(2.3rem,5.6vw,4.8rem)/1.05 Unbounded;margin-bottom:22px;backgro
 .marquee span{font:500 1.35rem Unbounded;color:var(--gold);padding-right:2rem}
 .marquee.alt span{color:var(--cyan)}.marquee.alt div{animation-direction:reverse;animation-duration:38s}
 @keyframes mq{to{transform:translateX(-50%)}}
-.marquee:hover div{animation-play-state:paused}
 
 /* sections */
 section.s{padding:110px 5vw;max-width:1240px;margin:auto;position:relative;z-index:2}
@@ -66,24 +66,32 @@ h2{font:700 clamp(1.8rem,4vw,3.1rem)/1.1 Unbounded;margin-bottom:22px}
 .stat strong{display:block;font:700 clamp(2.4rem,5vw,3.8rem) Unbounded;color:var(--pink)}
 .stat span{color:var(--mute)}
 
-/* gallery tabs */
-.tabs{display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:start}
-.tablist{display:flex;flex-direction:column;gap:8px}
-.tab{text-align:left;padding:16px 18px;border:1px solid var(--line);border-radius:16px;font:500 1rem Unbounded;color:var(--mute);transition:.25s}
-.tab small{display:block;font:300 .85rem Outfit;color:var(--mute);margin-top:2px}
-.tab:hover{border-color:var(--pink);color:var(--ink)}
-.tab[aria-selected=true]{background:var(--bg2);border-color:var(--pink);color:var(--ink);transform:translateX(8px)}
-.panel{background:var(--bg2);border:1px solid var(--line);border-radius:26px;padding:22px;display:none;grid-template-columns:1.2fr 1fr;gap:26px;animation:fade .5s}
-.panel.on{display:grid}
-@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.art{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--b))}
-.art::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 45%)}
-.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
-.art b{font:700 4rem Unbounded;color:#ffffff99;position:relative;z-index:0}
-.panel h3{font:700 1.5rem Unbounded;margin-bottom:10px}.panel p{color:var(--mute);margin-bottom:14px}
-.panel ul{list-style:none;margin-bottom:16px}.panel li{padding:8px 0;border-bottom:1px solid var(--line)}
-.panel li::before{content:"✦ ";color:var(--gold)}
-.panel code{color:var(--cyan);font-size:.85rem}
+/* ===== MIRROR DOOR FOLDERS ===== */
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:34px 28px}
+.dc{perspective:1400px}
+.dc button.frame{display:block;width:100%;text-align:left;position:relative;aspect-ratio:4/5;border-radius:18px 18px 6px 6px;padding:12px;background:linear-gradient(160deg,#2b2142,#120c20);border:1px solid #3a2f58;box-shadow:0 30px 60px -28px #000,inset 0 0 40px #000}
+.frame::before{content:"";position:absolute;left:10px;right:10px;bottom:-12px;height:14px;background:radial-gradient(ellipse at center,rgba(255,79,163,.35),transparent 70%);filter:blur(6px)}
+.inside{position:absolute;inset:12px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,var(--a),var(--b));display:flex;flex-direction:column;justify-content:flex-end}
+.inside img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.inside .big{position:absolute;top:14px;right:18px;font:700 4.5rem Unbounded;color:#ffffff55}
+.inside .info{position:relative;padding:18px;background:linear-gradient(transparent,rgba(12,8,19,.92) 40%);color:var(--ink)}
+.inside h3{font:700 1.2rem Unbounded;margin-bottom:6px}
+.inside ul{list-style:none;font-size:.92rem;color:#d9d3ee}.inside li::before{content:"✦ ";color:var(--gold)}
+.inside code{display:block;margin-top:8px;color:var(--cyan);font-size:.8rem}
+.door{position:absolute;inset:12px;border-radius:10px;transform-origin:left center;transition:transform 1s cubic-bezier(.6,0,.2,1);transform-style:preserve-3d;backface-visibility:hidden;overflow:hidden;
+ background:linear-gradient(115deg,#2a2440 0%,#d9d4ee 20%,#6d6591 38%,#f7f4ff 52%,#4b4470 72%,#b3acd0 100%);background-size:260% 100%;animation:sheen 7s ease-in-out infinite;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35),inset 0 0 50px rgba(255,79,163,.25)}
+@keyframes sheen{50%{background-position:100% 0}}
+.door::before{content:"";position:absolute;inset:14px;border:1px solid rgba(20,10,40,.45);border-radius:6px;box-shadow:inset 0 0 0 5px rgba(255,255,255,.18)}
+.door::after{content:"";position:absolute;top:-20%;left:-60%;width:40%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);transform:rotate(18deg);animation:glint 4.5s ease-in-out infinite}
+@keyframes glint{0%,55%{left:-60%}100%{left:140%}}
+.door .letter{position:absolute;inset:0;display:grid;place-items:center;font:700 6rem Unbounded;color:rgba(20,10,40,.28);text-shadow:0 2px 0 rgba(255,255,255,.4)}
+.door .plate{position:absolute;left:50%;top:22px;transform:translateX(-50%);padding:6px 16px;border-radius:99px;background:#150f24;color:var(--gold);font:500 .78rem Unbounded;white-space:nowrap;box-shadow:0 2px 8px #0008}
+.door .handle{position:absolute;right:22px;top:50%;width:14px;height:64px;border-radius:99px;transform:translateY(-50%);background:linear-gradient(90deg,#fff3c4,#d19a2b 60%,#7a5410);box-shadow:0 4px 10px #0007}
+.door .hint2{position:absolute;bottom:20px;left:0;right:0;text-align:center;font-size:.82rem;color:rgba(20,10,40,.7)}
+.dc.open .door{transform:rotateY(-112deg)}
+@media(hover:hover){.dc:hover .door{transform:rotateY(-112deg)}}
+.cap{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding:0 4px}
+.cap h3{font:500 1.05rem Unbounded}.cap span{color:var(--mute);font-size:.9rem}
 .p1{--a:#ff4fa3;--b:#5b2a86}.p2{--a:#5ee7ff;--b:#2a3b86}.p3{--a:#ffd36b;--b:#c2410c}.p4{--a:#a78bfa;--b:#ec4899}.p5{--a:#34d399;--b:#1e3a8a}.p6{--a:#f472b6;--b:#0e7490}
 
 /* services */
@@ -93,30 +101,33 @@ h2{font:700 clamp(1.8rem,4vw,3.1rem)/1.1 Unbounded;margin-bottom:22px}
 .svc a:hover{transform:translateY(-6px);border-color:var(--pink)}.svc a:hover::before{opacity:1}
 .svc h3{font:500 1.05rem Unbounded;margin-bottom:8px;position:relative}.svc p{color:var(--mute);position:relative}
 
-/* work scroller */
-.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 5vw 24px;margin:0 -5vw;cursor:grab;scrollbar-width:thin;scrollbar-color:var(--pink) var(--line)}
-.rail.drag{cursor:grabbing;scroll-snap-type:none}
-.work{flex:0 0 min(78vw,380px);scroll-snap-align:start;background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:16px;transition:transform .3s,border-color .3s;user-select:none}
-.work:hover{transform:translateY(-8px) rotate(-.6deg);border-color:var(--gold)}
-.work .art{margin-bottom:14px}.work h3{font:500 1.05rem Unbounded}.work p{color:var(--mute);font-size:.95rem}
-
 /* process */
-.steps{display:grid;gap:0}
 .step{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:26px 0;border-top:1px solid var(--line);transition:padding .3s}
 .step:hover{padding-left:14px}
 .step i{font:700 1.8rem Unbounded;color:var(--pink);font-style:normal}
 .step h3{font:500 1.2rem Unbounded;margin-bottom:6px}.step p{color:var(--mute);max-width:60ch}
 
-/* about */
-.about{display:grid;grid-template-columns:340px 1fr;gap:44px;align-items:center}
-.avatar{aspect-ratio:1;border-radius:50%;background:conic-gradient(from 0deg,var(--pink),var(--gold),var(--cyan),var(--pink));padding:6px;animation:spin 14s linear infinite}
-.avatar div{width:100%;height:100%;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font:700 4rem Unbounded;animation:spin 14s linear infinite reverse}
-.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-blockquote{border-left:3px solid var(--pink);padding-left:18px;margin-top:22px;color:var(--ink);font-size:1.2rem}
-.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:60px}
+/* ===== ABOUT (portfolio style) ===== */
+.about{display:grid;grid-template-columns:380px 1fr;gap:56px;align-items:start}
+.portrait{position:relative;aspect-ratio:4/5;border-radius:26px;padding:10px;background:linear-gradient(160deg,var(--pink),var(--gold) 50%,var(--cyan))}
+.portrait .in{width:100%;height:100%;border-radius:18px;background:var(--bg2);display:grid;place-items:center;overflow:hidden;position:relative}
+.portrait .in b{font:700 8rem Unbounded;background:linear-gradient(160deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;padding:9px 16px;border-radius:99px;background:rgba(12,8,19,.88);backdrop-filter:blur(8px);border:1px solid var(--line);font-size:.85rem}
+.badge.b1{left:-18px;bottom:60px;color:var(--gold)}.badge.b2{right:-14px;top:40px;color:var(--cyan)}
+.about h2{margin-bottom:18px}
+.about .bio p{color:var(--mute);font-size:1.12rem;max-width:62ch;margin-bottom:16px}
+.about .bio p:first-of-type{color:var(--ink);font-size:1.3rem;line-height:1.5}
+.facts{margin:30px 0;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.facts dt{color:var(--gold);font:500 .85rem Unbounded}.facts dd{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.chips span{padding:8px 16px;border-radius:99px;border:1px solid var(--line);color:var(--mute);transition:.25s}
+.chips span:hover{border-color:var(--pink);color:var(--ink)}
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:70px}
 .val{border:1px solid var(--line);border-radius:20px;padding:22px}.val h3{font:500 1rem Unbounded;color:var(--gold);margin-bottom:8px}.val p{color:var(--mute)}
 
-/* contact */
+/* contact + footer */
 .contact{text-align:center;padding:120px 5vw 90px;position:relative;z-index:2}
 .contact h2{font-size:clamp(2rem,6vw,4.5rem);margin:20px auto}
 .contact .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px}
@@ -127,17 +138,14 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
 .fbot{max-width:1240px;margin:36px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--mute);font-size:.9rem}
 .fbot a{color:var(--cyan)}
 
-/* reveal */
 .rv{opacity:0;transform:translateY(34px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
 
 @media(max-width:900px){
  .hero{grid-template-columns:1fr;padding-top:90px}#disco{order:0;height:340px}
- .tabs{grid-template-columns:1fr}.tablist{flex-direction:row;overflow-x:auto}.tab{flex:0 0 auto;white-space:nowrap}.tab small{display:none}.tab[aria-selected=true]{transform:none}
- .panel.on{grid-template-columns:1fr}.about{grid-template-columns:1fr}.avatar{max-width:240px}
- .fgrid{grid-template-columns:1fr 1fr}
- .burger{display:block}
- .links{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;gap:28px;font:700 1.6rem Unbounded;transform:translateY(-100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:-1}
+ .about{grid-template-columns:1fr}.portrait{max-width:320px}.facts div{grid-template-columns:1fr;gap:2px}
+ .fgrid{grid-template-columns:1fr 1fr}.burger{display:block}
+ .links{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;align-items:center;gap:28px;font:700 1.6rem Unbounded;transform:translateY(-100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:-1}
  .links.open{transform:none}.nav .btn{display:none}
 }
 @media(hover:none){#glow{display:none}}
@@ -151,20 +159,22 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
 <header class="nav" id="nav">
  <a class="logo" href="#top"><i></i>Anna</a>
  <nav class="links" id="links">
-  <a href="#studio">Studio</a><a href="#gallery">Gallery</a><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#about">About</a>
+  <a href="#studio">Studio</a><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#about">About</a>
  </nav>
  <a class="btn" href="#contact">Commission me</a>
  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 
 <main id="main">
+<!-- HERO -->
 <section class="hero" id="top">
  <canvas id="disco" aria-label="Spinning disco ball. Drag to spin, click to send a pulse."></canvas>
  <div>
-  <p class="kicker">Graphic design · VTuber art · 3D rooms · Since 2023</p>
-  <h1>I design characters worth streaming.</h1>
-  <p class="sub">Models, logos, banners, emotes and whole worlds for creators who want a channel that feels like one brand. Drag the ball, click it, and move your cursor — everything sparkles.</p>
-  <a class="btn" href="#gallery">See the gallery</a><a class="btn ghost" href="#contact">Book a commission</a>
+  <p class="kicker">Graphic designer · VTuber artist · 3D room builder</p>
+  <h1>I'm Anna.</h1>
+  <p class="tag">I design characters, brands and worlds for creators.</p>
+  <p class="sub">Models, logos, banners, emotes and 3D rooms that all feel like one brand. Drag the ball, click it, and move your cursor to make it sparkle.</p>
+  <a class="btn" href="#work">Open the folders</a><a class="btn ghost" href="#contact">Book a commission</a>
  </div>
  <div class="hint"><b></b>Scroll · PKT <span id="clock">--:--:--</span></div>
 </section>
@@ -174,25 +184,25 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
  <span>Photoshop ✦ Illustrator ✦ Clip Studio ✦ Live2D ✦ Blender ✦ Procreate ✦ After Effects ✦ Figma ✦ </span>
 </div></div>
 
+<!-- STUDIO -->
 <section class="s" id="studio">
  <p class="eyebrow rv">The studio</p>
  <h2 class="rv">One artist, every layer.</h2>
- <p class="lead rv">Concept, line art, colour, rigging and 3D — made by one person, so your logo, model, emotes and room all look like they belong together.</p>
+ <p class="lead rv">Concept, line art, colour, rigging and 3D — made by one person, so your logo, model, emotes and room look like they belong together.</p>
  <div class="stats rv">
-  <div class="stat"><strong data-n="2023" data-plain="1">0</strong><span>Year I started</span></div>
+  <div class="stat"><strong data-n="2023">0</strong><span>Year I started</span></div>
   <div class="stat"><strong data-n="6">0</strong><span>Things I make</span></div>
   <div class="stat"><strong data-n="120" data-suf="+">0</strong><span>Projects delivered</span></div>
   <div class="stat"><strong data-n="5">0</strong><span>Steps, no surprises</span></div>
  </div>
 </section>
 
-<section class="s" id="gallery">
- <p class="eyebrow rv">Gallery</p>
- <h2 class="rv">Six folders, one style.</h2>
- <div class="tabs rv">
-  <div class="tablist" role="tablist" id="tablist"></div>
-  <div id="panels"></div>
- </div>
+<!-- WORK: mirror door folders -->
+<section class="s" id="work">
+ <p class="eyebrow rv">Work</p>
+ <h2 class="rv">Open a door.</h2>
+ <p class="lead rv">Six folders, each with its own style. Hover a door, or tap it on your phone, to see what is inside.</p>
+ <div class="doors rv" id="doors"></div>
 </section>
 
 <div class="marquee alt" aria-hidden="true"><div>
@@ -200,6 +210,7 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
  <span>VTuber Model ✦ Logo ✦ Banner ✦ Emotes ✦ Art Scene ✦ 3D Art Room ✦ </span>
 </div></div>
 
+<!-- SERVICES -->
 <section class="s" id="services">
  <p class="eyebrow rv">Services</p>
  <h2 class="rv">What I can make for you.</h2>
@@ -215,32 +226,39 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
  </div>
 </section>
 
-<section class="s" id="work">
- <p class="eyebrow rv">Selected work</p>
- <h2 class="rv">Drag to travel.</h2>
- <div class="rail rv" id="rail"></div>
-</section>
-
+<!-- PROCESS -->
 <section class="s" id="process">
  <p class="eyebrow rv">How I work</p>
  <h2 class="rv">Five steps. No surprises.</h2>
- <div class="steps">
-  <div class="step rv"><i>01</i><div><h3>Brief</h3><p>You tell me who you are, what you stream and the mood you want.</p></div></div>
-  <div class="step rv"><i>02</i><div><h3>Sketch</h3><p>Rough thumbnails and a colour palette. You pick a direction.</p></div></div>
-  <div class="step rv"><i>03</i><div><h3>Render</h3><p>Line art, colour and polish. You review each stage.</p></div></div>
-  <div class="step rv"><i>04</i><div><h3>Revise</h3><p>Changes until it feels right, within the agreed rounds.</p></div></div>
-  <div class="step rv"><i>05</i><div><h3>Deliver</h3><p>Final files in every size you need, plus a usage guide.</p></div></div>
- </div>
+ <div class="step rv"><i>01</i><div><h3>Brief</h3><p>You tell me who you are, what you stream and the mood you want.</p></div></div>
+ <div class="step rv"><i>02</i><div><h3>Sketch</h3><p>Rough thumbnails and a colour palette. You pick a direction.</p></div></div>
+ <div class="step rv"><i>03</i><div><h3>Render</h3><p>Line art, colour and polish. You review each stage.</p></div></div>
+ <div class="step rv"><i>04</i><div><h3>Revise</h3><p>Changes until it feels right, within the agreed rounds.</p></div></div>
+ <div class="step rv"><i>05</i><div><h3>Deliver</h3><p>Final files in every size you need, plus a usage guide.</p></div></div>
 </section>
 
+<!-- ABOUT -->
 <section class="s" id="about">
  <div class="about">
-  <div class="avatar rv"><div><img src="assets/logo/anna.webp" alt="Anna" onerror="this.remove();this.parentNode.textContent='A'"></div></div>
-  <div class="rv">
+  <div class="portrait rv">
+   <div class="in"><b>A</b><img src="assets/logo/anna.webp" alt="Portrait of Anna" onerror="this.remove()"></div>
+   <span class="badge b1">Open for commissions</span>
+   <span class="badge b2">Designer · Artist</span>
+  </div>
+  <div class="bio rv">
    <p class="eyebrow">About</p>
-   <h2>Hi, I'm Anna.</h2>
-   <p class="lead" style="margin-bottom:0">I turn rough ideas into characters, logos and worlds that feel like one brand. I love bright colours, soft light and the sparkle of a disco ball in a dark room.</p>
-   <blockquote>Your channel should look like you on your best day.</blockquote>
+   <h2>The artist behind the work.</h2>
+   <p>I design the visual identity of online creators, from the first sketch of a character to the last light in a 3D room.</p>
+   <p>My work sits where graphic design meets character art. I build VTuber models, logos, banners, emotes, illustrated scenes and 3D art rooms, and I keep them consistent, so a viewer recognises your channel from a single thumbnail.</p>
+   <p>I care about clean shapes, considered colour and detail that survives at small sizes. Every project is shaped around your personality and your audience, never around a template.</p>
+   <dl class="facts">
+    <div><dt>Discipline</dt><dd>Graphic design, character art, 3D environments</dd></div>
+    <div><dt>Focus</dt><dd>VTubers, streamers and online creators</dd></div>
+    <div><dt>Delivery</dt><dd>Layered source files, web and print exports</dd></div>
+    <div><dt>Availability</dt><dd>Taking new commissions</dd></div>
+   </dl>
+   <div class="chips"><span>Character design</span><span>Brand identity</span><span>Illustration</span><span>Rigging-ready art</span><span>3D environments</span><span>Motion</span></div>
+   <a class="btn" href="#contact">Work with me</a>
   </div>
  </div>
  <div class="values">
@@ -251,6 +269,7 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
  </div>
 </section>
 
+<!-- CONTACT -->
 <section class="contact" id="contact">
  <p class="eyebrow rv">Let's talk</p>
  <h2 class="rv">Have a character in mind?</h2>
@@ -267,8 +286,8 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
 <footer>
  <div class="fgrid">
   <div><a class="logo" href="#top"><i></i>Anna</a><p style="margin-top:12px;max-width:34ch">VTuber models, logos, banners, emotes, art scenes and 3D art rooms.</p></div>
-  <div><h4>Gallery</h4><ul><li><a href="#gallery">VTuber Model</a></li><li><a href="#gallery">Logo</a></li><li><a href="#gallery">Banner</a></li></ul></div>
-  <div><h4>More</h4><ul><li><a href="#gallery">Emotes</a></li><li><a href="#gallery">Art Scene</a></li><li><a href="#gallery">3D Art Room</a></li></ul></div>
+  <div><h4>Work</h4><ul><li><a href="#work">VTuber Model</a></li><li><a href="#work">Logo</a></li><li><a href="#work">Banner</a></li></ul></div>
+  <div><h4>More</h4><ul><li><a href="#work">Emotes</a></li><li><a href="#work">Art Scene</a></li><li><a href="#work">3D Art Room</a></li></ul></div>
   <div><h4>Studio</h4><ul><li><a href="#services">Services</a></li><li><a href="#process">Process</a></li><li><a href="#contact">Contact</a></li></ul></div>
  </div>
  <div class="fbot"><span>© 2026 Anna. All artwork belongs to its creator.</span><span>PKT <b id="clock2" style="font-weight:400">--:--:--</b> · <a href="#top">Back to top ↑</a></span></div>
@@ -276,31 +295,37 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* ===== DATA: har category ka folder ===== */
-const CATS=[
- {k:'vtuber-model',t:'VTuber Model',s:'Layered characters',l:'V',d:'A full character made in layers, ready for a rigger. Includes expression sheet and colour palette.',f:['Full-body or bust-up','Separate layers for rigging','Expression sheet','Colour palette & style guide']},
- {k:'logo',t:'Logo',s:'Marks & avatars',l:'L',d:'A simple mark that works as your avatar, watermark and banner signature.',f:['3 concept directions','Light and dark versions','SVG and PNG files','Social avatar crops']},
- {k:'banner',t:'Banner',s:'Headers & panels',l:'B',d:'Channel headers and stream panels that match your character and colours.',f:['YouTube, Twitch & X sizes','Stream panels set','Starting-soon screen','Editable source file']},
- {k:'emotes',t:'Emotes',s:'Sub emotes & badges',l:'E',d:'Expressive sets that stay readable at tiny sizes.',f:['Sets of 5, 8 or 12','28, 56 and 112px exports','Sub badges','Animated option']},
- {k:'art-scene',t:'Art Scene',s:'Backdrops & key art',l:'A',d:'Illustrated backgrounds and key art for streams, covers and posters.',f:['Full illustrated scene','Character integration','Wallpaper sizes','Print-ready file']},
- {k:'3d-art-room',t:'3D Art Room',s:'Real-time rooms',l:'3D',d:'A 3D room built in Blender for streams, shows and virtual events.',f:['Custom room layout','Lighting & props','GLB / FBX export','Camera angle presets']}
-];
 const $=s=>document.querySelector(s);
-/* tabs + panels + work rail */
-const tl=$('#tablist'),pn=$('#panels'),rail=$('#rail');
+
+/* ===== DATA: har category ka folder (assets/<k>/preview.webp) ===== */
+const CATS=[
+ {k:'vtuber-model',t:'VTuber Model',s:'Layered characters',l:'V',f:['Full-body or bust-up','Separate layers for rigging','Expression sheet','Colour palette & style guide']},
+ {k:'logo',t:'Logo',s:'Marks & avatars',l:'L',f:['3 concept directions','Light and dark versions','SVG and PNG files','Social avatar crops']},
+ {k:'banner',t:'Banner',s:'Headers & panels',l:'B',f:['YouTube, Twitch & X sizes','Stream panels set','Starting-soon screen','Editable source file']},
+ {k:'emotes',t:'Emotes',s:'Sub emotes & badges',l:'E',f:['Sets of 5, 8 or 12','28, 56 and 112px exports','Sub badges','Animated option']},
+ {k:'art-scene',t:'Art Scene',s:'Backdrops & key art',l:'A',f:['Full illustrated scene','Character integration','Wallpaper sizes','Print-ready file']},
+ {k:'3d-art-room',t:'3D Art Room',s:'Real-time rooms',l:'3D',f:['Custom room layout','Lighting & props','GLB / FBX export','Camera angle presets']}
+];
+
+/* mirror doors */
+const doors=$('#doors');
 CATS.forEach((c,i)=>{
- tl.insertAdjacentHTML('beforeend',`<button class="tab" role="tab" aria-selected="${i==0}" data-i="${i}">${c.t}<small>${c.s}</small></button>`);
- pn.insertAdjacentHTML('beforeend',`<div class="panel p${i+1}${i==0?' on':''}" role="tabpanel"><div class="art"><img src="assets/${c.k}/preview.webp" alt="${c.t} preview" onerror="this.remove()"><b>${c.l}</b></div><div><h3>${c.t}</h3><p>${c.d}</p><ul>${c.f.map(x=>'<li>'+x+'</li>').join('')}</ul><code>assets/${c.k}/</code></div></div>`);
- rail.insertAdjacentHTML('beforeend',`<article class="work p${i+1}"><div class="art"><img src="assets/${c.k}/work1.webp" alt="" draggable="false" onerror="this.remove()"><b>${c.l}</b></div><h3>${c.t}</h3><p>${c.s} · sample project</p></article>`);
+ doors.insertAdjacentHTML('beforeend',`
+ <div class="dc p${i+1}">
+  <button class="frame" aria-expanded="false" aria-label="Open ${c.t} folder">
+   <div class="inside">
+    <img src="assets/${c.k}/preview.webp" alt="" onerror="this.remove()"><span class="big">${c.l}</span>
+    <div class="info"><h3>${c.t}</h3><ul>${c.f.map(x=>'<li>'+x+'</li>').join('')}</ul><code>assets/${c.k}/</code></div>
+   </div>
+   <div class="door"><span class="plate">${c.t}</span><span class="letter">${c.l}</span><span class="handle"></span><span class="hint2">Hover or tap to open</span></div>
+  </button>
+  <div class="cap"><h3>${c.t}</h3><span>${c.s}</span></div>
+ </div>`);
 });
-tl.addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
- tl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t===b));
- pn.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('on',i==b.dataset.i))});
-/* drag rail */
-(()=>{let d=false,x=0,s=0;
- rail.addEventListener('pointerdown',e=>{d=true;x=e.clientX;s=rail.scrollLeft;rail.classList.add('drag')});
- addEventListener('pointermove',e=>{if(d)rail.scrollLeft=s-(e.clientX-x)});
- addEventListener('pointerup',()=>{d=false;rail.classList.remove('drag')})})();
+doors.addEventListener('click',e=>{const b=e.target.closest('.frame');if(!b)return;
+ const d=b.parentNode,o=!d.classList.contains('open');
+ doors.querySelectorAll('.dc').forEach(x=>{x.classList.remove('open');x.querySelector('.frame').setAttribute('aria-expanded',false)});
+ if(o){d.classList.add('open');b.setAttribute('aria-expanded',true)}});
 
 /* clocks */
 const clk=[$('#clock'),$('#clock2')];
@@ -315,22 +340,22 @@ links.addEventListener('click',e=>{if(e.target.closest('a')){links.classList.rem
 
 /* reveal + counters */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
- e.target.querySelectorAll('[data-n]').forEach(n=>{const T=+n.dataset.n,suf=n.dataset.suf||'',pl=n.dataset.plain;let v=0;
-  const st=performance.now();(function f(t){const p=Math.min((t-st)/1400,1);v=Math.round(T*(1-Math.pow(1-p,3)));n.textContent=v+(p==1?suf:'');if(p<1)requestAnimationFrame(f)})(st)})
+ e.target.querySelectorAll('[data-n]').forEach(n=>{const T=+n.dataset.n,suf=n.dataset.suf||'';
+  const st=performance.now();(function f(t){const p=Math.min((t-st)/1400,1);n.textContent=Math.round(T*(1-Math.pow(1-p,3)))+(p==1?suf:'');if(p<1)requestAnimationFrame(f)})(st)})
 }),{threshold:.15});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-/* service card spotlight */
+/* service spotlight */
 document.querySelectorAll('.svc a').forEach(a=>a.addEventListener('pointermove',e=>{const r=a.getBoundingClientRect();a.style.setProperty('--mx',(e.clientX-r.left)+'px');a.style.setProperty('--my',(e.clientY-r.top)+'px')}));
 
 /* ===== CURSOR: glow + disco particle trail ===== */
 (()=>{
  const cv=$('#trail'),c=cv.getContext('2d'),glow=$('#glow');
  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
- let W,H,P=[],mx=-999,my=-999,lx=-999,ly=-999;
- const rs=()=>{const dpr=Math.min(devicePixelRatio,2);W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr;c.setTransform(dpr,0,0,dpr,0,0)};rs();addEventListener('resize',rs);
+ let P=[],mx=-999,my=-999,lx=-999,ly=-999;
+ const rs=()=>{const d=Math.min(devicePixelRatio,2);cv.width=innerWidth*d;cv.height=innerHeight*d;c.setTransform(d,0,0,d,0,0)};rs();addEventListener('resize',rs);
  const cols=['#ff4fa3','#5ee7ff','#ffd36b','#ffffff','#a78bfa'];
- const spawn=(x,y,n,burst)=>{for(let i=0;i<n;i++){const a=Math.random()*6.28,sp=(burst?2+Math.random()*4:Math.random()*1.2);
+ const spawn=(x,y,n,burst)=>{for(let i=0;i<n;i++){const a=Math.random()*6.28,sp=burst?2+Math.random()*4:Math.random()*1.2;
   P.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-.3,life:1,dec:.015+Math.random()*.02,s:1.5+Math.random()*3.2,c:cols[Math.random()*cols.length|0],star:Math.random()<.35})}};
  addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;glow.style.transform=`translate(${mx}px,${my}px)`;
   if(reduce)return;const d=Math.hypot(mx-lx,my-ly);if(d>6){spawn(mx,my,Math.min(4,1+d/14|0));lx=mx;ly=my}},{passive:true});
