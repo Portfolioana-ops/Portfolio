@@ -18,7 +18,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
 .skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;color:#000;padding:8px;z-index:99}
 ::selection{background:var(--gold);color:#1a1004}
-.disp{font-family:Syne,system-ui,sans-serif}
 
 /* cursor effects */
 #trail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:90}
@@ -41,7 +40,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* hero */
 .hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:2vw;padding:100px 5vw 70px;position:relative;z-index:2}
-#gold{width:100%;height:min(74vh,620px);order:2;cursor:grab;touch-action:pan-y}#gold:active{cursor:grabbing}
+#gold{width:100%;height:min(78vh,660px);order:2;cursor:grab;touch-action:pan-y}#gold:active{cursor:grabbing}
 .kicker{color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .kicker::before{content:"";width:38px;height:1px;background:var(--gold)}
 h1{font:800 clamp(3.4rem,10vw,8.2rem)/.95 Syne;letter-spacing:-.04em;margin-bottom:22px;color:#fff3d1;text-shadow:0 0 50px rgba(245,199,107,.45);white-space:nowrap}
@@ -68,7 +67,7 @@ section.s{padding:110px 5vw;max-width:1240px;margin:auto;position:relative;z-ind
 h2{font:800 clamp(2rem,4.6vw,3.6rem)/1.05 Syne;letter-spacing:-.03em;margin-bottom:22px;background:linear-gradient(100deg,#fff,var(--gold2) 45%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 .lead{max-width:60ch;color:var(--mute);font-size:1.15rem;margin-bottom:42px}
 
-/* ===== MIRROR DOOR FOLDERS ===== */
+/* mirror door folders */
 .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:40px 28px}
 .frame{display:block;position:relative;aspect-ratio:4/5;border-radius:18px 18px 6px 6px;padding:12px;perspective:1300px;cursor:pointer;
  background:linear-gradient(160deg,#2a2112,#0e0a06);border:1px solid #4a3a1c;box-shadow:0 30px 60px -28px #000,inset 0 0 40px #000}
@@ -96,7 +95,7 @@ h2{font:800 clamp(2rem,4.6vw,3.6rem)/1.05 Syne;letter-spacing:-.03em;margin-bott
 .cap h3{font:700 1.1rem Syne}.cap span{color:var(--mute);font-size:.9rem}
 .p1{--a:#f5c76b;--b:#5a2d0c}.p2{--a:#ffe9a8;--b:#8a5a1a}.p3{--a:#ff9a62;--b:#4a1d2e}.p4{--a:#e8b4ff;--b:#3a1f5e}.p5{--a:#f5c76b;--b:#12343b}.p6{--a:#ffd9a0;--b:#3b1c4a}
 
-/* ===== CINEMATIC FOLDER ZOOM ===== */
+/* cinematic folder zoom */
 #cine{position:fixed;z-index:80;left:0;top:0;width:0;height:0;overflow:hidden;border-radius:18px;opacity:0;pointer-events:none;background:#09070d;
  transition:left .95s cubic-bezier(.7,0,.2,1),top .95s cubic-bezier(.7,0,.2,1),width .95s cubic-bezier(.7,0,.2,1),height .95s cubic-bezier(.7,0,.2,1),border-radius .95s,opacity .25s}
 #cine.show{opacity:1;pointer-events:auto}
@@ -172,7 +171,7 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
 .rv.in{opacity:1;transform:none}
 
 @media(max-width:900px){
- .hero{grid-template-columns:1fr;padding-top:90px}#gold{order:0;height:340px}h1{white-space:normal}
+ .hero{grid-template-columns:1fr;padding-top:90px}#gold{order:0;height:400px}h1{white-space:normal}
  .about{grid-template-columns:1fr}.portrait{max-width:320px}.facts div{grid-template-columns:1fr;gap:2px}
  .fgrid{grid-template-columns:1fr 1fr}.burger{display:block}
  .links{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;align-items:center;gap:28px;font:800 1.7rem Syne;transform:translateY(-100%);transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:-1}
@@ -198,12 +197,12 @@ footer li{list-style:none;margin-bottom:8px}footer li a,footer p{color:var(--mut
 <main id="main">
 <!-- HERO -->
 <section class="hero" id="top">
- <canvas id="gold" aria-label="Golden particle galaxy. Drag to spin, click for a burst."></canvas>
+ <canvas id="gold" aria-label="Golden particles that swirl and form an anime-style character sketch. Move your cursor to scatter them, click to burst."></canvas>
  <div>
   <p class="kicker">Graphic designer · VTuber artist · 3D room builder</p>
   <h1 id="h1" aria-label="I'm Anna.">I'm Anna.</h1>
   <p class="tag">I design characters, brands and worlds for creators.</p>
-  <p class="sub">Models, logos, banners, emotes and 3D rooms that all feel like one brand. Move your cursor, drag the galaxy and click it to make the gold fly.</p>
+  <p class="sub">Models, logos, banners, emotes and 3D rooms that all feel like one brand. Watch the gold form a character, then move your cursor through it or click to scatter it.</p>
   <a class="btn" href="#work">Open the folders</a><a class="btn ghost" href="#contact">Book a commission</a>
  </div>
  <div class="hint"><b></b>Scroll · PKT <span id="clock">--:--:--</span></div>
@@ -438,38 +437,126 @@ document.querySelectorAll('.svc a').forEach(a=>a.addEventListener('pointermove',
   c.globalAlpha=1;c.shadowBlur=0;if(P.length>500)P.splice(0,P.length-500)})();
 })();
 
-/* ===== HERO: golden particle galaxy (three.js) ===== */
+/* ===== HERO: golden galaxy that forms an anime character sketch ===== */
 (()=>{
  const cv=$('#gold');if(!cv||!window.THREE)return;
+
+ /* 1) Draw an original anime-style character as line art, then read its pixels */
+ const W=360,H=460,dc=document.createElement('canvas');dc.width=W;dc.height=H;const d=dc.getContext('2d');
+ d.strokeStyle='#fff';d.fillStyle='#fff';d.lineCap='round';d.lineJoin='round';
+ const mir=fn=>{fn();d.save();d.translate(W,0);d.scale(-1,1);fn();d.restore()};
+ const L=(w,fn)=>{d.lineWidth=w;d.beginPath();fn();d.stroke()};
+ // face / jaw
+ L(3,()=>{d.moveTo(112,200);d.quadraticCurveTo(112,300,180,336);d.quadraticCurveTo(248,300,248,200)});
+ // hair crown
+ L(4,()=>{d.moveTo(92,215);d.bezierCurveTo(70,70,290,70,268,215)});
+ L(2.5,()=>{d.moveTo(104,170);d.bezierCurveTo(120,100,240,100,256,170)});
+ // bangs (center parted)
+ L(3,()=>{d.moveTo(180,88);d.bezierCurveTo(165,140,140,175,112,205)});
+ L(3,()=>{d.moveTo(180,88);d.bezierCurveTo(190,140,205,170,246,200)});
+ L(2.5,()=>{d.moveTo(178,92);d.bezierCurveTo(170,150,160,180,150,200)});
+ L(2.5,()=>{d.moveTo(184,92);d.bezierCurveTo(192,140,196,170,205,190)});
+ L(2,()=>{d.moveTo(140,100);d.bezierCurveTo(125,140,118,170,114,198)});
+ L(2,()=>{d.moveTo(220,100);d.bezierCurveTo(235,140,242,170,246,198)});
+ // long side hair + inner strands
+ mir(()=>{
+  L(4,()=>{d.moveTo(92,215);d.bezierCurveTo(60,300,78,380,48,448)});
+  L(3,()=>{d.moveTo(112,222);d.bezierCurveTo(92,300,104,370,86,440)});
+  L(2,()=>{d.moveTo(100,250);d.bezierCurveTo(84,310,92,380,70,432)});
+  L(2,()=>{d.moveTo(80,270);d.bezierCurveTo(64,330,66,390,56,430)});
+  // twin tail
+  L(4,()=>{d.moveTo(88,130);d.bezierCurveTo(10,140,-5,250,22,350)});
+  L(3,()=>{d.moveTo(98,140);d.bezierCurveTo(40,160,28,250,44,330)});
+  L(2,()=>{d.moveTo(70,150);d.bezierCurveTo(36,190,32,250,34,310)});
+  // hair bow
+  L(3,()=>{d.moveTo(92,122);d.quadraticCurveTo(60,95,66,128);d.quadraticCurveTo(70,150,92,122)});
+  L(3,()=>{d.moveTo(92,122);d.quadraticCurveTo(118,92,118,126);d.quadraticCurveTo(112,150,92,122)});
+  // eye
+  L(6,()=>{d.moveTo(118,234);d.quadraticCurveTo(146,208,176,232)});
+  L(2.5,()=>{d.moveTo(122,238);d.quadraticCurveTo(146,266,174,236)});
+  L(2.5,()=>{d.ellipse(147,240,14,19,0,0,6.28)});
+  for(let x=135;x<=159;x+=3)L(1.6,()=>{d.moveTo(x,226);d.lineTo(x,258)});
+  d.beginPath();d.arc(141,232,4.5,0,6.28);d.fill();d.beginPath();d.arc(155,250,2.4,0,6.28);d.fill();
+  // lashes + brow
+  L(3,()=>{d.moveTo(118,234);d.lineTo(108,226)});L(2.5,()=>{d.moveTo(122,229);d.lineTo(113,217)});
+  L(3,()=>{d.moveTo(122,196);d.quadraticCurveTo(146,184,170,194)});
+  // shoulder + collar + neck
+  L(3,()=>{d.moveTo(160,330);d.lineTo(158,368);d.quadraticCurveTo(100,378,48,448)});
+  L(2.5,()=>{d.moveTo(158,368);d.quadraticCurveTo(172,392,180,396)});
+ });
+ // nose, mouth, blush
+ L(2,()=>{d.moveTo(178,270);d.lineTo(183,277)});
+ L(3,()=>{d.moveTo(164,300);d.quadraticCurveTo(180,312,196,300)});
+ mir(()=>{for(let i=0;i<4;i++)L(1.6,()=>{d.moveTo(122+i*5,278);d.lineTo(118+i*5,288)})});
+ // ribbon bow at collar
+ L(4,()=>{d.moveTo(180,384);d.quadraticCurveTo(138,356,138,398);d.quadraticCurveTo(142,422,180,384)});
+ L(4,()=>{d.moveTo(180,384);d.quadraticCurveTo(222,356,222,398);d.quadraticCurveTo(218,422,180,384)});
+ d.beginPath();d.arc(180,386,7,0,6.28);d.fill();
+ L(3,()=>{d.moveTo(176,392);d.lineTo(168,440)});L(3,()=>{d.moveTo(184,392);d.lineTo(192,440)});
+ // sparkles
+ [[300,90,14],[330,200,9],[40,60,10],[310,330,8]].forEach(([x,y,s])=>{L(2.5,()=>{d.moveTo(x,y-s);d.quadraticCurveTo(x,y,x+s,y);d.quadraticCurveTo(x,y,x,y+s);d.quadraticCurveTo(x,y,x-s,y);d.quadraticCurveTo(x,y,x,y-s)})});
+
+ const img=d.getImageData(0,0,W,H).data,pts=[];
+ for(let y=0;y<H;y+=2)for(let x=0;x<W;x+=2){if(img[(y*W+x)*4+3]>110)pts.push([x,y])}
+
+ /* 2) three.js scene */
  const r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});r.setPixelRatio(Math.min(devicePixelRatio,2));
  const s=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,1,.1,100);cam.position.z=7.5;
- // soft glowing sprite
- const sc=document.createElement('canvas');sc.width=sc.height=64;const x=sc.getContext('2d');
- const gr=x.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,225,150,.9)');gr.addColorStop(1,'rgba(255,200,100,0)');
- x.fillStyle=gr;x.fillRect(0,0,64,64);const tex=new THREE.CanvasTexture(sc);
- const N=2600,pos=new Float32Array(N*3),col=new Float32Array(N*3),c1=new THREE.Color('#ffe9a8'),c2=new THREE.Color('#f5c76b'),c3=new THREE.Color('#c98a2b');
+ const sc=document.createElement('canvas');sc.width=sc.height=64;const x2=sc.getContext('2d');
+ const gr=x2.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.25,'rgba(255,225,150,.9)');gr.addColorStop(1,'rgba(255,200,100,0)');
+ x2.fillStyle=gr;x2.fillRect(0,0,64,64);const tex=new THREE.CanvasTexture(sc);
+
+ const N=Math.min(4200,Math.max(2800,pts.length)),pos=new Float32Array(N*3),col=new Float32Array(N*3);
+ const GR=new Float32Array(N),GA=new Float32Array(N),GZ=new Float32Array(N),TX=new Float32Array(N),TY=new Float32Array(N),TZ=new Float32Array(N),PH=new Float32Array(N),DL=new Float32Array(N),OX=new Float32Array(N),OY=new Float32Array(N);
+ const c1=new THREE.Color('#ffe9a8'),c2=new THREE.Color('#f5c76b'),c3=new THREE.Color('#c98a2b'),cw=new THREE.Color('#fff'),k=new THREE.Color();
+ const SC=5.5/H;
  for(let i=0;i<N;i++){
-  let X,Y,Z,t;
-  if(i<N*.8){const rad=Math.pow(Math.random(),.65)*3.6,arm=(i%3)*2.094+rad*1.5,sp=(Math.random()-.5)*.55*(rad*.35+.3);
-   X=Math.cos(arm)*rad+sp;Z=Math.sin(arm)*rad+sp;Y=(Math.random()-.5)*.5*(1.2-rad/4);t=rad/3.6}
-  else{const a=Math.random()*6.28,b=Math.acos(2*Math.random()-1),d=1+Math.random()*3.6;X=d*Math.sin(b)*Math.cos(a);Y=d*Math.sin(b)*Math.sin(a);Z=d*Math.cos(b);t=Math.random()}
-  pos.set([X,Y,Z],i*3);
-  const k=new THREE.Color().copy(t<.4?c1:c2).lerp(c3,Math.max(0,t-.4)).lerp(new THREE.Color('#fff'),Math.random()*.25);col.set([k.r,k.g,k.b],i*3);
+  const rad=Math.pow(Math.random(),.65)*3.6;
+  GR[i]=rad;GA[i]=(i%3)*2.094+rad*1.5;GZ[i]=(Math.random()-.5)*.5;
+  const p=pts[i<pts.length?i:(Math.random()*pts.length|0)];
+  TX[i]=(p[0]-W/2)*SC+(Math.random()-.5)*.018;TY[i]=-(p[1]-H/2)*SC+(Math.random()-.5)*.018;TZ[i]=(Math.random()-.5)*.12;
+  PH[i]=Math.random()*6.28;DL[i]=Math.random();
+  const t=rad/3.6;k.copy(t<.4?c1:c2).lerp(c3,Math.max(0,t-.4)).lerp(cw,Math.random()*.25);col.set([k.r,k.g,k.b],i*3);
  }
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));
- const mat=new THREE.PointsMaterial({size:.11,map:tex,vertexColors:true,transparent:true,opacity:.95,depthWrite:false,blending:THREE.AdditiveBlending});
- const gal=new THREE.Points(g,mat);gal.rotation.x=.95;const grp=new THREE.Group();grp.add(gal);s.add(grp);
- let vx=reduce?0:.0025,drag=false,lx=0,pulse=0,moved=0,t=0,tx=0,ty=0;
- const size=()=>{const w=cv.clientWidth,h=cv.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};size();addEventListener('resize',size);
- addEventListener('pointermove',e=>{tx=(e.clientX/innerWidth-.5)*.6;ty=(e.clientY/innerHeight-.5)*.5},{passive:true});
+ const mat=new THREE.PointsMaterial({size:.085,map:tex,vertexColors:true,transparent:true,opacity:.95,depthWrite:false,blending:THREE.AdditiveBlending});
+ const cloud=new THREE.Points(g,mat);cloud.frustumCulled=false;const grp=new THREE.Group();grp.add(cloud);s.add(grp);
+
+ let drag=false,lx=0,moved=0,t=0,tx=0,ty=0,m=reduce?1:0,mwx=999,mwy=999,hH=0,hW=0;
+ const size=()=>{const w=cv.clientWidth,h=cv.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();hH=Math.tan(22.5*Math.PI/180)*cam.position.z;hW=hH*cam.aspect};size();addEventListener('resize',size);
+ addEventListener('pointermove',e=>{
+  tx=(e.clientX/innerWidth-.5)*.4;ty=(e.clientY/innerHeight-.5)*.25;
+  const b=cv.getBoundingClientRect();
+  if(e.clientX>=b.left&&e.clientX<=b.right&&e.clientY>=b.top&&e.clientY<=b.bottom){mwx=((e.clientX-b.left)/b.width*2-1)*hW;mwy=-((e.clientY-b.top)/b.height*2-1)*hH}else{mwx=mwy=999}
+ },{passive:true});
+ const burst=()=>{for(let i=0;i<N;i++){const a=Math.random()*6.28,f=.6+Math.random()*1.8;OX[i]+=Math.cos(a)*f;OY[i]+=Math.sin(a)*f}};
  cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;moved=0;cv.setPointerCapture(e.pointerId)});
- cv.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;moved+=Math.abs(dx);gal.rotation.z+=dx*.008;vx=dx*.0015});
- cv.addEventListener('pointerup',()=>{drag=false;if(moved<4)pulse=1});
+ cv.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;moved+=Math.abs(dx);grp.rotation.y+=dx*.01});
+ cv.addEventListener('pointerup',()=>{drag=false;if(moved<4&&!reduce)burst()});
+ const ease=x=>x<0?0:x>1?1:x*x*(3-2*x);
+ const start=performance.now();
+
  (function loop(){requestAnimationFrame(loop);t+=.016;
-  if(!drag){gal.rotation.z+=vx;vx+=((reduce?0:.0025)-vx)*.02}
+  // cycle: galaxy 0-2.2s -> character till 12.5s -> dissolve to galaxy till 16s
+  const cyc=reduce?5:((performance.now()-start)/1000)%16;
+  const target=(cyc>2.2&&cyc<12.5)?1:0;
+  m+=(target-m)*.022;
+  const A=pos;
+  for(let i=0;i<N;i++){
+   const rad=GR[i],ang=GA[i]+t*(.55/(rad*.55+.5));
+   const gx=Math.cos(ang)*rad,gy=Math.sin(ang)*rad*.62,gz=Math.sin(ang)*rad*.35+GZ[i];
+   const cx=TX[i]+Math.sin(t*1.3+PH[i])*.02,cy=TY[i]+Math.cos(t*1.1+PH[i])*.02+Math.sin(t*.9)*.03,cz=TZ[i];
+   const e=ease(m*1.7-DL[i]*.7);
+   let x=gx+(cx-gx)*e,y=gy+(cy-gy)*e,z=gz+(cz-gz)*e;
+   // cursor repel
+   const dx=x+OX[i]-mwx,dy=y+OY[i]-mwy,dd=Math.sqrt(dx*dx+dy*dy)+1e-4;
+   if(dd<1){const f=(1-dd)*(1-dd)*.16;OX[i]+=dx/dd*f;OY[i]+=dy/dd*f}
+   OX[i]*=.93;OY[i]*=.93;
+   A[i*3]=x+OX[i];A[i*3+1]=y+OY[i];A[i*3+2]=z;
+  }
+  g.attributes.position.needsUpdate=true;
   grp.rotation.y+=(tx-grp.rotation.y)*.05;grp.rotation.x+=(ty-grp.rotation.x)*.05;
-  mat.size=.1+Math.sin(t*2.4)*.018;
-  if(pulse>0){pulse-=.025;grp.scale.setScalar(1+Math.sin((1-pulse)*Math.PI)*.35)}else grp.scale.setScalar(1);
+  mat.size=.08+Math.sin(t*2.4)*.012;
   r.render(s,cam)})();
 })();
 </script>
