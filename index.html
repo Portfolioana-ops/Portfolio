@@ -499,7 +499,7 @@ const SERVICES = [
    images:["model1.webp","model2.webp","model3.png"]
 
    If "images" is empty [], the site finds model1, model2, model3... by itself
-   (works, but "images" is faster and uses less hosting bandwidth).
+   (jpg, jpeg, png, webp can now be mixed in the same folder).
 
    TIP: use .webp and keep every image under 300 KB, max 1600px wide.
    That is what stops the "limit exceeded" problem on free hosting. */
@@ -511,7 +511,8 @@ const CATEGORIES = [
   desc:"Logos that make your brand easy to remember" },
 { title:"Banners", sub:"for streams", item:"Banner", names:["banner"], folder:"Banner", images:[],
   desc:"Banners and headers for your channels" },
-{ title:"Emotes", sub:"and badges", item:"Emote", names:["emote","emotes"], folder:"Emotes", images:[],
+{ title:"Emotes", sub:"and badges", item:"Emote", names:["emote","emotes"], folder:"Emotes",
+  images:["Emotes1.jpeg","Emotes2.jpg","Emotes3.jpg","Emotes4.jpeg","Emotes5.jpg"],
   desc:"Cute and expressive emotes for your community" },
 { title:"Character", sub:"art", item:"Character", names:["character","char"], folder:"Character", images:[],
   desc:"Original characters and illustrations" },
@@ -1059,22 +1060,34 @@ mk(folderVariants(cat).filter(x => x !== F), EXT_UP, S4, 1, 1)
 
 const fileUrl = (p, n) => encodeURI(p.fo + "/" + p.pre + p.sep + String(n).padStart(p.pad, "0") + "." + p.ext);
 
+/* FIXED: every number is tried with ALL extensions, so jpg + jpeg + png can be mixed */
 async function collect(p) {
 const MAX = 60;
-const urls = [fileUrl(p, p.start)];
-if (p.start === 1 && await exists(fileUrl(p, 0))) urls.unshift(fileUrl(p, 0));   /* also catch a file numbered 0 */
-let n = p.start + 1;
+const exts = [p.ext, ...EXT_LOW, ...EXT_UP].filter((e, i, a) => a.indexOf(e) === i);
+const urlFor = (n, ext) => fileUrl({...p, ext}, n);
+
+const find = async n => {
+if (await exists(urlFor(n, p.ext))) return urlFor(n, p.ext);
+const rest = exts.filter(e => e !== p.ext);
+const res = await Promise.all(rest.map(e => exists(urlFor(n, e))));
+const k = res.findIndex(Boolean);
+return k >= 0 ? urlFor(n, rest[k]) : null;
+};
+
+const urls = [];
+if (p.start === 1) { const z = await find(0); if (z) urls.push(z); }   /* also catch a file numbered 0 */
+
+let n = p.start;
 while (n < p.start + MAX) {
-const batch = [];
-for (let k = 0; k < 6; k++) batch.push(n + k);
-const res = await Promise.all(batch.map(i => exists(fileUrl(p, i))));
+const batch = [0, 1, 2, 3].map(k => n + k);
+const res = await Promise.all(batch.map(find));
 let stop = false;
 for (let k = 0; k < res.length; k++) {
 if (!res[k]) { stop = true; break; }
-urls.push(fileUrl(p, batch[k]));
+urls.push(res[k]);
 }
 if (stop) break;
-n += 6;
+n += 4;
 }
 return urls;
 }
@@ -1100,12 +1113,12 @@ if (cat.images && cat.images.length) return cat.images.map(f => enc(cat, f));
 
 /* remembered for this visit */
 try {
-const saved = sessionStorage.getItem("anna2:" + cat.folder);
+const saved = sessionStorage.getItem("anna3:" + cat.folder);
 if (saved) { const arr = JSON.parse(saved); if (arr.length) return arr; }
 } catch (err) {}
 
 const urls = await discover(cat);
-if (urls.length) { try { sessionStorage.setItem("anna2:" + cat.folder, JSON.stringify(urls)); } catch (err) {} }
+if (urls.length) { try { sessionStorage.setItem("anna3:" + cat.folder, JSON.stringify(urls)); } catch (err) {} }
 return urls;
 })();
 
