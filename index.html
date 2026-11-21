@@ -53,9 +53,6 @@ nav.top{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:
 nav.top a{position:relative;padding:2px 0;transition:color .2s}
 nav.top a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .35s}
 nav.top a:hover{color:var(--text)}nav.top a:hover::after{transform:scaleX(1)}
-nav.top a.contact-nav{margin-left:auto;padding:7px 14px;border:1px solid var(--gold);color:var(--gold);white-space:nowrap}
-nav.top a.contact-nav::after{display:none}
-nav.top a.contact-nav:hover{background:var(--gold);color:#241a10}
 .hero{min-height:calc(100vh - 56px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:50px 24px 90px;position:relative;overflow:hidden}
 .ring{position:absolute;left:50%;top:50%;width:min(86vw,660px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(201,165,106,.22);pointer-events:none;animation:ringin 1.6s var(--t) both}
 .ring::before{content:"";position:absolute;inset:34px;border-radius:50%;border:1px dashed rgba(232,180,216,.16);will-change:transform;animation:spin 90s linear infinite}
@@ -177,8 +174,11 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .card h3{font-family:var(--head);font-weight:700;font-size:1.55rem;margin:10px 0 8px;color:var(--text)}
 .card p{color:#d9cadc;font-size:.95rem}
 .story .end{margin-top:10px;font-family:var(--head);font-size:clamp(1.5rem,4vw,2.2rem);color:var(--pink)}
+.contact{text-align:center;padding:90px 24px 80px;background:linear-gradient(to bottom,transparent,rgba(8,4,12,.75))}
+.contact h2{font-weight:600;font-size:clamp(2.6rem,8vw,5.2rem)}
+.contact p{color:var(--muted);margin:0 auto 30px;max-width:44ch}
 footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter-spacing:.12em;background:rgba(8,4,12,.9)}
-@media (max-width:760px){nav.top{gap:12px 18px;flex-wrap:wrap;justify-content:flex-start;padding:12px 16px}nav.top a.contact-nav{margin-left:auto}.tl::before{left:12px}.m,.m:nth-child(even){width:100%;margin-left:0;padding:0 0 48px 40px}.m::after,.m:nth-child(even)::after{left:6px;right:auto}}
+@media (max-width:760px){.tl::before{left:12px}.m,.m:nth-child(even){width:100%;margin-left:0;padding:0 0 48px 40px}.m::after,.m:nth-child(even)::after{left:6px;right:auto}}
 @media (max-width:640px){.door-wrap{font-size:8.5px}.doors{gap:64px 24px}}
 @media (hover:none),(pointer:coarse){.cur,.glow{display:none}}
 @media print{.folder,.lightbox,.zoom{display:none!important}}
@@ -198,13 +198,13 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter
 <div class="glow" id="glow" aria-hidden="true"></div>
 <div class="cur" id="cur" aria-hidden="true"></div>
 <div class="progress" id="progress"></div>
-<nav class="top" aria-label="Main"><a href="#home">Home</a><a href="#doors">My work</a><a href="#about">About</a><a href="#story">My story</a><a class="contact-nav" href="mailto:Vtuberanna036@gmail.com">Contact / Email</a></nav>
+<nav class="top" aria-label="Main"><a href="#home">Home</a><a href="#doors">My work</a><a href="#about">About</a><a href="#story">My story</a><a href="#contact">Contact</a></nav>
 <header class="hero" id="home">
 <div class="ring" aria-hidden="true"></div>
 <p class="eyebrow">Welcome to Anna's Art World</p>
 <h1 class="big-name">I'm <span id="name">ANNA</span>.</h1>
 <div class="avail"><i></i>Commissions are open</div>
-<div class="cta"><a class="btn main" href="#doors">Explore my work</a><a class="btn" href="mailto:Vtuberanna036@gmail.com">Start a project</a></div>
+<div class="cta"><a class="btn main" href="#doors">Explore my work</a><a class="btn" href="#contact">Start a project</a></div>
 <span class="scroll">Scroll</span>
 </header>
 <section class="doors-sec" id="doors">
@@ -238,6 +238,12 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter
 <div class="tl" id="timeline"></div>
 <p class="end rv">And the story is still being written.</p>
 </section>
+<section class="contact" id="contact">
+<h2 class="rv">Got a project?<br>Let's build it together.</h2>
+<i class="rule"></i>
+<p class="rv">Need a VTuber model, logo, banner or emotes? Tell me what you would like to create.</p>
+<div class="cta rv" id="links" style="animation:none"></div>
+</section>
 <footer>&copy; <span class="nm">ANNA</span>. All art belongs to the artist.</footer>
 <div class="zoom" id="zoom" aria-hidden="true">
 <div class="big door-wrap" id="big"><div class="frame"></div><div class="door"><span class="plate" id="bplate"></span><span class="knob"></span></div></div>
@@ -270,6 +276,12 @@ const STORY = [
   { year:"2024", title:"A character comes alive", text:"My first VTuber model and emote set, made for a creator who trusted me with their identity." },
   { year:"2026", title:"Designing full time", text:"Today I create models, logos, banners, emotes and 3D art for creators and streamers." }
 ];
+const LINKS = [
+  { label:"Email me", href:"https://mail.google.com/mail/?view=cm&to=Vtuberanna036@gmail.com", main:true },
+  { label:"Discord", href:"https://discord.com/users/1177021302285013172" },
+  { label:"Twitter / X", href:"https://x.com/Annavt_X" }
+];
+document.getElementById("links").insertAdjacentHTML("beforebegin",'<p class="rv in">Or write to me at <b>Vtuberanna036@gmail.com</b></p>');
 /* ============ You do not need to edit below this line ============ */
 
 const $ = id => document.getElementById(id);
@@ -358,6 +370,7 @@ setInterval(() => {
 const pills = SERVICES.map(s => '<span class="pill">' + s + '</span>').join("");
 $("chips").innerHTML = pills;
 $("timeline").innerHTML = STORY.map(s => '<div class="m rv"><div class="card"><div class="yr">' + s.year + '</div><h3>' + s.title + '</h3><p>' + s.text + '</p></div></div>').join("");
+$("links").innerHTML = LINKS.map(l => '<a class="btn' + (l.main ? ' main' : '') + '" href="' + l.href + '"' + (/^mailto:/.test(l.href) ? '' : ' target="_blank" rel="noopener"') + '>' + l.label + '</a>').join("");
 
 document.querySelectorAll(".btn").forEach(b => {
   b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); b.style.transform = "translate3d(" + (e.clientX - r.left - r.width / 2) * .2 + "px," + (e.clientY - r.top - r.height / 2) * .3 + "px,0)"; });
