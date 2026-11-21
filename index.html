@@ -7,10 +7,23 @@
 <meta name="description" content="ANNA is a graphic designer and Vtuber Artist creating models, Logos, Banners, emotes, Art Scenes and 3D Art Room for Streamers and Vtubers.">
 <meta name="theme-color" content="#0f0a14">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#0f0a14;--trim:#5a4463;--text:#f7eef7;--muted:#b9a9bd;--pink:#e8b4d8;--gold:#c9a56a;--t:1.4s;--head:'Cormorant Garamond',Georgia,serif;--body:'Montserrat',system-ui,sans-serif}
+:root{
+--bg:#0f0a14;
+--trim:#5a4463;
+--text:#f7eef7;
+--muted:#b9a9bd;
+--pink:#e8b4d8;
+--gold:#c9a56a;
+--t:1.4s;
+--head:'Cormorant Garamond',Georgia,serif;
+--body:'Montserrat',system-ui,sans-serif
+}
+
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:auto}
 body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;font-size:1rem;line-height:1.7;overflow-x:hidden}
@@ -19,40 +32,91 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 :focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 h1,h2{font-family:var(--head);font-weight:500;letter-spacing:-.01em;line-height:1.05}
 b{font-weight:500}
+
 .intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:#0b070f;animation:curtain .9s 1.2s cubic-bezier(.76,0,.24,1) forwards}
 .intro span{font-family:var(--head);font-size:clamp(2.6rem,9vw,5rem);color:var(--pink);padding-left:.35em;letter-spacing:.35em;animation:introText 1.3s ease both}
 @keyframes introText{0%{opacity:0;transform:scale(.94)}40%,75%{opacity:1;transform:none}100%{opacity:0}}
 @keyframes curtain{to{transform:translateY(-100%);visibility:hidden}}
+
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(160deg,#170e1e,#0f0a14 55%,#160e19)}
 .orb{position:absolute;border-radius:50%;will-change:transform;animation:drift 32s ease-in-out infinite alternate}
 .o1{width:70vmax;height:70vmax;left:-25vmax;top:-25vmax;background:radial-gradient(circle,rgba(86,42,100,.7),transparent 65%)}
 .o2{width:64vmax;height:64vmax;right:-24vmax;bottom:-20vmax;background:radial-gradient(circle,rgba(98,38,76,.55),transparent 65%);animation-duration:40s;animation-delay:-9s}
 .o3{width:46vmax;height:46vmax;left:30%;top:36%;background:radial-gradient(circle,rgba(82,62,30,.26),transparent 65%);animation-duration:46s;animation-delay:-16s}
 @keyframes drift{to{transform:translate3d(6vmax,4vmax,0) scale(1.12)}}
+
 .wave{position:absolute;left:0;width:200vw;height:130px;fill:none;stroke-width:1.2;will-change:transform;animation:flow 44s linear infinite}
 .w1{top:30%;stroke:rgba(201,165,106,.14)}
 .w2{top:68%;animation-duration:60s;animation-direction:reverse;stroke:rgba(232,180,216,.12)}
 @keyframes flow{to{transform:translate3d(-100vw,0,0)}}
+
 .star{position:absolute;border-radius:50%;background:#f3dcc0;opacity:0;animation:tw 5s ease-in-out infinite}
 @keyframes tw{50%{opacity:.7}}
-/* white glowing butterflies */
-#bfly,#ffs{position:absolute;inset:0;pointer-events:none}
-.bf{position:absolute;left:0;top:0;will-change:transform;filter:drop-shadow(0 0 5px var(--g)) drop-shadow(0 0 14px var(--g))}
-.bf svg{display:block;overflow:visible}
-.wg{transform-origin:30px 25px;animation:flap .22s ease-in-out infinite alternate}
-@keyframes flap{from{transform:scaleX(1)}to{transform:scaleX(.22)}}
-.ff{position:absolute;bottom:-12px;border-radius:50%;background:#fff1c9;box-shadow:0 0 10px 3px rgba(243,220,160,.65);opacity:0;animation:ffl linear infinite}
-@keyframes ffl{0%{transform:translate3d(0,0,0);opacity:0}12%{opacity:.9}50%{transform:translate3d(var(--sx),-50vh,0);opacity:.55}85%{opacity:.85}100%{transform:translate3d(calc(var(--sx) * -1),-105vh,0);opacity:0}}
+
+/* PURE WHITE GLOWING BUTTERFLIES */
+#bfly{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bf{
+position:absolute;
+left:0;
+top:0;
+width:34px;
+height:29px;
+will-change:transform;
+pointer-events:none;
+opacity:.96;
+filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 9px rgba(255,255,255,.98)) drop-shadow(0 0 20px rgba(255,255,255,.78))
+}
+.bf svg{display:block;width:100%;height:100%;overflow:visible}
+.bf-wing-left,.bf-wing-right{transform-box:fill-box;transform-origin:center center}
+.bf-wing-left{transform-origin:100% 50%;animation:flapLeft .24s ease-in-out infinite alternate}
+.bf-wing-right{transform-origin:0% 50%;animation:flapRight .24s ease-in-out infinite alternate}
+@keyframes flapLeft{from{transform:scaleX(1) rotate(-4deg)}to{transform:scaleX(.24) rotate(7deg)}}
+@keyframes flapRight{from{transform:scaleX(1) rotate(4deg)}to{transform:scaleX(.24) rotate(-7deg)}}
+
 .sh{position:absolute;width:150px;height:1.5px;background:linear-gradient(90deg,transparent,#fff 80%,#f3dcc0);transform:rotate(25deg);opacity:0;animation:shoot 1.2s ease-out forwards}
 @keyframes shoot{0%{opacity:0;translate:0 0}12%{opacity:1}100%{opacity:0;translate:380px 177px}}
+
 .glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:0;will-change:transform;background:radial-gradient(circle,rgba(232,180,216,.1),transparent 62%)}
 .cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:120;will-change:transform;transition:width .25s,height .25s,margin .25s,background .25s}
 .cur.hot{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(232,180,216,.12)}
 .progress{position:fixed;left:0;top:0;height:2px;width:100%;z-index:60;transform:scaleX(0);transform-origin:left;will-change:transform;background:linear-gradient(90deg,var(--gold),var(--pink))}
-nav.top{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:clamp(16px,4vw,38px);padding:18px 12px;background:rgba(15,10,20,.93);border-bottom:1px solid rgba(201,165,106,.18);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-nav.top a{position:relative;padding:2px 0;transition:color .2s}
-nav.top a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .35s}
-nav.top a:hover{color:var(--text)}nav.top a:hover::after{transform:scaleX(1)}
+
+/* HIGHLIGHTED TOP NAVIGATION */
+nav.top{
+position:sticky;
+top:0;
+z-index:5;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:10px 14px;
+padding:13px 14px;
+background:rgba(15,10,20,.97);
+border-bottom:1px solid rgba(201,165,106,.32);
+box-shadow:0 8px 24px rgba(0,0,0,.28);
+font-size:.72rem;
+letter-spacing:.16em;
+text-transform:uppercase;
+color:var(--muted);
+backdrop-filter:blur(14px)
+}
+nav.top a{
+position:relative;
+display:inline-block;
+padding:8px 15px;
+border:1px solid rgba(201,165,106,.24);
+border-radius:5px;
+color:#f7eef7;
+background:linear-gradient(145deg,rgba(201,165,106,.16),rgba(255,255,255,.035));
+text-shadow:0 0 12px rgba(255,255,255,.18);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 3px 12px rgba(0,0,0,.18);
+transition:color .25s,background .25s,border-color .25s,transform .25s,box-shadow .25s
+}
+nav.top a::after{content:"";position:absolute;left:15px;right:15px;bottom:4px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+nav.top a:hover,nav.top a:focus-visible{color:#fff4d6;border-color:#d8b878;background:linear-gradient(145deg,rgba(201,165,106,.32),rgba(201,165,106,.1));box-shadow:0 0 18px rgba(201,165,106,.18);transform:translateY(-2px)}
+nav.top a:hover::after,nav.top a:focus-visible::after{transform:scaleX(1)}
+
 .hero{min-height:calc(100vh - 56px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:50px 24px 90px;position:relative;overflow:hidden}
 .ring{position:absolute;left:50%;top:50%;width:min(86vw,660px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(201,165,106,.22);pointer-events:none;animation:ringin 1.6s var(--t) both}
 .ring::before{content:"";position:absolute;inset:34px;border-radius:50%;border:1px dashed rgba(232,180,216,.16);will-change:transform;animation:spin 90s linear infinite}
@@ -86,22 +150,35 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .rv.in{opacity:1;transform:none}
 .rule{display:block;width:80px;height:1px;margin:22px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 1.3s .2s cubic-bezier(.2,.8,.2,1)}
 .rule.in{transform:scaleX(1)}
+
 .doors-sec{padding:110px 20px 40px}
 .doors-sec h2{text-align:center;font-weight:600;font-size:clamp(2.4rem,6.5vw,4.6rem);max-width:15ch;margin:0 auto}
 .doors-sec>p{text-align:center;color:var(--muted);margin:0 auto;max-width:46ch}
 .doors{display:flex;flex-wrap:wrap;justify-content:center;gap:80px 48px;padding:80px 0 60px;max-width:1150px;margin:0 auto}
 .door-wrap{font-size:11px;width:16.8em;height:33em;perspective:90em;position:relative;display:block}
 .door-wrap::after{content:"";position:absolute;left:-1.5em;right:-1.5em;bottom:-1.5em;height:2.4em;background:radial-gradient(ellipse at center,rgba(0,0,0,.55),transparent 70%);pointer-events:none}
-.frame{position:absolute;inset:0;border:1em solid var(--trim);border-bottom:0;border-radius:8.4em 8.4em 0 0;overflow:hidden;background:radial-gradient(ellipse at 50% 88%,rgba(255,226,150,.55),transparent 62%),linear-gradient(#07040a,#1a1020);transition:box-shadow .4s}
-.door{position:absolute;inset:0;transform-origin:left center;transition:transform .9s cubic-bezier(.5,.05,.2,1);border-radius:7.4em 7.4em 0 0;background-color:var(--c);background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 .3em,rgba(0,0,0,.12) .3em .6em),linear-gradient(to bottom,rgba(255,235,250,.14),rgba(0,0,0,.26));box-shadow:inset 0 0 0 .3em rgba(0,0,0,.2)}
-.door::before{content:"";position:absolute;left:2.2em;right:2.2em;top:2.4em;bottom:0;border:.2em solid rgba(0,0,0,.25);border-bottom:0;border-radius:6.2em 6.2em 0 0}
+.frame{position:absolute;inset:0;border:1em solid #30263a;border-bottom:0;border-radius:8.4em 8.4em 0 0;overflow:hidden;background:radial-gradient(ellipse at 50% 88%,rgba(255,226,150,.34),transparent 62%),linear-gradient(#17111d,#30263a);transition:box-shadow .4s}
+
+/* ALL DOORS: GREY PURPLE STRIPES + GOLD DETAILS */
+.door{
+position:absolute;
+inset:0;
+transform-origin:left center;
+transition:transform .9s cubic-bezier(.5,.05,.2,1);
+border-radius:7.4em 7.4em 0 0;
+background-color:#51465f;
+background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.105) 0 .12em,rgba(24,17,31,.13) .12em .28em),linear-gradient(to bottom,rgba(235,222,255,.12),rgba(13,9,19,.28));
+box-shadow:inset 0 0 0 .3em rgba(0,0,0,.22)
+}
+.door::before{content:"";position:absolute;left:2.2em;right:2.2em;top:2.4em;bottom:0;border:.2em solid rgba(25,17,33,.42);border-bottom:0;border-radius:6.2em 6.2em 0 0}
 .plate{position:absolute;top:10.5em;left:2.4em;right:2.4em;padding:.7em .3em .6em;text-align:center;border-radius:.4em;z-index:2;background:linear-gradient(135deg,#f3dca0,#c9a56a 55%,#e6cb8a);color:#3f2d0c;text-shadow:0 .1em 0 rgba(255,255,255,.4);box-shadow:0 .2em .5em rgba(0,0,0,.4),inset 0 0 0 .15em rgba(70,51,10,.25)}
 .plate b{display:block;font-family:var(--head);font-weight:700;font-size:1.65em;line-height:1.05}
 .plate i{display:block;font-style:normal;font-weight:500;font-size:.95em;margin-top:.25em;opacity:.8;letter-spacing:.04em}
-.knob{position:absolute;right:2em;top:21em;width:1.8em;height:1.8em;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3c4,#c9a56a);box-shadow:0 .2em .4em rgba(0,0,0,.5);z-index:2}
-.knob::after{content:"";position:absolute;right:50%;top:50%;width:3.6em;height:.8em;margin-top:-.4em;border-radius:.4em;background:linear-gradient(#f3dca0,#b8912f);box-shadow:0 .2em .3em rgba(0,0,0,.4)}
+.knob{position:absolute;right:2em;top:21em;width:1.8em;height:1.8em;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff8d8,#d7b66f);box-shadow:0 .2em .4em rgba(0,0,0,.5);z-index:2}
+.knob::after{content:"";position:absolute;right:50%;top:50%;width:3.6em;height:.8em;margin-top:-.4em;border-radius:.4em;background:linear-gradient(#f5dfa0,#b8912f);box-shadow:0 .2em .3em rgba(0,0,0,.4)}
 .door-wrap:hover .door,.door-wrap:focus-visible .door{transform:rotateY(-24deg)}
 .door-wrap:hover .frame,.door-wrap:focus-visible .frame{box-shadow:0 0 2.4em .2em rgba(201,165,106,.35)}
+
 .zoom{position:fixed;inset:0;z-index:30;display:grid;place-items:center;background:var(--bg);opacity:0;visibility:hidden;overflow:hidden;transition:opacity .5s,visibility .5s}
 .zoom.show{opacity:1;visibility:visible}
 .big.door-wrap{font-size:min(calc(92vh / 33),calc(90vw / 24));width:24em;height:33em;transform:scale(.45);transform-origin:50% 72%;will-change:transform;transition:transform .8s cubic-bezier(.3,.7,.2,1)}
@@ -110,7 +187,8 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .big .door{border-radius:11em 11em 0 0}
 .big .door::before{border-radius:9.8em 9.8em 0 0}
 .big .plate{left:3.8em;right:3.8em;padding:.9em .4em .8em}
-.big .plate b{font-size:2em}.big .plate i{font-size:1.05em}
+.big .plate b{font-size:2em}
+.big .plate i{font-size:1.05em}
 .big .knob{right:3em;top:21.5em;width:2.2em;height:2.2em}
 .big .knob::after{width:4.4em;height:1em;margin-top:-.5em;border-radius:.5em}
 .zoom.show .big{transform:scale(1)}
@@ -120,6 +198,7 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .zoom.enter .big.door-wrap{transform:scale(3.4);transition:transform .9s cubic-bezier(.55,0,.85,.4)}
 .bloom{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .9s ease-in;background:radial-gradient(circle at 50% 66%,#fff4d6 0%,#f0cf8a 22%,#7a4a6a 58%,#1a0f20 100%)}
 .zoom.enter .bloom{opacity:1}
+
 .folder{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;background:radial-gradient(ellipse at 15% 0%,#2a1733,transparent 60%),#0f0a14;opacity:0;visibility:hidden;transition:opacity .6s,visibility .6s;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .folder.show{opacity:1;visibility:visible}
 .ftop{display:flex;align-items:center;flex-wrap:wrap;gap:14px;padding:16px 24px;border-bottom:1px solid rgba(201,165,106,.18)}
@@ -139,9 +218,11 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .pic::after,.lbpic::after{content:"";position:absolute;inset:0;pointer-events:none;background:var(--wm) 0 0/220px 140px}
 .cap{padding:13px 16px;font-family:var(--head);font-weight:600;font-size:1.15rem}
 @keyframes rise{from{opacity:0;transform:translate3d(0,50px,0) scale(.97)}to{opacity:1;transform:none}}
+
 .lightbox{position:fixed;inset:0;z-index:50;display:none;place-items:center;background:rgba(8,4,12,.96);padding:24px;cursor:zoom-out;-webkit-user-select:none;user-select:none}
 .lightbox.show{display:grid}
 .lbpic{position:relative;width:min(94vw,1100px);height:88vh;background:center/contain no-repeat;-webkit-touch-callout:none}
+
 .about-sec{padding:90px 20px}
 .about{max-width:900px;margin:0 auto;text-align:center;padding:clamp(28px,6vw,70px);border:1px solid rgba(201,165,106,.28);background:linear-gradient(160deg,rgba(34,22,42,.92),rgba(22,14,28,.92));box-shadow:0 24px 60px rgba(4,1,8,.5);position:relative}
 .about::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,165,106,.12);pointer-events:none}
@@ -157,7 +238,8 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .step h3{font-family:var(--head);font-weight:700;font-size:1.3rem;margin-bottom:4px}
 .step p{margin:0;font-size:.9rem;color:var(--muted)}
 .close{font-family:var(--head);font-weight:600;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--pink)}
-/* premium story */
+
+/* PREMIUM STORY */
 .story{max-width:1040px;margin:0 auto;padding:110px 24px 120px;text-align:center}
 .story .ey{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold)}
 .story h2{font-weight:600;font-size:clamp(2.6rem,7vw,4.6rem);margin:14px 0 0}
@@ -174,63 +256,116 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .card h3{font-family:var(--head);font-weight:700;font-size:1.55rem;margin:10px 0 8px;color:var(--text)}
 .card p{color:#d9cadc;font-size:.95rem}
 .story .end{margin-top:10px;font-family:var(--head);font-size:clamp(1.5rem,4vw,2.2rem);color:var(--pink)}
+
 .contact{text-align:center;padding:90px 24px 80px;background:linear-gradient(to bottom,transparent,rgba(8,4,12,.75))}
 .contact h2{font-weight:600;font-size:clamp(2.6rem,8vw,5.2rem)}
 .contact p{color:var(--muted);margin:0 auto 30px;max-width:44ch}
 footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter-spacing:.12em;background:rgba(8,4,12,.9)}
-@media (max-width:760px){.tl::before{left:12px}.m,.m:nth-child(even){width:100%;margin-left:0;padding:0 0 48px 40px}.m::after,.m:nth-child(even)::after{left:6px;right:auto}}
-@media (max-width:640px){.door-wrap{font-size:8.5px}.doors{gap:64px 24px}}
+
+@media (max-width:760px){
+.tl::before{left:12px}
+.m,.m:nth-child(even){width:100%;margin-left:0;padding:0 0 48px 40px}
+.m::after,.m:nth-child(even)::after{left:6px;right:auto}
+}
+@media (max-width:640px){
+.door-wrap{font-size:8.5px}
+.doors{gap:64px 24px}
+}
 @media (hover:none),(pointer:coarse){.cur,.glow{display:none}}
 @media print{.folder,.lightbox,.zoom{display:none!important}}
-@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.intro{display:none}}
+@media (prefers-reduced-motion:reduce){
+*{transition-duration:.01s!important;animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
+.intro{display:none}
+}
 </style>
 </head>
+
 <body>
+
 <div class="intro" aria-hidden="true"><span id="introName">ANNA Vtuber Artist</span></div>
+
 <div class="bg" aria-hidden="true">
-<i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
-<svg class="wave w1" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 60 q180 -60 360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0"/></svg>
-<svg class="wave w2" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 60 q180 -60 360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0"/></svg>
+<i class="orb o1"></i>
+<i class="orb o2"></i>
+<i class="orb o3"></i>
+
+<svg class="wave w1" viewBox="0 0 2880 120" preserveAspectRatio="none">
+<path d="M0 60 q180 -60 360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0"/>
+</svg>
+
+<svg class="wave w2" viewBox="0 0 2880 120" preserveAspectRatio="none">
+<path d="M0 60 q180 -60 360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0"/>
+</svg>
+
 <div id="stars"></div>
 <div id="ffs"></div>
 <div id="bfly"></div>
 </div>
+
 <div class="glow" id="glow" aria-hidden="true"></div>
 <div class="cur" id="cur" aria-hidden="true"></div>
 <div class="progress" id="progress"></div>
-<nav class="top" aria-label="Main"><a href="#home">Home</a><a href="#doors">My work</a><a href="#about">About</a><a href="#story">My story</a><a href="#contact">Contact</a></nav>
+
+<nav class="top" aria-label="Main">
+<a href="#home">Home</a>
+<a href="#doors">My work</a>
+<a href="#about">About</a>
+<a href="#story">My story</a>
+<a href="#contact">Contact</a>
+</nav>
+
 <header class="hero" id="home">
 <div class="ring" aria-hidden="true"></div>
 <p class="eyebrow">Welcome to Anna's Art World</p>
 <h1 class="big-name"> I'M <span id="name">ANNA</span>.</h1>
 <div class="avail"><i></i>Commissions are open</div>
-<div class="cta"><a class="btn main" href="#doors">Explore my work</a><a class="btn" href="#contact">Start a project</a></div>
+<div class="cta">
+<a class="btn main" href="#doors">Explore my work</a>
+<a class="btn" href="#contact">Start a project</a>
+</div>
 <span class="scroll">Scroll</span>
 </header>
+
 <section class="doors-sec" id="doors">
 <h2 class="rv">Open a door, step into my world</h2>
 <i class="rule"></i>
 <p class="rv">Behind every door is a different kind of artwork work. Choose one and step inside.</p>
 <div class="doors" id="doorList"></div>
 </section>
+
 <section class="about-sec" id="about">
 <div class="about rv">
 <h2>About me</h2>
 <i class="rule"></i>
 <p class="lead">Hello and welcome to my little corner of the art world!</p>
-<p>I'm <b class="nm">ANNA</b>, ♡ Meow ur Sleepiest Celestial Kitty┆Artist ┆ No AI  Commission are Open ┆ Adopt Artist Mama ┆ She/Her.</p>
+<p>I'm <b class="nm">ANNA</b>, ♡ Meow ur Sleepiest Celestial Kitty┆Artist ┆ No AI Commission are Open ┆ Adopt Artist Mama ┆ She/Her.</p>
 <p>Here is what I can create for you:</p>
 <div class="chips" id="chips"></div>
 <p>I believe every character has a story worth telling. Whether you arrive with a fully developed concept or only a small spark of an idea, I'm happy to help turn it into something special.</p>
+
 <div class="steps">
-<div class="step"><span>1</span><h3>Tell me your idea</h3><p>Share your concept, references and the feeling you want.</p></div>
-<div class="step"><span>2</span><h3>Sketch and refine</h3><p>I send sketches and we polish them together until it feels right.</p></div>
-<div class="step"><span>3</span><h3>Final files</h3><p>You get clean, ready-to-use files, made with care.</p></div>
+<div class="step">
+<span>1</span>
+<h3>Tell me your idea</h3>
+<p>Share your concept, references and the feeling you want.</p>
 </div>
+<div class="step">
+<span>2</span>
+<h3>Sketch and refine</h3>
+<p>I send sketches and we polish them together until it feels right.</p>
+</div>
+<div class="step">
+<span>3</span>
+<h3>Final files</h3>
+<p>You get clean, ready-to-use files, made with care.</p>
+</div>
+</div>
+
 <p>I value creativity, clear communication and making sure every client feels heard and comfortable during the commission. Thank you for visiting and for supporting my art. I truly appreciate every one of you.</p>
 <p class="close">Let's create something wonderful together.</p>
 </div>
 </section>
+
 <section class="story" id="story">
 <p class="ey rv">Since 2023</p>
 <h2 class="rv">My journey</h2>
@@ -238,268 +373,757 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter
 <div class="tl" id="timeline"></div>
 <p class="end rv">And the story is still being written.</p>
 </section>
+
 <section class="contact" id="contact">
 <h2 class="rv">Got a project?<br>Let's build it together.</h2>
 <i class="rule"></i>
 <p class="rv">Need a VTuber model, logo, banner or emotes? Tell me what you would like to create.</p>
 <div class="cta rv" id="links" style="animation:none"></div>
 </section>
+
 <footer>&copy; <span class="nm">ANNA</span>. All art belongs to the artist.</footer>
+
 <div class="zoom" id="zoom" aria-hidden="true">
-<div class="big door-wrap" id="big"><div class="frame"></div><div class="door"><span class="plate" id="bplate"></span><span class="knob"></span></div></div>
+<div class="big door-wrap" id="big">
+<div class="frame"></div>
+<div class="door">
+<span class="plate" id="bplate"></span>
+<span class="knob"></span>
+</div>
+</div>
 <div class="bloom"></div>
 </div>
-<section class="folder" id="folder" aria-hidden="true">
-<div class="ftop"><button class="back" id="back">Back to the doors</button><span class="fcount" id="fcount"></span></div>
-<div class="fbody" id="fbody"><div class="fhead"><h2 id="ftitle"></h2><p id="fdesc"></p></div><div class="grid" id="grid"></div></div>
-</section>
-<div class="lightbox" id="lightbox"><div class="lbpic" id="lbpic"></div></div>
-<script>
-/* ============ SETTINGS: change everything here ============ */
-const NAME = "ANNA";
-const ROLES = ["Graphic Designer","VTuber Model Artist","Logo Designer","3D Artist"];
-const SERVICES = ["Live2D models and rigging","Character design","Profile pictures","Emotes","Banners","Stream assets","Reference sheets","3D models","VRChat assets","Custom outfits","Logos"];
 
-/* Each door: put images in  images/<folder>/  and name them  <name> 1, <name> 2 ...
-   (model1.png, "model 1.webp", model-1.jpg and Model1.png all work; png, webp, jpg, jpeg) */
+<section class="folder" id="folder" aria-hidden="true">
+<div class="ftop">
+<button class="back" id="back">Back to the doors</button>
+<span class="fcount" id="fcount"></span>
+</div>
+<div class="fbody" id="fbody">
+<div class="fhead">
+<h2 id="ftitle"></h2>
+<p id="fdesc"></p>
+</div>
+<div class="grid" id="grid"></div>
+</div>
+</section>
+
+<div class="lightbox" id="lightbox">
+<div class="lbpic" id="lbpic"></div>
+</div>
+
+<script>
+/* ============ SETTINGS: CHANGE EVERYTHING HERE ============ */
+
+const NAME = "ANNA";
+
+const ROLES = [
+"Graphic Designer",
+"VTuber Model Artist",
+"Logo Designer",
+"3D Artist"
+];
+
+const SERVICES = [
+"Live2D models and rigging",
+"Character design",
+"Profile pictures",
+"Emotes",
+"Banners",
+"Stream assets",
+"Reference sheets",
+"3D models",
+"VRChat assets",
+"Custom outfits",
+"Logos"
+];
+
+/* EACH DOOR: ADD YOUR IMAGES INSIDE ITS FOLDER.
+   Example: Model/model1.png, Model/model2.png
+   Supported formats: png, webp, jpg, jpeg */
+
 const CATEGORIES = [
-   { title:"VTuber",    sub:"models",          color:"#6b3a7d", item:"Model",     names:["model"],            folder:"Model",     desc:"Custom VTuber models, ready for your stream." },
-  { title:"Logos",     sub:"and branding",    color:"#8a4a64", item:"Logo",      names:["logo"],             folder:"Logo",      desc:"Logos that make your brand easy to remember." },
-  { title:"Banners",   sub:"for streams",     color:"#4a3a6e", item:"Banner",    names:["banner"],           folder:"Banner",    desc:"Banners and headers for your channels." },
-  { title:"Emotes",    sub:"and badges",      color:"#b4607f", item:"Emote",     names:["emote","emotes"],   folder:"Emotes",    desc:"Cute and expressive emotes for your community." },
-  { title:"Character", sub:"art",             color:"#7a5a8c", item:"Character", names:["character","char"], folder:"Character", desc:"Original characters and illustrations." },
-  { title:"Artscenes", sub:"and backgrounds", color:"#3e3050", item:"Artscene", names:["artscenes","artscene"], folder:"Artscenes", desc:"Artscenes and backdrops with a story inside." },
-  { title:"3D Room", sub:"Art", color:"#5c3358", item:"3D Room", names:["3d","3D"], folder:"3D", desc:"3D rooms and environments." }
+{
+title:"VTuber",
+sub:"models",
+color:"#51465f",
+item:"Model",
+names:["model"],
+folder:"Model",
+desc:"Custom VTuber models, ready for your stream."
+},
+{
+title:"Logos",
+sub:"and branding",
+color:"#51465f",
+item:"Logo",
+names:["logo"],
+folder:"Logo",
+desc:"Logos that make your brand easy to remember."
+},
+{
+title:"Banners",
+sub:"for streams",
+color:"#51465f",
+item:"Banner",
+names:["banner"],
+folder:"Banner",
+desc:"Banners and headers for your channels."
+},
+{
+title:"Emotes",
+sub:"and badges",
+color:"#51465f",
+item:"Emote",
+names:["emote","emotes"],
+folder:"Emotes",
+desc:"Cute and expressive emotes for your community."
+},
+{
+title:"Character",
+sub:"art",
+color:"#51465f",
+item:"Character",
+names:["character","char"],
+folder:"Character",
+desc:"Original characters and illustrations."
+},
+{
+title:"Artscenes",
+sub:"and backgrounds",
+color:"#51465f",
+item:"Artscene",
+names:["artscenes","artscene"],
+folder:"Artscenes",
+desc:"Artscenes and backdrops with a story inside."
+},
+{
+title:"3D Room",
+sub:"Art",
+color:"#51465f",
+item:"3D Room",
+names:["3d","3D"],
+folder:"3D",
+desc:"3D rooms and environments."
+}
 ];
+
 const STORY = [
-  { year:"2023", title:"The first spark", text:"My first logo and my first banner. Small projects, but they changed everything." },
-  { year:"2024", title:"A character comes alive", text:"My first VTuber model and emote set, made for a creator who trusted me with their identity." },
-  { year:"2026", title:"Designing full time", text:"Today I create models, logos, banners, emotes and 3D art for creators and streamers." }
+{
+year:"2023",
+title:"The first spark",
+text:"My first logo and my first banner. Small projects, but they changed everything."
+},
+{
+year:"2024",
+title:"A character comes alive",
+text:"My first VTuber model and emote set, made for a creator who trusted me with their identity."
+},
+{
+year:"2026",
+title:"Designing full time",
+text:"Today I create models, logos, banners, emotes and 3D art for creators and streamers."
+}
 ];
+
 const LINKS = [
-  { label:"Email me", href:"https://mail.google.com/mail/?view=cm&to=Vtuberanna036@gmail.com", main:true },
-  { label:"Discord", href:"https://discord.com/users/1177021302285013172" },
-  { label:"Twitter / X", href:"https://x.com/Annavt_X" }
+{
+label:"Email me",
+href:"https://mail.google.com/mail/?view=cm&to=Vtuberanna036@gmail.com",
+main:true
+},
+{
+label:"Discord",
+href:"https://discord.com/users/1177021302285013172"
+},
+{
+label:"Twitter / X",
+href:"https://x.com/Annavt_X"
+}
 ];
-document.getElementById("links").insertAdjacentHTML("beforebegin",'<p class="rv in">Or write to me at <b>Vtuberanna036@gmail.com</b></p>');
-/* ============ You do not need to edit below this line ============ */
+
+document.getElementById("links").insertAdjacentHTML(
+"beforebegin",
+'<p class="rv in">Or write to me at <b>Vtuberanna036@gmail.com</b></p>'
+);
+
+/* ============ DO NOT NEED TO EDIT BELOW THIS LINE ============ */
 
 const $ = id => document.getElementById(id);
+
 document.title = NAME + " | Graphic Designer";
-$("name").textContent = NAME; $("introName").textContent = NAME;
+$("name").textContent = NAME;
+$("introName").textContent = NAME;
 document.querySelectorAll(".nm").forEach(e => e.textContent = NAME);
 
 const wmSvg = "<svg xmlns='http://www.w3.org/2000/svg' width='220' height='140'><text x='110' y='78' text-anchor='middle' transform='rotate(-28 110 70)' fill='white' fill-opacity='.17' font-size='26' font-family='Georgia,serif' letter-spacing='4'>" + NAME + "</text></svg>";
-document.documentElement.style.setProperty("--wm", 'url("data:image/svg+xml;utf8,' + encodeURIComponent(wmSvg) + '")');
+
+document.documentElement.style.setProperty(
+"--wm",
+'url("data:image/svg+xml;utf8,' + encodeURIComponent(wmSvg) + '")'
+);
 
 for (let i = 0; i < 24; i++) {
-  const s = document.createElement("i"); s.className = "star";
-  const z = Math.random() * 2 + 1;
-  s.style.cssText = "left:" + Math.random() * 100 + "%;top:" + Math.random() * 100 + "%;width:" + z + "px;height:" + z + "px;animation-delay:" + (-Math.random() * 6) + "s;animation-duration:" + (4 + Math.random() * 4) + "s";
-  $("stars").appendChild(s);
+const s = document.createElement("i");
+s.className = "star";
+const z = Math.random() * 2 + 1;
+s.style.cssText =
+"left:" + Math.random() * 100 + "%;top:" + Math.random() * 100 +
+"%;width:" + z + "px;height:" + z + "px;animation-delay:" +
+(-Math.random() * 6) + "s;animation-duration:" +
+(4 + Math.random() * 4) + "s";
+$("stars").appendChild(s);
 }
 
-/* ---------- glowing butterflies, fireflies and shooting stars ---------- */
+/* ---------- PURE WHITE FLYING BUTTERFLIES ---------- */
+
 const rm = matchMedia("(prefers-reduced-motion:reduce)").matches;
-let VW = innerWidth, VH = innerHeight;
-addEventListener("resize", () => { VW = innerWidth; VH = innerHeight; });
-const BCOL = [["#e8b4d8","#c9a56a"],["#f3dca0","#e8b4d8"],["#b9a2ff","#e8b4d8"],["#8fd8ff","#c9a56a"]];
-const wingSVG = (a, b) => '<svg viewBox="0 0 60 50" width="100%" height="100%"><g class="wg"><path d="M30 25C22 4 4 2 3 14C2 24 14 28 30 25Z" fill="' + a + '" fill-opacity=".88"/><path d="M30 25C14 30 6 44 16 47C24 49 29 38 30 25Z" fill="' + b + '" fill-opacity=".82"/><path d="M30 25C38 4 56 2 57 14C58 24 46 28 30 25Z" fill="' + a + '" fill-opacity=".88"/><path d="M30 25C46 30 54 44 44 47C36 49 31 38 30 25Z" fill="' + b + '" fill-opacity=".82"/></g><ellipse cx="30" cy="26" rx="1.6" ry="9" fill="#fff4d6"/></svg>';
-const flies = [];
-for (let i = 0; i < 12; i++) {
-  const c = BCOL[i % BCOL.length], s = 22 + Math.random() * 26, el = document.createElement("div");
-  el.className = "bf";
-  el.style.cssText = "width:" + s + "px;height:" + s * .83 + "px;--g:" + c[0];
-  el.innerHTML = wingSVG(c[0], c[1]);
-  el.querySelector(".wg").style.animationDuration = (.16 + Math.random() * .16) + "s";
-  $("bfly").appendChild(el);
-  flies.push({ el, s, cx: Math.random(), cy: Math.random(), ax: .15 + Math.random() * .25, ay: .1 + Math.random() * .22, bx: .04 + Math.random() * .08, by: .04 + Math.random() * .08, f: .05 + Math.random() * .07, g: .17 + Math.random() * .2, p: Math.random() * 6.28, q: Math.random() * 6.28, px: 0, py: 0, r: 0 });
-}
-function stepFlies(ts) {
-  const t = ts / 1000;
-  flies.forEach(b => {
-    const x = (b.cx + b.ax * Math.sin(t * b.f + b.p) + b.bx * Math.sin(t * b.g + b.q)) * VW;
-    const y = (b.cy + b.ay * Math.cos(t * b.f * 1.3 + b.q) + b.by * Math.sin(t * b.g * 1.1 + b.p)) * VH;
-    const dx = x - b.px, dy = y - b.py;
-    if (b.px && (dx || dy)) {
-      const a = Math.atan2(dy, dx) * 180 / Math.PI + 90;
-      let d = a - b.r; d = ((d + 540) % 360) - 180; b.r += d * .08;
-    }
-    b.px = x; b.py = y;
-    b.el.style.transform = "translate3d(" + (x - b.s / 2) + "px," + (y - b.s / 2) + "px,0) rotate(" + b.r + "deg)";
-  });
-  if (!rm) requestAnimationFrame(stepFlies);
-}
-requestAnimationFrame(stepFlies);
 
-for (let i = 0; i < 30; i++) {
-  const f = document.createElement("i"), d = 16 + Math.random() * 18, z = 2 + Math.random() * 3;
-  f.className = "ff";
-  f.style.cssText = "left:" + Math.random() * 100 + "%;--sx:" + (Math.random() * 120 - 60) + "px;animation-duration:" + d + "s;animation-delay:" + (-Math.random() * d) + "s;width:" + z + "px;height:" + z + "px";
-  $("ffs").appendChild(f);
+let VW = innerWidth;
+let VH = innerHeight;
+
+addEventListener("resize", () => {
+VW = innerWidth;
+VH = innerHeight;
+});
+
+const whiteButterflySVG = `
+<svg viewBox="0 0 64 52" aria-hidden="true">
+<defs>
+<linearGradient id="whiteWing" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset=".55" stop-color="#f8fbff"/>
+<stop offset="1" stop-color="#eaf2ff"/>
+</linearGradient>
+<radialGradient id="whiteBody">
+<stop offset="0" stop-color="#ffffff"/>
+<stop offset="1" stop-color="#dce8f7"/>
+</radialGradient>
+</defs>
+
+<g class="bf-wing-left">
+<path d="M32 25 C24 5 7 1 4 12 C1 23 15 29 31 28 C20 29 12 39 19 46 C25 51 31 40 32 27Z"
+fill="url(#whiteWing)" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M29 24 Q16 12 7 12 M29 28 Q17 29 14 37"
+fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width=".8"/>
+</g>
+
+<g class="bf-wing-right">
+<path d="M32 25 C40 5 57 1 60 12 C63 23 49 29 33 28 C44 29 52 39 45 46 C39 51 33 40 32 27Z"
+fill="url(#whiteWing)" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M35 24 Q48 12 57 12 M35 28 Q47 29 50 37"
+fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width=".8"/>
+</g>
+
+<ellipse cx="32" cy="27" rx="1.8" ry="9" fill="url(#whiteBody)"/>
+<path d="M31 19 Q26 12 25 14 M33 19 Q38 12 39 14"
+fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
+</svg>`;
+
+const butterflies = [];
+const butterflyCount = 9;
+
+for (let i = 0; i < butterflyCount; i++) {
+const size = 22 + Math.random() * 23;
+const el = document.createElement("div");
+
+el.className = "bf";
+el.style.width = size + "px";
+el.style.height = (size * .82) + "px";
+el.innerHTML = whiteButterflySVG;
+
+const leftWing = el.querySelector(".bf-wing-left");
+const rightWing = el.querySelector(".bf-wing-right");
+const flapSpeed = (.19 + Math.random() * .13) + "s";
+
+leftWing.style.animationDuration = flapSpeed;
+rightWing.style.animationDuration = flapSpeed;
+
+$("bfly").appendChild(el);
+
+butterflies.push({
+el,
+size,
+startX:Math.random() * VW,
+startY:Math.random() * VH,
+driftX:35 + Math.random() * 100,
+driftY:24 + Math.random() * 75,
+speed:.00022 + Math.random() * .00028,
+phase:Math.random() * Math.PI * 2,
+phase2:Math.random() * Math.PI * 2,
+previousX:0,
+previousY:0,
+rotation:0
+});
 }
+
+function animateButterflies(time) {
+const seconds = time;
+
+butterflies.forEach((b,index) => {
+const x =
+b.startX +
+Math.sin(seconds * b.speed + b.phase) * b.driftX +
+Math.sin(seconds * b.speed * 1.7 + b.phase2) * 24;
+
+const y =
+b.startY +
+Math.cos(seconds * b.speed * .9 + b.phase2) * b.driftY +
+Math.sin(seconds * b.speed * 1.4 + b.phase) * 18;
+
+const dx = x - b.previousX;
+const dy = y - b.previousY;
+
+if (b.previousX !== 0 || b.previousY !== 0) {
+const targetRotation = Math.atan2(dy,dx) * 180 / Math.PI + 90;
+let difference = targetRotation - b.rotation;
+difference = ((difference + 540) % 360) - 180;
+b.rotation += difference * .045;
+}
+
+b.previousX = x;
+b.previousY = y;
+
+const safeX = Math.max(8,Math.min(VW - b.size - 8,x));
+const safeY = Math.max(8,Math.min(VH - b.size - 8,y));
+
+b.el.style.transform =
+"translate3d(" + safeX + "px," + safeY + "px,0) rotate(" + b.rotation + "deg)";
+
+b.el.style.opacity =
+String(.72 + .22 * (Math.sin(seconds * .001 + index) * .5 + .5));
+});
+
+if (!rm) requestAnimationFrame(animateButterflies);
+}
+
+if (!rm) {
+requestAnimationFrame(animateButterflies);
+} else {
+butterflies.forEach(b => {
+b.el.style.transform =
+"translate3d(" + b.startX + "px," + b.startY + "px,0)";
+});
+}
+
 function shoot() {
-  if (rm) return;
-  const s = document.createElement("i"); s.className = "sh";
-  s.style.cssText = "left:" + Math.random() * 60 + "%;top:" + Math.random() * 35 + "%";
-  $("stars").appendChild(s);
-  setTimeout(() => s.remove(), 1300);
-  setTimeout(shoot, 6000 + Math.random() * 7000);
-}
-setTimeout(shoot, 3000);
+if (rm) return;
 
-const glow = $("glow"), cur = $("cur");
-let gx = innerWidth / 2, gy = innerHeight / 2, tx = gx, ty = gy, cx = gx, cy = gy, moving = false;
+const s = document.createElement("i");
+s.className = "sh";
+s.style.cssText =
+"left:" + Math.random() * 60 + "%;top:" + Math.random() * 35 + "%";
+
+$("stars").appendChild(s);
+
+setTimeout(() => s.remove(),1300);
+setTimeout(shoot,6000 + Math.random() * 7000);
+}
+
+setTimeout(shoot,3000);
+
+const glow = $("glow");
+const cur = $("cur");
+
+let gx = innerWidth / 2;
+let gy = innerHeight / 2;
+let tx = gx;
+let ty = gy;
+let cx = gx;
+let cy = gy;
+let moving = false;
+
 function follow() {
-  gx += (tx - gx) * .08; gy += (ty - gy) * .08; cx += (tx - cx) * .22; cy += (ty - cy) * .22;
-  glow.style.transform = "translate3d(" + gx + "px," + gy + "px,0)";
-  cur.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
-  if (Math.abs(tx - gx) + Math.abs(ty - gy) > .5) requestAnimationFrame(follow); else moving = false;
-}
-addEventListener("pointermove", e => { tx = e.clientX; ty = e.clientY; if (!moving) { moving = true; requestAnimationFrame(follow); } }, { passive: true });
-document.addEventListener("pointerover", e => cur.classList.toggle("hot", !!e.target.closest("a,button")));
+gx += (tx - gx) * .08;
+gy += (ty - gy) * .08;
+cx += (tx - cx) * .22;
+cy += (ty - cy) * .22;
 
-addEventListener("scroll", () => { const h = document.documentElement; $("progress").style.transform = "scaleX(" + (h.scrollTop / (h.scrollHeight - h.clientHeight || 1)) + ")"; }, { passive: true });
+glow.style.transform = "translate3d(" + gx + "px," + gy + "px,0)";
+cur.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
+
+if (Math.abs(tx - gx) + Math.abs(ty - gy) > .5) {
+requestAnimationFrame(follow);
+} else {
+moving = false;
+}
+}
+
+addEventListener("pointermove",e => {
+tx = e.clientX;
+ty = e.clientY;
+
+if (!moving) {
+moving = true;
+requestAnimationFrame(follow);
+}
+},{passive:true});
+
+document.addEventListener("pointerover",e => {
+cur.classList.toggle("hot",!!e.target.closest("a,button"));
+});
+
+addEventListener("scroll",() => {
+const h = document.documentElement;
+$("progress").style.transform =
+"scaleX(" + (h.scrollTop / (h.scrollHeight - h.clientHeight || 1)) + ")";
+},{passive:true});
 
 let ri = 0;
+
 setInterval(() => {
-  const el = $("role"); if (!el) return; el.classList.add("out");
-  setTimeout(() => { ri = (ri + 1) % ROLES.length; el.textContent = ROLES[ri]; el.classList.remove("out"); }, 260);
-}, 2600);
+const el = $("role");
+if (!el) return;
+
+el.classList.add("out");
+
+setTimeout(() => {
+ri = (ri + 1) % ROLES.length;
+el.textContent = ROLES[ri];
+el.classList.remove("out");
+},260);
+},2600);
 
 const pills = SERVICES.map(s => '<span class="pill">' + s + '</span>').join("");
 $("chips").innerHTML = pills;
-$("timeline").innerHTML = STORY.map(s => '<div class="m rv"><div class="card"><div class="yr">' + s.year + '</div><h3>' + s.title + '</h3><p>' + s.text + '</p></div></div>').join("");
-$("links").innerHTML = LINKS.map(l => '<a class="btn' + (l.main ? ' main' : '') + '" href="' + l.href + '"' + (/^mailto:/.test(l.href) ? '' : ' target="_blank" rel="noopener"') + '>' + l.label + '</a>').join("");
+
+$("timeline").innerHTML = STORY.map(s =>
+'<div class="m rv"><div class="card"><div class="yr">' +
+s.year + '</div><h3>' + s.title + '</h3><p>' +
+s.text + '</p></div></div>'
+).join("");
+
+$("links").innerHTML = LINKS.map(l =>
+'<a class="btn' + (l.main ? ' main' : '') +
+'" href="' + l.href + '"' +
+(/^mailto:/.test(l.href) ? '' : ' target="_blank" rel="noopener"') +
+'>' + l.label + '</a>'
+).join("");
 
 document.querySelectorAll(".btn").forEach(b => {
-  b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); b.style.transform = "translate3d(" + (e.clientX - r.left - r.width / 2) * .2 + "px," + (e.clientY - r.top - r.height / 2) * .3 + "px,0)"; });
-  b.addEventListener("pointerleave", () => { b.style.transform = ""; });
+b.addEventListener("pointermove",e => {
+const r = b.getBoundingClientRect();
+b.style.transform =
+"translate3d(" +
+(e.clientX - r.left - r.width / 2) * .2 +
+"px," +
+(e.clientY - r.top - r.height / 2) * .3 +
+"px,0)";
 });
 
-const zoom = $("zoom"), big = $("big"), folder = $("folder"), grid = $("grid"), lightbox = $("lightbox"), lbpic = $("lbpic");
+b.addEventListener("pointerleave",() => {
+b.style.transform = "";
+});
+});
+
+const zoom = $("zoom");
+const big = $("big");
+const folder = $("folder");
+const grid = $("grid");
+const lightbox = $("lightbox");
+const lbpic = $("lbpic");
+
 const plate = c => '<b>' + c.title + '</b><i>' + c.sub + '</i>';
-let busy = false, lastBtn = null, token = 0;
 
-CATEGORIES.forEach((cat, i) => {
-  const b = document.createElement("button");
-  b.className = "door-wrap rv";
-  b.style.setProperty("--c", cat.color);
-  b.style.transitionDelay = (i % 4) * 120 + "ms";
-  b.setAttribute("aria-label", "Open " + cat.title + " " + cat.sub);
-  b.innerHTML = '<div class="frame"></div><div class="door"><span class="plate">' + plate(cat) + '</span><span class="knob"></span></div>';
-  b.addEventListener("click", () => openDoor(b, cat));
-  $("doorList").appendChild(b);
+let busy = false;
+let lastBtn = null;
+let token = 0;
+
+CATEGORIES.forEach((cat,i) => {
+const b = document.createElement("button");
+
+b.className = "door-wrap rv";
+b.style.setProperty("--c","#51465f");
+b.style.transitionDelay = (i % 4) * 120 + "ms";
+
+b.setAttribute("aria-label","Open " + cat.title + " " + cat.sub);
+
+b.innerHTML =
+'<div class="frame"></div><div class="door"><span class="plate">' +
+plate(cat) +
+'</span><span class="knob"></span></div>';
+
+b.addEventListener("click",() => openDoor(b,cat));
+
+$("doorList").appendChild(b);
 });
 
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+const io = new IntersectionObserver(es => {
+es.forEach(e => {
+if (e.isIntersecting) {
+e.target.classList.add("in");
+io.unobserve(e.target);
+}
+});
+},{threshold:.12});
+
 document.querySelectorAll(".rv,.rule").forEach(el => io.observe(el));
-document.querySelectorAll(".door-wrap.rv").forEach(el => el.addEventListener("transitionend", () => { el.style.transitionDelay = "0ms"; }, { once: true }));
 
-/* smooth mouse-wheel scrolling */
-const fine = matchMedia("(hover:hover) and (pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches;
-let target = scrollY, current = scrollY, ticking = false, last = 0;
+document.querySelectorAll(".door-wrap.rv").forEach(el => {
+el.addEventListener("transitionend",() => {
+el.style.transitionDelay = "0ms";
+},{once:true});
+});
+
+/* SMOOTH MOUSE WHEEL SCROLLING */
+
+const fine =
+matchMedia("(hover:hover) and (pointer:fine)").matches &&
+!matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+let target = scrollY;
+let current = scrollY;
+let ticking = false;
+let last = 0;
+
 const maxY = () => document.documentElement.scrollHeight - innerHeight;
-const locked = () => busy || folder.classList.contains("show") || lightbox.classList.contains("show");
+
+const locked = () =>
+busy ||
+folder.classList.contains("show") ||
+lightbox.classList.contains("show");
+
 function tick(now) {
-  const dt = Math.min(now - last, 50); last = now;
-  current += (target - current) * (1 - Math.exp(-dt / 120));
-  if (Math.abs(target - current) < .4) { current = target; scrollTo(0, current); ticking = false; return; }
-  scrollTo(0, current); requestAnimationFrame(tick);
+const dt = Math.min(now - last,50);
+last = now;
+
+current += (target - current) * (1 - Math.exp(-dt / 120));
+
+if (Math.abs(target - current) < .4) {
+current = target;
+scrollTo(0,current);
+ticking = false;
+return;
 }
-function startTick() { if (!ticking) { ticking = true; last = performance.now(); requestAnimationFrame(tick); } }
-function goTo(y) { y = Math.max(0, Math.min(maxY(), y)); if (fine) { target = y; startTick(); } else scrollTo({ top: y, behavior: "smooth" }); }
+
+scrollTo(0,current);
+requestAnimationFrame(tick);
+}
+
+function startTick() {
+if (!ticking) {
+ticking = true;
+last = performance.now();
+requestAnimationFrame(tick);
+}
+}
+
+function goTo(y) {
+y = Math.max(0,Math.min(maxY(),y));
+
 if (fine) {
-  addEventListener("wheel", e => {
-    if (e.ctrlKey || locked()) return;
-    e.preventDefault();
-    target = Math.max(0, Math.min(maxY(), target + e.deltaY * (e.deltaMode === 1 ? 33 : 1)));
-    startTick();
-  }, { passive: false });
-  addEventListener("scroll", () => { if (!ticking) target = current = scrollY; }, { passive: true });
+target = y;
+startTick();
+} else {
+scrollTo({top:y,behavior:"smooth"});
 }
-document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
-  const el = document.querySelector(a.getAttribute("href")); if (!el) return;
-  e.preventDefault(); goTo(el.getBoundingClientRect().top + scrollY - 56);
-}));
-
-/* door opens, you walk into the light, the gallery appears */
-function openDoor(btn, cat) {
-  if (busy) return;
-  busy = true; lastBtn = btn;
-  big.style.setProperty("--c", cat.color);
-  $("bplate").innerHTML = plate(cat);
-  zoom.classList.add("show");
-  setTimeout(() => zoom.classList.add("swing"), 800);
-  setTimeout(() => zoom.classList.add("enter"), 1800);
-  setTimeout(() => showFolder(cat), 2600);
 }
 
-/* finds numbered images by itself: model1.png, "model 1.webp", Model-1.jpg ... */
-function probe(url) { return new Promise(r => { const im = new Image(); im.onload = () => r(url); im.onerror = () => r(null); im.src = url; }); }
+if (fine) {
+addEventListener("wheel",e => {
+if (e.ctrlKey || locked()) return;
+
+e.preventDefault();
+
+target = Math.max(
+0,
+Math.min(
+maxY(),
+target + e.deltaY * (e.deltaMode === 1 ? 33 : 1)
+)
+);
+
+startTick();
+},{passive:false});
+
+addEventListener("scroll",() => {
+if (!ticking) target = current = scrollY;
+},{passive:true});
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+a.addEventListener("click",e => {
+const el = document.querySelector(a.getAttribute("href"));
+if (!el) return;
+
+e.preventDefault();
+
+goTo(el.getBoundingClientRect().top + scrollY - 56);
+});
+});
+
+/* DOOR OPENS, YOU WALK INTO THE LIGHT, GALLERY APPEARS */
+
+function openDoor(btn,cat) {
+if (busy) return;
+
+busy = true;
+lastBtn = btn;
+
+big.style.setProperty("--c","#51465f");
+$("bplate").innerHTML = plate(cat);
+
+zoom.classList.add("show");
+
+setTimeout(() => zoom.classList.add("swing"),800);
+setTimeout(() => zoom.classList.add("enter"),1800);
+setTimeout(() => showFolder(cat),2600);
+}
+
+/* FINDS NUMBERED IMAGES AUTOMATICALLY */
+
+function probe(url) {
+return new Promise(r => {
+const im = new Image();
+im.onload = () => r(url);
+im.onerror = () => r(null);
+im.src = url;
+});
+}
+
 function patternsFor(cat) {
-  const out = [];
-  cat.names.forEach(n => [n, n[0].toUpperCase() + n.slice(1)].forEach(pre => ["webp","png","jpg","jpeg"].forEach(ext => ["", " ", "-", "_"].forEach(sep => out.push({ pre, sep, ext })))));
-  return out;
+const out = [];
+
+cat.names.forEach(n => {
+[n,n[0].toUpperCase() + n.slice(1)].forEach(pre => {
+["webp","png","jpg","jpeg"].forEach(ext => {
+[""," ","-","_"].forEach(sep => {
+out.push({pre,sep,ext});
+});
+});
+});
+});
+
+return out;
 }
-const urlOf = (cat, p, n) => encodeURI(cat.folder + "/" + p.pre + p.sep + n + "." + p.ext);
-async function* findImages(cat, max = 24) {
-  const ps = patternsFor(cat);
-  for (let n = 1; n <= max; n++) {
-    const res = await Promise.all(ps.map(p => probe(urlOf(cat, p, n))));
-    const url = res.find(Boolean);
-    if (!url) return;
-    yield { url, n };
-  }
+
+const urlOf = (cat,p,n) =>
+encodeURI(cat.folder + "/" + p.pre + p.sep + n + "." + p.ext);
+
+async function* findImages(cat,max = 24) {
+const ps = patternsFor(cat);
+
+for (let n = 1; n <= max; n++) {
+const res = await Promise.all(ps.map(p => probe(urlOf(cat,p,n))));
+const url = res.find(Boolean);
+
+if (!url) return;
+
+yield {url,n};
+}
 }
 
 async function showFolder(cat) {
-  const my = ++token;
-  $("ftitle").textContent = cat.title + " " + cat.sub;
-  $("fdesc").textContent = cat.desc;
-  $("fcount").textContent = "";
-  grid.innerHTML = "";
-  $("fbody").scrollTop = 0;
-  document.body.style.overflow = "hidden";
-  folder.classList.add("show");
-  folder.setAttribute("aria-hidden", "false");
-  $("back").focus();
-  let count = 0;
-  for await (const { url, n } of findImages(cat)) {
-    if (my !== token) return;
-    const t = document.createElement("button");
-    t.className = "tile"; t.style.setProperty("--i", count % 6);
-    t.setAttribute("aria-label", "View " + cat.item + " " + n);
-    t.innerHTML = '<div class="thumb"><div class="pic" role="img" aria-label="' + cat.item + ' ' + n + '"></div></div><div class="cap">' + cat.item + ' ' + n + '</div>';
-    t.querySelector(".pic").style.backgroundImage = 'url("' + url + '")';  /* background, not <img>: no "Save image" menu */
-    t.addEventListener("click", () => { lbpic.style.backgroundImage = 'url("' + url + '")'; lightbox.classList.add("show"); });
-    grid.appendChild(t);
-    $("fcount").textContent = ++count + (count === 1 ? " work" : " works");
-  }
-  if (my === token && !count) grid.innerHTML = '<p class="soon">New work is coming soon.</p>';
+const my = ++token;
+
+$("ftitle").textContent = cat.title + " " + cat.sub;
+$("fdesc").textContent = cat.desc;
+$("fcount").textContent = "";
+
+grid.innerHTML = "";
+$("fbody").scrollTop = 0;
+
+document.body.style.overflow = "hidden";
+
+folder.classList.add("show");
+folder.setAttribute("aria-hidden","false");
+
+$("back").focus();
+
+let count = 0;
+
+for await (const {url,n} of findImages(cat)) {
+if (my !== token) return;
+
+const t = document.createElement("button");
+
+t.className = "tile";
+t.style.setProperty("--i",count % 6);
+
+t.setAttribute("aria-label","View " + cat.item + " " + n);
+
+t.innerHTML =
+'<div class="thumb"><div class="pic" role="img" aria-label="' +
+cat.item + " " + n +
+'"></div></div><div class="cap">' +
+cat.item + " " + n +
+'</div>';
+
+t.querySelector(".pic").style.backgroundImage = 'url("' + url + '")';
+
+t.addEventListener("click",() => {
+lbpic.style.backgroundImage = 'url("' + url + '")';
+lightbox.classList.add("show");
+});
+
+grid.appendChild(t);
+
+$("fcount").textContent =
+++count + (count === 1 ? " work" : " works");
+}
+
+if (my === token && !count) {
+grid.innerHTML = '<p class="soon">New work is coming soon.</p>';
+}
 }
 
 function closeAll() {
-  if (lightbox.classList.contains("show")) { lightbox.classList.remove("show"); return; }
-  if (!folder.classList.contains("show")) return;
-  token++;
-  folder.classList.remove("show");
-  folder.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-  zoom.classList.remove("enter");
-  setTimeout(() => zoom.classList.remove("swing"), 800);
-  setTimeout(() => { zoom.classList.remove("show"); busy = false; target = current = scrollY; if (lastBtn) lastBtn.focus({ preventScroll: true }); }, 1700);
+if (lightbox.classList.contains("show")) {
+lightbox.classList.remove("show");
+return;
 }
-$("back").addEventListener("click", closeAll);
-lightbox.addEventListener("click", () => lightbox.classList.remove("show"));
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeAll();
-  if ((e.ctrlKey || e.metaKey) && ["s", "p"].includes(e.key.toLowerCase())) e.preventDefault();
+
+if (!folder.classList.contains("show")) return;
+
+token++;
+
+folder.classList.remove("show");
+folder.setAttribute("aria-hidden","true");
+
+document.body.style.overflow = "";
+
+zoom.classList.remove("enter");
+
+setTimeout(() => zoom.classList.remove("swing"),800);
+
+setTimeout(() => {
+zoom.classList.remove("show");
+busy = false;
+target = current = scrollY;
+
+if (lastBtn) {
+lastBtn.focus({preventScroll:true});
+}
+},1700);
+}
+
+$("back").addEventListener("click",closeAll);
+
+lightbox.addEventListener("click",() => {
+lightbox.classList.remove("show");
 });
-/* discourages casual copying (it cannot fully stop screenshots or direct links) */
-document.addEventListener("contextmenu", e => { if (e.target.closest(".folder,.lightbox")) e.preventDefault(); });
-document.addEventListener("dragstart", e => { if (e.target.closest(".folder,.lightbox")) e.preventDefault(); });
-document.addEventListener("copy", e => { if (e.target.closest && e.target.closest(".folder,.lightbox")) e.preventDefault(); });
+
+document.addEventListener("keydown",e => {
+if (e.key === "Escape") closeAll();
+
+if ((e.ctrlKey || e.metaKey) && ["s","p"].includes(e.key.toLowerCase())) {
+e.preventDefault();
+}
+});
+
+/* DISCOURAGES CASUAL COPYING */
+document.addEventListener("contextmenu",e => {
+if (e.target.closest(".folder,.lightbox")) e.preventDefault();
+});
+
+document.addEventListener("dragstart",e => {
+if (e.target.closest(".folder,.lightbox")) e.preventDefault();
+});
+
+document.addEventListener("copy",e => {
+if (e.target.closest && e.target.closest(".folder,.lightbox")) e.preventDefault();
+});
 </script>
+
 </body>
 </html>
