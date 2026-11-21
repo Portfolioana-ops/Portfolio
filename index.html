@@ -57,11 +57,13 @@ b{font-weight:500}
 
 /* WHITE GLOWING BUTTERFLIES (lighter glow = smoother site) */
 #bfly{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.bf{position:absolute;left:0;top:0;width:34px;height:29px;will-change:transform;pointer-events:none;opacity:.88;filter:drop-shadow(0 0 7px rgba(255,255,255,.95))}
+.bf{position:absolute;left:0;top:0;width:34px;height:29px;will-change:transform;pointer-events:none;opacity:.9}
+.bf::before{content:"";position:absolute;left:-55%;top:-55%;width:210%;height:210%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.42) 0,rgba(255,255,255,.14) 32%,transparent 62%)}
+.bf .wl,.bf .wr,.bf .bd{position:absolute;top:0;height:100%}
+.bf .wl{left:0;width:50%;transform-origin:100% 50%;will-change:transform;animation:flapLeft .24s ease-in-out infinite alternate}
+.bf .wr{left:50%;width:50%;transform-origin:0% 50%;will-change:transform;animation:flapRight .24s ease-in-out infinite alternate}
+.bf .bd{left:0;width:100%}
 .bf svg{display:block;width:100%;height:100%;overflow:visible}
-.bf-wing-left,.bf-wing-right{transform-box:fill-box}
-.bf-wing-left{transform-origin:100% 50%;animation:flapLeft .24s ease-in-out infinite alternate}
-.bf-wing-right{transform-origin:0% 50%;animation:flapRight .24s ease-in-out infinite alternate}
 @keyframes flapLeft{from{transform:scaleX(1) rotate(-4deg)}to{transform:scaleX(.24) rotate(7deg)}}
 @keyframes flapRight{from{transform:scaleX(1) rotate(4deg)}to{transform:scaleX(.24) rotate(-7deg)}}
 
@@ -307,6 +309,10 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter
 *{transition-duration:.01s!important;animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
 .intro{display:none}
 }
+
+/* pause hero animations while a gallery is open */
+body.paused .hero *,body.paused .rope-in,body.paused .ring::before,body.paused .ring::after{animation-play-state:paused!important}
+
 </style>
 </head>
 
@@ -557,6 +563,8 @@ document.getElementById("links").insertAdjacentHTML(
 
 const $ = id => document.getElementById(id);
 const rm = matchMedia("(prefers-reduced-motion:reduce)").matches;
+/* phones: image guessing is done more gently (this does not change how anything looks) */
+const LITE = matchMedia("(pointer:coarse)").matches;
 
 document.title = NAME + " | Graphic Designer";
 $("name").textContent = NAME;
@@ -592,18 +600,18 @@ let VH = innerHeight;
 addEventListener("resize", () => { VW = innerWidth; VH = innerHeight; });
 
 const butterflySVG = `
-<svg viewBox="0 0 64 52" aria-hidden="true">
-<g class="bf-wing-left">
+<div class="wl"><svg viewBox="0 0 32 52" preserveAspectRatio="none" aria-hidden="true">
 <path d="M32 25 C24 5 7 1 4 12 C1 23 15 29 31 28 C20 29 12 39 19 46 C25 51 31 40 32 27Z" fill="url(#whiteWing)" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
 <path d="M29 24 Q16 12 7 12 M29 28 Q17 29 14 37" fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width=".8"/>
-</g>
-<g class="bf-wing-right">
+</svg></div>
+<div class="wr"><svg viewBox="32 0 32 52" preserveAspectRatio="none" aria-hidden="true">
 <path d="M32 25 C40 5 57 1 60 12 C63 23 49 29 33 28 C44 29 52 39 45 46 C39 51 33 40 32 27Z" fill="url(#whiteWing)" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
 <path d="M35 24 Q48 12 57 12 M35 28 Q47 29 50 37" fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width=".8"/>
-</g>
+</svg></div>
+<div class="bd"><svg viewBox="0 0 64 52" aria-hidden="true">
 <ellipse cx="32" cy="27" rx="1.8" ry="9" fill="url(#whiteBody)"/>
 <path d="M31 19 Q26 12 25 14 M33 19 Q38 12 39 14" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
-</svg>`;
+</svg></div>`;
 
 const butterflies = [];
 const butterflyCount = innerWidth < 700 ? 5 : 7;
@@ -619,8 +627,8 @@ el.style.height = (size * .82) + "px";
 el.innerHTML = butterflySVG;
 
 const flapSpeed = (.19 + Math.random() * .13) + "s";
-el.querySelector(".bf-wing-left").style.animationDuration = flapSpeed;
-el.querySelector(".bf-wing-right").style.animationDuration = flapSpeed;
+el.querySelector(".wl").style.animationDuration = flapSpeed;
+el.querySelector(".wr").style.animationDuration = flapSpeed;
 $("bfly").appendChild(el);
 
 butterflies.push({
@@ -827,6 +835,17 @@ let busy = false;
 let lastBtn = null;
 let token = 0;
 
+/* thumbnails start loading only when they are close to the screen (big memory saver on phones) */
+const lazyIO = new IntersectionObserver(es => {
+es.forEach(e => {
+if (e.isIntersecting) {
+const im = e.target;
+im.src = im.dataset.src;
+lazyIO.unobserve(im);
+}
+});
+}, {root: $("fbody"), rootMargin: "250px 0px"});
+
 CATEGORIES.forEach((cat, i) => {
 const b = document.createElement("button");
 b.className = "door-wrap rv";
@@ -836,10 +855,11 @@ b.innerHTML = '<div class="frame"></div><div class="door"><span class="plate">' 
 b.addEventListener("click", () => openDoor(b, cat));
 
 /* start finding the images as soon as the visitor shows interest */
+if (matchMedia("(hover:hover) and (pointer:fine)").matches) {
 const warm = () => getList(cat);
 b.addEventListener("pointerenter", warm, {once:true});
 b.addEventListener("focus", warm, {once:true});
-b.addEventListener("touchstart", warm, {once:true, passive:true});
+}
 
 $("doorList").appendChild(b);
 });
@@ -882,7 +902,10 @@ function rollUp(done) {
 if (rolled || rolling) return;
 rolling = true;
 
+
 const h = hero.offsetHeight;
+rest.style.height = innerHeight + "px";   /* only the part you can see moves = no giant layer */
+rest.style.overflow = "hidden";
 
 rope.classList.add("pull");
 setTimeout(() => rope.classList.remove("pull"), 280);
@@ -897,6 +920,7 @@ setTimeout(() => {
 hero.style.display = "none";
 hero.style.transition = rest.style.transition = "none";
 hero.style.transform = rest.style.transform = "";
+rest.style.height = rest.style.overflow = "";
 rolled = true;
 rolling = false;
 root.classList.remove("locked");
@@ -912,11 +936,14 @@ if (!rolled || rolling) return;
 rolling = true;
 ropeUp.classList.remove("show");
 
+
 scrollTo(0, 0);
 hero.style.display = "";
 hero.classList.add("rolling");
 
 const h = hero.offsetHeight;
+rest.style.height = innerHeight + "px";
+rest.style.overflow = "hidden";
 hero.style.transition = rest.style.transition = "none";
 hero.style.transform = rest.style.transform = "translateY(-" + h + "px)";
 void hero.offsetHeight;
@@ -927,6 +954,7 @@ hero.style.transform = rest.style.transform = "translateY(0)";
 setTimeout(() => {
 hero.style.transition = rest.style.transition = "";
 hero.style.transform = rest.style.transform = "";
+rest.style.height = rest.style.overflow = "";
 hero.classList.remove("rolling");
 rolled = false;
 rolling = false;
@@ -1158,9 +1186,10 @@ return [];
 }
 
 async function discover(cat) {
+const size = LITE ? 8 : 30;
 for (const stage of stagesFor(cat)) {
-for (let i = 0; i < stage.length; i += 30) {
-const chunk = stage.slice(i, i + 30);
+for (let i = 0; i < stage.length; i += size) {
+const chunk = stage.slice(i, i + size);
 const res = await Promise.all(chunk.map(p => exists(fileUrl(p, p.start))));
 const k = res.findIndex(Boolean);
 if (k >= 0) return collect(chunk[k]);
@@ -1204,6 +1233,7 @@ getList(cat);   /* images start loading right now, during the animation */
 $("bplate").innerHTML = plate(cat);
 zoom.classList.add("show");
 
+
 setTimeout(() => zoom.classList.add("swing"), 450);
 setTimeout(() => zoom.classList.add("enter"), 1050);
 setTimeout(() => showFolder(cat), 1650);
@@ -1243,12 +1273,13 @@ t.setAttribute("aria-label", "View " + cat.item + " " + (i + 1));
 
 t.innerHTML =
 '<div class="thumb"><div class="pic" role="img" aria-label="' + cat.item + " " + (i + 1) +
-'"><img alt="" loading="lazy" decoding="async" draggable="false"></div></div><div class="cap">' +
+'"><img alt="" decoding="async" draggable="false"></div></div><div class="cap">' +
 cat.item + " " + (i + 1) + '</div>';
 
 const img = t.querySelector("img");
 img.addEventListener("load", () => img.classList.add("ok"));
-img.src = url;
+img.dataset.src = url;
+lazyIO.observe(img);
 
 t.addEventListener("click", () => {
 lbpic.style.backgroundImage = 'url("' + url + '")';
