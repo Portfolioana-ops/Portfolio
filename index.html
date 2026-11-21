@@ -81,13 +81,6 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .btn:hover{background:var(--pink);border-color:var(--pink);color:#2a1424}
 .scroll{position:absolute!important;bottom:22px;color:var(--muted);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;animation:in 1s calc(var(--t) + 1.4s) both}
 .scroll::after{content:"";display:block;width:1px;height:34px;margin:8px auto 0;background:linear-gradient(var(--gold),transparent)}
-.marquee{position:relative;overflow:hidden;padding:20px 0;border-block:1px solid rgba(201,165,106,.18);background:rgba(255,255,255,.025)}
-.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:12%;z-index:1;pointer-events:none}
-.marquee::before{left:0;background:linear-gradient(90deg,#120b18,transparent)}
-.marquee::after{right:0;background:linear-gradient(270deg,#120b18,transparent)}
-.track{display:flex;gap:14px;width:max-content;will-change:transform;animation:scrollx 46s linear infinite}
-.marquee:hover .track{animation-play-state:paused}
-@keyframes scrollx{to{transform:translate3d(-50%,0,0)}}
 .pill{white-space:nowrap;padding:8px 22px;border:1px solid rgba(201,165,106,.3);background:rgba(255,255,255,.03);color:var(--text);font-size:.82rem;letter-spacing:.06em}
 .rv{opacity:0;transform:translate3d(0,40px,0);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -214,7 +207,6 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter
 <div class="cta"><a class="btn main" href="#doors">Explore my work</a><a class="btn" href="#contact">Start a project</a></div>
 <span class="scroll">Scroll</span>
 </header>
-<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
 <section class="doors-sec" id="doors">
 <h2 class="rv">Open a door, step into my world</h2>
 <i class="rule"></i>
@@ -371,12 +363,11 @@ addEventListener("scroll", () => { const h = document.documentElement; $("progre
 
 let ri = 0;
 setInterval(() => {
-  const el = $("role"); el.classList.add("out");
+  const el = $("role"); if (!el) return; el.classList.add("out");
   setTimeout(() => { ri = (ri + 1) % ROLES.length; el.textContent = ROLES[ri]; el.classList.remove("out"); }, 260);
 }, 2600);
 
 const pills = SERVICES.map(s => '<span class="pill">' + s + '</span>').join("");
-$("track").innerHTML = pills + pills;
 $("chips").innerHTML = pills;
 $("timeline").innerHTML = STORY.map(s => '<div class="m rv"><div class="card"><div class="yr">' + s.year + '</div><h3>' + s.title + '</h3><p>' + s.text + '</p></div></div>').join("");
 $("links").innerHTML = LINKS.map(l => '<a class="btn' + (l.main ? ' main' : '') + '" href="' + l.href + '"' + (/^mailto:/.test(l.href) ? '' : ' target="_blank" rel="noopener"') + '>' + l.label + '</a>').join("");
