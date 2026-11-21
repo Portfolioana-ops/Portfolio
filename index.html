@@ -35,6 +35,16 @@ b{font-weight:500}
 @keyframes flow{to{transform:translate3d(-100vw,0,0)}}
 .star{position:absolute;border-radius:50%;background:#f3dcc0;opacity:0;animation:tw 5s ease-in-out infinite}
 @keyframes tw{50%{opacity:.7}}
+/* glowing butterflies, fireflies, shooting stars */
+#bfly,#ffs{position:absolute;inset:0;pointer-events:none}
+.bf{position:absolute;left:0;top:0;will-change:transform;filter:drop-shadow(0 0 5px var(--g)) drop-shadow(0 0 14px var(--g))}
+.bf svg{display:block;overflow:visible}
+.wg{transform-origin:30px 25px;animation:flap .22s ease-in-out infinite alternate}
+@keyframes flap{from{transform:scaleX(1)}to{transform:scaleX(.22)}}
+.ff{position:absolute;bottom:-12px;border-radius:50%;background:#fff1c9;box-shadow:0 0 10px 3px rgba(243,220,160,.65);opacity:0;animation:ffl linear infinite}
+@keyframes ffl{0%{transform:translate3d(0,0,0);opacity:0}12%{opacity:.9}50%{transform:translate3d(var(--sx),-50vh,0);opacity:.55}85%{opacity:.85}100%{transform:translate3d(calc(var(--sx) * -1),-105vh,0);opacity:0}}
+.sh{position:absolute;width:150px;height:1.5px;background:linear-gradient(90deg,transparent,#fff 80%,#f3dcc0);transform:rotate(25deg);opacity:0;animation:shoot 1.2s ease-out forwards}
+@keyframes shoot{0%{opacity:0;translate:0 0}12%{opacity:1}100%{opacity:0;translate:380px 177px}}
 .glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:0;will-change:transform;background:radial-gradient(circle,rgba(232,180,216,.1),transparent 62%)}
 .cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:120;will-change:transform;transition:width .25s,height .25s,margin .25s,background .25s}
 .cur.hot{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(232,180,216,.12)}
@@ -154,19 +164,29 @@ h1.big-name{font-size:clamp(3.2rem,11vw,7.4rem);margin:18px 0 6px;animation:in 1
 .step h3{font-family:var(--head);font-weight:700;font-size:1.3rem;margin-bottom:4px}
 .step p{margin:0;font-size:.9rem;color:var(--muted)}
 .close{font-family:var(--head);font-weight:600;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--pink)}
-.story{max-width:760px;margin:0 auto;padding:80px 24px 100px}
-.story h2{font-weight:600;font-size:clamp(2.2rem,6vw,3.6rem);margin-bottom:44px}
-.item{display:grid;grid-template-columns:90px 1fr;gap:20px;padding-bottom:36px;position:relative}
-.item::before{content:"";position:absolute;left:84px;top:10px;bottom:0;width:1px;background:linear-gradient(var(--gold),transparent)}
-.item::after{content:"";position:absolute;left:80px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--pink)}
-.yr{font-family:var(--head);font-weight:700;font-size:1.8rem;line-height:1.1;color:var(--gold)}
-.item h3{font-family:var(--head);font-weight:700;font-size:1.4rem;margin-bottom:4px;padding-left:14px;line-height:1.2}
-.item p{color:var(--muted);padding-left:14px;max-width:56ch}
+/* premium story */
+.story{max-width:1040px;margin:0 auto;padding:110px 24px 120px;text-align:center}
+.story .ey{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold)}
+.story h2{font-weight:600;font-size:clamp(2.6rem,7vw,4.6rem);margin:14px 0 0}
+.tl{position:relative;margin-top:80px;text-align:left}
+.tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,var(--gold) 10%,var(--gold) 90%,transparent)}
+.m{position:relative;width:50%;padding:0 56px 64px 0}
+.m:nth-child(even){margin-left:50%;padding:0 0 64px 56px}
+.m::after{content:"";position:absolute;top:34px;right:-7px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--gold);box-shadow:0 0 0 5px rgba(201,165,106,.15),0 0 18px rgba(201,165,106,.6)}
+.m:nth-child(even)::after{right:auto;left:-7px}
+.card{position:relative;padding:30px 32px;border:1px solid rgba(201,165,106,.28);background:linear-gradient(160deg,rgba(40,26,50,.92),rgba(22,14,28,.92));box-shadow:0 24px 60px rgba(4,1,8,.5);transition:transform .4s,border-color .4s}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,165,106,.12);pointer-events:none}
+.m:hover .card{transform:translate3d(0,-6px,0);border-color:var(--gold)}
+.card .yr{font-family:var(--head);font-size:clamp(3.2rem,8vw,4.8rem);line-height:1;font-weight:700;background:linear-gradient(100deg,#e6cb8a,#c9a56a 55%,#f3dca0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card h3{font-family:var(--head);font-weight:700;font-size:1.55rem;margin:10px 0 8px;color:var(--text)}
+.card p{color:#d9cadc;font-size:.95rem}
+.story .end{margin-top:10px;font-family:var(--head);font-size:clamp(1.5rem,4vw,2.2rem);color:var(--pink)}
 .contact{text-align:center;padding:90px 24px 80px;background:linear-gradient(to bottom,transparent,rgba(8,4,12,.75))}
 .contact h2{font-weight:600;font-size:clamp(2.6rem,8vw,5.2rem)}
 .contact p{color:var(--muted);margin:0 auto 30px;max-width:44ch}
 footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter-spacing:.12em;background:rgba(8,4,12,.9)}
-@media (max-width:640px){.door-wrap{font-size:8.5px}.doors{gap:64px 24px}.item{grid-template-columns:66px 1fr}.item::before{left:60px}.item::after{left:56px}}
+@media (max-width:760px){.tl::before{left:12px}.m,.m:nth-child(even){width:100%;margin-left:0;padding:0 0 48px 40px}.m::after,.m:nth-child(even)::after{left:6px;right:auto}}
+@media (max-width:640px){.door-wrap{font-size:8.5px}.doors{gap:64px 24px}}
 @media (hover:none),(pointer:coarse){.cur,.glow{display:none}}
 @media print{.folder,.lightbox,.zoom{display:none!important}}
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}.intro{display:none}}
@@ -179,6 +199,8 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter
 <svg class="wave w1" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 60 q180 -60 360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0"/></svg>
 <svg class="wave w2" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 60 q180 -60 360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0 t360 0"/></svg>
 <div id="stars"></div>
+<div id="ffs"></div>
+<div id="bfly"></div>
 </div>
 <div class="glow" id="glow" aria-hidden="true"></div>
 <div class="cur" id="cur" aria-hidden="true"></div>
@@ -219,7 +241,13 @@ footer{text-align:center;padding:22px;color:var(--muted);font-size:.78rem;letter
 <p class="close">Let's create something wonderful together.</p>
 </div>
 </section>
-<section class="story" id="story"><h2 class="rv">Let's go back in time</h2><div id="timeline"></div></section>
+<section class="story" id="story">
+<p class="ey rv">Since 2023</p>
+<h2 class="rv">My journey</h2>
+<i class="rule"></i>
+<div class="tl" id="timeline"></div>
+<p class="end rv">And the story is still being written.</p>
+</section>
 <section class="contact" id="contact">
 <h2 class="rv">Got a project?<br>Let's build it together.</h2>
 <i class="rule"></i>
@@ -254,9 +282,9 @@ const CATEGORIES = [
   { title:"3D Room", sub:"Art", color:"#5c3358", item:"3D Room", names:["3d","3D"], folder:"3D", desc:"3D rooms and environments." }
 ];
 const STORY = [
-  { year:"2023", title:"Started designing", text:"I made my first logo and my first banner, and fell in love with design." },
-  { year:"2024", title:"First VTuber model", text:"I created my first VTuber model and emote set for a client." },
-  { year:"2026", title:"Independent designer", text:"Now I work full time on logos, models, banners and 3D art." }
+  { year:"2023", title:"The first spark", text:"My first logo and my first banner. Small projects, but they changed everything." },
+  { year:"2024", title:"A character comes alive", text:"My first VTuber model and emote set, made for a creator who trusted me with their identity." },
+  { year:"2026", title:"Designing full time", text:"Today I create models, logos, banners, emotes and 3D art for creators and streamers." }
 ];
 const LINKS = [
   { label:"Email me", href:"https://mail.google.com/mail/?view=cm&to=Vtuberanna036@gmail.com", main:true },
@@ -281,6 +309,55 @@ for (let i = 0; i < 24; i++) {
   $("stars").appendChild(s);
 }
 
+/* ---------- glowing butterflies, fireflies and shooting stars ---------- */
+const rm = matchMedia("(prefers-reduced-motion:reduce)").matches;
+let VW = innerWidth, VH = innerHeight;
+addEventListener("resize", () => { VW = innerWidth; VH = innerHeight; });
+const BCOL = [["#e8b4d8","#c9a56a"],["#f3dca0","#e8b4d8"],["#b9a2ff","#e8b4d8"],["#8fd8ff","#c9a56a"]];
+const wingSVG = (a, b) => '<svg viewBox="0 0 60 50" width="100%" height="100%"><g class="wg"><path d="M30 25C22 4 4 2 3 14C2 24 14 28 30 25Z" fill="' + a + '" fill-opacity=".88"/><path d="M30 25C14 30 6 44 16 47C24 49 29 38 30 25Z" fill="' + b + '" fill-opacity=".82"/><path d="M30 25C38 4 56 2 57 14C58 24 46 28 30 25Z" fill="' + a + '" fill-opacity=".88"/><path d="M30 25C46 30 54 44 44 47C36 49 31 38 30 25Z" fill="' + b + '" fill-opacity=".82"/></g><ellipse cx="30" cy="26" rx="1.6" ry="9" fill="#fff4d6"/></svg>';
+const flies = [];
+for (let i = 0; i < 12; i++) {
+  const c = BCOL[i % BCOL.length], s = 22 + Math.random() * 26, el = document.createElement("div");
+  el.className = "bf";
+  el.style.cssText = "width:" + s + "px;height:" + s * .83 + "px;--g:" + c[0];
+  el.innerHTML = wingSVG(c[0], c[1]);
+  el.querySelector(".wg").style.animationDuration = (.16 + Math.random() * .16) + "s";
+  $("bfly").appendChild(el);
+  flies.push({ el, s, cx: Math.random(), cy: Math.random(), ax: .15 + Math.random() * .25, ay: .1 + Math.random() * .22, bx: .04 + Math.random() * .08, by: .04 + Math.random() * .08, f: .05 + Math.random() * .07, g: .17 + Math.random() * .2, p: Math.random() * 6.28, q: Math.random() * 6.28, px: 0, py: 0, r: 0 });
+}
+function stepFlies(ts) {
+  const t = ts / 1000;
+  flies.forEach(b => {
+    const x = (b.cx + b.ax * Math.sin(t * b.f + b.p) + b.bx * Math.sin(t * b.g + b.q)) * VW;
+    const y = (b.cy + b.ay * Math.cos(t * b.f * 1.3 + b.q) + b.by * Math.sin(t * b.g * 1.1 + b.p)) * VH;
+    const dx = x - b.px, dy = y - b.py;
+    if (b.px && (dx || dy)) {
+      const a = Math.atan2(dy, dx) * 180 / Math.PI + 90;
+      let d = a - b.r; d = ((d + 540) % 360) - 180; b.r += d * .08;
+    }
+    b.px = x; b.py = y;
+    b.el.style.transform = "translate3d(" + (x - b.s / 2) + "px," + (y - b.s / 2) + "px,0) rotate(" + b.r + "deg)";
+  });
+  if (!rm) requestAnimationFrame(stepFlies);
+}
+requestAnimationFrame(stepFlies);
+
+for (let i = 0; i < 30; i++) {
+  const f = document.createElement("i"), d = 16 + Math.random() * 18, z = 2 + Math.random() * 3;
+  f.className = "ff";
+  f.style.cssText = "left:" + Math.random() * 100 + "%;--sx:" + (Math.random() * 120 - 60) + "px;animation-duration:" + d + "s;animation-delay:" + (-Math.random() * d) + "s;width:" + z + "px;height:" + z + "px";
+  $("ffs").appendChild(f);
+}
+function shoot() {
+  if (rm) return;
+  const s = document.createElement("i"); s.className = "sh";
+  s.style.cssText = "left:" + Math.random() * 60 + "%;top:" + Math.random() * 35 + "%";
+  $("stars").appendChild(s);
+  setTimeout(() => s.remove(), 1300);
+  setTimeout(shoot, 6000 + Math.random() * 7000);
+}
+setTimeout(shoot, 3000);
+
 const glow = $("glow"), cur = $("cur");
 let gx = innerWidth / 2, gy = innerHeight / 2, tx = gx, ty = gy, cx = gx, cy = gy, moving = false;
 function follow() {
@@ -303,7 +380,7 @@ setInterval(() => {
 const pills = SERVICES.map(s => '<span class="pill">' + s + '</span>').join("");
 $("track").innerHTML = pills + pills;
 $("chips").innerHTML = pills;
-$("timeline").innerHTML = STORY.map(s => '<div class="item rv"><div class="yr">' + s.year + '</div><div><h3>' + s.title + '</h3><p>' + s.text + '</p></div></div>').join("");
+$("timeline").innerHTML = STORY.map(s => '<div class="m rv"><div class="card"><div class="yr">' + s.year + '</div><h3>' + s.title + '</h3><p>' + s.text + '</p></div></div>').join("");
 $("links").innerHTML = LINKS.map(l => '<a class="btn' + (l.main ? ' main' : '') + '" href="' + l.href + '"' + (/^mailto:/.test(l.href) ? '' : ' target="_blank" rel="noopener"') + '>' + l.label + '</a>').join("");
 
 document.querySelectorAll(".btn").forEach(b => {
