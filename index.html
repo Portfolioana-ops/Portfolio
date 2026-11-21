@@ -95,10 +95,14 @@ b{font-weight:500}
 /* pause all background animation when a gallery is open or tab is hidden */
 body.paused .bg,body.paused .bg *{animation-play-state:paused!important}
 
-.glow{position:fixed;left:0;top:0;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;pointer-events:none;z-index:0;will-change:transform;background:radial-gradient(circle,rgba(255,238,210,.17) 0,rgba(240,200,235,.09) 32%,transparent 68%)}
+/* CURSOR: hidden until the mouse first moves, hides when it leaves the window */
+.glow{position:fixed;left:0;top:0;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;pointer-events:none;z-index:0;will-change:transform;opacity:0;transition:opacity .4s;background:radial-gradient(circle,rgba(255,238,210,.17) 0,rgba(240,200,235,.09) 32%,transparent 68%)}
+.glow.on{opacity:1}
 body.paused .glow{display:none}
-.cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:120;will-change:transform;transition:width .25s,height .25s,margin .25s,background .25s}
+.cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:120;will-change:transform;opacity:0;transition:width .25s,height .25s,margin .25s,background .25s,opacity .25s,scale .15s}
+.cur.on{opacity:1}
 .cur.hot{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(232,180,216,.12)}
+.cur.down{scale:.76}
 .progress{position:fixed;left:0;top:0;height:2px;width:100%;z-index:60;transform:scaleX(0);transform-origin:left;will-change:transform;background:linear-gradient(90deg,var(--gold),var(--pink))}
 
 /* TOP NAVIGATION (no blur filter = no lag) */
@@ -473,7 +477,8 @@ const NAME = "ANNA";
 
 /* Your GitHub repository (owner/name). The site asks GitHub for the exact list of files
    inside each folder, so every image shows up no matter if it is .jpg, .jpeg, .png or .webp,
-   and no matter how it is numbered. Leave it as "" to turn this off. */
+   and no matter how it is numbered. If your site is on github.io it also finds the
+   repository by itself. Leave it as "" to turn this off. */
 const REPO = "Portfolioana-ops/Portfolio";
 
 const ROLES = [
@@ -512,7 +517,7 @@ const SERVICES = [
 const CATEGORIES = [
 { title:"Vtuber", sub:"model", item:"Model", names:["model"], folder:"Model", images:[],
   desc:"Custom Vtuber models, ready for your stream" },
-  { title:"Logos",     sub:"",    color:"#8a4a64", item:"Logo",      names:["logo"],             folder:"Logo",      desc:"Logos that make your brand easy to remember." },
+{ title:"Logos", sub:"", item:"Logo", names:["logo"], folder:"Logo", images:[],
   desc:"Logos that make your brand easy to remember" },
 { title:"Banners", sub:"for streams", item:"Banner", names:["banner"], folder:"Banner", images:[],
   desc:"Banners and headers for your channels" },
@@ -678,12 +683,19 @@ setTimeout(shoot, 6000 + Math.random() * 7000);
 }
 setTimeout(shoot, 3000);
 
-/* ---------- CURSOR GLOW ---------- */
+/* ---------- CURSOR ---------- */
 const glow = $("glow");
 const cur = $("cur");
-let gx = innerWidth / 2, gy = innerHeight / 2;
-let tx = gx, ty = gy, cx = gx, cy = gy;
+let gx = 0, gy = 0, tx = 0, ty = 0, cx = 0, cy = 0;
 let moving = false;
+let curOn = false;
+
+function showCursor(v) {
+if (v === curOn) return;
+curOn = v;
+cur.classList.toggle("on", v);
+glow.classList.toggle("on", v);
+}
 
 function follow() {
 gx += (tx - gx) * .08;
@@ -692,19 +704,35 @@ cx += (tx - cx) * .22;
 cy += (ty - cy) * .22;
 glow.style.transform = "translate3d(" + gx + "px," + gy + "px,0)";
 cur.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
-if (Math.abs(tx - gx) + Math.abs(ty - gy) > .5) requestAnimationFrame(follow);
+if (Math.abs(tx - gx) + Math.abs(ty - gy) + Math.abs(tx - cx) + Math.abs(ty - cy) > .5) requestAnimationFrame(follow);
 else moving = false;
 }
 
 addEventListener("pointermove", e => {
+if (e.pointerType === "touch") return;
 tx = e.clientX;
 ty = e.clientY;
+if (!curOn) {
+/* first move (or coming back into the window): appear exactly under the mouse */
+gx = cx = tx;
+gy = cy = ty;
+showCursor(true);
+}
 if (!moving) { moving = true; requestAnimationFrame(follow); }
 }, {passive:true});
 
+/* hide when the mouse leaves the window or the tab loses focus */
+document.documentElement.addEventListener("mouseleave", () => showCursor(false));
+addEventListener("blur", () => showCursor(false));
+
+/* ring grows over anything clickable, shrinks while pressing */
+const HOT = "a,button,[role=button],.door-wrap,.tile,.lightbox";
 document.addEventListener("pointerover", e => {
-cur.classList.toggle("hot", !!(e.target.closest && e.target.closest("a,button")));
+cur.classList.toggle("hot", !!(e.target.closest && e.target.closest(HOT)));
 });
+document.addEventListener("pointerdown", e => { if (e.pointerType !== "touch") cur.classList.add("down"); });
+addEventListener("pointerup", () => cur.classList.remove("down"));
+addEventListener("pointercancel", () => cur.classList.remove("down"));
 
 /* ---------- SCROLL PROGRESS (one rAF per frame max) ---------- */
 let pTick = false;
@@ -791,7 +819,9 @@ const grid = $("grid");
 const lightbox = $("lightbox");
 const lbpic = $("lbpic");
 
-const plate = c => '<b>' + c.title + '</b><i>' + c.sub + '</i>';
+/* if a door has no second line (like "Logos"), only the title shows */
+const plate = c => '<b>' + c.title + '</b>' + (c.sub ? '<i>' + c.sub + '</i>' : '');
+const fullTitle = c => (c.title + " " + c.sub).trim();
 
 let busy = false;
 let lastBtn = null;
@@ -801,7 +831,7 @@ CATEGORIES.forEach((cat, i) => {
 const b = document.createElement("button");
 b.className = "door-wrap rv";
 b.style.transitionDelay = (i % 4) * 120 + "ms";
-b.setAttribute("aria-label", "Open " + cat.title + " " + cat.sub);
+b.setAttribute("aria-label", "Open " + fullTitle(cat));
 b.innerHTML = '<div class="frame"></div><div class="door"><span class="plate">' + plate(cat) + '</span><span class="knob"></span></div>';
 b.addEventListener("click", () => openDoor(b, cat));
 
@@ -1095,22 +1125,36 @@ n += 4;
 return urls;
 }
 
-/* exact file list from GitHub (best way, no guessing) */
+/* the repository: the one written in REPO, plus the one detected from the github.io address */
+function repoGuesses() {
+const list = [];
+if (REPO) list.push(REPO);
+const h = location.hostname;
+if (h.endsWith(".github.io")) {
+const owner = h.split(".")[0];
+const first = location.pathname.split("/").filter(Boolean)[0];
+const repo = first && !/\.html?$/i.test(first) ? first : owner + ".github.io";
+list.push(owner + "/" + repo);
+}
+return uniq(list);
+}
+
+/* exact file list from GitHub (best way, no guessing). Works for .jpg .jpeg .png .webp .gif in any mix */
 async function listViaGitHub(cat) {
-if (!REPO) return [];
+for (const repo of repoGuesses()) {
 try {
-const r = await fetch("https://api.github.com/repos/" + REPO + "/contents/" + encodeURIComponent(cat.folder));
-if (!r.ok) return [];
+const r = await fetch("https://api.github.com/repos/" + repo + "/contents/" + encodeURIComponent(cat.folder));
+if (!r.ok) continue;
 const data = await r.json();
-if (!Array.isArray(data)) return [];
-return data
+if (!Array.isArray(data)) continue;
+const names = data
 .filter(f => f.type === "file" && /\.(webp|png|jpe?g|gif)$/i.test(f.name))
 .map(f => f.name)
-.sort((a, b) => a.localeCompare(b, undefined, {numeric:true, sensitivity:"base"}))
-.map(name => enc(cat, name));
-} catch (err) {
-return [];
+.sort((a, b) => a.localeCompare(b, undefined, {numeric:true, sensitivity:"base"}));
+if (names.length) return names.map(name => enc(cat, name));
+} catch (err) {}
 }
+return [];
 }
 
 async function discover(cat) {
@@ -1134,13 +1178,13 @@ if (cat.images && cat.images.length) return cat.images.map(f => enc(cat, f));
 
 /* remembered for this visit */
 try {
-const saved = sessionStorage.getItem("anna4:" + cat.folder);
+const saved = sessionStorage.getItem("anna5:" + cat.folder);
 if (saved) { const arr = JSON.parse(saved); if (arr.length) return arr; }
 } catch (err) {}
 
 let urls = await listViaGitHub(cat);
 if (!urls.length) urls = await discover(cat);
-if (urls.length) { try { sessionStorage.setItem("anna4:" + cat.folder, JSON.stringify(urls)); } catch (err) {} }
+if (urls.length) { try { sessionStorage.setItem("anna5:" + cat.folder, JSON.stringify(urls)); } catch (err) {} }
 return urls;
 })();
 
@@ -1168,7 +1212,7 @@ setTimeout(() => showFolder(cat), 1650);
 async function showFolder(cat) {
 const my = ++token;
 
-$("ftitle").textContent = cat.title + " " + cat.sub;
+$("ftitle").textContent = fullTitle(cat);
 $("fdesc").textContent = cat.desc;
 $("fcount").textContent = "";
 
