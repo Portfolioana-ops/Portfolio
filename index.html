@@ -998,14 +998,7 @@ const listCache = {};
 function enc(cat, file) { return encodeURI(cat.folder + "/" + file); }
 
 /* checks a file with a tiny HEAD request (does not download the image) */
-async function exists(url) {
-try {
-const r = await fetch(url, {method:"HEAD", cache:"force-cache"});
-if (!r.ok) return false;
-const t = r.headers.get("content-type") || "";
-return t.startsWith("image/") || t === "";
-} catch (err) {
-/* fallback (for example when opened from a local file) */
+function viaImage(url) {
 return new Promise(res => {
 const im = new Image();
 im.onload = () => res(true);
@@ -1013,48 +1006,89 @@ im.onerror = () => res(false);
 im.src = url;
 });
 }
+
+async function exists(url) {
+try {
+const r = await fetch(url, {method:"HEAD", cache:"force-cache"});
+if (r.status === 405 || r.status === 501) return viaImage(url);
+if (!r.ok) return false;
+const t = r.headers.get("content-type") || "";
+return t.startsWith("image/") || t === "";
+} catch (err) {
+return viaImage(url);   /* for example when opened as a local file */
+}
 }
 
-function firstPatterns(cat) {
+/* ---- smart finder: tries many common naming styles, step by step ---- */
+const EXT_LOW = ["webp","png","jpg","jpeg","gif"];
+const EXT_UP = ["PNG","JPG","JPEG","WEBP","GIF"];
+const cap = w => w[0].toUpperCase() + w.slice(1);
+const uniq = a => [...new Set(a)];
+const flip = n => n.endsWith("s") ? n.slice(0, -1) : n + "s";   /* emote <-> emotes */
+
+function nameVariants(cat) {
+const base = [...cat.names, cat.folder.toLowerCase()];
+const all = [];
+base.forEach(n => { all.push(n); all.push(flip(n)); });
+return uniq(all.flatMap(n => [n, cap(n)]));
+}
+
+function folderVariants(cat) {
+const f = cat.folder, l = f.toLowerCase();
+return uniq([f, l, cap(l), flip(l), cap(flip(l))]);
+}
+
+function stagesFor(cat) {
+const names = nameVariants(cat);
+const F = cat.folder;
+const mk = (folders, exts, seps, pad, start) => {
 const out = [];
-cat.names.forEach(n => {
-[n, n[0].toUpperCase() + n.slice(1)].forEach(pre => {
-["webp","png","jpg","jpeg"].forEach(ext => {
-["", "_", "-", " "].forEach(sep => out.push({pre, sep, ext}));
-});
-});
-});
+folders.forEach(fo => names.forEach(pre => exts.forEach(ext => seps.forEach(sep => out.push({fo, pre, sep, ext, pad, start})))));
 return out;
+};
+const S4 = ["", "_", "-", " "];
+const S3 = ["", "_", "-"];
+return [
+mk([F], EXT_LOW, S4, 1, 1),                                   /* model1.png, Model_1.webp ...  */
+[].concat(mk([F], EXT_LOW, S3, 2, 1), mk([F], EXT_LOW, S3, 3, 1), mk([F], EXT_LOW, S3, 1, 0)),   /* emote01, emote001, emote0 */
+mk(folderVariants(cat).filter(x => x !== F), EXT_LOW, S4, 1, 1),   /* other folder spellings */
+mk([F], EXT_UP, S4, 1, 1),                                    /* .PNG .JPG in capitals */
+mk(folderVariants(cat).filter(x => x !== F), EXT_UP, S4, 1, 1)
+];
 }
 
-async function discover(cat) {
-const MAX = 40;
-const name = (p, n) => p.pre + p.sep + n + "." + p.ext;
+const fileUrl = (p, n) => encodeURI(p.fo + "/" + p.pre + p.sep + String(n).padStart(p.pad, "0") + "." + p.ext);
 
-/* image 1: try every naming style once, then remember the one that worked */
-const ps = firstPatterns(cat);
-const hits = await Promise.all(ps.map(p => exists(enc(cat, name(p, 1)))));
-const idx = hits.findIndex(Boolean);
-if (idx < 0) return [];
-
-const p = ps[idx];
-const urls = [enc(cat, name(p, 1))];
-
-/* image 2, 3, 4...: only ONE request each, in small parallel batches */
-let n = 2;
-while (n <= MAX) {
+async function collect(p) {
+const MAX = 60;
+const urls = [fileUrl(p, p.start)];
+if (p.start === 1 && await exists(fileUrl(p, 0))) urls.unshift(fileUrl(p, 0));   /* also catch a file numbered 0 */
+let n = p.start + 1;
+while (n < p.start + MAX) {
 const batch = [];
-for (let k = 0; k < 6 && n + k <= MAX; k++) batch.push(n + k);
-const res = await Promise.all(batch.map(i => exists(enc(cat, name(p, i)))));
+for (let k = 0; k < 6; k++) batch.push(n + k);
+const res = await Promise.all(batch.map(i => exists(fileUrl(p, i))));
 let stop = false;
 for (let k = 0; k < res.length; k++) {
 if (!res[k]) { stop = true; break; }
-urls.push(enc(cat, name(p, batch[k])));
+urls.push(fileUrl(p, batch[k]));
 }
 if (stop) break;
 n += 6;
 }
 return urls;
+}
+
+async function discover(cat) {
+for (const stage of stagesFor(cat)) {
+for (let i = 0; i < stage.length; i += 30) {
+const chunk = stage.slice(i, i + 30);
+const res = await Promise.all(chunk.map(p => exists(fileUrl(p, p.start))));
+const k = res.findIndex(Boolean);
+if (k >= 0) return collect(chunk[k]);
+}
+}
+return [];
 }
 
 function getList(cat) {
@@ -1066,12 +1100,12 @@ if (cat.images && cat.images.length) return cat.images.map(f => enc(cat, f));
 
 /* remembered for this visit */
 try {
-const saved = sessionStorage.getItem("anna:" + cat.folder);
-if (saved) return JSON.parse(saved);
+const saved = sessionStorage.getItem("anna2:" + cat.folder);
+if (saved) { const arr = JSON.parse(saved); if (arr.length) return arr; }
 } catch (err) {}
 
 const urls = await discover(cat);
-try { sessionStorage.setItem("anna:" + cat.folder, JSON.stringify(urls)); } catch (err) {}
+if (urls.length) { try { sessionStorage.setItem("anna2:" + cat.folder, JSON.stringify(urls)); } catch (err) {} }
 return urls;
 })();
 
