@@ -377,15 +377,10 @@ function patternsFor(cat) {
 }
 const urlOf = (cat, p, n) => encodeURI(cat.folder + "/" + p.pre + p.sep + n + "." + p.ext);
 async function* findImages(cat, max = 24) {
-  let pat = null;
+  const ps = patternsFor(cat);
   for (let n = 1; n <= max; n++) {
-    let url = null;
-    if (pat) url = await probe(urlOf(cat, pat, n));
-    else {
-      const ps = patternsFor(cat), res = await Promise.all(ps.map(p => probe(urlOf(cat, p, n))));
-      const k = res.findIndex(Boolean);
-      if (k >= 0) { pat = ps[k]; url = res[k]; }
-    }
+    const res = await Promise.all(ps.map(p => probe(urlOf(cat, p, n))));
+    const url = res.find(Boolean);
     if (!url) return;
     yield { url, n };
   }
